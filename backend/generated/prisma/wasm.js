@@ -120,6 +120,8 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
+  name: 'name',
+  profilePhoto: 'profilePhoto',
   password: 'password',
   role: 'role',
   status: 'status',
@@ -127,24 +129,15 @@ exports.Prisma.UserScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.AdminScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  profilePhoto: 'profilePhoto',
-  email: 'email',
-  contactNumber: 'contactNumber',
-  isDeleted: 'isDeleted',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
 exports.Prisma.SecurityDetailsScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
+  isEmailVerified: 'isEmailVerified',
   otpToken: 'otpToken',
   emailVerifyAttemptNo: 'emailVerifyAttemptNo',
   failedResetPassAttemptNo: 'failedResetPassAttemptNo',
   failedOTPAttemptNo: 'failedOTPAttemptNo',
+  lastAttemptTime: 'lastAttemptTime',
   failedLoginAttemptNo: 'failedLoginAttemptNo',
   lastLoginTime: 'lastLoginTime',
   suspendUntil: 'suspendUntil',
@@ -187,7 +180,7 @@ exports.Prisma.NullsOrder = {
 exports.UserRole = exports.$Enums.UserRole = {
   s_admin: 's_admin',
   admin: 'admin',
-  patient: 'patient'
+  user: 'user'
 };
 
 exports.UserStatus = exports.$Enums.UserStatus = {
@@ -207,7 +200,6 @@ exports.DeviceType = exports.$Enums.DeviceType = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Admin: 'Admin',
   SecurityDetails: 'SecurityDetails',
   Device: 'Device'
 };

@@ -32,9 +32,11 @@ const clientInfoParser = (req: Request, res: Response, next: NextFunction) => {
     },
     securityDetails: {
       otpToken: null, // Set it to null or get from some other source if needed
-      resetAttemptNumber: 0, // Default value, modify based on your logic
-      lastResetAttemptTime: new Date(),
-      failedLoginAttemptNumber: 0, // Default value, modify based on your logic
+      emailVerifyAttemptNo: 0, // Default value, modify based on your logic
+      lastAttemptTime: new Date(),
+      failedResetPassAttemptNo: 0, // Default value, modify based on your logic
+      failedOTPAttemptNo: 0,
+      failedLoginAttemptNo: 0,
       suspendUntil: null,
       lastLoginTime: new Date(), // Current login time
     },
