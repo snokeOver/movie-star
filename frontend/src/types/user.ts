@@ -1,0 +1,16 @@
+export interface IUser {
+  userId: string;
+  name: string;
+  email: string;
+  hasShop?: boolean;
+  isActive?: boolean;
+  role: "user" | "admin";
+  iat?: number;
+  exp?: number;
+}
+
+export interface IUserStore {
+  user: IUser | null;
+  setUser: (user: IUser | null) => void;
+  clearUser: () => void;
+}
