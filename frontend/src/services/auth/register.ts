@@ -1,16 +1,13 @@
 "use server";
 
 import { cookies } from "next/headers";
-import { FieldValues } from "react-hook-form";
 
-export const registerUser = async (userData: FieldValues) => {
+export const registerUser = async (userData: FormData) => {
   try {
-    const res = await fetch(`${process.env.BASE_API_URL}/user`, {
+    console.log("user data:", userData);
+    const res = await fetch(`${process.env.BASE_API_URL}/auth/register`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userData),
+      body: userData,
     });
 
     const result = await res.json();

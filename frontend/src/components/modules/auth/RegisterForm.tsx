@@ -41,10 +41,16 @@ const RegisterForm = () => {
 
   const onSubmit = async (data: FieldValues) => {
     setIsLoading(true);
-    console.log(data);
+
+    const { confirmPassword, ...rest } = data;
+    void confirmPassword;
+    // Convert data to FormData
+    const formData = new FormData();
+
+    formData.append("data", JSON.stringify(rest));
 
     try {
-      const res = await registerUser(data);
+      const res = await registerUser(formData);
 
       if (res?.success) {
         toast.success(res?.message);

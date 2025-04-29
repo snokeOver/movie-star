@@ -56,6 +56,8 @@ const LoginForm = () => {
     } catch (error) {
       console.log(error);
       toast.error(`Sign in failed`);
+    } finally {
+      setIsLoading(false);
     }
   };
 
