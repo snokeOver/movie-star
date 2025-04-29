@@ -1,0 +1,119 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// -------------------------------- Models ------------------------------- //
+model User {
+  id              String           @id @default(cuid())
+  email           String           @unique
+  password        String
+  role            UserRole
+  status          UserStatus       @default(active)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  admin           Admin?
+  securityDetails SecurityDetails?
+
+  @@map("users")
+}
+
+model Admin {
+  id            String  @id @default(cuid())
+  name          String
+  profilePhoto  String?
+  email         String  @unique
+  contactNumber String
+
+  isDeleted Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [email], references: [email])
+
+  @@map("admins")
+}
+
+model SecurityDetails {
+  id     String @id @default(cuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id])
+
+  otpToken             String?
+  emailVerifyAttemptNo Int     @default(0)
+
+  failedResetPassAttemptNo Int @default(0)
+  failedOTPAttemptNo       Int @default(0)
+
+  failedLoginAttemptNo Int       @default(0)
+  lastLoginTime        DateTime  @default(now())
+  suspendUntil         DateTime?
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+  device               Device[]
+
+  @@index([userId])
+  @@map("security_details")
+}
+
+model Device {
+  id                String @id @default(cuid())
+  machineId         String @default("")
+  securityDetailsId String
+
+  securityDetails SecurityDetails @relation(fields: [securityDetailsId], references: [id])
+  type            DeviceType
+  browser         String
+  name            String
+  os              String
+  ip              String?
+  userAgent       String
+  location        String
+  isActive        Boolean
+  isPreferred     Boolean
+  isInfected      Boolean
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  @@index([securityDetailsId])
+  @@map("devices")
+}
+
+// ------------------------------ Enums ---------------------------//
+
+enum UserRole {
+  s_admin
+  admin
+  patient
+}
+
+enum UserStatus {
+  deactive
+  active
+  blocked
+  suspended
+  deleted
+}
+
+enum DeviceType {
+  mobile
+  desktop
+  tablet
+  other
+}
+
+enum Gender {
+  male
+  female
+}
