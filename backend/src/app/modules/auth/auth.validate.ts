@@ -24,6 +24,8 @@ const resetPassword = z.object({
   body: z
     .object({
       password: z.string(),
+      email: z.string().email(),
+      otp: z.string(),
     })
     .strict(),
 });

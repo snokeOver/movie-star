@@ -30,7 +30,7 @@ const sendEmail = async (
 
     // Email configuration
     const mailOptions: any = {
-      from: '"Snoke Patient Management" <support@nextmart.com>',
+      from: '"Movie Star" <support@moviestar.com>',
       to: email,
       subject,
       html,

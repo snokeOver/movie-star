@@ -18,10 +18,10 @@ router.post(
   AuthController.changePassword
 );
 
-router.post("/forget-password", AuthController.forgetPassword);
+router.post("/send-forget-password-otp", AuthController.forgetPassword);
 
 router.post(
-  "/verify-otp",
+  "/verify-forget-password-otp",
   validateRequest(ValidateAuth.verifyOtp),
   AuthController.verifyOTP
 );

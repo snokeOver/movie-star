@@ -65,8 +65,8 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="flex max-w-sm flex-col items-center gap-2 sm:gap-10 rounded-xl bg-white/20 px-5 py-4 sm:py-8 backdrop-blur-md md:max-w-md lg:max-w-xl lg:px-15  xl:max-w-2xl">
-      <h1 className="text-lg font-bold uppercase text-black lg:text-4xl">
+    <>
+      <h1 className="text-lg font-bold uppercase text-black lg:text-2xl">
         Register
       </h1>
 
@@ -187,7 +187,7 @@ const RegisterForm = () => {
           Login
         </Link>
       </div>
-    </div>
+    </>
   );
 };
 

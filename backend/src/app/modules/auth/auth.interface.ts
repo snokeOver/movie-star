@@ -9,3 +9,9 @@ export interface IUser {
   password: string;
   profilePhoto?: string;
 }
+
+export interface IResetPassPayload {
+  email: string;
+  otp: string;
+  password: string;
+}

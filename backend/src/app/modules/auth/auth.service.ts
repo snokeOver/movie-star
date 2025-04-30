@@ -1,7 +1,7 @@
 import config from "../../config";
 import AppError from "../../middleWares/errorHandler/appError";
 import { prisma } from "../../utils/prisma";
-import { ILoginCred, IUser } from "./auth.interface";
+import { ILoginCred, IResetPassPayload, IUser } from "./auth.interface";
 import bcrypt from "bcrypt";
 import httpStatus from "http-status";
 
@@ -305,7 +305,7 @@ const forgetPassword = async (payload: { email: string }) => {
   const foundUser = await prisma.user.findUnique({
     where: {
       email: payload.email,
-      status: UserStatus.active,
+      status: { in: [UserStatus.active, UserStatus.deactive] },
     },
     include: {
       securityDetails: true,
@@ -316,7 +316,19 @@ const forgetPassword = async (payload: { email: string }) => {
     throw new AppError(httpStatus.NOT_FOUND, "User not found");
   }
 
-  const { suspendUntil, lastAttemptTime, failedOTPAttemptNo } =
+  if (
+    foundUser.status !== UserStatus.active &&
+    !foundUser.securityDetails?.isEmailVerified
+  )
+    throw new AppError(httpStatus.FORBIDDEN, "Email is not verified!");
+
+  if (
+    foundUser.status !== UserStatus.active &&
+    foundUser.securityDetails?.isEmailVerified
+  )
+    throw new AppError(httpStatus.FORBIDDEN, "User is deactive");
+
+  const { suspendUntil, lastAttemptTime, failedResetPassAttemptNo } =
     foundUser.securityDetails;
 
   // Check if the user is blocked due to multiple failed attempts
@@ -352,7 +364,9 @@ const forgetPassword = async (payload: { email: string }) => {
   );
 
   // Increase attempt count
-  let newNoOfAttempt = failedOTPAttemptNo ? failedOTPAttemptNo + 1 : 1;
+  let newNoOfAttempt = failedResetPassAttemptNo
+    ? failedResetPassAttemptNo + 1
+    : 1;
 
   // Check if the user is blocked due to multiple failed attempts for more than 60 minutes then reset the attempt count to 1
   if (suspendUntil && new Date(suspendUntil) < new Date()) {
@@ -367,7 +381,7 @@ const forgetPassword = async (payload: { email: string }) => {
       },
       data: {
         otpToken: createdOtpToken,
-        failedOTPAttemptNo: newNoOfAttempt,
+        failedResetPassAttemptNo: newNoOfAttempt,
         suspendUntil: new Date(Date.now() + suspendTIme * 60 * 1000), // Block for 30 minutes
       },
     });
@@ -379,7 +393,7 @@ const forgetPassword = async (payload: { email: string }) => {
 
   // Now send the OTP email if the attempts are below the limit
   const emailContent = await emailSender.createEmailContent(
-    { otpCode: otp, userName: foundUser.id },
+    { otpCode: otp, userName: foundUser.name },
     "forgotPassword"
   );
 
@@ -396,7 +410,7 @@ const forgetPassword = async (payload: { email: string }) => {
     },
     data: {
       otpToken: createdOtpToken,
-      failedOTPAttemptNo: newNoOfAttempt,
+      failedResetPassAttemptNo: newNoOfAttempt,
       lastAttemptTime: new Date(), // Set the time when OTP was requested
       suspendUntil: null,
     },
@@ -546,36 +560,15 @@ const verifyOTP = async (payload: { email: string; otp: string }) => {
 };
 
 //Reset password
-const resetPassword = async (
-  token: string | undefined,
-  payload: { password: string }
-) => {
-  if (!token)
+const resetPassword = async (payload: IResetPassPayload) => {
+  if (!payload)
     throw new AppError(httpStatus.UNAUTHORIZED, "You are not authorized!");
 
-  let email = "";
+  const { email, otp, password } = payload;
 
-  try {
-    const decoded = verifyToken(
-      token,
-      config.jwt.jwt_pass_reset_secret as string
-    );
-
-    email = decoded.email;
-  } catch (error: any) {
-    if (error instanceof TokenExpiredError) {
-      throw new AppError(
-        httpStatus.UNAUTHORIZED,
-        "Session timeout! Please try again"
-      );
-    }
-    throw new AppError(httpStatus.UNAUTHORIZED, error.message);
-  }
-
-  //check if user exist
   const foundUser = await prisma.user.findUnique({
     where: {
-      email,
+      email: payload.email,
       status: UserStatus.active,
     },
     include: {
@@ -586,17 +579,40 @@ const resetPassword = async (
   if (!foundUser || !foundUser.securityDetails)
     throw new AppError(httpStatus.NOT_FOUND, "User not found");
 
-  if (
-    !foundUser.securityDetails.otpToken ||
-    token !== foundUser.securityDetails.otpToken
-  ) {
+  if (!foundUser.securityDetails.otpToken)
     throw new AppError(
       httpStatus.UNAUTHORIZED,
-      "Session terminated! Please try again"
+      "Session timeout! Please try again"
     );
+
+  const decodedData = {
+    email: "",
+    otp: "",
+  };
+
+  try {
+    const decoded = verifyToken(
+      foundUser.securityDetails.otpToken as string,
+      config.jwt.jwt_pass_reset_secret as string
+    );
+
+    decodedData.email = decoded.email;
+    decodedData.otp = decoded.otp;
+  } catch (error: any) {
+    if (error instanceof TokenExpiredError) {
+      throw new AppError(
+        httpStatus.UNAUTHORIZED,
+        "Session timeout! Please try again"
+      );
+    }
+    throw new AppError(httpStatus.UNAUTHORIZED, error.message);
   }
 
-  if (await bcrypt.compare(payload.password, foundUser.password)) {
+  if (decodedData.email !== email && decodedData.otp !== otp) {
+    throw new AppError(httpStatus.UNAUTHORIZED, "You are not authorized!");
+  }
+
+  if (await bcrypt.compare(password, foundUser.password)) {
     throw new AppError(
       httpStatus.BAD_REQUEST,
       `New password can't be the same as Old password!,`

@@ -76,8 +76,8 @@ const LoginForm = () => {
   }, [searchParams]);
 
   return (
-    <div className="flex max-w-sm flex-col items-center gap-10 rounded-xl bg-white/20 px-5 py-8 backdrop-blur-md md:max-w-md lg:max-w-xl lg:px-15  xl:max-w-2xl">
-      <h1 className="text-lg font-bold uppercase text-black lg:text-4.2xl">
+    <>
+      <h1 className="text-lg font-bold uppercase text-black lg:text-2xl">
         Sign In
       </h1>
 
@@ -105,7 +105,7 @@ const LoginForm = () => {
               control={form.control}
               name="password"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="relative">
                   <FormLabel>Password</FormLabel>
                   <FormControl>
                     <div className="relative">
@@ -127,6 +127,15 @@ const LoginForm = () => {
                 </FormItem>
               )}
             />
+
+            <div className="absolute -top-2 flex w-full justify-end">
+              <Link
+                href={"/forget-password"}
+                className="cursor-pointer text-primary hover:underline"
+              >
+                Forgot Password?
+              </Link>
+            </div>
           </div>
 
           <PrimaryButton
@@ -157,7 +166,7 @@ const LoginForm = () => {
           Register
         </Link>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -95,10 +95,7 @@ const verifyOTP = tryCatchAsync(async (req, res) => {
 
 //Reset password
 const resetPassword = tryCatchAsync(async (req, res) => {
-  const result = await AuthService.resetPassword(
-    req.headers.authorization,
-    req.body
-  );
+  const result = await AuthService.resetPassword(req.body);
 
   sendResponse({
     res,
