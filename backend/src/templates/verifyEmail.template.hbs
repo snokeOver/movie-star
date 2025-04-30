@@ -10,11 +10,13 @@
       { max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid
       #ccc; border-radius: 5px; } .header { background-color: #f4f4f4; padding:
       10px; text-align: center; border-radius: 5px; } .content { margin-top:
-      20px; text-align: center; } .otp-link { display: inline-block;
+      20px; text-align: start; } .otp-link { display: inline-block;
       background-color: #007bff; padding: 10px 20px; color: #fff; font-size:
-      20px; font-weight: bold; border-radius: 5px; letter-spacing: 2px; text-decoration: none;}
-      .footer { margin-top: 20px; font-size: 14px; color: #666; text-align:
-      center; }
+      20px; font-weight: bold; border-radius: 5px; letter-spacing: 2px;
+      text-decoration: none;} .footer { margin-top: 20px; font-size: 14px;
+      color: #666; text-align: center; } .otp-box { display: inline-block;
+      background-color: #007bff; padding: 10px 20px; color: #fff; font-size:
+      20px; font-weight: bold; border-radius: 5px; letter-spacing: 2px; }
     </style>
   </head>
 
@@ -26,10 +28,12 @@
       <div class="content">
         <p>Hello {{userName}},</p>
         <p>
-          Click on the link below to verify your email. This
-          link is valid for the next {{expireTime}} minutes:
+          Use the OTP code below to verify your email. This code is valid for
+          the next
+          {{expireTime}}
+          minutes:
         </p>
-        <a href=`{{otpLink}}` class="otp-link" style="color: #ffffff">Verify Email</a>
+        <div class="otp-box">{{otpCode}}</div>
         <p>If you didn't request this, please ignore this email.</p>
       </div>
       <div class="footer">

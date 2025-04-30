@@ -14,7 +14,7 @@ const verifyEmail = z.object({
   body: z
     .object({
       email: z.string().email(),
-      token: z.string(),
+      otp: z.string(),
     })
     .strict(),
 });

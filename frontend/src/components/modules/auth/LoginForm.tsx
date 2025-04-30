@@ -21,10 +21,13 @@ import { toast } from "sonner";
 import { useUserStore } from "@/stores/auth";
 import { getCurrentUser } from "@/services/auth/getCurrentUser";
 import useSilentLogout from "@/hooks/useLogout";
+import { useVerifyEmail } from "@/stores/verifyEmail";
 
 const LoginForm = () => {
   const { setUser } = useUserStore();
   const { handleLogout } = useSilentLogout();
+
+  const { setEmail } = useVerifyEmail();
 
   const [showPass, setShowPass] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -52,7 +55,13 @@ const LoginForm = () => {
 
         setUser(await getCurrentUser());
         router.push(searchParams.get("redirect") || "/");
-      } else toast.error(res.message);
+      } else {
+        toast.error(res.message);
+        if (res.message === "Email is not verified") {
+          setEmail(data.email);
+          router.push("/verify-email");
+        }
+      }
     } catch (error) {
       console.log(error);
       toast.error(`Sign in failed`);

@@ -32,15 +32,10 @@ router.post(
   AuthController.resetPassword
 );
 
-router.post(
-  "/send-verification-email",
-  auth(UserRole.admin, UserRole.user, UserRole.s_admin),
-  AuthController.sendVerificationEmail
-);
+router.post("/send-verification-email", AuthController.sendVerificationEmail);
 
 router.post(
   "/verify-email",
-  auth(UserRole.admin, UserRole.user, UserRole.s_admin),
   validateRequest(ValidateAuth.verifyEmail),
   AuthController.verifyEmail
 );

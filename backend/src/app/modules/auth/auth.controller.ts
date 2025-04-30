@@ -109,38 +109,34 @@ const resetPassword = tryCatchAsync(async (req, res) => {
 });
 
 //send verification email
-const sendVerificationEmail = tryCatchAsync(
-  async (req: Request & { user?: JwtPayload }, res) => {
-    const result = await AuthService.sendVerificationEmail(req.body, req.user);
+const sendVerificationEmail = tryCatchAsync(async (req: Request, res) => {
+  const result = await AuthService.sendVerificationEmail(req.body);
 
-    sendResponse({
-      res,
-      sendData: {
-        statusCode: httpStatus.OK,
-        success: true,
-        message: "Email send successfully",
-        data: result,
-      },
-    });
-  }
-);
+  sendResponse({
+    res,
+    sendData: {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "OTP send successfully",
+      data: result,
+    },
+  });
+});
 
 //verify email
-const verifyEmail = tryCatchAsync(
-  async (req: Request & { user?: JwtPayload }, res) => {
-    const result = await AuthService.verifyEmail(req.body, req.user);
+const verifyEmail = tryCatchAsync(async (req: Request, res) => {
+  const result = await AuthService.verifyEmail(req.body);
 
-    sendResponse({
-      res,
-      sendData: {
-        statusCode: httpStatus.OK,
-        success: true,
-        message: "Email verification successfully",
-        data: result,
-      },
-    });
-  }
-);
+  sendResponse({
+    res,
+    sendData: {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Email verified successfully",
+      data: result,
+    },
+  });
+});
 
 //Register user
 const register = tryCatchAsync(async (req, res) => {
