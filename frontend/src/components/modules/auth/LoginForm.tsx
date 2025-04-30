@@ -19,9 +19,10 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { loginUser } from "@/services/auth/login";
 import { toast } from "sonner";
 import { useUserStore } from "@/stores/auth";
-import { getCurrentUser } from "@/services/auth/getCurrentUser";
 import useSilentLogout from "@/hooks/useLogout";
 import { useVerifyEmail } from "@/stores/verifyEmail";
+import { jwtDecode } from "jwt-decode";
+import { IUser } from "@/types";
 
 const LoginForm = () => {
   const { setUser } = useUserStore();
@@ -48,13 +49,15 @@ const LoginForm = () => {
 
     try {
       const res = await loginUser(data);
-
       if (res.success) {
-        setIsLoading(true);
+        const currUser: IUser = jwtDecode(res.data.accessToken);
+        setUser(currUser);
+        const redirecUrl =
+          searchParams.get("redirect") || currUser.role === "admin"
+            ? "/dashboard/admin"
+            : "/dashboard/user";
+        router.push(redirecUrl);
         toast.success(res.message);
-
-        setUser(await getCurrentUser());
-        router.push(searchParams.get("redirect") || "/");
       } else {
         toast.error(res.message);
         if (res.message === "Email is not verified") {

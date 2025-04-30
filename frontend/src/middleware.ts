@@ -5,18 +5,21 @@ const authRoutes = ["/login", "/register"];
 type Role = keyof typeof roleBasedPrivateRoutes;
 
 const roleBasedPrivateRoutes = {
-  user: [/^\/user/, /^\/create-shop/],
-  admin: [/^\/admin/],
+  user: [/^\/create-shop/, /^\/dashboard\/user/],
+  admin: [/^\/dashboard\/admin/],
 };
 
 export const middleware = async (request: NextRequest) => {
   const { pathname } = request.nextUrl;
 
   const userInfo = await getCurrentUser();
+  // console.log("user info:", userInfo);
+
   if (!userInfo) {
-    if (authRoutes.includes(pathname)) return NextResponse.next();
-    else {
-      //need to clear user store
+    if (authRoutes.includes(pathname)) {
+      // console.log("here");
+      return NextResponse.next();
+    } else {
       return NextResponse.redirect(
         new URL(
           `${process.env.BASE_URL}/login?redirect=${pathname}&cleanup=true`,
@@ -39,10 +42,12 @@ export const middleware = async (request: NextRequest) => {
 export const config = {
   matcher: [
     "/create-shop",
-    "/admin",
-    "/admin/:page",
-    "/user",
-    "/user/:path",
-    "/user/:path/:page",
+    "/dashboard/admin",
+    "/dashboard/admin/:page",
+    "/dashboard/user",
+    "/dashboard/user/:path",
+    "/dashboard/user/:path/:page",
+    "/login",
+    "/register",
   ],
 };

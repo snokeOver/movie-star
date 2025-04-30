@@ -106,6 +106,7 @@ const loginUser = async (payload: ILoginCred, clientInfo: IClientInfo) => {
     return { updatedSecurityDetails };
   });
 
+  //create accessToken and refreshToken using logged in user data and send within response
   const jwtPayload: IJwtPayload = {
     userId: foundUser.id as string,
     name: foundUser.name as string,

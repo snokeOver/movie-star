@@ -18,14 +18,13 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { registerUser } from "@/services/auth/register";
 import { toast } from "sonner";
-import { getCurrentUser } from "@/services/auth/getCurrentUser";
-import { useUserStore } from "@/stores/auth";
+import { useVerifyEmail } from "@/stores/verifyEmail";
 
 const RegisterForm = () => {
-  const { setUser } = useUserStore();
   const [showPass, setShowPass] = useState(false);
   const [showConfirmPass, setShowConfirmPass] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const { setEmail } = useVerifyEmail();
   const router = useRouter();
 
   const form = useForm({
@@ -54,7 +53,8 @@ const RegisterForm = () => {
 
       if (res?.success) {
         toast.success(res?.message);
-        setUser(await getCurrentUser());
+        setEmail(data.email);
+        router.push("/verify-email");
       } else toast.error(res?.message);
     } catch (error) {
       console.log(error);
