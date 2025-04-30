@@ -2,10 +2,11 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { InputOTPForm } from "./InputOTPForm";
+
 import { toast } from "sonner";
 import { useVerifyEmail } from "@/stores/verifyEmail";
 import { postWithFieldValues } from "@/services/auth/postWithFieldValues";
+import { InputOTPForm } from "../resetPassword/InputOTPForm";
 
 export default function VrifyEmailOTPForm() {
   const { email, otp, setOTP } = useVerifyEmail();

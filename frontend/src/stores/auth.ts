@@ -11,7 +11,7 @@ export const useUserStore = create(
       clearUser: () => set({ user: null }),
     }),
     {
-      name: "sociovio_user",
+      name: "movie_star_user",
       storage: createJSONStorage(() => localStorage),
     }
   )

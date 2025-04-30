@@ -9,6 +9,7 @@ export default {
   port: process.env.PORT!,
   db_url: process.env.DATABASE_URL!,
   schedule_interval: process.env.SCHEDULE_TIME_INTERVAL_IN_MINUTES!,
+  default_profile_url: process.env.DEFAULT_PROFILE_URL!,
 
   client_url: process.env.CLIENT_URL!,
   server_url: process.env.SERVER_URL!,

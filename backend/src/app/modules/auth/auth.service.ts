@@ -108,9 +108,11 @@ const loginUser = async (payload: ILoginCred, clientInfo: IClientInfo) => {
 
   const jwtPayload: IJwtPayload = {
     userId: foundUser.id as string,
+    name: foundUser.name as string,
     email: foundUser.email as string,
     status: foundUser.status,
     role: foundUser.role,
+    profilePhoto: foundUser.profilePhoto || config.default_profile_url,
   };
 
   const accessToken = createToken(
@@ -152,9 +154,11 @@ const getAccessToken = async (token: string) => {
 
   const jwtPayload: IJwtPayload = {
     userId: foundUser.id as string,
+    name: foundUser.name as string,
     email: foundUser.email as string,
     status: foundUser.status,
     role: foundUser.role,
+    profilePhoto: foundUser.profilePhoto || config.default_profile_url,
   };
 
   const accessToken = createToken(

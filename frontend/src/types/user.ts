@@ -4,7 +4,8 @@ export interface IUser {
   email: string;
   hasShop?: boolean;
   isActive?: boolean;
-  role: "user" | "admin";
+  role: "user" | "admin" | "s_admin";
+  profilePhoto: string;
   iat?: number;
   exp?: number;
 }

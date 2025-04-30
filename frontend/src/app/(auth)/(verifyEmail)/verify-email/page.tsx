@@ -1,4 +1,4 @@
-import VerifyEmailForm from "@/components/modules/auth/resetPassword/VerifyEmailForm";
+import VerifyEmailForm from "@/components/modules/auth/verifyEmail/VerifyEmailForm";
 import React from "react";
 
 const VerifyEmailPage = () => {

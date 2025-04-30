@@ -1,5 +1,4 @@
-import VrifyEmailOTPForm from "@/components/modules/auth/resetPassword/VrrifyEmailOTPForm";
-
+import VrifyEmailOTPForm from "@/components/modules/auth/verifyEmail/VerifyEmailOTPForm";
 import React from "react";
 
 const VerifyEmailOTPPage = () => {
