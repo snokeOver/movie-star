@@ -1,4 +1,4 @@
-import VerifyOTPForm from "@/components/modules/auth/resetPassword/VrrifyOTPForm";
+import VerifyOTPForm from "@/components/modules/auth/resetPassword/VerifyOTPForm";
 import React from "react";
 
 const VerifyOTPPage = () => {

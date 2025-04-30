@@ -18,8 +18,9 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import { toast } from "sonner";
-import { sendForgetPasswordOTP } from "@/services/auth/sendForgetPasswordOTP";
+
 import { useForgotPassEmailOTP } from "@/stores/forgetPssEmailOTP";
+import { postWithFieldValues } from "@/services/auth/postWithFieldValues";
 
 const ForgetPasswordForm = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -39,7 +40,10 @@ const ForgetPasswordForm = () => {
     setIsLoading(true);
 
     try {
-      const res = await sendForgetPasswordOTP(data);
+      const res = await postWithFieldValues(
+        data,
+        "auth/send-forget-password-otp"
+      );
 
       if (res.success) {
         setIsLoading(true);

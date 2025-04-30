@@ -7,8 +7,8 @@ import { useRouter } from "next/navigation";
 import { InputOTPForm } from "./InputOTPForm";
 import { useForgotPassEmailOTP } from "@/stores/forgetPssEmailOTP";
 import { toast } from "sonner";
-import { sendForgetPasswordOTP } from "@/services/auth/sendForgetPasswordOTP";
-import { verifyForgetPassOTP } from "@/services/auth/verifyForgetPassOTP";
+
+import { postWithFieldValues } from "@/services/auth/postWithFieldValues";
 
 export default function VerifyOTPForm() {
   const { email, otp, setOTP } = useForgotPassEmailOTP();
@@ -28,7 +28,10 @@ export default function VerifyOTPForm() {
           email: email,
           otp: curOTP,
         };
-        const res = await verifyForgetPassOTP(payload);
+        const res = await postWithFieldValues(
+          payload,
+          "auth/verify-forget-password-otp"
+        );
 
         if (res.success) {
           setError("");
@@ -66,7 +69,10 @@ export default function VerifyOTPForm() {
     setIsLoading(true);
 
     try {
-      const res = await sendForgetPasswordOTP({ email: email });
+      const res = await postWithFieldValues(
+        { email: email },
+        "auth/send-forget-password-otp"
+      );
 
       if (res.success) {
         toast.success(

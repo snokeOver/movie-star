@@ -2,9 +2,12 @@
 
 import { FieldValues } from "react-hook-form";
 
-export const verifyEmailVerificationOTP = async (userData: FieldValues) => {
+export const postWithFieldValues = async (
+  userData: FieldValues,
+  url: string
+) => {
   try {
-    const res = await fetch(`${process.env.BASE_API_URL}/auth/verify-email`, {
+    const res = await fetch(`${process.env.BASE_API_URL}/${url}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

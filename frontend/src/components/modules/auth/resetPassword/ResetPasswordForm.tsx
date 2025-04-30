@@ -24,7 +24,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { EyeClosed, EyeIcon } from "lucide-react";
 import PrimaryButton from "@/components/shared/buttons/PrimaryButton";
-import { createNewPassword } from "@/services/auth/createNewPassword";
+import { postWithFieldValues } from "@/services/auth/postWithFieldValues";
 
 export default function ResetPasswordForm() {
   const router = useRouter();
@@ -52,7 +52,7 @@ export default function ResetPasswordForm() {
         password: data.password,
         otp: otp,
       };
-      const res = await createNewPassword(payload);
+      const res = await postWithFieldValues(payload, "auth/reset-password");
       console.log(res);
       if (res.success) {
         router.push("/login");

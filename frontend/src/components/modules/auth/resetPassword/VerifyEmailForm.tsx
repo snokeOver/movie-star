@@ -20,7 +20,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 import { useVerifyEmail } from "@/stores/verifyEmail";
-import { sendEmailVerificationEmail } from "@/services/auth/sendEmailVerificationEmail";
+import { postWithFieldValues } from "@/services/auth/postWithFieldValues";
 
 const VerifyEmailForm = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -41,7 +41,10 @@ const VerifyEmailForm = () => {
     setIsLoading(true);
 
     try {
-      const res = await sendEmailVerificationEmail(data);
+      const res = await postWithFieldValues(
+        data,
+        "auth/send-verification-email"
+      );
 
       if (res.success) {
         setIsLoading(true);

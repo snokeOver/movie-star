@@ -1,16 +1,11 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-
 import { useRouter } from "next/navigation";
-
 import { InputOTPForm } from "./InputOTPForm";
-
 import { toast } from "sonner";
-
 import { useVerifyEmail } from "@/stores/verifyEmail";
-import { sendEmailVerificationEmail } from "@/services/auth/sendEmailVerificationEmail";
-import { verifyEmailVerificationOTP } from "@/services/auth/verifyEmailVerificationOTP";
+import { postWithFieldValues } from "@/services/auth/postWithFieldValues";
 
 export default function VrifyEmailOTPForm() {
   const { email, otp, setOTP } = useVerifyEmail();
@@ -30,7 +25,7 @@ export default function VrifyEmailOTPForm() {
           email: email,
           otp: curOTP,
         };
-        const res = await verifyEmailVerificationOTP(payload);
+        const res = await postWithFieldValues(payload, "auth/verify-email");
 
         if (res.success) {
           setError("");
@@ -68,7 +63,10 @@ export default function VrifyEmailOTPForm() {
     setIsLoading(true);
 
     try {
-      const res = await sendEmailVerificationEmail({ email: email });
+      const res = await postWithFieldValues(
+        { email: email },
+        "auth/send-verification-email"
+      );
 
       if (res.success) {
         toast.success(
