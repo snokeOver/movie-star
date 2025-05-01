@@ -16,16 +16,22 @@ datasource db {
 
 // -------------------------------- Models ------------------------------- //
 model User {
-  id              String           @id @default(cuid())
-  email           String           @unique
-  name            String
-  profilePhoto    String?
-  password        String
-  role            UserRole         @default(user)
-  status          UserStatus       @default(deactive)
-  createdAt       DateTime         @default(now())
-  updatedAt       DateTime         @updatedAt
-  securityDetails SecurityDetails?
+  id                  String                @id @default(cuid())
+  email               String                @unique
+  name                String
+  profilePhoto        String?
+  password            String
+  role                UserRole              @default(user)
+  status              UserStatus            @default(deactive)
+  createdAt           DateTime              @default(now())
+  updatedAt           DateTime              @updatedAt
+  securityDetails     SecurityDetails?
+  review              Review[]
+  comment             Comment[]
+  watchlist           Watchlist[]
+  purchaseRentHistory PurchaseRentHistory[]
+  paymentTransaction  PaymentTransaction[]
+  notification        Notification[]
 
   @@map("users")
 }
@@ -76,6 +82,135 @@ model Device {
   @@map("devices")
 }
 
+model MovieSeries {
+  id                  String                @id @default(cuid())
+  title               String
+  description         String
+  releaseYear         Int
+  genre               Genre[]
+  director            String
+  cast                String
+  streamingPlatform   StreamingPlatform[]
+  rating              Float                 @default(0)
+  price               Float // The base price for buy/rent
+  priceType           PriceType // Buy or Rent type
+  discount            Float? // Optional discount
+  discountType        DiscountType? // Discount type (percentage or fixed)
+  discountExpiry      DateTime? // Expiration date for the discount
+  isActive            Boolean               @default(true)
+  createdAt           DateTime              @default(now())
+  updatedAt           DateTime              @updatedAt
+  reviews             Review[]
+  watchlist           Watchlist[]
+  purchaseRentHistory PurchaseRentHistory[]
+
+  @@map("movie_series")
+}
+
+model Review {
+  id            String       @id @default(cuid())
+  movieSeriesId String
+  userId        String
+  rating        Int          @default(1)
+  writtenReview String
+  isSpoiler     Boolean      @default(false)
+  tags          String[]
+  likesCount    Int          @default(0)
+  commentCount  Int          @default(0)
+  status        ReviewStatus @default(pending)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  movieSeries MovieSeries @relation(fields: [movieSeriesId], references: [id])
+  user        User        @relation(fields: [userId], references: [id])
+  comment     Comment[]
+
+  @@map("reviews")
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  reviewId  String
+  userId    String
+  content   String
+  replyTo   String? // Reference to another comment if it's a reply
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  review Review @relation(fields: [reviewId], references: [id])
+  user   User   @relation(fields: [userId], references: [id])
+
+  @@map("comments")
+}
+
+model Watchlist {
+  id            String   @id @default(cuid())
+  userId        String
+  movieSeriesId String
+  addedAt       DateTime @default(now())
+
+  user        User        @relation(fields: [userId], references: [id])
+  movieSeries MovieSeries @relation(fields: [movieSeriesId], references: [id])
+
+  @@map("watchlists")
+}
+
+model PurchaseRentHistory {
+  id            String        @id @default(cuid())
+  userId        String
+  movieSeriesId String
+  purchaseType  PriceType
+  purchaseDate  DateTime      @default(now())
+  paymentStatus PaymentStatus
+  price         Float
+  transactionId String
+  accessExpiry  DateTime?
+  isEmailSent   Boolean       @default(false)
+
+  user        User        @relation(fields: [userId], references: [id])
+  movieSeries MovieSeries @relation(fields: [movieSeriesId], references: [id])
+
+  @@map("purchase_rent_history")
+}
+
+model PaymentTransaction {
+  id            String        @id @default(cuid())
+  userId        String
+  amount        Float
+  transactionId String
+  status        PaymentStatus
+  paymentMethod String        @default("stripe")
+  createdAt     DateTime      @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("payment_transactions")
+}
+
+model AdminAnalytics {
+  id                   String   @id @default(cuid())
+  date                 DateTime @default(now())
+  totalPurchases       Int      @default(0)
+  totalRentals         Int      @default(0)
+  totalRevenue         Float    @default(0)
+  totalReviews         Int      @default(0)
+  totalApprovedReviews Int      @default(0)
+
+  @@map("admin_analytics")
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("notifications")
+}
+
 // ------------------------------ Enums ---------------------------//
 
 enum UserRole {
@@ -102,4 +237,50 @@ enum DeviceType {
 enum Gender {
   male
   female
+}
+
+enum Genre {
+  action
+  comedy
+  drama
+  horror
+  thriller
+  romance
+  documentary
+  sci_fi
+  fantasy
+  mystery
+}
+
+enum StreamingPlatform {
+  netflix
+  disney_plus
+  amazon_prime
+  hulu
+  youtube
+  self_hosted
+}
+
+enum PriceType {
+  buy
+  rent
+}
+
+enum DiscountType {
+  percentage
+  fixed
+}
+
+enum ReviewStatus {
+  pending
+  approved
+  unpublished
+}
+
+enum PaymentStatus {
+  pending
+  successful
+  failed
+  refunded
+  cancelled
 }

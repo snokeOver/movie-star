@@ -9,7 +9,7 @@ import {
   Map,
   PieChart,
   Settings2,
-  SquareTerminal,
+  Video,
 } from "lucide-react";
 
 import {
@@ -41,18 +41,18 @@ const data = {
   ],
   navMain: [
     {
-      title: "Playground",
+      title: "Media Library",
       url: "#",
-      icon: SquareTerminal,
+      icon: Video,
       isActive: true,
       items: [
         {
-          title: "History",
-          url: "#",
+          title: "Create",
+          url: "/dashboard/admin/media/create",
         },
         {
-          title: "Starred",
-          url: "#",
+          title: "Manage",
+          url: "/dashboard/admin/media/manage",
         },
         {
           title: "Settings",

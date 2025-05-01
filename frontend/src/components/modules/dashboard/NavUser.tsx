@@ -25,6 +25,11 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
+import { logOut } from "@/services/auth/logOut";
+import { useUserStore } from "@/stores/auth";
+import { usePathname, useRouter } from "next/navigation";
+import { privateRoutes } from "@/constants/privateRoutes";
+import { toast } from "sonner";
 
 export function NavUser({
   user,
@@ -36,6 +41,19 @@ export function NavUser({
   };
 }) {
   const { isMobile } = useSidebar();
+  const { clearUser } = useUserStore();
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const handleLogOut = async () => {
+    await logOut();
+    clearUser();
+
+    if (privateRoutes.some((route) => pathname.match(route))) {
+      router.push("/");
+    }
+    toast.success("Log out successfull");
+  };
 
   return (
     <SidebarMenu>
@@ -98,7 +116,10 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem
+              className="cursor-pointer"
+              onClick={() => handleLogOut()}
+            >
               <LogOut />
               Log out
             </DropdownMenuItem>
