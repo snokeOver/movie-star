@@ -6,6 +6,7 @@ import PrimaryButton from "../../buttons/PrimaryButton";
 import { format } from "date-fns";
 import { ActionConfirmationDialogue } from "../../dialogue/ActionConfirmationDialogue";
 import { useRouter } from "next/navigation";
+import { useMediaMutation } from "@/hooks/mutations/useMediaMutation";
 
 interface IAdminCardProps {
   media: IMedia;
@@ -13,6 +14,12 @@ interface IAdminCardProps {
 
 export function AdminCard({ media }: IAdminCardProps) {
   const router = useRouter();
+  const { mutate: deleteMedia, isPending: isLoading } = useMediaMutation();
+
+  //handle delete movie series
+  const handleDelete = async () => {
+    deleteMedia({ type: "delete", mediaId: media.id });
+  };
   return (
     <Card>
       <Image
@@ -59,15 +66,14 @@ export function AdminCard({ media }: IAdminCardProps) {
 
             <div className="flex-1">
               <ActionConfirmationDialogue
-                onConfirm={() => console.log("accepted")}
-                isLoading={false}
+                onConfirm={handleDelete}
+                isLoading={isLoading}
                 bodyText="This media will be deleted permanently"
                 triggerButton={
                   <PrimaryButton
                     btnText="Delete"
                     isLoading={false}
                     loadingText=""
-                    onClick={() => {}}
                     className="rounded-full mt-2 bg-destructive  hover:bg-destructive/80"
                   />
                 }

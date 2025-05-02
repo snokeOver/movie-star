@@ -20,7 +20,7 @@ import {
   MultiSelectorTrigger,
 } from "@/components/ui/extension/multi-select";
 
-import { format, set } from "date-fns";
+import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";

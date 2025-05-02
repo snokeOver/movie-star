@@ -29,7 +29,6 @@ export function ActionConfirmationDialogue({
 
   const handleConfirm = () => {
     onConfirm();
-    setIsOpen(false); // Close dialog after confirming
   };
 
   return (
