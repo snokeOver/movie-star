@@ -84,12 +84,13 @@ model Device {
 
 model MovieSeries {
   id                  String                @id @default(cuid())
-  title               String
+  title               String                @unique
+  posterUrl           String
   description         String
   releaseYear         Int
   genre               Genre[]
-  director            String
-  cast                String
+  director            String[]
+  cast                String[]
   streamingPlatform   StreamingPlatform[]
   accessLink          String[]
   rating              Float                 @default(0)

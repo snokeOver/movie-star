@@ -12,3 +12,25 @@ export interface IMovieSeriesFilteredQuery {
   releaseYear?: number | undefined;
   searchTerm?: string | undefined;
 }
+
+export interface IMovieSeries
+  extends Pick<
+    MovieSeries,
+    | "id"
+    | "title"
+    | "posterUrl"
+    | "description"
+    | "releaseYear"
+    | "accessLink"
+    | "cast"
+    | "director"
+    | "discount"
+    | "discountType"
+    | "discountExpiry"
+    | "genre"
+    | "isActive"
+    | "price"
+    | "priceType"
+    | "rating"
+    | "streamingPlatform"
+  > {}

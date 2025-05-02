@@ -68,9 +68,25 @@ const getAll = tryCatchAsync(async (req, res) => {
   });
 });
 
+//Create single movie series
+const createSingle = tryCatchAsync(async (req, res) => {
+  const result = await MovieSeriesService.createSingle(req.body.data, req.file);
+
+  sendResponse({
+    res,
+    sendData: {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Media created successfully",
+      data: result,
+    },
+  });
+});
+
 export const MovieSeriesController = {
   getSingle,
   getAll,
   updateSingle,
   deleteSingle,
+  createSingle,
 };

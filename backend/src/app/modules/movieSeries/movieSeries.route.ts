@@ -1,4 +1,4 @@
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
 
 import { validateRequest } from "../../middleWares/validateRequest";
 
@@ -7,6 +7,7 @@ import { UserRole } from "../../../../generated/prisma";
 
 import { MovieSeriesController } from "./movieSeries.controller";
 import { ValidateMovieSeries } from "./movieSeries.validate";
+import { fileUploader } from "../../utils/fileUploader";
 
 const router = express.Router();
 
@@ -33,6 +34,18 @@ router.get(
   "/",
   auth(UserRole.admin, UserRole.s_admin),
   MovieSeriesController.getAll
+);
+
+router.post(
+  "/",
+  auth(UserRole.admin, UserRole.s_admin),
+  fileUploader.multerUpload.single("file"),
+
+  (req: Request, res: Response, next: NextFunction) => {
+    req.body.data = ValidateMovieSeries.create.parse(JSON.parse(req.body.data));
+
+    return MovieSeriesController.createSingle(req, res, next);
+  }
 );
 
 export const movieSeriesRoutes = router;

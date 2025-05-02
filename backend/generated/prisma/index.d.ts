@@ -5852,10 +5852,9 @@ export namespace Prisma {
   export type MovieSeriesMinAggregateOutputType = {
     id: string | null
     title: string | null
+    posterUrl: string | null
     description: string | null
     releaseYear: number | null
-    director: string | null
-    cast: string | null
     rating: number | null
     price: number | null
     priceType: $Enums.PriceType | null
@@ -5871,10 +5870,9 @@ export namespace Prisma {
   export type MovieSeriesMaxAggregateOutputType = {
     id: string | null
     title: string | null
+    posterUrl: string | null
     description: string | null
     releaseYear: number | null
-    director: string | null
-    cast: string | null
     rating: number | null
     price: number | null
     priceType: $Enums.PriceType | null
@@ -5890,6 +5888,7 @@ export namespace Prisma {
   export type MovieSeriesCountAggregateOutputType = {
     id: number
     title: number
+    posterUrl: number
     description: number
     releaseYear: number
     genre: number
@@ -5928,10 +5927,9 @@ export namespace Prisma {
   export type MovieSeriesMinAggregateInputType = {
     id?: true
     title?: true
+    posterUrl?: true
     description?: true
     releaseYear?: true
-    director?: true
-    cast?: true
     rating?: true
     price?: true
     priceType?: true
@@ -5947,10 +5945,9 @@ export namespace Prisma {
   export type MovieSeriesMaxAggregateInputType = {
     id?: true
     title?: true
+    posterUrl?: true
     description?: true
     releaseYear?: true
-    director?: true
-    cast?: true
     rating?: true
     price?: true
     priceType?: true
@@ -5966,6 +5963,7 @@ export namespace Prisma {
   export type MovieSeriesCountAggregateInputType = {
     id?: true
     title?: true
+    posterUrl?: true
     description?: true
     releaseYear?: true
     genre?: true
@@ -6075,11 +6073,12 @@ export namespace Prisma {
   export type MovieSeriesGroupByOutputType = {
     id: string
     title: string
+    posterUrl: string
     description: string
     releaseYear: number
     genre: $Enums.Genre[]
-    director: string
-    cast: string
+    director: string[]
+    cast: string[]
     streamingPlatform: $Enums.StreamingPlatform[]
     accessLink: string[]
     rating: number
@@ -6116,6 +6115,7 @@ export namespace Prisma {
   export type MovieSeriesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     title?: boolean
+    posterUrl?: boolean
     description?: boolean
     releaseYear?: boolean
     genre?: boolean
@@ -6142,6 +6142,7 @@ export namespace Prisma {
   export type MovieSeriesSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     title?: boolean
+    posterUrl?: boolean
     description?: boolean
     releaseYear?: boolean
     genre?: boolean
@@ -6164,6 +6165,7 @@ export namespace Prisma {
   export type MovieSeriesSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     title?: boolean
+    posterUrl?: boolean
     description?: boolean
     releaseYear?: boolean
     genre?: boolean
@@ -6186,6 +6188,7 @@ export namespace Prisma {
   export type MovieSeriesSelectScalar = {
     id?: boolean
     title?: boolean
+    posterUrl?: boolean
     description?: boolean
     releaseYear?: boolean
     genre?: boolean
@@ -6205,7 +6208,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type MovieSeriesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "releaseYear" | "genre" | "director" | "cast" | "streamingPlatform" | "accessLink" | "rating" | "price" | "priceType" | "discount" | "discountType" | "discountExpiry" | "isActive" | "isDeleted" | "createdAt" | "updatedAt", ExtArgs["result"]["movieSeries"]>
+  export type MovieSeriesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "posterUrl" | "description" | "releaseYear" | "genre" | "director" | "cast" | "streamingPlatform" | "accessLink" | "rating" | "price" | "priceType" | "discount" | "discountType" | "discountExpiry" | "isActive" | "isDeleted" | "createdAt" | "updatedAt", ExtArgs["result"]["movieSeries"]>
   export type MovieSeriesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     reviews?: boolean | MovieSeries$reviewsArgs<ExtArgs>
     watchlist?: boolean | MovieSeries$watchlistArgs<ExtArgs>
@@ -6225,11 +6228,12 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       title: string
+      posterUrl: string
       description: string
       releaseYear: number
       genre: $Enums.Genre[]
-      director: string
-      cast: string
+      director: string[]
+      cast: string[]
       streamingPlatform: $Enums.StreamingPlatform[]
       accessLink: string[]
       rating: number
@@ -6670,11 +6674,12 @@ export namespace Prisma {
   interface MovieSeriesFieldRefs {
     readonly id: FieldRef<"MovieSeries", 'String'>
     readonly title: FieldRef<"MovieSeries", 'String'>
+    readonly posterUrl: FieldRef<"MovieSeries", 'String'>
     readonly description: FieldRef<"MovieSeries", 'String'>
     readonly releaseYear: FieldRef<"MovieSeries", 'Int'>
     readonly genre: FieldRef<"MovieSeries", 'Genre[]'>
-    readonly director: FieldRef<"MovieSeries", 'String'>
-    readonly cast: FieldRef<"MovieSeries", 'String'>
+    readonly director: FieldRef<"MovieSeries", 'String[]'>
+    readonly cast: FieldRef<"MovieSeries", 'String[]'>
     readonly streamingPlatform: FieldRef<"MovieSeries", 'StreamingPlatform[]'>
     readonly accessLink: FieldRef<"MovieSeries", 'String[]'>
     readonly rating: FieldRef<"MovieSeries", 'Float'>
@@ -15019,6 +15024,7 @@ export namespace Prisma {
   export const MovieSeriesScalarFieldEnum: {
     id: 'id',
     title: 'title',
+    posterUrl: 'posterUrl',
     description: 'description',
     releaseYear: 'releaseYear',
     genre: 'genre',
@@ -15660,11 +15666,12 @@ export namespace Prisma {
     NOT?: MovieSeriesWhereInput | MovieSeriesWhereInput[]
     id?: StringFilter<"MovieSeries"> | string
     title?: StringFilter<"MovieSeries"> | string
+    posterUrl?: StringFilter<"MovieSeries"> | string
     description?: StringFilter<"MovieSeries"> | string
     releaseYear?: IntFilter<"MovieSeries"> | number
     genre?: EnumGenreNullableListFilter<"MovieSeries">
-    director?: StringFilter<"MovieSeries"> | string
-    cast?: StringFilter<"MovieSeries"> | string
+    director?: StringNullableListFilter<"MovieSeries">
+    cast?: StringNullableListFilter<"MovieSeries">
     streamingPlatform?: EnumStreamingPlatformNullableListFilter<"MovieSeries">
     accessLink?: StringNullableListFilter<"MovieSeries">
     rating?: FloatFilter<"MovieSeries"> | number
@@ -15685,6 +15692,7 @@ export namespace Prisma {
   export type MovieSeriesOrderByWithRelationInput = {
     id?: SortOrder
     title?: SortOrder
+    posterUrl?: SortOrder
     description?: SortOrder
     releaseYear?: SortOrder
     genre?: SortOrder
@@ -15709,15 +15717,16 @@ export namespace Prisma {
 
   export type MovieSeriesWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    title?: string
     AND?: MovieSeriesWhereInput | MovieSeriesWhereInput[]
     OR?: MovieSeriesWhereInput[]
     NOT?: MovieSeriesWhereInput | MovieSeriesWhereInput[]
-    title?: StringFilter<"MovieSeries"> | string
+    posterUrl?: StringFilter<"MovieSeries"> | string
     description?: StringFilter<"MovieSeries"> | string
     releaseYear?: IntFilter<"MovieSeries"> | number
     genre?: EnumGenreNullableListFilter<"MovieSeries">
-    director?: StringFilter<"MovieSeries"> | string
-    cast?: StringFilter<"MovieSeries"> | string
+    director?: StringNullableListFilter<"MovieSeries">
+    cast?: StringNullableListFilter<"MovieSeries">
     streamingPlatform?: EnumStreamingPlatformNullableListFilter<"MovieSeries">
     accessLink?: StringNullableListFilter<"MovieSeries">
     rating?: FloatFilter<"MovieSeries"> | number
@@ -15733,11 +15742,12 @@ export namespace Prisma {
     reviews?: ReviewListRelationFilter
     watchlist?: WatchlistListRelationFilter
     purchaseRentHistory?: PurchaseRentHistoryListRelationFilter
-  }, "id">
+  }, "id" | "title">
 
   export type MovieSeriesOrderByWithAggregationInput = {
     id?: SortOrder
     title?: SortOrder
+    posterUrl?: SortOrder
     description?: SortOrder
     releaseYear?: SortOrder
     genre?: SortOrder
@@ -15768,11 +15778,12 @@ export namespace Prisma {
     NOT?: MovieSeriesScalarWhereWithAggregatesInput | MovieSeriesScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"MovieSeries"> | string
     title?: StringWithAggregatesFilter<"MovieSeries"> | string
+    posterUrl?: StringWithAggregatesFilter<"MovieSeries"> | string
     description?: StringWithAggregatesFilter<"MovieSeries"> | string
     releaseYear?: IntWithAggregatesFilter<"MovieSeries"> | number
     genre?: EnumGenreNullableListFilter<"MovieSeries">
-    director?: StringWithAggregatesFilter<"MovieSeries"> | string
-    cast?: StringWithAggregatesFilter<"MovieSeries"> | string
+    director?: StringNullableListFilter<"MovieSeries">
+    cast?: StringNullableListFilter<"MovieSeries">
     streamingPlatform?: EnumStreamingPlatformNullableListFilter<"MovieSeries">
     accessLink?: StringNullableListFilter<"MovieSeries">
     rating?: FloatWithAggregatesFilter<"MovieSeries"> | number
@@ -16632,11 +16643,12 @@ export namespace Prisma {
   export type MovieSeriesCreateInput = {
     id?: string
     title: string
+    posterUrl: string
     description: string
     releaseYear: number
     genre?: MovieSeriesCreategenreInput | $Enums.Genre[]
-    director: string
-    cast: string
+    director?: MovieSeriesCreatedirectorInput | string[]
+    cast?: MovieSeriesCreatecastInput | string[]
     streamingPlatform?: MovieSeriesCreatestreamingPlatformInput | $Enums.StreamingPlatform[]
     accessLink?: MovieSeriesCreateaccessLinkInput | string[]
     rating?: number
@@ -16657,11 +16669,12 @@ export namespace Prisma {
   export type MovieSeriesUncheckedCreateInput = {
     id?: string
     title: string
+    posterUrl: string
     description: string
     releaseYear: number
     genre?: MovieSeriesCreategenreInput | $Enums.Genre[]
-    director: string
-    cast: string
+    director?: MovieSeriesCreatedirectorInput | string[]
+    cast?: MovieSeriesCreatecastInput | string[]
     streamingPlatform?: MovieSeriesCreatestreamingPlatformInput | $Enums.StreamingPlatform[]
     accessLink?: MovieSeriesCreateaccessLinkInput | string[]
     rating?: number
@@ -16682,11 +16695,12 @@ export namespace Prisma {
   export type MovieSeriesUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    posterUrl?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     releaseYear?: IntFieldUpdateOperationsInput | number
     genre?: MovieSeriesUpdategenreInput | $Enums.Genre[]
-    director?: StringFieldUpdateOperationsInput | string
-    cast?: StringFieldUpdateOperationsInput | string
+    director?: MovieSeriesUpdatedirectorInput | string[]
+    cast?: MovieSeriesUpdatecastInput | string[]
     streamingPlatform?: MovieSeriesUpdatestreamingPlatformInput | $Enums.StreamingPlatform[]
     accessLink?: MovieSeriesUpdateaccessLinkInput | string[]
     rating?: FloatFieldUpdateOperationsInput | number
@@ -16707,11 +16721,12 @@ export namespace Prisma {
   export type MovieSeriesUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    posterUrl?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     releaseYear?: IntFieldUpdateOperationsInput | number
     genre?: MovieSeriesUpdategenreInput | $Enums.Genre[]
-    director?: StringFieldUpdateOperationsInput | string
-    cast?: StringFieldUpdateOperationsInput | string
+    director?: MovieSeriesUpdatedirectorInput | string[]
+    cast?: MovieSeriesUpdatecastInput | string[]
     streamingPlatform?: MovieSeriesUpdatestreamingPlatformInput | $Enums.StreamingPlatform[]
     accessLink?: MovieSeriesUpdateaccessLinkInput | string[]
     rating?: FloatFieldUpdateOperationsInput | number
@@ -16732,11 +16747,12 @@ export namespace Prisma {
   export type MovieSeriesCreateManyInput = {
     id?: string
     title: string
+    posterUrl: string
     description: string
     releaseYear: number
     genre?: MovieSeriesCreategenreInput | $Enums.Genre[]
-    director: string
-    cast: string
+    director?: MovieSeriesCreatedirectorInput | string[]
+    cast?: MovieSeriesCreatecastInput | string[]
     streamingPlatform?: MovieSeriesCreatestreamingPlatformInput | $Enums.StreamingPlatform[]
     accessLink?: MovieSeriesCreateaccessLinkInput | string[]
     rating?: number
@@ -16754,11 +16770,12 @@ export namespace Prisma {
   export type MovieSeriesUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    posterUrl?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     releaseYear?: IntFieldUpdateOperationsInput | number
     genre?: MovieSeriesUpdategenreInput | $Enums.Genre[]
-    director?: StringFieldUpdateOperationsInput | string
-    cast?: StringFieldUpdateOperationsInput | string
+    director?: MovieSeriesUpdatedirectorInput | string[]
+    cast?: MovieSeriesUpdatecastInput | string[]
     streamingPlatform?: MovieSeriesUpdatestreamingPlatformInput | $Enums.StreamingPlatform[]
     accessLink?: MovieSeriesUpdateaccessLinkInput | string[]
     rating?: FloatFieldUpdateOperationsInput | number
@@ -16776,11 +16793,12 @@ export namespace Prisma {
   export type MovieSeriesUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    posterUrl?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     releaseYear?: IntFieldUpdateOperationsInput | number
     genre?: MovieSeriesUpdategenreInput | $Enums.Genre[]
-    director?: StringFieldUpdateOperationsInput | string
-    cast?: StringFieldUpdateOperationsInput | string
+    director?: MovieSeriesUpdatedirectorInput | string[]
+    cast?: MovieSeriesUpdatecastInput | string[]
     streamingPlatform?: MovieSeriesUpdatestreamingPlatformInput | $Enums.StreamingPlatform[]
     accessLink?: MovieSeriesUpdateaccessLinkInput | string[]
     rating?: FloatFieldUpdateOperationsInput | number
@@ -17757,19 +17775,19 @@ export namespace Prisma {
     isEmpty?: boolean
   }
 
-  export type EnumStreamingPlatformNullableListFilter<$PrismaModel = never> = {
-    equals?: $Enums.StreamingPlatform[] | ListEnumStreamingPlatformFieldRefInput<$PrismaModel> | null
-    has?: $Enums.StreamingPlatform | EnumStreamingPlatformFieldRefInput<$PrismaModel> | null
-    hasEvery?: $Enums.StreamingPlatform[] | ListEnumStreamingPlatformFieldRefInput<$PrismaModel>
-    hasSome?: $Enums.StreamingPlatform[] | ListEnumStreamingPlatformFieldRefInput<$PrismaModel>
-    isEmpty?: boolean
-  }
-
   export type StringNullableListFilter<$PrismaModel = never> = {
     equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
     has?: string | StringFieldRefInput<$PrismaModel> | null
     hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
     hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
+  export type EnumStreamingPlatformNullableListFilter<$PrismaModel = never> = {
+    equals?: $Enums.StreamingPlatform[] | ListEnumStreamingPlatformFieldRefInput<$PrismaModel> | null
+    has?: $Enums.StreamingPlatform | EnumStreamingPlatformFieldRefInput<$PrismaModel> | null
+    hasEvery?: $Enums.StreamingPlatform[] | ListEnumStreamingPlatformFieldRefInput<$PrismaModel>
+    hasSome?: $Enums.StreamingPlatform[] | ListEnumStreamingPlatformFieldRefInput<$PrismaModel>
     isEmpty?: boolean
   }
 
@@ -17812,6 +17830,7 @@ export namespace Prisma {
   export type MovieSeriesCountOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
+    posterUrl?: SortOrder
     description?: SortOrder
     releaseYear?: SortOrder
     genre?: SortOrder
@@ -17841,10 +17860,9 @@ export namespace Prisma {
   export type MovieSeriesMaxOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
+    posterUrl?: SortOrder
     description?: SortOrder
     releaseYear?: SortOrder
-    director?: SortOrder
-    cast?: SortOrder
     rating?: SortOrder
     price?: SortOrder
     priceType?: SortOrder
@@ -17860,10 +17878,9 @@ export namespace Prisma {
   export type MovieSeriesMinOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
+    posterUrl?: SortOrder
     description?: SortOrder
     releaseYear?: SortOrder
-    director?: SortOrder
-    cast?: SortOrder
     rating?: SortOrder
     price?: SortOrder
     priceType?: SortOrder
@@ -18638,6 +18655,14 @@ export namespace Prisma {
     set: $Enums.Genre[]
   }
 
+  export type MovieSeriesCreatedirectorInput = {
+    set: string[]
+  }
+
+  export type MovieSeriesCreatecastInput = {
+    set: string[]
+  }
+
   export type MovieSeriesCreatestreamingPlatformInput = {
     set: $Enums.StreamingPlatform[]
   }
@@ -18691,6 +18716,16 @@ export namespace Prisma {
   export type MovieSeriesUpdategenreInput = {
     set?: $Enums.Genre[]
     push?: $Enums.Genre | $Enums.Genre[]
+  }
+
+  export type MovieSeriesUpdatedirectorInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type MovieSeriesUpdatecastInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type MovieSeriesUpdatestreamingPlatformInput = {
@@ -20175,11 +20210,12 @@ export namespace Prisma {
   export type MovieSeriesCreateWithoutReviewsInput = {
     id?: string
     title: string
+    posterUrl: string
     description: string
     releaseYear: number
     genre?: MovieSeriesCreategenreInput | $Enums.Genre[]
-    director: string
-    cast: string
+    director?: MovieSeriesCreatedirectorInput | string[]
+    cast?: MovieSeriesCreatecastInput | string[]
     streamingPlatform?: MovieSeriesCreatestreamingPlatformInput | $Enums.StreamingPlatform[]
     accessLink?: MovieSeriesCreateaccessLinkInput | string[]
     rating?: number
@@ -20199,11 +20235,12 @@ export namespace Prisma {
   export type MovieSeriesUncheckedCreateWithoutReviewsInput = {
     id?: string
     title: string
+    posterUrl: string
     description: string
     releaseYear: number
     genre?: MovieSeriesCreategenreInput | $Enums.Genre[]
-    director: string
-    cast: string
+    director?: MovieSeriesCreatedirectorInput | string[]
+    cast?: MovieSeriesCreatecastInput | string[]
     streamingPlatform?: MovieSeriesCreatestreamingPlatformInput | $Enums.StreamingPlatform[]
     accessLink?: MovieSeriesCreateaccessLinkInput | string[]
     rating?: number
@@ -20308,11 +20345,12 @@ export namespace Prisma {
   export type MovieSeriesUpdateWithoutReviewsInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    posterUrl?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     releaseYear?: IntFieldUpdateOperationsInput | number
     genre?: MovieSeriesUpdategenreInput | $Enums.Genre[]
-    director?: StringFieldUpdateOperationsInput | string
-    cast?: StringFieldUpdateOperationsInput | string
+    director?: MovieSeriesUpdatedirectorInput | string[]
+    cast?: MovieSeriesUpdatecastInput | string[]
     streamingPlatform?: MovieSeriesUpdatestreamingPlatformInput | $Enums.StreamingPlatform[]
     accessLink?: MovieSeriesUpdateaccessLinkInput | string[]
     rating?: FloatFieldUpdateOperationsInput | number
@@ -20332,11 +20370,12 @@ export namespace Prisma {
   export type MovieSeriesUncheckedUpdateWithoutReviewsInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    posterUrl?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     releaseYear?: IntFieldUpdateOperationsInput | number
     genre?: MovieSeriesUpdategenreInput | $Enums.Genre[]
-    director?: StringFieldUpdateOperationsInput | string
-    cast?: StringFieldUpdateOperationsInput | string
+    director?: MovieSeriesUpdatedirectorInput | string[]
+    cast?: MovieSeriesUpdatecastInput | string[]
     streamingPlatform?: MovieSeriesUpdatestreamingPlatformInput | $Enums.StreamingPlatform[]
     accessLink?: MovieSeriesUpdateaccessLinkInput | string[]
     rating?: FloatFieldUpdateOperationsInput | number
@@ -20624,11 +20663,12 @@ export namespace Prisma {
   export type MovieSeriesCreateWithoutWatchlistInput = {
     id?: string
     title: string
+    posterUrl: string
     description: string
     releaseYear: number
     genre?: MovieSeriesCreategenreInput | $Enums.Genre[]
-    director: string
-    cast: string
+    director?: MovieSeriesCreatedirectorInput | string[]
+    cast?: MovieSeriesCreatecastInput | string[]
     streamingPlatform?: MovieSeriesCreatestreamingPlatformInput | $Enums.StreamingPlatform[]
     accessLink?: MovieSeriesCreateaccessLinkInput | string[]
     rating?: number
@@ -20648,11 +20688,12 @@ export namespace Prisma {
   export type MovieSeriesUncheckedCreateWithoutWatchlistInput = {
     id?: string
     title: string
+    posterUrl: string
     description: string
     releaseYear: number
     genre?: MovieSeriesCreategenreInput | $Enums.Genre[]
-    director: string
-    cast: string
+    director?: MovieSeriesCreatedirectorInput | string[]
+    cast?: MovieSeriesCreatecastInput | string[]
     streamingPlatform?: MovieSeriesCreatestreamingPlatformInput | $Enums.StreamingPlatform[]
     accessLink?: MovieSeriesCreateaccessLinkInput | string[]
     rating?: number
@@ -20735,11 +20776,12 @@ export namespace Prisma {
   export type MovieSeriesUpdateWithoutWatchlistInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    posterUrl?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     releaseYear?: IntFieldUpdateOperationsInput | number
     genre?: MovieSeriesUpdategenreInput | $Enums.Genre[]
-    director?: StringFieldUpdateOperationsInput | string
-    cast?: StringFieldUpdateOperationsInput | string
+    director?: MovieSeriesUpdatedirectorInput | string[]
+    cast?: MovieSeriesUpdatecastInput | string[]
     streamingPlatform?: MovieSeriesUpdatestreamingPlatformInput | $Enums.StreamingPlatform[]
     accessLink?: MovieSeriesUpdateaccessLinkInput | string[]
     rating?: FloatFieldUpdateOperationsInput | number
@@ -20759,11 +20801,12 @@ export namespace Prisma {
   export type MovieSeriesUncheckedUpdateWithoutWatchlistInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    posterUrl?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     releaseYear?: IntFieldUpdateOperationsInput | number
     genre?: MovieSeriesUpdategenreInput | $Enums.Genre[]
-    director?: StringFieldUpdateOperationsInput | string
-    cast?: StringFieldUpdateOperationsInput | string
+    director?: MovieSeriesUpdatedirectorInput | string[]
+    cast?: MovieSeriesUpdatecastInput | string[]
     streamingPlatform?: MovieSeriesUpdatestreamingPlatformInput | $Enums.StreamingPlatform[]
     accessLink?: MovieSeriesUpdateaccessLinkInput | string[]
     rating?: FloatFieldUpdateOperationsInput | number
@@ -20824,11 +20867,12 @@ export namespace Prisma {
   export type MovieSeriesCreateWithoutPurchaseRentHistoryInput = {
     id?: string
     title: string
+    posterUrl: string
     description: string
     releaseYear: number
     genre?: MovieSeriesCreategenreInput | $Enums.Genre[]
-    director: string
-    cast: string
+    director?: MovieSeriesCreatedirectorInput | string[]
+    cast?: MovieSeriesCreatecastInput | string[]
     streamingPlatform?: MovieSeriesCreatestreamingPlatformInput | $Enums.StreamingPlatform[]
     accessLink?: MovieSeriesCreateaccessLinkInput | string[]
     rating?: number
@@ -20848,11 +20892,12 @@ export namespace Prisma {
   export type MovieSeriesUncheckedCreateWithoutPurchaseRentHistoryInput = {
     id?: string
     title: string
+    posterUrl: string
     description: string
     releaseYear: number
     genre?: MovieSeriesCreategenreInput | $Enums.Genre[]
-    director: string
-    cast: string
+    director?: MovieSeriesCreatedirectorInput | string[]
+    cast?: MovieSeriesCreatecastInput | string[]
     streamingPlatform?: MovieSeriesCreatestreamingPlatformInput | $Enums.StreamingPlatform[]
     accessLink?: MovieSeriesCreateaccessLinkInput | string[]
     rating?: number
@@ -20935,11 +20980,12 @@ export namespace Prisma {
   export type MovieSeriesUpdateWithoutPurchaseRentHistoryInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    posterUrl?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     releaseYear?: IntFieldUpdateOperationsInput | number
     genre?: MovieSeriesUpdategenreInput | $Enums.Genre[]
-    director?: StringFieldUpdateOperationsInput | string
-    cast?: StringFieldUpdateOperationsInput | string
+    director?: MovieSeriesUpdatedirectorInput | string[]
+    cast?: MovieSeriesUpdatecastInput | string[]
     streamingPlatform?: MovieSeriesUpdatestreamingPlatformInput | $Enums.StreamingPlatform[]
     accessLink?: MovieSeriesUpdateaccessLinkInput | string[]
     rating?: FloatFieldUpdateOperationsInput | number
@@ -20959,11 +21005,12 @@ export namespace Prisma {
   export type MovieSeriesUncheckedUpdateWithoutPurchaseRentHistoryInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    posterUrl?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     releaseYear?: IntFieldUpdateOperationsInput | number
     genre?: MovieSeriesUpdategenreInput | $Enums.Genre[]
-    director?: StringFieldUpdateOperationsInput | string
-    cast?: StringFieldUpdateOperationsInput | string
+    director?: MovieSeriesUpdatedirectorInput | string[]
+    cast?: MovieSeriesUpdatecastInput | string[]
     streamingPlatform?: MovieSeriesUpdatestreamingPlatformInput | $Enums.StreamingPlatform[]
     accessLink?: MovieSeriesUpdateaccessLinkInput | string[]
     rating?: FloatFieldUpdateOperationsInput | number

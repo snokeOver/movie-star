@@ -48,6 +48,9 @@ import PrimaryButton from "@/components/shared/buttons/PrimaryButton";
 // import { createMediaLibrary } from "@/services/media/createMediaLibrary";
 import { toast } from "sonner";
 import { Textarea } from "@/components/ui/textarea";
+import ImagePreviewer from "@/components/shared/core/image/ImagePreviewer";
+import ImageUploader from "@/components/shared/core/image/ImageUploader";
+import { postWithFormData } from "@/services/auth/postWithFormData";
 
 // Enums for Genre and Streaming Platform
 enum Genre {
@@ -72,14 +75,11 @@ enum StreamingPlatform {
   self_hosted = "Self-hosted",
 }
 
-export const GenreArray = Object.values(Genre); // Convert enum values into an array
-
-// Enum for StreamingPlatform
-export const StreamingPlatformArray = Object.values(StreamingPlatform);
-
 const CreateMediaForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
+  const [imageFiles, setImageFiles] = useState<File[] | []>([]);
+  const [imagePreview, setImagePreview] = useState<string[] | []>([]);
 
   const form = useForm({
     resolver: zodResolver(createMediaLibrarySchema),
@@ -88,39 +88,46 @@ const CreateMediaForm = () => {
       description: "",
       releaseYear: new Date().getFullYear(),
       genre: [],
-      director: "",
-      cast: "",
+      director: [],
+      cast: [],
       streamingPlatform: [],
-      accessLink: "",
+      accessLink: [],
       rating: 0,
       price: 0,
       priceType: "buy",
       discount: undefined,
       discountType: undefined,
       discountExpiry: undefined,
-      status: true,
+      isActive: true,
     },
     mode: "onChange",
   });
 
   const onSubmit = async (data: FieldValues) => {
-    // setIsLoading(true);
-    console.log(data);
+    setIsLoading(true);
+
     const formData = new FormData();
     formData.append("data", JSON.stringify(data));
+    formData.append("file", imageFiles[0] as File);
 
-    // try {
-    //   const res = await createMediaLibrary(formData);
+    if (!imageFiles[0]) {
+      toast.error("Please upload an image");
+      return;
+    }
 
-    //   if (res?.success) {
-    //     toast.success(res?.message);
-    //   } else toast.error(res?.message);
-    // } catch (error) {
-    //   console.log(error);
-    //   toast.error(`Media Library creation failed`);
-    // } finally {
-    //   setIsLoading(false);
-    // }
+    try {
+      const res = await postWithFormData(formData, "media");
+
+      if (res?.success) {
+        toast.success(res?.message);
+      } else toast.error(res?.message);
+    } catch (error) {
+      console.log(error);
+      toast.error(`Media Library creation failed`);
+    } finally {
+      setIsLoading(false);
+      // form.reset();
+    }
   };
 
   // Handle date selection
@@ -137,12 +144,29 @@ const CreateMediaForm = () => {
         Create Media Library
       </h1>
 
+      <div className="flex items-center justify-center">
+        {imagePreview?.length > 0 ? (
+          <ImagePreviewer
+            setImageFiles={setImageFiles}
+            imagePreview={imagePreview}
+            setImagePreview={setImagePreview}
+          />
+        ) : (
+          <ImageUploader
+            setImageFiles={setImageFiles}
+            setImagePreview={setImagePreview}
+            label="Upload Media Cover"
+          />
+        )}
+      </div>
+
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           className="w-full flex flex-col gap-5"
         >
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+            {/* title */}
             <FormField
               control={form.control}
               name="title"
@@ -158,6 +182,8 @@ const CreateMediaForm = () => {
                 </FormItem>
               )}
             />
+
+            {/* Relese Year */}
             <FormField
               control={form.control}
               name="releaseYear"
@@ -170,7 +196,10 @@ const CreateMediaForm = () => {
                     <Input
                       type="number"
                       placeholder="Enter release year"
-                      {...field}
+                      onChange={(e) => {
+                        const value = parseInt(e.target.value);
+                        field.onChange(isNaN(value) ? "" : value); // Convert to number or reset if NaN
+                      }}
                     />
                   </FormControl>
                   <FormMessage />
@@ -178,6 +207,8 @@ const CreateMediaForm = () => {
               )}
             />
           </div>
+
+          {/* Description */}
           <FormField
             control={form.control}
             name="description"
@@ -195,6 +226,59 @@ const CreateMediaForm = () => {
           />
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+            {/* cast */}
+            <FormField
+              control={form.control}
+              name="cast"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>
+                    Cast <span className="text-destructive">*</span>
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Enter cast names (comma separated)"
+                      value={field.value.join(", ")} // Display the array as a comma-separated string
+                      onChange={(e) => {
+                        const newCast = e.target.value
+                          .split(",")
+                          .map((item) => item.trim());
+                        field.onChange(newCast); // Update the form with the array of names
+                      }}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            {/* Director */}
+            <FormField
+              control={form.control}
+              name="director"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>
+                    Director <span className="text-destructive">*</span>
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Enter cast names (comma separated)"
+                      value={field.value.join(", ")} // Display the array as a comma-separated string
+                      onChange={(e) => {
+                        const newDirector = e.target.value
+                          .split(",")
+                          .map((item) => item.trim()); // Trim spaces
+                        field.onChange(newDirector); // Update the form with the array of names
+                      }}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            {/* Genre */}
             <FormField
               control={form.control}
               name="genre"
@@ -214,7 +298,7 @@ const CreateMediaForm = () => {
                       </MultiSelectorTrigger>
                       <MultiSelectorContent>
                         <MultiSelectorList>
-                          {GenreArray.map((category) => (
+                          {Object.keys(Genre).map((category) => (
                             <MultiSelectorItem
                               key={category}
                               value={category as string}
@@ -231,38 +315,7 @@ const CreateMediaForm = () => {
               )}
             />
 
-            <FormField
-              control={form.control}
-              name="director"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>
-                    Director <span className="text-destructive">*</span>
-                  </FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter the director's name" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="cast"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>
-                    Cast <span className="text-destructive">*</span>
-                  </FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter the cast names" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
+            {/* Streaming Platform */}
             <FormField
               control={form.control}
               name="streamingPlatform"
@@ -283,7 +336,7 @@ const CreateMediaForm = () => {
                       </MultiSelectorTrigger>
                       <MultiSelectorContent>
                         <MultiSelectorList>
-                          {StreamingPlatformArray.map((category) => (
+                          {Object.keys(StreamingPlatform).map((category) => (
                             <MultiSelectorItem
                               key={category}
                               value={category as string}
@@ -299,26 +352,37 @@ const CreateMediaForm = () => {
                 </FormItem>
               )}
             />
+
+            {/* Access Links */}
             <FormField
               control={form.control}
               name="accessLink"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>
-                    Access Link
-                    <span className="text-destructive">*</span>
+                    Access Link <span className="text-destructive">*</span>
                   </FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Enter access links (comma separated)"
-                      {...field}
+                      value={field.value.join(", ")} // Display the array as a comma-separated string
+                      onChange={(e) => {
+                        const newLinks = e.target.value
+                          .split(",") // Split input by commas
+                          .map((item) => item.trim()); // Trim spaces from each item
+                        // Update the form state with the array of links
+                        field.onChange(newLinks);
+                      }}
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage>
+                    {form.formState.errors.accessLink?.message}
+                  </FormMessage>
                 </FormItem>
               )}
             />
 
+            {/* Ratings */}
             <FormField
               control={form.control}
               name="rating"
@@ -341,6 +405,7 @@ const CreateMediaForm = () => {
               )}
             />
 
+            {/* Price */}
             <FormField
               control={form.control}
               name="price"
@@ -365,6 +430,7 @@ const CreateMediaForm = () => {
               )}
             />
 
+            {/* Price Type */}
             <FormField
               control={form.control}
               name="priceType"
@@ -396,6 +462,7 @@ const CreateMediaForm = () => {
               )}
             />
 
+            {/* Discount */}
             <FormField
               control={form.control}
               name="discount"
@@ -418,6 +485,7 @@ const CreateMediaForm = () => {
               )}
             />
 
+            {/* Discount Type */}
             <FormField
               control={form.control}
               name="discountType"
@@ -447,6 +515,7 @@ const CreateMediaForm = () => {
               )}
             />
 
+            {/* Discount Expiry Date */}
             <FormField
               control={form.control}
               name="discountExpiry"
@@ -480,6 +549,12 @@ const CreateMediaForm = () => {
                           mode="single"
                           selected={field.value}
                           onSelect={handleDateSelect}
+                          disabled={(date) =>
+                            date <=
+                            new Date(
+                              new Date().setDate(new Date().getDate() - 1)
+                            )
+                          }
                           initialFocus
                         />
                       </PopoverContent>
@@ -490,9 +565,10 @@ const CreateMediaForm = () => {
               )}
             />
 
+            {/*            Status */}
             <FormField
               control={form.control}
-              name="status"
+              name="isActive"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Status</FormLabel>

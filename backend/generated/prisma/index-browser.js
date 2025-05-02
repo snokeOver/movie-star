@@ -169,6 +169,7 @@ exports.Prisma.DeviceScalarFieldEnum = {
 exports.Prisma.MovieSeriesScalarFieldEnum = {
   id: 'id',
   title: 'title',
+  posterUrl: 'posterUrl',
   description: 'description',
   releaseYear: 'releaseYear',
   genre: 'genre',

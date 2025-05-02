@@ -1,12 +1,6 @@
-import {
-  Admin,
-  MovieSeries,
-  Prisma,
-  User,
-  UserStatus,
-} from "../../../../generated/prisma";
+import { MovieSeries, Prisma } from "../../../../generated/prisma";
 import AppError from "../../middleWares/errorHandler/appError";
-import { IPagination } from "../../types";
+import { IFile, IPagination } from "../../types";
 import { paginationHelper } from "../../utils/paginationHealper";
 import { prisma } from "../../utils/prisma";
 
@@ -15,8 +9,10 @@ import httpStatus from "http-status";
 import {
   IMovieSeriesFilteredQuery,
   IAllMovieSeries,
+  IMovieSeries,
 } from "./movieSeries.interface";
 import { movieSeriesSearchTerms } from "./movieSeries.constant";
+import { fileUploader } from "../../utils/fileUploader";
 
 //Update single movie series data by id
 const deleteSingle = async (id: string): Promise<any> => {
@@ -145,9 +141,39 @@ const getAll = async (
   };
 };
 
+//Create single Movie series
+const createSingle = async (
+  data: IMovieSeries,
+  file: IFile | undefined
+): Promise<MovieSeries> => {
+  //check if user exist before take any costly action like upload image
+  const foundMovieSeries = await prisma.movieSeries.findUnique({
+    where: {
+      title: data.title,
+    },
+  });
+
+  if (foundMovieSeries)
+    throw new AppError(httpStatus.CONFLICT, "Media already exist");
+
+  //Upload image to cloudinary
+  if (file) {
+    const uploadedResult = await fileUploader.cloudinaryUpload(
+      file.path,
+      file.filename.split(".")[0]
+    );
+    data.posterUrl = uploadedResult.secure_url;
+  }
+
+  const createdMovieSeries = await prisma.movieSeries.create({ data });
+
+  return createdMovieSeries;
+};
+
 export const MovieSeriesService = {
   getSingle,
   getAll,
   updateSingle,
   deleteSingle,
+  createSingle,
 };
