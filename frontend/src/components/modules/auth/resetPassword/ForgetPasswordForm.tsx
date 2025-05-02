@@ -20,7 +20,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 import { useForgotPassEmailOTP } from "@/stores/forgetPssEmailOTP";
-import { postWithFieldValues } from "@/services/auth/postWithFieldValues";
+import { postWithFieldValues } from "@/services/core/postWithFieldValues";
 
 const ForgetPasswordForm = () => {
   const [isLoading, setIsLoading] = useState(false);

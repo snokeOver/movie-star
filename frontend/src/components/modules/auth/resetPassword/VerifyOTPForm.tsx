@@ -8,7 +8,7 @@ import { InputOTPForm } from "./InputOTPForm";
 import { useForgotPassEmailOTP } from "@/stores/forgetPssEmailOTP";
 import { toast } from "sonner";
 
-import { postWithFieldValues } from "@/services/auth/postWithFieldValues";
+import { postWithFieldValues } from "@/services/core/postWithFieldValues";
 
 export default function VerifyOTPForm() {
   const { email, otp, setOTP } = useForgotPassEmailOTP();

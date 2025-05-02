@@ -50,33 +50,15 @@ import { toast } from "sonner";
 import { Textarea } from "@/components/ui/textarea";
 import ImagePreviewer from "@/components/shared/core/image/ImagePreviewer";
 import ImageUploader from "@/components/shared/core/image/ImageUploader";
-import { postWithFormData } from "@/services/auth/postWithFormData";
+
+import { useMediaMutation } from "@/hooks/mutations/useMediaMutation";
+import { Genre, StreamingPlatform } from "@/types";
 
 // Enums for Genre and Streaming Platform
-enum Genre {
-  action = "Action",
-  comedy = "Comedy",
-  drama = "Drama",
-  horror = "Horror",
-  thriller = "Thriller",
-  romance = "Romance",
-  documentary = "Documentary",
-  sci_fi = "Sci-Fi",
-  fantasy = "Fantasy",
-  mystery = "Mystery",
-}
-
-enum StreamingPlatform {
-  netflix = "Netflix",
-  disney_plus = "Disney Plus",
-  amazon_prime = "Amazon Prime",
-  hulu = "Hulu",
-  youtube = "YouTube",
-  self_hosted = "Self-hosted",
-}
 
 const CreateMediaForm = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const { mutate: createMedia, isPending: isLoading } = useMediaMutation();
+
   const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
   const [imageFiles, setImageFiles] = useState<File[] | []>([]);
   const [imagePreview, setImagePreview] = useState<string[] | []>([]);
@@ -104,8 +86,6 @@ const CreateMediaForm = () => {
   });
 
   const onSubmit = async (data: FieldValues) => {
-    setIsLoading(true);
-
     const formData = new FormData();
     formData.append("data", JSON.stringify(data));
     formData.append("file", imageFiles[0] as File);
@@ -115,19 +95,7 @@ const CreateMediaForm = () => {
       return;
     }
 
-    try {
-      const res = await postWithFormData(formData, "media");
-
-      if (res?.success) {
-        toast.success(res?.message);
-      } else toast.error(res?.message);
-    } catch (error) {
-      console.log(error);
-      toast.error(`Media Library creation failed`);
-    } finally {
-      setIsLoading(false);
-      // form.reset();
-    }
+    createMedia({ type: "create", input: formData });
   };
 
   // Handle date selection

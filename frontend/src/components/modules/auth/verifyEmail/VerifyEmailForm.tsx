@@ -20,7 +20,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 import { useVerifyEmail } from "@/stores/verifyEmail";
-import { postWithFieldValues } from "@/services/auth/postWithFieldValues";
+import { postWithFieldValues } from "@/services/core/postWithFieldValues";
 
 const VerifyEmailForm = () => {
   const [isLoading, setIsLoading] = useState(false);

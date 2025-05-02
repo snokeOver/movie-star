@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 import { toast } from "sonner";
 import { useVerifyEmail } from "@/stores/verifyEmail";
-import { postWithFieldValues } from "@/services/auth/postWithFieldValues";
+import { postWithFieldValues } from "@/services/core/postWithFieldValues";
 import { InputOTPForm } from "../resetPassword/InputOTPForm";
 
 export default function VrifyEmailOTPForm() {

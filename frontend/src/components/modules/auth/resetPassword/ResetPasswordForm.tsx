@@ -24,7 +24,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { EyeClosed, EyeIcon } from "lucide-react";
 import PrimaryButton from "@/components/shared/buttons/PrimaryButton";
-import { postWithFieldValues } from "@/services/auth/postWithFieldValues";
+import { postWithFieldValues } from "@/services/core/postWithFieldValues";
 
 export default function ResetPasswordForm() {
   const router = useRouter();
