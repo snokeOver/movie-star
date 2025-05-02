@@ -4,12 +4,15 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Star } from "lucide-react";
 import PrimaryButton from "../../buttons/PrimaryButton";
 import { format } from "date-fns";
+import { ActionConfirmationDialogue } from "../../dialogue/ActionConfirmationDialogue";
+import { useRouter } from "next/navigation";
 
 interface IAdminCardProps {
   media: IMedia;
 }
 
 export function AdminCard({ media }: IAdminCardProps) {
+  const router = useRouter();
   return (
     <Card>
       <Image
@@ -42,20 +45,34 @@ export function AdminCard({ media }: IAdminCardProps) {
           </h3>
 
           <div className="flex gap-2">
-            <PrimaryButton
-              btnText="Update"
-              isLoading={false}
-              loadingText=""
-              onClick={() => {}}
-              className="rounded-full mt-2 w-fit flex-1"
-            />
-            <PrimaryButton
-              btnText="Delete"
-              isLoading={false}
-              loadingText=""
-              onClick={() => {}}
-              className="rounded-full mt-2 bg-destructive w-fit flex-1 hover:bg-destructive/80"
-            />
+            <div className="flex-1">
+              <PrimaryButton
+                btnText="Update"
+                isLoading={false}
+                loadingText=""
+                onClick={() =>
+                  router.push(`/dashboard/admin/media/create?id=${media.id}`)
+                }
+                className="rounded-full mt-2 "
+              />
+            </div>
+
+            <div className="flex-1">
+              <ActionConfirmationDialogue
+                onConfirm={() => console.log("accepted")}
+                isLoading={false}
+                bodyText="This media will be deleted permanently"
+                triggerButton={
+                  <PrimaryButton
+                    btnText="Delete"
+                    isLoading={false}
+                    loadingText=""
+                    onClick={() => {}}
+                    className="rounded-full mt-2 bg-destructive  hover:bg-destructive/80"
+                  />
+                }
+              />
+            </div>
           </div>
         </div>
       </CardContent>

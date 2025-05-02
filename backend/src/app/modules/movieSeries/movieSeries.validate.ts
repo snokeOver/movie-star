@@ -6,15 +6,6 @@ import {
   StreamingPlatform,
 } from "../../../../generated/prisma";
 
-const update = z.object({
-  body: z
-    .object({
-      name: z.string().optional(),
-      contactNumber: z.string().optional(),
-    })
-    .strict(),
-});
-
 const create = z
   .object({
     title: z
@@ -78,6 +69,12 @@ const create = z
       ),
   })
   .strict();
+
+const update = create
+  .extend({
+    posterUrl: z.string().url("Invalid poster URL").optional(),
+  })
+  .partial();
 
 export const ValidateMovieSeries = {
   update,

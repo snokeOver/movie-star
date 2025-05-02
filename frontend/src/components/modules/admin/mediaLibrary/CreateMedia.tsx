@@ -1,7 +1,7 @@
 "use client";
 import { createMediaLibrarySchema } from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Form,
   FormControl,
@@ -20,7 +20,7 @@ import {
   MultiSelectorTrigger,
 } from "@/components/ui/extension/multi-select";
 
-import { format } from "date-fns";
+import { format, set } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -53,21 +53,35 @@ import ImageUploader from "@/components/shared/core/image/ImageUploader";
 
 import { useMediaMutation } from "@/hooks/mutations/useMediaMutation";
 import { Genre, StreamingPlatform } from "@/types";
+import { useSearchParams } from "next/navigation";
+import { useMediaQuery } from "@/hooks/queries/useMediaQuery";
+import LoadingSection from "@/components/shared/core/loading-skeleton/LoadingSection";
 
 // Enums for Genre and Streaming Platform
 
 const CreateMediaForm = () => {
   const { mutate: createMedia, isPending: isLoading } = useMediaMutation();
+  const mediaId = useSearchParams().get("id");
 
   const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
   const [imageFiles, setImageFiles] = useState<File[] | []>([]);
   const [imagePreview, setImagePreview] = useState<string[] | []>([]);
+
+  const {
+    data: media,
+    isPending,
+    isError,
+    error,
+  } = useMediaQuery({
+    id: mediaId || "",
+  });
 
   const form = useForm({
     resolver: zodResolver(createMediaLibrarySchema),
     defaultValues: {
       title: "",
       description: "",
+      posterUrl: "",
       releaseYear: new Date().getFullYear(),
       genre: [],
       director: [],
@@ -90,12 +104,16 @@ const CreateMediaForm = () => {
     formData.append("data", JSON.stringify(data));
     formData.append("file", imageFiles[0] as File);
 
-    if (!imageFiles[0]) {
+    if (!imageFiles[0] && !data.posterUrl) {
       toast.error("Please upload an image");
       return;
     }
 
-    createMedia({ type: "create", input: formData });
+    createMedia({
+      type: mediaId && mediaId ? "update" : "create",
+      mediaId: mediaId || undefined,
+      input: formData,
+    });
   };
 
   // Handle date selection
@@ -105,6 +123,31 @@ const CreateMediaForm = () => {
       setIsPopoverOpen(false);
     }
   };
+
+  useEffect(() => {
+    if (media) {
+      form.setValue("title", media.title || "");
+      form.setValue("description", media.description || "");
+      form.setValue("posterUrl", media.posterUrl || "");
+      form.setValue("releaseYear", media.releaseYear);
+      form.setValue("genre", media.genre || []);
+      form.setValue("director", media.director || []);
+      form.setValue("cast", media.cast || []);
+      form.setValue("streamingPlatform", media.streamingPlatform || []);
+      form.setValue("accessLink", media.accessLink || []);
+      form.setValue("rating", media.rating || 0);
+      form.setValue("price", media.price || 0);
+      form.setValue("priceType", media.priceType || "buy");
+      form.setValue("discount", media.discount || undefined);
+      form.setValue("discountType", media.discountType || undefined);
+      form.setValue("discountExpiry", media.discountExpiry || undefined);
+      form.setValue("isActive", media.isActive || true);
+      setImagePreview([media?.posterUrl || ""]);
+    }
+  }, [media]);
+
+  if (isPending) return <LoadingSection />;
+  if (isError) return <div>Error: {error?.message}</div>; // Error state
 
   return (
     <div className="flex flex-col items-center gap-10">
@@ -164,6 +207,7 @@ const CreateMediaForm = () => {
                     <Input
                       type="number"
                       placeholder="Enter release year"
+                      value={field.value}
                       onChange={(e) => {
                         const value = parseInt(e.target.value);
                         field.onChange(isNaN(value) ? "" : value); // Convert to number or reset if NaN
@@ -567,8 +611,8 @@ const CreateMediaForm = () => {
           </div>
 
           <PrimaryButton
-            btnText="Create"
-            loadingText="Creating..."
+            btnText={mediaId ? "Update" : "Create"}
+            loadingText={mediaId ? "Updating..." : "Creating..."}
             isLoading={isLoading}
             type="submit"
           />

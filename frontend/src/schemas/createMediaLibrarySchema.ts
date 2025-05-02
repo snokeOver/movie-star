@@ -6,6 +6,8 @@ export const createMediaLibrarySchema = z.object({
     .min(1, "Title is required")
     .max(100, "Title cannot exceed 100 characters"), // Added max length for title
 
+  posterUrl: z.string().optional(),
+
   description: z
     .string()
     .min(1, "Description is required")

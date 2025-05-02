@@ -23,7 +23,11 @@ const deleteSingle = tryCatchAsync(async (req, res) => {
 
 //Update single movie series by id
 const updateSingle = tryCatchAsync(async (req, res) => {
-  const result = await MovieSeriesService.updateSingle(req.params.id, req.body);
+  const result = await MovieSeriesService.updateSingle(
+    req.params.id,
+    req.body.data,
+    req.file
+  );
 
   sendResponse({
     res,

@@ -41,7 +41,8 @@ const deleteSingle = async (id: string): Promise<any> => {
 //Update single movie series data by id
 const updateSingle = async (
   id: string,
-  data: Partial<MovieSeries>
+  data: Partial<MovieSeries>,
+  file: IFile | undefined
 ): Promise<MovieSeries> => {
   const foundMovieSeries = await prisma.movieSeries.findUnique({
     where: {
@@ -52,6 +53,15 @@ const updateSingle = async (
 
   if (!foundMovieSeries)
     throw new AppError(httpStatus.NOT_FOUND, "Media not found");
+
+  //Upload image to cloudinary
+  if (file) {
+    const uploadedResult = await fileUploader.cloudinaryUpload(
+      file.path,
+      file.filename.split(".")[0]
+    );
+    data.posterUrl = uploadedResult.secure_url;
+  }
 
   const result = await prisma.movieSeries.update({
     where: {

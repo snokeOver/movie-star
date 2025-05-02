@@ -1,7 +1,5 @@
 import express, { NextFunction, Request, Response } from "express";
 
-import { validateRequest } from "../../middleWares/validateRequest";
-
 import auth from "../../middleWares/auth";
 import { UserRole } from "../../../../generated/prisma";
 
@@ -15,13 +13,6 @@ router.delete(
   "/:id",
   auth(UserRole.admin, UserRole.s_admin),
   MovieSeriesController.deleteSingle
-);
-
-router.patch(
-  "/:id",
-  auth(UserRole.admin, UserRole.s_admin),
-  validateRequest(ValidateMovieSeries.update),
-  MovieSeriesController.updateSingle
 );
 
 router.get(
@@ -45,6 +36,18 @@ router.post(
     req.body.data = ValidateMovieSeries.create.parse(JSON.parse(req.body.data));
 
     return MovieSeriesController.createSingle(req, res, next);
+  }
+);
+
+router.patch(
+  "/:id",
+  auth(UserRole.admin, UserRole.s_admin),
+  fileUploader.multerUpload.single("file"),
+
+  (req: Request, res: Response, next: NextFunction) => {
+    req.body.data = ValidateMovieSeries.update.parse(JSON.parse(req.body.data));
+
+    return MovieSeriesController.updateSingle(req, res, next);
   }
 );
 
