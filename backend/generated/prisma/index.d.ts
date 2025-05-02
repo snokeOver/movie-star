@@ -5863,6 +5863,7 @@ export namespace Prisma {
     discountType: $Enums.DiscountType | null
     discountExpiry: Date | null
     isActive: boolean | null
+    isDeleted: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -5881,6 +5882,7 @@ export namespace Prisma {
     discountType: $Enums.DiscountType | null
     discountExpiry: Date | null
     isActive: boolean | null
+    isDeleted: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -5894,6 +5896,7 @@ export namespace Prisma {
     director: number
     cast: number
     streamingPlatform: number
+    accessLink: number
     rating: number
     price: number
     priceType: number
@@ -5901,6 +5904,7 @@ export namespace Prisma {
     discountType: number
     discountExpiry: number
     isActive: number
+    isDeleted: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -5935,6 +5939,7 @@ export namespace Prisma {
     discountType?: true
     discountExpiry?: true
     isActive?: true
+    isDeleted?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -5953,6 +5958,7 @@ export namespace Prisma {
     discountType?: true
     discountExpiry?: true
     isActive?: true
+    isDeleted?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -5966,6 +5972,7 @@ export namespace Prisma {
     director?: true
     cast?: true
     streamingPlatform?: true
+    accessLink?: true
     rating?: true
     price?: true
     priceType?: true
@@ -5973,6 +5980,7 @@ export namespace Prisma {
     discountType?: true
     discountExpiry?: true
     isActive?: true
+    isDeleted?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -6073,6 +6081,7 @@ export namespace Prisma {
     director: string
     cast: string
     streamingPlatform: $Enums.StreamingPlatform[]
+    accessLink: string[]
     rating: number
     price: number
     priceType: $Enums.PriceType
@@ -6080,6 +6089,7 @@ export namespace Prisma {
     discountType: $Enums.DiscountType | null
     discountExpiry: Date | null
     isActive: boolean
+    isDeleted: boolean
     createdAt: Date
     updatedAt: Date
     _count: MovieSeriesCountAggregateOutputType | null
@@ -6112,6 +6122,7 @@ export namespace Prisma {
     director?: boolean
     cast?: boolean
     streamingPlatform?: boolean
+    accessLink?: boolean
     rating?: boolean
     price?: boolean
     priceType?: boolean
@@ -6119,6 +6130,7 @@ export namespace Prisma {
     discountType?: boolean
     discountExpiry?: boolean
     isActive?: boolean
+    isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     reviews?: boolean | MovieSeries$reviewsArgs<ExtArgs>
@@ -6136,6 +6148,7 @@ export namespace Prisma {
     director?: boolean
     cast?: boolean
     streamingPlatform?: boolean
+    accessLink?: boolean
     rating?: boolean
     price?: boolean
     priceType?: boolean
@@ -6143,6 +6156,7 @@ export namespace Prisma {
     discountType?: boolean
     discountExpiry?: boolean
     isActive?: boolean
+    isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["movieSeries"]>
@@ -6156,6 +6170,7 @@ export namespace Prisma {
     director?: boolean
     cast?: boolean
     streamingPlatform?: boolean
+    accessLink?: boolean
     rating?: boolean
     price?: boolean
     priceType?: boolean
@@ -6163,6 +6178,7 @@ export namespace Prisma {
     discountType?: boolean
     discountExpiry?: boolean
     isActive?: boolean
+    isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["movieSeries"]>
@@ -6176,6 +6192,7 @@ export namespace Prisma {
     director?: boolean
     cast?: boolean
     streamingPlatform?: boolean
+    accessLink?: boolean
     rating?: boolean
     price?: boolean
     priceType?: boolean
@@ -6183,11 +6200,12 @@ export namespace Prisma {
     discountType?: boolean
     discountExpiry?: boolean
     isActive?: boolean
+    isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type MovieSeriesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "releaseYear" | "genre" | "director" | "cast" | "streamingPlatform" | "rating" | "price" | "priceType" | "discount" | "discountType" | "discountExpiry" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["movieSeries"]>
+  export type MovieSeriesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "releaseYear" | "genre" | "director" | "cast" | "streamingPlatform" | "accessLink" | "rating" | "price" | "priceType" | "discount" | "discountType" | "discountExpiry" | "isActive" | "isDeleted" | "createdAt" | "updatedAt", ExtArgs["result"]["movieSeries"]>
   export type MovieSeriesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     reviews?: boolean | MovieSeries$reviewsArgs<ExtArgs>
     watchlist?: boolean | MovieSeries$watchlistArgs<ExtArgs>
@@ -6213,6 +6231,7 @@ export namespace Prisma {
       director: string
       cast: string
       streamingPlatform: $Enums.StreamingPlatform[]
+      accessLink: string[]
       rating: number
       price: number
       priceType: $Enums.PriceType
@@ -6220,6 +6239,7 @@ export namespace Prisma {
       discountType: $Enums.DiscountType | null
       discountExpiry: Date | null
       isActive: boolean
+      isDeleted: boolean
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["movieSeries"]>
@@ -6656,6 +6676,7 @@ export namespace Prisma {
     readonly director: FieldRef<"MovieSeries", 'String'>
     readonly cast: FieldRef<"MovieSeries", 'String'>
     readonly streamingPlatform: FieldRef<"MovieSeries", 'StreamingPlatform[]'>
+    readonly accessLink: FieldRef<"MovieSeries", 'String[]'>
     readonly rating: FieldRef<"MovieSeries", 'Float'>
     readonly price: FieldRef<"MovieSeries", 'Float'>
     readonly priceType: FieldRef<"MovieSeries", 'PriceType'>
@@ -6663,6 +6684,7 @@ export namespace Prisma {
     readonly discountType: FieldRef<"MovieSeries", 'DiscountType'>
     readonly discountExpiry: FieldRef<"MovieSeries", 'DateTime'>
     readonly isActive: FieldRef<"MovieSeries", 'Boolean'>
+    readonly isDeleted: FieldRef<"MovieSeries", 'Boolean'>
     readonly createdAt: FieldRef<"MovieSeries", 'DateTime'>
     readonly updatedAt: FieldRef<"MovieSeries", 'DateTime'>
   }
@@ -15003,6 +15025,7 @@ export namespace Prisma {
     director: 'director',
     cast: 'cast',
     streamingPlatform: 'streamingPlatform',
+    accessLink: 'accessLink',
     rating: 'rating',
     price: 'price',
     priceType: 'priceType',
@@ -15010,6 +15033,7 @@ export namespace Prisma {
     discountType: 'discountType',
     discountExpiry: 'discountExpiry',
     isActive: 'isActive',
+    isDeleted: 'isDeleted',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -15642,6 +15666,7 @@ export namespace Prisma {
     director?: StringFilter<"MovieSeries"> | string
     cast?: StringFilter<"MovieSeries"> | string
     streamingPlatform?: EnumStreamingPlatformNullableListFilter<"MovieSeries">
+    accessLink?: StringNullableListFilter<"MovieSeries">
     rating?: FloatFilter<"MovieSeries"> | number
     price?: FloatFilter<"MovieSeries"> | number
     priceType?: EnumPriceTypeFilter<"MovieSeries"> | $Enums.PriceType
@@ -15649,6 +15674,7 @@ export namespace Prisma {
     discountType?: EnumDiscountTypeNullableFilter<"MovieSeries"> | $Enums.DiscountType | null
     discountExpiry?: DateTimeNullableFilter<"MovieSeries"> | Date | string | null
     isActive?: BoolFilter<"MovieSeries"> | boolean
+    isDeleted?: BoolFilter<"MovieSeries"> | boolean
     createdAt?: DateTimeFilter<"MovieSeries"> | Date | string
     updatedAt?: DateTimeFilter<"MovieSeries"> | Date | string
     reviews?: ReviewListRelationFilter
@@ -15665,6 +15691,7 @@ export namespace Prisma {
     director?: SortOrder
     cast?: SortOrder
     streamingPlatform?: SortOrder
+    accessLink?: SortOrder
     rating?: SortOrder
     price?: SortOrder
     priceType?: SortOrder
@@ -15672,6 +15699,7 @@ export namespace Prisma {
     discountType?: SortOrderInput | SortOrder
     discountExpiry?: SortOrderInput | SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     reviews?: ReviewOrderByRelationAggregateInput
@@ -15691,6 +15719,7 @@ export namespace Prisma {
     director?: StringFilter<"MovieSeries"> | string
     cast?: StringFilter<"MovieSeries"> | string
     streamingPlatform?: EnumStreamingPlatformNullableListFilter<"MovieSeries">
+    accessLink?: StringNullableListFilter<"MovieSeries">
     rating?: FloatFilter<"MovieSeries"> | number
     price?: FloatFilter<"MovieSeries"> | number
     priceType?: EnumPriceTypeFilter<"MovieSeries"> | $Enums.PriceType
@@ -15698,6 +15727,7 @@ export namespace Prisma {
     discountType?: EnumDiscountTypeNullableFilter<"MovieSeries"> | $Enums.DiscountType | null
     discountExpiry?: DateTimeNullableFilter<"MovieSeries"> | Date | string | null
     isActive?: BoolFilter<"MovieSeries"> | boolean
+    isDeleted?: BoolFilter<"MovieSeries"> | boolean
     createdAt?: DateTimeFilter<"MovieSeries"> | Date | string
     updatedAt?: DateTimeFilter<"MovieSeries"> | Date | string
     reviews?: ReviewListRelationFilter
@@ -15714,6 +15744,7 @@ export namespace Prisma {
     director?: SortOrder
     cast?: SortOrder
     streamingPlatform?: SortOrder
+    accessLink?: SortOrder
     rating?: SortOrder
     price?: SortOrder
     priceType?: SortOrder
@@ -15721,6 +15752,7 @@ export namespace Prisma {
     discountType?: SortOrderInput | SortOrder
     discountExpiry?: SortOrderInput | SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: MovieSeriesCountOrderByAggregateInput
@@ -15742,6 +15774,7 @@ export namespace Prisma {
     director?: StringWithAggregatesFilter<"MovieSeries"> | string
     cast?: StringWithAggregatesFilter<"MovieSeries"> | string
     streamingPlatform?: EnumStreamingPlatformNullableListFilter<"MovieSeries">
+    accessLink?: StringNullableListFilter<"MovieSeries">
     rating?: FloatWithAggregatesFilter<"MovieSeries"> | number
     price?: FloatWithAggregatesFilter<"MovieSeries"> | number
     priceType?: EnumPriceTypeWithAggregatesFilter<"MovieSeries"> | $Enums.PriceType
@@ -15749,6 +15782,7 @@ export namespace Prisma {
     discountType?: EnumDiscountTypeNullableWithAggregatesFilter<"MovieSeries"> | $Enums.DiscountType | null
     discountExpiry?: DateTimeNullableWithAggregatesFilter<"MovieSeries"> | Date | string | null
     isActive?: BoolWithAggregatesFilter<"MovieSeries"> | boolean
+    isDeleted?: BoolWithAggregatesFilter<"MovieSeries"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"MovieSeries"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"MovieSeries"> | Date | string
   }
@@ -16604,6 +16638,7 @@ export namespace Prisma {
     director: string
     cast: string
     streamingPlatform?: MovieSeriesCreatestreamingPlatformInput | $Enums.StreamingPlatform[]
+    accessLink?: MovieSeriesCreateaccessLinkInput | string[]
     rating?: number
     price: number
     priceType: $Enums.PriceType
@@ -16611,6 +16646,7 @@ export namespace Prisma {
     discountType?: $Enums.DiscountType | null
     discountExpiry?: Date | string | null
     isActive?: boolean
+    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     reviews?: ReviewCreateNestedManyWithoutMovieSeriesInput
@@ -16627,6 +16663,7 @@ export namespace Prisma {
     director: string
     cast: string
     streamingPlatform?: MovieSeriesCreatestreamingPlatformInput | $Enums.StreamingPlatform[]
+    accessLink?: MovieSeriesCreateaccessLinkInput | string[]
     rating?: number
     price: number
     priceType: $Enums.PriceType
@@ -16634,6 +16671,7 @@ export namespace Prisma {
     discountType?: $Enums.DiscountType | null
     discountExpiry?: Date | string | null
     isActive?: boolean
+    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     reviews?: ReviewUncheckedCreateNestedManyWithoutMovieSeriesInput
@@ -16650,6 +16688,7 @@ export namespace Prisma {
     director?: StringFieldUpdateOperationsInput | string
     cast?: StringFieldUpdateOperationsInput | string
     streamingPlatform?: MovieSeriesUpdatestreamingPlatformInput | $Enums.StreamingPlatform[]
+    accessLink?: MovieSeriesUpdateaccessLinkInput | string[]
     rating?: FloatFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     priceType?: EnumPriceTypeFieldUpdateOperationsInput | $Enums.PriceType
@@ -16657,6 +16696,7 @@ export namespace Prisma {
     discountType?: NullableEnumDiscountTypeFieldUpdateOperationsInput | $Enums.DiscountType | null
     discountExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reviews?: ReviewUpdateManyWithoutMovieSeriesNestedInput
@@ -16673,6 +16713,7 @@ export namespace Prisma {
     director?: StringFieldUpdateOperationsInput | string
     cast?: StringFieldUpdateOperationsInput | string
     streamingPlatform?: MovieSeriesUpdatestreamingPlatformInput | $Enums.StreamingPlatform[]
+    accessLink?: MovieSeriesUpdateaccessLinkInput | string[]
     rating?: FloatFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     priceType?: EnumPriceTypeFieldUpdateOperationsInput | $Enums.PriceType
@@ -16680,6 +16721,7 @@ export namespace Prisma {
     discountType?: NullableEnumDiscountTypeFieldUpdateOperationsInput | $Enums.DiscountType | null
     discountExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reviews?: ReviewUncheckedUpdateManyWithoutMovieSeriesNestedInput
@@ -16696,6 +16738,7 @@ export namespace Prisma {
     director: string
     cast: string
     streamingPlatform?: MovieSeriesCreatestreamingPlatformInput | $Enums.StreamingPlatform[]
+    accessLink?: MovieSeriesCreateaccessLinkInput | string[]
     rating?: number
     price: number
     priceType: $Enums.PriceType
@@ -16703,6 +16746,7 @@ export namespace Prisma {
     discountType?: $Enums.DiscountType | null
     discountExpiry?: Date | string | null
     isActive?: boolean
+    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -16716,6 +16760,7 @@ export namespace Prisma {
     director?: StringFieldUpdateOperationsInput | string
     cast?: StringFieldUpdateOperationsInput | string
     streamingPlatform?: MovieSeriesUpdatestreamingPlatformInput | $Enums.StreamingPlatform[]
+    accessLink?: MovieSeriesUpdateaccessLinkInput | string[]
     rating?: FloatFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     priceType?: EnumPriceTypeFieldUpdateOperationsInput | $Enums.PriceType
@@ -16723,6 +16768,7 @@ export namespace Prisma {
     discountType?: NullableEnumDiscountTypeFieldUpdateOperationsInput | $Enums.DiscountType | null
     discountExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16736,6 +16782,7 @@ export namespace Prisma {
     director?: StringFieldUpdateOperationsInput | string
     cast?: StringFieldUpdateOperationsInput | string
     streamingPlatform?: MovieSeriesUpdatestreamingPlatformInput | $Enums.StreamingPlatform[]
+    accessLink?: MovieSeriesUpdateaccessLinkInput | string[]
     rating?: FloatFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     priceType?: EnumPriceTypeFieldUpdateOperationsInput | $Enums.PriceType
@@ -16743,6 +16790,7 @@ export namespace Prisma {
     discountType?: NullableEnumDiscountTypeFieldUpdateOperationsInput | $Enums.DiscountType | null
     discountExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -17717,6 +17765,14 @@ export namespace Prisma {
     isEmpty?: boolean
   }
 
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
   export type FloatFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[] | ListFloatFieldRefInput<$PrismaModel>
@@ -17762,6 +17818,7 @@ export namespace Prisma {
     director?: SortOrder
     cast?: SortOrder
     streamingPlatform?: SortOrder
+    accessLink?: SortOrder
     rating?: SortOrder
     price?: SortOrder
     priceType?: SortOrder
@@ -17769,6 +17826,7 @@ export namespace Prisma {
     discountType?: SortOrder
     discountExpiry?: SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -17794,6 +17852,7 @@ export namespace Prisma {
     discountType?: SortOrder
     discountExpiry?: SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -17812,6 +17871,7 @@ export namespace Prisma {
     discountType?: SortOrder
     discountExpiry?: SortOrder
     isActive?: SortOrder
+    isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -17873,14 +17933,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedEnumDiscountTypeNullableFilter<$PrismaModel>
     _max?: NestedEnumDiscountTypeNullableFilter<$PrismaModel>
-  }
-
-  export type StringNullableListFilter<$PrismaModel = never> = {
-    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    has?: string | StringFieldRefInput<$PrismaModel> | null
-    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
-    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
-    isEmpty?: boolean
   }
 
   export type EnumReviewStatusFilter<$PrismaModel = never> = {
@@ -18590,6 +18642,10 @@ export namespace Prisma {
     set: $Enums.StreamingPlatform[]
   }
 
+  export type MovieSeriesCreateaccessLinkInput = {
+    set: string[]
+  }
+
   export type ReviewCreateNestedManyWithoutMovieSeriesInput = {
     create?: XOR<ReviewCreateWithoutMovieSeriesInput, ReviewUncheckedCreateWithoutMovieSeriesInput> | ReviewCreateWithoutMovieSeriesInput[] | ReviewUncheckedCreateWithoutMovieSeriesInput[]
     connectOrCreate?: ReviewCreateOrConnectWithoutMovieSeriesInput | ReviewCreateOrConnectWithoutMovieSeriesInput[]
@@ -18640,6 +18696,11 @@ export namespace Prisma {
   export type MovieSeriesUpdatestreamingPlatformInput = {
     set?: $Enums.StreamingPlatform[]
     push?: $Enums.StreamingPlatform | $Enums.StreamingPlatform[]
+  }
+
+  export type MovieSeriesUpdateaccessLinkInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type FloatFieldUpdateOperationsInput = {
@@ -20120,6 +20181,7 @@ export namespace Prisma {
     director: string
     cast: string
     streamingPlatform?: MovieSeriesCreatestreamingPlatformInput | $Enums.StreamingPlatform[]
+    accessLink?: MovieSeriesCreateaccessLinkInput | string[]
     rating?: number
     price: number
     priceType: $Enums.PriceType
@@ -20127,6 +20189,7 @@ export namespace Prisma {
     discountType?: $Enums.DiscountType | null
     discountExpiry?: Date | string | null
     isActive?: boolean
+    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     watchlist?: WatchlistCreateNestedManyWithoutMovieSeriesInput
@@ -20142,6 +20205,7 @@ export namespace Prisma {
     director: string
     cast: string
     streamingPlatform?: MovieSeriesCreatestreamingPlatformInput | $Enums.StreamingPlatform[]
+    accessLink?: MovieSeriesCreateaccessLinkInput | string[]
     rating?: number
     price: number
     priceType: $Enums.PriceType
@@ -20149,6 +20213,7 @@ export namespace Prisma {
     discountType?: $Enums.DiscountType | null
     discountExpiry?: Date | string | null
     isActive?: boolean
+    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     watchlist?: WatchlistUncheckedCreateNestedManyWithoutMovieSeriesInput
@@ -20249,6 +20314,7 @@ export namespace Prisma {
     director?: StringFieldUpdateOperationsInput | string
     cast?: StringFieldUpdateOperationsInput | string
     streamingPlatform?: MovieSeriesUpdatestreamingPlatformInput | $Enums.StreamingPlatform[]
+    accessLink?: MovieSeriesUpdateaccessLinkInput | string[]
     rating?: FloatFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     priceType?: EnumPriceTypeFieldUpdateOperationsInput | $Enums.PriceType
@@ -20256,6 +20322,7 @@ export namespace Prisma {
     discountType?: NullableEnumDiscountTypeFieldUpdateOperationsInput | $Enums.DiscountType | null
     discountExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     watchlist?: WatchlistUpdateManyWithoutMovieSeriesNestedInput
@@ -20271,6 +20338,7 @@ export namespace Prisma {
     director?: StringFieldUpdateOperationsInput | string
     cast?: StringFieldUpdateOperationsInput | string
     streamingPlatform?: MovieSeriesUpdatestreamingPlatformInput | $Enums.StreamingPlatform[]
+    accessLink?: MovieSeriesUpdateaccessLinkInput | string[]
     rating?: FloatFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     priceType?: EnumPriceTypeFieldUpdateOperationsInput | $Enums.PriceType
@@ -20278,6 +20346,7 @@ export namespace Prisma {
     discountType?: NullableEnumDiscountTypeFieldUpdateOperationsInput | $Enums.DiscountType | null
     discountExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     watchlist?: WatchlistUncheckedUpdateManyWithoutMovieSeriesNestedInput
@@ -20561,6 +20630,7 @@ export namespace Prisma {
     director: string
     cast: string
     streamingPlatform?: MovieSeriesCreatestreamingPlatformInput | $Enums.StreamingPlatform[]
+    accessLink?: MovieSeriesCreateaccessLinkInput | string[]
     rating?: number
     price: number
     priceType: $Enums.PriceType
@@ -20568,6 +20638,7 @@ export namespace Prisma {
     discountType?: $Enums.DiscountType | null
     discountExpiry?: Date | string | null
     isActive?: boolean
+    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     reviews?: ReviewCreateNestedManyWithoutMovieSeriesInput
@@ -20583,6 +20654,7 @@ export namespace Prisma {
     director: string
     cast: string
     streamingPlatform?: MovieSeriesCreatestreamingPlatformInput | $Enums.StreamingPlatform[]
+    accessLink?: MovieSeriesCreateaccessLinkInput | string[]
     rating?: number
     price: number
     priceType: $Enums.PriceType
@@ -20590,6 +20662,7 @@ export namespace Prisma {
     discountType?: $Enums.DiscountType | null
     discountExpiry?: Date | string | null
     isActive?: boolean
+    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     reviews?: ReviewUncheckedCreateNestedManyWithoutMovieSeriesInput
@@ -20668,6 +20741,7 @@ export namespace Prisma {
     director?: StringFieldUpdateOperationsInput | string
     cast?: StringFieldUpdateOperationsInput | string
     streamingPlatform?: MovieSeriesUpdatestreamingPlatformInput | $Enums.StreamingPlatform[]
+    accessLink?: MovieSeriesUpdateaccessLinkInput | string[]
     rating?: FloatFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     priceType?: EnumPriceTypeFieldUpdateOperationsInput | $Enums.PriceType
@@ -20675,6 +20749,7 @@ export namespace Prisma {
     discountType?: NullableEnumDiscountTypeFieldUpdateOperationsInput | $Enums.DiscountType | null
     discountExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reviews?: ReviewUpdateManyWithoutMovieSeriesNestedInput
@@ -20690,6 +20765,7 @@ export namespace Prisma {
     director?: StringFieldUpdateOperationsInput | string
     cast?: StringFieldUpdateOperationsInput | string
     streamingPlatform?: MovieSeriesUpdatestreamingPlatformInput | $Enums.StreamingPlatform[]
+    accessLink?: MovieSeriesUpdateaccessLinkInput | string[]
     rating?: FloatFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     priceType?: EnumPriceTypeFieldUpdateOperationsInput | $Enums.PriceType
@@ -20697,6 +20773,7 @@ export namespace Prisma {
     discountType?: NullableEnumDiscountTypeFieldUpdateOperationsInput | $Enums.DiscountType | null
     discountExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reviews?: ReviewUncheckedUpdateManyWithoutMovieSeriesNestedInput
@@ -20753,6 +20830,7 @@ export namespace Prisma {
     director: string
     cast: string
     streamingPlatform?: MovieSeriesCreatestreamingPlatformInput | $Enums.StreamingPlatform[]
+    accessLink?: MovieSeriesCreateaccessLinkInput | string[]
     rating?: number
     price: number
     priceType: $Enums.PriceType
@@ -20760,6 +20838,7 @@ export namespace Prisma {
     discountType?: $Enums.DiscountType | null
     discountExpiry?: Date | string | null
     isActive?: boolean
+    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     reviews?: ReviewCreateNestedManyWithoutMovieSeriesInput
@@ -20775,6 +20854,7 @@ export namespace Prisma {
     director: string
     cast: string
     streamingPlatform?: MovieSeriesCreatestreamingPlatformInput | $Enums.StreamingPlatform[]
+    accessLink?: MovieSeriesCreateaccessLinkInput | string[]
     rating?: number
     price: number
     priceType: $Enums.PriceType
@@ -20782,6 +20862,7 @@ export namespace Prisma {
     discountType?: $Enums.DiscountType | null
     discountExpiry?: Date | string | null
     isActive?: boolean
+    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     reviews?: ReviewUncheckedCreateNestedManyWithoutMovieSeriesInput
@@ -20860,6 +20941,7 @@ export namespace Prisma {
     director?: StringFieldUpdateOperationsInput | string
     cast?: StringFieldUpdateOperationsInput | string
     streamingPlatform?: MovieSeriesUpdatestreamingPlatformInput | $Enums.StreamingPlatform[]
+    accessLink?: MovieSeriesUpdateaccessLinkInput | string[]
     rating?: FloatFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     priceType?: EnumPriceTypeFieldUpdateOperationsInput | $Enums.PriceType
@@ -20867,6 +20949,7 @@ export namespace Prisma {
     discountType?: NullableEnumDiscountTypeFieldUpdateOperationsInput | $Enums.DiscountType | null
     discountExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reviews?: ReviewUpdateManyWithoutMovieSeriesNestedInput
@@ -20882,6 +20965,7 @@ export namespace Prisma {
     director?: StringFieldUpdateOperationsInput | string
     cast?: StringFieldUpdateOperationsInput | string
     streamingPlatform?: MovieSeriesUpdatestreamingPlatformInput | $Enums.StreamingPlatform[]
+    accessLink?: MovieSeriesUpdateaccessLinkInput | string[]
     rating?: FloatFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     priceType?: EnumPriceTypeFieldUpdateOperationsInput | $Enums.PriceType
@@ -20889,6 +20973,7 @@ export namespace Prisma {
     discountType?: NullableEnumDiscountTypeFieldUpdateOperationsInput | $Enums.DiscountType | null
     discountExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reviews?: ReviewUncheckedUpdateManyWithoutMovieSeriesNestedInput

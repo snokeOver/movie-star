@@ -175,6 +175,7 @@ exports.Prisma.MovieSeriesScalarFieldEnum = {
   director: 'director',
   cast: 'cast',
   streamingPlatform: 'streamingPlatform',
+  accessLink: 'accessLink',
   rating: 'rating',
   price: 'price',
   priceType: 'priceType',
@@ -182,6 +183,7 @@ exports.Prisma.MovieSeriesScalarFieldEnum = {
   discountType: 'discountType',
   discountExpiry: 'discountExpiry',
   isActive: 'isActive',
+  isDeleted: 'isDeleted',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

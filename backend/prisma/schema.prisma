@@ -91,6 +91,7 @@ model MovieSeries {
   director            String
   cast                String
   streamingPlatform   StreamingPlatform[]
+  accessLink          String[]
   rating              Float                 @default(0)
   price               Float // The base price for buy/rent
   priceType           PriceType // Buy or Rent type
@@ -98,6 +99,7 @@ model MovieSeries {
   discountType        DiscountType? // Discount type (percentage or fixed)
   discountExpiry      DateTime? // Expiration date for the discount
   isActive            Boolean               @default(true)
+  isDeleted           Boolean               @default(false)
   createdAt           DateTime              @default(now())
   updatedAt           DateTime              @updatedAt
   reviews             Review[]
