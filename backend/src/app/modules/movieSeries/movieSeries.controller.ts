@@ -40,9 +40,22 @@ const updateSingle = tryCatchAsync(async (req, res) => {
   });
 });
 
-//Get single movie series data by id
+//Get single movie series data by id for admin
 const getSingle = tryCatchAsync(async (req, res) => {
   const result = await MovieSeriesService.getSingle(req.params.id);
+  sendResponse({
+    res,
+    sendData: {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Media fetched successfully",
+      data: result,
+    },
+  });
+});
+//Get single movie series data by id for public
+const getSinglePublic = tryCatchAsync(async (req, res) => {
+  const result = await MovieSeriesService.getSinglePublic(req.params.id);
   sendResponse({
     res,
     sendData: {
@@ -87,10 +100,71 @@ const createSingle = tryCatchAsync(async (req, res) => {
   });
 });
 
+const getFiveHomeBanner = tryCatchAsync(async (req, res) => {
+  const result = await MovieSeriesService.getFiveHomeBanner();
+
+  sendResponse({
+    res,
+    sendData: {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Five Media for home banner fetched successfully",
+      data: result,
+    },
+  });
+});
+
+const getFiveHighestRated = tryCatchAsync(async (req, res) => {
+  const result = await MovieSeriesService.getFiveHighestRated();
+
+  sendResponse({
+    res,
+    sendData: {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Five Highest Rated Media for home fetched successfully",
+      data: result,
+    },
+  });
+});
+
+const getFiveHighlyViewed = tryCatchAsync(async (req, res) => {
+  const result = await MovieSeriesService.getFiveHighlyViewed();
+
+  sendResponse({
+    res,
+    sendData: {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Five Highly viewed Media for home fetched successfully",
+      data: result,
+    },
+  });
+});
+
+const getFiveAdminSelected = tryCatchAsync(async (req, res) => {
+  const result = await MovieSeriesService.getFiveAdminSelected();
+
+  sendResponse({
+    res,
+    sendData: {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Five admin recommended Media for home fetched successfully",
+      data: result,
+    },
+  });
+});
+
 export const MovieSeriesController = {
   getSingle,
   getAll,
   updateSingle,
   deleteSingle,
   createSingle,
+  getFiveHomeBanner,
+  getFiveHighestRated,
+  getFiveHighlyViewed,
+  getFiveAdminSelected,
+  getSinglePublic,
 };

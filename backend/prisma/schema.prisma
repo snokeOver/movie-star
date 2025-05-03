@@ -94,6 +94,8 @@ model MovieSeries {
   streamingPlatform   StreamingPlatform[]
   accessLink          String[]
   rating              Float                 @default(0)
+  viewCount           Int                   @default(0)
+  markByAdmin         Boolean               @default(false)
   price               Float // The base price for buy/rent
   priceType           PriceType // Buy or Rent type
   discount            Float? // Optional discount

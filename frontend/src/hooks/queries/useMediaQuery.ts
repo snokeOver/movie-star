@@ -17,7 +17,7 @@ export const useMediaQuery = ({ id }: IUseMediaQueryOptions = {}) => {
       if (!token) return null;
 
       const url = id
-        ? `${process.env.NEXT_PUBLIC_BASE_API_URL}/media/${id}` // Fetch single media
+        ? `${process.env.NEXT_PUBLIC_BASE_API_URL}/media/single/${id}` // Fetch single media
         : `${process.env.NEXT_PUBLIC_BASE_API_URL}/media`; // Fetch all media
 
       const res = await fetch(url, {

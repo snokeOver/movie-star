@@ -1,15 +1,17 @@
+"use client";
 import Image from "next/image";
 import { IMedia } from "@/types";
 import { Card, CardContent } from "@/components/ui/card";
-import { Star } from "lucide-react";
+import { Plus, Star, Video } from "lucide-react";
 import PrimaryButton from "../../buttons/PrimaryButton";
-import { format } from "date-fns";
+import { useRouter } from "next/navigation";
 
 interface IPopularCardProps {
   media: IMedia;
 }
 
 export function PopularCard({ media }: IPopularCardProps) {
+  const router = useRouter();
   return (
     <Card>
       <Image
@@ -27,34 +29,32 @@ export function PopularCard({ media }: IPopularCardProps) {
               <span>
                 <Star className="text-yellow-400 fill-amber-400 size-4" />
               </span>
-              <span className="text-white">{media.rating}/10</span>
+              <span className="text-white/50">{media.rating}/10</span>
             </div>
             <span>
               <Star className="text-primary ml-2 size-4" />
             </span>
           </div>
-          <h3 className="text-lg font-medium">
+          <h3 className="text-md line-clamp-1 text-white/70 font-medium">
             {media.title.slice(0, 1).toUpperCase() + media.title.slice(1)}
           </h3>
 
-          <h3 className="text-md font-medium">
-            Created: {format(new Date(media.createdAt), "dd-MM-yyyy")}
-          </h3>
-
-          <div className="flex gap-2">
+          <div className="flex flex-col gap-2">
             <PrimaryButton
-              btnText="Update"
+              btnText="Wishlist"
               isLoading={false}
               loadingText=""
               onClick={() => {}}
-              className="rounded-full mt-2 w-fit flex-1"
+              Icon={Plus}
+              className="rounded-sm text-white/80 bg-blue-100/10 hover:bg-blue-400/20 mt-2"
             />
             <PrimaryButton
-              btnText="Delete"
+              btnText="Details"
               isLoading={false}
               loadingText=""
-              onClick={() => {}}
-              className="rounded-full mt-2 bg-destructive w-fit flex-1 hover:bg-destructive/80"
+              onClick={() => router.push(`/media/${media.id}`)}
+              Icon={Video}
+              className="rounded-full text-white/70 hover:text-blue-500/40 mt-2 bg-trasparent flex-1 hover:bg-transparent"
             />
           </div>
         </div>

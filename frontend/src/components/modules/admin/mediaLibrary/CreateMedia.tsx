@@ -56,24 +56,7 @@ import { Genre, StreamingPlatform } from "@/types";
 import { useSearchParams } from "next/navigation";
 import { useMediaQuery } from "@/hooks/queries/useMediaQuery";
 import LoadingSection from "@/components/shared/core/loading-skeleton/LoadingSection";
-
-const transformEnumArray = <T extends Record<string, string>>(
-  values: string[],
-  enumObj: T
-): (keyof T)[] =>
-  values
-    .map((value) => {
-      const key = (Object.keys(enumObj) as (keyof T)[]).find(
-        (k) => enumObj[k] === value || k === value
-      );
-      return key;
-    })
-    .filter(Boolean) as (keyof T)[];
-
-const getEnumValueByKey = <T extends Record<string, string>>(
-  enumObj: T,
-  key: string
-): string | undefined => enumObj[key as keyof T];
+import { getEnumValueByKey, transformEnumArray } from "@/lib/formatter";
 
 const CreateMediaForm = () => {
   const { mutate: createMedia, isPending: isLoading } = useMediaMutation();
@@ -187,10 +170,6 @@ const CreateMediaForm = () => {
       setImagePreview([media?.posterUrl || null]);
     }
   }, [mediaId, media]);
-
-  console.log("media Id: ", mediaId);
-
-  console.log("media title: ", form.getValues("title"));
 
   if (isPending) return <LoadingSection />;
   if (isError) return <div>Error: {error?.message}</div>; // Error state
@@ -453,7 +432,7 @@ const CreateMediaForm = () => {
                       placeholder="Enter rating (1-10)"
                       value={field.value || ""}
                       onChange={(e) => {
-                        const value = parseInt(e.target.value, 10);
+                        const value = parseFloat(e.target.value);
                         field.onChange(isNaN(value) ? "" : value);
                       }}
                     />

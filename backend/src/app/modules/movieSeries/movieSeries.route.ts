@@ -16,16 +16,23 @@ router.delete(
 );
 
 router.get(
-  "/:id",
+  "/single/:id",
   auth(UserRole.admin, UserRole.s_admin),
   MovieSeriesController.getSingle
 );
+
+router.get("/single-public/:id", MovieSeriesController.getSinglePublic);
 
 router.get(
   "/",
   auth(UserRole.admin, UserRole.s_admin),
   MovieSeriesController.getAll
 );
+
+router.get("/home-banner", MovieSeriesController.getFiveHomeBanner);
+router.get("/admin-selected", MovieSeriesController.getFiveAdminSelected);
+router.get("/hightest-rated", MovieSeriesController.getFiveHighestRated);
+router.get("/trending", MovieSeriesController.getFiveHighlyViewed);
 
 router.post(
   "/",

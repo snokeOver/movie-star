@@ -61,7 +61,11 @@ const create = z
     isActive: z.boolean().optional(),
 
     discountExpiry: z
-      .date()
+      .preprocess((val) => {
+        if (!val) return undefined;
+        const date = new Date(val as string);
+        return isNaN(date.getTime()) ? undefined : date;
+      }, z.date())
       .optional()
       .refine(
         (date) => !date || date > new Date(),

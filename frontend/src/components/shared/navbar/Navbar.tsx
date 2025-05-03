@@ -32,9 +32,6 @@ const Navbar = () => {
             </Button>
           </Link>
 
-          <Link href={"/dashboard"}>
-            <Button className="rounded-full">Create Post</Button>
-          </Link>
           {user ? (
             <AvatarDropDown />
           ) : (
