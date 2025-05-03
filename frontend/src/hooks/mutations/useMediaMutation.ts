@@ -56,7 +56,8 @@ export const useMediaMutation = () => {
     },
 
     onSuccess: (res) => {
-      toast.success(res?.message || "Operation successful");
+      if (res.success) toast.success(res?.message || "Operation successful");
+      if (!res.success) toast.error(res?.message || "Operation unsuccessful");
 
       // Invalidate the queries related to media to update the UI after mutation
       queryClient.invalidateQueries({ queryKey: ["medias"] });

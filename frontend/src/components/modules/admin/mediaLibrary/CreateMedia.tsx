@@ -57,7 +57,23 @@ import { useSearchParams } from "next/navigation";
 import { useMediaQuery } from "@/hooks/queries/useMediaQuery";
 import LoadingSection from "@/components/shared/core/loading-skeleton/LoadingSection";
 
-// Enums for Genre and Streaming Platform
+const transformEnumArray = <T extends Record<string, string>>(
+  values: string[],
+  enumObj: T
+): (keyof T)[] =>
+  values
+    .map((value) => {
+      const key = (Object.keys(enumObj) as (keyof T)[]).find(
+        (k) => enumObj[k] === value || k === value
+      );
+      return key;
+    })
+    .filter(Boolean) as (keyof T)[];
+
+const getEnumValueByKey = <T extends Record<string, string>>(
+  enumObj: T,
+  key: string
+): string | undefined => enumObj[key as keyof T];
 
 const CreateMediaForm = () => {
   const { mutate: createMedia, isPending: isLoading } = useMediaMutation();
@@ -81,7 +97,7 @@ const CreateMediaForm = () => {
     defaultValues: {
       title: "",
       description: "",
-      posterUrl: "",
+      posterUrl: undefined,
       releaseYear: new Date().getFullYear(),
       genre: [],
       director: [],
@@ -100,8 +116,24 @@ const CreateMediaForm = () => {
   });
 
   const onSubmit = async (data: FieldValues) => {
+    const transformedData = {
+      ...data,
+      streamingPlatform: transformEnumArray(
+        data.streamingPlatform,
+        StreamingPlatform
+      ),
+      genre: transformEnumArray(data.genre, Genre),
+    } as typeof data & {
+      streamingPlatform: ReturnType<typeof transformEnumArray>;
+      genre: ReturnType<typeof transformEnumArray>;
+    };
+
+    if (!mediaId) {
+      delete transformedData.posterUrl;
+    }
+
     const formData = new FormData();
-    formData.append("data", JSON.stringify(data));
+    formData.append("data", JSON.stringify(transformedData));
     formData.append("file", imageFiles[0] as File);
 
     if (!imageFiles[0] && !data.posterUrl) {
@@ -110,7 +142,7 @@ const CreateMediaForm = () => {
     }
 
     createMedia({
-      type: mediaId && mediaId ? "update" : "create",
+      type: media && mediaId ? "update" : "create",
       mediaId: mediaId || undefined,
       input: formData,
     });
@@ -125,26 +157,40 @@ const CreateMediaForm = () => {
   };
 
   useEffect(() => {
-    if (media) {
-      form.setValue("title", media.title || "");
-      form.setValue("description", media.description || "");
-      form.setValue("posterUrl", media.posterUrl || "");
-      form.setValue("releaseYear", media.releaseYear);
-      form.setValue("genre", media.genre || []);
-      form.setValue("director", media.director || []);
-      form.setValue("cast", media.cast || []);
-      form.setValue("streamingPlatform", media.streamingPlatform || []);
-      form.setValue("accessLink", media.accessLink || []);
-      form.setValue("rating", media.rating || 0);
-      form.setValue("price", media.price || 0);
-      form.setValue("priceType", media.priceType || "buy");
-      form.setValue("discount", media.discount || undefined);
-      form.setValue("discountType", media.discountType || undefined);
-      form.setValue("discountExpiry", media.discountExpiry || undefined);
-      form.setValue("isActive", media.isActive || true);
-      setImagePreview([media?.posterUrl || ""]);
+    form.setValue("title", media?.title || "");
+    form.setValue("description", media?.description || "");
+    form.setValue("posterUrl", media?.posterUrl || "");
+    form.setValue("releaseYear", media?.releaseYear);
+    form.setValue(
+      "genre",
+      media?.genre?.map((g: string) => getEnumValueByKey(Genre, g)) || []
+    );
+
+    form.setValue(
+      "streamingPlatform",
+      media?.streamingPlatform?.map((p: string) =>
+        getEnumValueByKey(StreamingPlatform, p)
+      ) || []
+    );
+    form.setValue("director", media?.director || []);
+    form.setValue("cast", media?.cast || []);
+
+    form.setValue("accessLink", media?.accessLink || []);
+    form.setValue("rating", media?.rating || 0);
+    form.setValue("price", media?.price || 0);
+    form.setValue("priceType", media?.priceType || "buy");
+    form.setValue("discount", media?.discount || undefined);
+    form.setValue("discountType", media?.discountType || undefined);
+    form.setValue("discountExpiry", media?.discountExpiry || undefined);
+    form.setValue("isActive", media?.isActive || true);
+    if (media?.title) {
+      setImagePreview([media?.posterUrl || null]);
     }
-  }, [media]);
+  }, [mediaId, media]);
+
+  console.log("media Id: ", mediaId);
+
+  console.log("media title: ", form.getValues("title"));
 
   if (isPending) return <LoadingSection />;
   if (isError) return <div>Error: {error?.message}</div>; // Error state
@@ -310,7 +356,7 @@ const CreateMediaForm = () => {
                       </MultiSelectorTrigger>
                       <MultiSelectorContent>
                         <MultiSelectorList>
-                          {Object.keys(Genre).map((category) => (
+                          {Object.values(Genre).map((category) => (
                             <MultiSelectorItem
                               key={category}
                               value={category as string}
@@ -348,7 +394,7 @@ const CreateMediaForm = () => {
                       </MultiSelectorTrigger>
                       <MultiSelectorContent>
                         <MultiSelectorList>
-                          {Object.keys(StreamingPlatform).map((category) => (
+                          {Object.values(StreamingPlatform).map((category) => (
                             <MultiSelectorItem
                               key={category}
                               value={category as string}
@@ -577,7 +623,7 @@ const CreateMediaForm = () => {
               )}
             />
 
-            {/*            Status */}
+            {/* Status */}
             <FormField
               control={form.control}
               name="isActive"
