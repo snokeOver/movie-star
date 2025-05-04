@@ -22,13 +22,17 @@ export function AdminCard({ media }: IAdminCardProps) {
   };
   return (
     <Card>
-      <Image
-        src={media.posterUrl}
-        alt={media.title}
-        width={500}
-        height={500}
-        className="h-56 w-full object-cover rounded-t-xl"
-      />
+      <div className="relative">
+        <Image
+          src={media.posterUrl}
+          alt={media.title}
+          width={500}
+          height={500}
+          className="h-56 w-full object-cover rounded-t-xl z-0"
+        />
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-lg z-10" />
+      </div>
 
       <CardContent className="grid gap-4">
         <div className="space-y-1">

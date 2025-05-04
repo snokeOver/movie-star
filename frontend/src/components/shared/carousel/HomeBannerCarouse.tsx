@@ -54,16 +54,18 @@ export function HomeBannerCarousel({ bannerMedias }: IHomeBannerCarouselProps) {
                     alt={media.title ?? "banner"}
                     width={1000}
                     height={500}
-                    className="h-[400px] w-full object-cover rounded-lg shadow-md"
+                    className="h-[400px] w-full object-cover rounded-lg shadow-md z-0"
                   />
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent rounded-lg z-10" />
 
                   {/* Top-left: Release Year */}
-                  <div className="absolute bottom-4 left-4 bg-black/70 text-2xl font-bold text-white px-3 py-1 rounded-full">
+                  <div className="absolute bottom-4 z-50 left-4 bg-black/70 text-2xl font-bold text-white px-3 py-1 rounded-full">
                     {media.title}
                   </div>
 
                   {/* Top-right: Rating */}
-                  <div className="absolute top-4 right-4 backdrop-blur-sm bg-white/20 text-primary font-semibold text-sm px-3 py-1 rounded-full  shadow">
+                  <div className="absolute top-4 right-4 z-50 backdrop-blur-sm bg-white/20 text-primary font-semibold text-sm px-3 py-1 rounded-full  shadow">
                     ⭐ {media.rating}/10
                   </div>
                 </div>

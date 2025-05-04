@@ -34,7 +34,8 @@ export interface IMedia {
   priceType: PriceType; // Add other price types if needed
   rating: number;
   releaseYear: number;
-  genre: Genre;
+  viewCount: number;
+  genre: string[];
   cast: string[];
   director: string[];
   streamingPlatform: StreamingPlatform[];

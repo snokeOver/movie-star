@@ -11,6 +11,8 @@ export default {
   schedule_interval: process.env.SCHEDULE_TIME_INTERVAL_IN_MINUTES!,
   default_profile_url: process.env.DEFAULT_PROFILE_URL!,
 
+  stripe_secret_key: process.env.STRIPE_SECRET_KEY!,
+
   client_url: process.env.CLIENT_URL!,
   server_url: process.env.SERVER_URL!,
 
