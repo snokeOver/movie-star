@@ -53,7 +53,7 @@ export function AvatarDropDown() {
         </DropdownMenuItem>
         <DropdownMenuItem
           className="cursor-pointer"
-          onClick={() => router.push(`dashboard/${user?.role}`)}
+          onClick={() => router.push(`/dashboard/${user?.role}`)}
         >
           <Plus className="text-white" />
           <span>Dashboard</span>

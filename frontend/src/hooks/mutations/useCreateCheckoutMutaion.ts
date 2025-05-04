@@ -7,14 +7,17 @@ import {
 import { toast } from "sonner";
 import { getValidToken } from "@/lib/verifyToken";
 import { loadStripe } from "@stripe/stripe-js";
+import { PriceType } from "@/types";
 
 interface ICheckoutPayload {
   price: number;
   customerEmail: string;
-  customerName: string;
+  purchaseType: PriceType;
   customerId: string;
   productId: string;
   productName: string;
+  success_url: string;
+  cancel_url: string;
 }
 
 export const useCreateCheckoutMutation = () => {

@@ -29,8 +29,8 @@ const MediaDetailsSection = ({ media }: { media: IMedia }) => {
 
     const payload = {
       price: media.price,
+      purchaseType: media.priceType,
       customerEmail: user.email,
-      customerName: user.name || user.email.split("@")[0],
       customerId: user.userId,
       productId: media.id,
       productName: media.title,

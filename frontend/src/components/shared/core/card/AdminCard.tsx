@@ -31,7 +31,7 @@ export function AdminCard({ media }: IAdminCardProps) {
           className="h-56 w-full object-cover rounded-t-xl z-0"
         />
         {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-lg z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent  z-10" />
       </div>
 
       <CardContent className="grid gap-4">

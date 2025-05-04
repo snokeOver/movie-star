@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { PriceType } from "../../../../generated/prisma";
 
 const createSession = z.object({
   body: z
@@ -28,11 +29,7 @@ const createSession = z.object({
         })
         .email("Invalid email format"),
 
-      customerName: z
-        .string({
-          required_error: "Customer name is required",
-        })
-        .min(1, "Customer name cannot be empty"),
+      purchaseType: z.nativeEnum(PriceType),
 
       customerId: z
         .string({
