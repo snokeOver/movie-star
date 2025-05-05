@@ -51,11 +51,12 @@ const LoginForm = () => {
       const res = await loginUser(data);
       if (res.success) {
         const currUser: IUser = jwtDecode(res.data.accessToken);
+        const roleBasedPath =
+          currUser.role === "admin" ? "/dashboard/admin" : "/";
+
         setUser(currUser);
-        const redirecUrl =
-          searchParams.get("redirect") || currUser.role === "admin"
-            ? "/dashboard/admin"
-            : "/dashboard/user";
+        const redirecUrl = searchParams.get("redirect") || roleBasedPath;
+
         router.push(redirecUrl);
         toast.success(res.message);
       } else {

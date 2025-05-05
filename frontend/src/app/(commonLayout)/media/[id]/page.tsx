@@ -1,4 +1,4 @@
-import MediaDetailsSection from "@/components/shared/MediaDetails";
+import MediaDetailsSection from "@/components/modules/mediaDetails";
 import { getPublicData } from "@/services/core/getPublicData";
 import { IPageWithProps } from "@/types";
 

@@ -13,7 +13,6 @@ import {
 } from "./movieSeries.interface";
 import { movieSeriesSearchTerms } from "./movieSeries.constant";
 import { fileUploader } from "../../utils/fileUploader";
-import { create } from "domain";
 
 //Update single movie series data by id
 const deleteSingle = async (id: string): Promise<any> => {

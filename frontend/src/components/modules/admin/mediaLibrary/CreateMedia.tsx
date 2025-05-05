@@ -68,11 +68,12 @@ const CreateMediaForm = () => {
 
   const {
     data: media,
-    isPending,
+    isLoading: isSingleMediaLoading,
     isError,
     error,
   } = useMediaQuery({
-    id: mediaId || "",
+    id: mediaId || null,
+    mode: "single",
   });
 
   const form = useForm({
@@ -171,7 +172,7 @@ const CreateMediaForm = () => {
     }
   }, [mediaId, media]);
 
-  if (isPending) return <LoadingSection />;
+  if (isSingleMediaLoading) return <LoadingSection />;
   if (isError) return <div>Error: {error?.message}</div>; // Error state
 
   return (

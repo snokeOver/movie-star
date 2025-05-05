@@ -33,6 +33,8 @@ model User {
   purchaseRentHistory PurchaseRentHistory[]
   paymentTransaction  PaymentTransaction[]
   notification        Notification[]
+  movieLike           MovieLike[]
+  CommentLike         CommentLike[]
 
   @@map("users")
 }
@@ -109,6 +111,7 @@ model MovieSeries {
   reviews             Review[]
   watchlist           Watchlist[]
   purchaseRentHistory PurchaseRentHistory[]
+  movieLike           MovieLike[]
 
   @@map("movie_series")
 }
@@ -143,10 +146,33 @@ model Comment {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  review Review @relation(fields: [reviewId], references: [id])
-  user   User   @relation(fields: [userId], references: [id])
+  review      Review        @relation(fields: [reviewId], references: [id])
+  user        User          @relation(fields: [userId], references: [id])
+  CommentLike CommentLike[]
 
   @@map("comments")
+}
+
+model MovieLike {
+  id            String      @id @default(cuid())
+  movieSeriesId String
+  userId        String
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  isLike        Boolean     @default(false)
+  movieSeries   MovieSeries @relation(fields: [movieSeriesId], references: [id])
+  user          User        @relation(fields: [userId], references: [id])
+}
+
+model CommentLike {
+  id        String   @id @default(cuid())
+  commentId String
+  userId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  isLike    Boolean  @default(false)
+  comment   Comment  @relation(fields: [commentId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
 }
 
 model Watchlist {

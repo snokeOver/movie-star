@@ -31,6 +31,9 @@ export const useMediaMutation = () => {
   return useMutation({
     mutationKey,
     mutationFn: async ({ type, mediaId, input }: IMediaMutationParams) => {
+      if (!mediaId && !input)
+        return toast.error("Please provide mediaId or input");
+
       const token = await getValidToken(); // Fetch token from the server-side utility
       const url =
         process.env.NEXT_PUBLIC_BASE_API_URL +

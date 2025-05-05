@@ -27,7 +27,7 @@ const handleCheckoutSessionSuccess = async (
   const amountTotal = session.amount_total ? session.amount_total / 100 : 0;
   const customerName = session?.customer_details?.name as string;
 
-  const movieName = (session.metadata.mediaName as string) || "Unknown";
+  const movieName = (session.metadata.productName as string) || "Unknown";
 
   await prisma.$transaction(
     async (tx) => {

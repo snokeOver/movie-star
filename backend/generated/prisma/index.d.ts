@@ -44,6 +44,16 @@ export type Review = $Result.DefaultSelection<Prisma.$ReviewPayload>
  */
 export type Comment = $Result.DefaultSelection<Prisma.$CommentPayload>
 /**
+ * Model MovieLike
+ * 
+ */
+export type MovieLike = $Result.DefaultSelection<Prisma.$MovieLikePayload>
+/**
+ * Model CommentLike
+ * 
+ */
+export type CommentLike = $Result.DefaultSelection<Prisma.$CommentLikePayload>
+/**
  * Model Watchlist
  * 
  */
@@ -400,6 +410,26 @@ export class PrismaClient<
     * ```
     */
   get comment(): Prisma.CommentDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.movieLike`: Exposes CRUD operations for the **MovieLike** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MovieLikes
+    * const movieLikes = await prisma.movieLike.findMany()
+    * ```
+    */
+  get movieLike(): Prisma.MovieLikeDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.commentLike`: Exposes CRUD operations for the **CommentLike** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more CommentLikes
+    * const commentLikes = await prisma.commentLike.findMany()
+    * ```
+    */
+  get commentLike(): Prisma.CommentLikeDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.watchlist`: Exposes CRUD operations for the **Watchlist** model.
@@ -896,6 +926,8 @@ export namespace Prisma {
     MovieSeries: 'MovieSeries',
     Review: 'Review',
     Comment: 'Comment',
+    MovieLike: 'MovieLike',
+    CommentLike: 'CommentLike',
     Watchlist: 'Watchlist',
     PurchaseRentHistory: 'PurchaseRentHistory',
     PaymentTransaction: 'PaymentTransaction',
@@ -919,7 +951,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "securityDetails" | "device" | "movieSeries" | "review" | "comment" | "watchlist" | "purchaseRentHistory" | "paymentTransaction" | "adminAnalytics" | "notification"
+      modelProps: "user" | "securityDetails" | "device" | "movieSeries" | "review" | "comment" | "movieLike" | "commentLike" | "watchlist" | "purchaseRentHistory" | "paymentTransaction" | "adminAnalytics" | "notification"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1364,6 +1396,154 @@ export namespace Prisma {
           count: {
             args: Prisma.CommentCountArgs<ExtArgs>
             result: $Utils.Optional<CommentCountAggregateOutputType> | number
+          }
+        }
+      }
+      MovieLike: {
+        payload: Prisma.$MovieLikePayload<ExtArgs>
+        fields: Prisma.MovieLikeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MovieLikeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MovieLikePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MovieLikeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MovieLikePayload>
+          }
+          findFirst: {
+            args: Prisma.MovieLikeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MovieLikePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MovieLikeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MovieLikePayload>
+          }
+          findMany: {
+            args: Prisma.MovieLikeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MovieLikePayload>[]
+          }
+          create: {
+            args: Prisma.MovieLikeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MovieLikePayload>
+          }
+          createMany: {
+            args: Prisma.MovieLikeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MovieLikeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MovieLikePayload>[]
+          }
+          delete: {
+            args: Prisma.MovieLikeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MovieLikePayload>
+          }
+          update: {
+            args: Prisma.MovieLikeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MovieLikePayload>
+          }
+          deleteMany: {
+            args: Prisma.MovieLikeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MovieLikeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MovieLikeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MovieLikePayload>[]
+          }
+          upsert: {
+            args: Prisma.MovieLikeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MovieLikePayload>
+          }
+          aggregate: {
+            args: Prisma.MovieLikeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMovieLike>
+          }
+          groupBy: {
+            args: Prisma.MovieLikeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MovieLikeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MovieLikeCountArgs<ExtArgs>
+            result: $Utils.Optional<MovieLikeCountAggregateOutputType> | number
+          }
+        }
+      }
+      CommentLike: {
+        payload: Prisma.$CommentLikePayload<ExtArgs>
+        fields: Prisma.CommentLikeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CommentLikeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentLikePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CommentLikeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentLikePayload>
+          }
+          findFirst: {
+            args: Prisma.CommentLikeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentLikePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CommentLikeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentLikePayload>
+          }
+          findMany: {
+            args: Prisma.CommentLikeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentLikePayload>[]
+          }
+          create: {
+            args: Prisma.CommentLikeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentLikePayload>
+          }
+          createMany: {
+            args: Prisma.CommentLikeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CommentLikeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentLikePayload>[]
+          }
+          delete: {
+            args: Prisma.CommentLikeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentLikePayload>
+          }
+          update: {
+            args: Prisma.CommentLikeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentLikePayload>
+          }
+          deleteMany: {
+            args: Prisma.CommentLikeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CommentLikeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CommentLikeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentLikePayload>[]
+          }
+          upsert: {
+            args: Prisma.CommentLikeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentLikePayload>
+          }
+          aggregate: {
+            args: Prisma.CommentLikeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCommentLike>
+          }
+          groupBy: {
+            args: Prisma.CommentLikeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CommentLikeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CommentLikeCountArgs<ExtArgs>
+            result: $Utils.Optional<CommentLikeCountAggregateOutputType> | number
           }
         }
       }
@@ -1827,6 +2007,8 @@ export namespace Prisma {
     movieSeries?: MovieSeriesOmit
     review?: ReviewOmit
     comment?: CommentOmit
+    movieLike?: MovieLikeOmit
+    commentLike?: CommentLikeOmit
     watchlist?: WatchlistOmit
     purchaseRentHistory?: PurchaseRentHistoryOmit
     paymentTransaction?: PaymentTransactionOmit
@@ -1932,6 +2114,8 @@ export namespace Prisma {
     purchaseRentHistory: number
     paymentTransaction: number
     notification: number
+    movieLike: number
+    CommentLike: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1941,6 +2125,8 @@ export namespace Prisma {
     purchaseRentHistory?: boolean | UserCountOutputTypeCountPurchaseRentHistoryArgs
     paymentTransaction?: boolean | UserCountOutputTypeCountPaymentTransactionArgs
     notification?: boolean | UserCountOutputTypeCountNotificationArgs
+    movieLike?: boolean | UserCountOutputTypeCountMovieLikeArgs
+    CommentLike?: boolean | UserCountOutputTypeCountCommentLikeArgs
   }
 
   // Custom InputTypes
@@ -1996,6 +2182,20 @@ export namespace Prisma {
     where?: NotificationWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountMovieLikeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MovieLikeWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCommentLikeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CommentLikeWhereInput
+  }
+
 
   /**
    * Count Type SecurityDetailsCountOutputType
@@ -2036,12 +2236,14 @@ export namespace Prisma {
     reviews: number
     watchlist: number
     purchaseRentHistory: number
+    movieLike: number
   }
 
   export type MovieSeriesCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     reviews?: boolean | MovieSeriesCountOutputTypeCountReviewsArgs
     watchlist?: boolean | MovieSeriesCountOutputTypeCountWatchlistArgs
     purchaseRentHistory?: boolean | MovieSeriesCountOutputTypeCountPurchaseRentHistoryArgs
+    movieLike?: boolean | MovieSeriesCountOutputTypeCountMovieLikeArgs
   }
 
   // Custom InputTypes
@@ -2076,6 +2278,13 @@ export namespace Prisma {
     where?: PurchaseRentHistoryWhereInput
   }
 
+  /**
+   * MovieSeriesCountOutputType without action
+   */
+  export type MovieSeriesCountOutputTypeCountMovieLikeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MovieLikeWhereInput
+  }
+
 
   /**
    * Count Type ReviewCountOutputType
@@ -2105,6 +2314,37 @@ export namespace Prisma {
    */
   export type ReviewCountOutputTypeCountCommentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CommentWhereInput
+  }
+
+
+  /**
+   * Count Type CommentCountOutputType
+   */
+
+  export type CommentCountOutputType = {
+    CommentLike: number
+  }
+
+  export type CommentCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    CommentLike?: boolean | CommentCountOutputTypeCountCommentLikeArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * CommentCountOutputType without action
+   */
+  export type CommentCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CommentCountOutputType
+     */
+    select?: CommentCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * CommentCountOutputType without action
+   */
+  export type CommentCountOutputTypeCountCommentLikeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CommentLikeWhereInput
   }
 
 
@@ -2315,6 +2555,8 @@ export namespace Prisma {
     purchaseRentHistory?: boolean | User$purchaseRentHistoryArgs<ExtArgs>
     paymentTransaction?: boolean | User$paymentTransactionArgs<ExtArgs>
     notification?: boolean | User$notificationArgs<ExtArgs>
+    movieLike?: boolean | User$movieLikeArgs<ExtArgs>
+    CommentLike?: boolean | User$CommentLikeArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2363,6 +2605,8 @@ export namespace Prisma {
     purchaseRentHistory?: boolean | User$purchaseRentHistoryArgs<ExtArgs>
     paymentTransaction?: boolean | User$paymentTransactionArgs<ExtArgs>
     notification?: boolean | User$notificationArgs<ExtArgs>
+    movieLike?: boolean | User$movieLikeArgs<ExtArgs>
+    CommentLike?: boolean | User$CommentLikeArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2378,6 +2622,8 @@ export namespace Prisma {
       purchaseRentHistory: Prisma.$PurchaseRentHistoryPayload<ExtArgs>[]
       paymentTransaction: Prisma.$PaymentTransactionPayload<ExtArgs>[]
       notification: Prisma.$NotificationPayload<ExtArgs>[]
+      movieLike: Prisma.$MovieLikePayload<ExtArgs>[]
+      CommentLike: Prisma.$CommentLikePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2790,6 +3036,8 @@ export namespace Prisma {
     purchaseRentHistory<T extends User$purchaseRentHistoryArgs<ExtArgs> = {}>(args?: Subset<T, User$purchaseRentHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PurchaseRentHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     paymentTransaction<T extends User$paymentTransactionArgs<ExtArgs> = {}>(args?: Subset<T, User$paymentTransactionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     notification<T extends User$notificationArgs<ExtArgs> = {}>(args?: Subset<T, User$notificationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    movieLike<T extends User$movieLikeArgs<ExtArgs> = {}>(args?: Subset<T, User$movieLikeArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MovieLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    CommentLike<T extends User$CommentLikeArgs<ExtArgs> = {}>(args?: Subset<T, User$CommentLikeArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3376,6 +3624,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: NotificationScalarFieldEnum | NotificationScalarFieldEnum[]
+  }
+
+  /**
+   * User.movieLike
+   */
+  export type User$movieLikeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MovieLike
+     */
+    select?: MovieLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MovieLike
+     */
+    omit?: MovieLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MovieLikeInclude<ExtArgs> | null
+    where?: MovieLikeWhereInput
+    orderBy?: MovieLikeOrderByWithRelationInput | MovieLikeOrderByWithRelationInput[]
+    cursor?: MovieLikeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MovieLikeScalarFieldEnum | MovieLikeScalarFieldEnum[]
+  }
+
+  /**
+   * User.CommentLike
+   */
+  export type User$CommentLikeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CommentLike
+     */
+    select?: CommentLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CommentLike
+     */
+    omit?: CommentLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentLikeInclude<ExtArgs> | null
+    where?: CommentLikeWhereInput
+    orderBy?: CommentLikeOrderByWithRelationInput | CommentLikeOrderByWithRelationInput[]
+    cursor?: CommentLikeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CommentLikeScalarFieldEnum | CommentLikeScalarFieldEnum[]
   }
 
   /**
@@ -6156,6 +6452,7 @@ export namespace Prisma {
     reviews?: boolean | MovieSeries$reviewsArgs<ExtArgs>
     watchlist?: boolean | MovieSeries$watchlistArgs<ExtArgs>
     purchaseRentHistory?: boolean | MovieSeries$purchaseRentHistoryArgs<ExtArgs>
+    movieLike?: boolean | MovieSeries$movieLikeArgs<ExtArgs>
     _count?: boolean | MovieSeriesCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["movieSeries"]>
 
@@ -6239,6 +6536,7 @@ export namespace Prisma {
     reviews?: boolean | MovieSeries$reviewsArgs<ExtArgs>
     watchlist?: boolean | MovieSeries$watchlistArgs<ExtArgs>
     purchaseRentHistory?: boolean | MovieSeries$purchaseRentHistoryArgs<ExtArgs>
+    movieLike?: boolean | MovieSeries$movieLikeArgs<ExtArgs>
     _count?: boolean | MovieSeriesCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type MovieSeriesIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -6250,6 +6548,7 @@ export namespace Prisma {
       reviews: Prisma.$ReviewPayload<ExtArgs>[]
       watchlist: Prisma.$WatchlistPayload<ExtArgs>[]
       purchaseRentHistory: Prisma.$PurchaseRentHistoryPayload<ExtArgs>[]
+      movieLike: Prisma.$MovieLikePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -6671,6 +6970,7 @@ export namespace Prisma {
     reviews<T extends MovieSeries$reviewsArgs<ExtArgs> = {}>(args?: Subset<T, MovieSeries$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     watchlist<T extends MovieSeries$watchlistArgs<ExtArgs> = {}>(args?: Subset<T, MovieSeries$watchlistArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WatchlistPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     purchaseRentHistory<T extends MovieSeries$purchaseRentHistoryArgs<ExtArgs> = {}>(args?: Subset<T, MovieSeries$purchaseRentHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PurchaseRentHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    movieLike<T extends MovieSeries$movieLikeArgs<ExtArgs> = {}>(args?: Subset<T, MovieSeries$movieLikeArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MovieLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7179,6 +7479,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: PurchaseRentHistoryScalarFieldEnum | PurchaseRentHistoryScalarFieldEnum[]
+  }
+
+  /**
+   * MovieSeries.movieLike
+   */
+  export type MovieSeries$movieLikeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MovieLike
+     */
+    select?: MovieLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MovieLike
+     */
+    omit?: MovieLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MovieLikeInclude<ExtArgs> | null
+    where?: MovieLikeWhereInput
+    orderBy?: MovieLikeOrderByWithRelationInput | MovieLikeOrderByWithRelationInput[]
+    cursor?: MovieLikeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MovieLikeScalarFieldEnum | MovieLikeScalarFieldEnum[]
   }
 
   /**
@@ -8607,6 +8931,8 @@ export namespace Prisma {
     updatedAt?: boolean
     review?: boolean | ReviewDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
+    CommentLike?: boolean | Comment$CommentLikeArgs<ExtArgs>
+    _count?: boolean | CommentCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["comment"]>
 
   export type CommentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -8647,6 +8973,8 @@ export namespace Prisma {
   export type CommentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     review?: boolean | ReviewDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
+    CommentLike?: boolean | Comment$CommentLikeArgs<ExtArgs>
+    _count?: boolean | CommentCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CommentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     review?: boolean | ReviewDefaultArgs<ExtArgs>
@@ -8662,6 +8990,7 @@ export namespace Prisma {
     objects: {
       review: Prisma.$ReviewPayload<ExtArgs>
       user: Prisma.$UserPayload<ExtArgs>
+      CommentLike: Prisma.$CommentLikePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -9067,6 +9396,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     review<T extends ReviewDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ReviewDefaultArgs<ExtArgs>>): Prisma__ReviewClient<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    CommentLike<T extends Comment$CommentLikeArgs<ExtArgs> = {}>(args?: Subset<T, Comment$CommentLikeArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9499,6 +9829,30 @@ export namespace Prisma {
   }
 
   /**
+   * Comment.CommentLike
+   */
+  export type Comment$CommentLikeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CommentLike
+     */
+    select?: CommentLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CommentLike
+     */
+    omit?: CommentLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentLikeInclude<ExtArgs> | null
+    where?: CommentLikeWhereInput
+    orderBy?: CommentLikeOrderByWithRelationInput | CommentLikeOrderByWithRelationInput[]
+    cursor?: CommentLikeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CommentLikeScalarFieldEnum | CommentLikeScalarFieldEnum[]
+  }
+
+  /**
    * Comment without action
    */
   export type CommentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9514,6 +9868,2164 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: CommentInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model MovieLike
+   */
+
+  export type AggregateMovieLike = {
+    _count: MovieLikeCountAggregateOutputType | null
+    _min: MovieLikeMinAggregateOutputType | null
+    _max: MovieLikeMaxAggregateOutputType | null
+  }
+
+  export type MovieLikeMinAggregateOutputType = {
+    id: string | null
+    movieSeriesId: string | null
+    userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    isLike: boolean | null
+  }
+
+  export type MovieLikeMaxAggregateOutputType = {
+    id: string | null
+    movieSeriesId: string | null
+    userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    isLike: boolean | null
+  }
+
+  export type MovieLikeCountAggregateOutputType = {
+    id: number
+    movieSeriesId: number
+    userId: number
+    createdAt: number
+    updatedAt: number
+    isLike: number
+    _all: number
+  }
+
+
+  export type MovieLikeMinAggregateInputType = {
+    id?: true
+    movieSeriesId?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+    isLike?: true
+  }
+
+  export type MovieLikeMaxAggregateInputType = {
+    id?: true
+    movieSeriesId?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+    isLike?: true
+  }
+
+  export type MovieLikeCountAggregateInputType = {
+    id?: true
+    movieSeriesId?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+    isLike?: true
+    _all?: true
+  }
+
+  export type MovieLikeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MovieLike to aggregate.
+     */
+    where?: MovieLikeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MovieLikes to fetch.
+     */
+    orderBy?: MovieLikeOrderByWithRelationInput | MovieLikeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MovieLikeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MovieLikes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MovieLikes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned MovieLikes
+    **/
+    _count?: true | MovieLikeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MovieLikeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MovieLikeMaxAggregateInputType
+  }
+
+  export type GetMovieLikeAggregateType<T extends MovieLikeAggregateArgs> = {
+        [P in keyof T & keyof AggregateMovieLike]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMovieLike[P]>
+      : GetScalarType<T[P], AggregateMovieLike[P]>
+  }
+
+
+
+
+  export type MovieLikeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MovieLikeWhereInput
+    orderBy?: MovieLikeOrderByWithAggregationInput | MovieLikeOrderByWithAggregationInput[]
+    by: MovieLikeScalarFieldEnum[] | MovieLikeScalarFieldEnum
+    having?: MovieLikeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MovieLikeCountAggregateInputType | true
+    _min?: MovieLikeMinAggregateInputType
+    _max?: MovieLikeMaxAggregateInputType
+  }
+
+  export type MovieLikeGroupByOutputType = {
+    id: string
+    movieSeriesId: string
+    userId: string
+    createdAt: Date
+    updatedAt: Date
+    isLike: boolean
+    _count: MovieLikeCountAggregateOutputType | null
+    _min: MovieLikeMinAggregateOutputType | null
+    _max: MovieLikeMaxAggregateOutputType | null
+  }
+
+  type GetMovieLikeGroupByPayload<T extends MovieLikeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MovieLikeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MovieLikeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MovieLikeGroupByOutputType[P]>
+            : GetScalarType<T[P], MovieLikeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MovieLikeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    movieSeriesId?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    isLike?: boolean
+    movieSeries?: boolean | MovieSeriesDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["movieLike"]>
+
+  export type MovieLikeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    movieSeriesId?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    isLike?: boolean
+    movieSeries?: boolean | MovieSeriesDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["movieLike"]>
+
+  export type MovieLikeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    movieSeriesId?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    isLike?: boolean
+    movieSeries?: boolean | MovieSeriesDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["movieLike"]>
+
+  export type MovieLikeSelectScalar = {
+    id?: boolean
+    movieSeriesId?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    isLike?: boolean
+  }
+
+  export type MovieLikeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "movieSeriesId" | "userId" | "createdAt" | "updatedAt" | "isLike", ExtArgs["result"]["movieLike"]>
+  export type MovieLikeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    movieSeries?: boolean | MovieSeriesDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type MovieLikeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    movieSeries?: boolean | MovieSeriesDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type MovieLikeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    movieSeries?: boolean | MovieSeriesDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $MovieLikePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MovieLike"
+    objects: {
+      movieSeries: Prisma.$MovieSeriesPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      movieSeriesId: string
+      userId: string
+      createdAt: Date
+      updatedAt: Date
+      isLike: boolean
+    }, ExtArgs["result"]["movieLike"]>
+    composites: {}
+  }
+
+  type MovieLikeGetPayload<S extends boolean | null | undefined | MovieLikeDefaultArgs> = $Result.GetResult<Prisma.$MovieLikePayload, S>
+
+  type MovieLikeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MovieLikeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MovieLikeCountAggregateInputType | true
+    }
+
+  export interface MovieLikeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MovieLike'], meta: { name: 'MovieLike' } }
+    /**
+     * Find zero or one MovieLike that matches the filter.
+     * @param {MovieLikeFindUniqueArgs} args - Arguments to find a MovieLike
+     * @example
+     * // Get one MovieLike
+     * const movieLike = await prisma.movieLike.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MovieLikeFindUniqueArgs>(args: SelectSubset<T, MovieLikeFindUniqueArgs<ExtArgs>>): Prisma__MovieLikeClient<$Result.GetResult<Prisma.$MovieLikePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one MovieLike that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MovieLikeFindUniqueOrThrowArgs} args - Arguments to find a MovieLike
+     * @example
+     * // Get one MovieLike
+     * const movieLike = await prisma.movieLike.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MovieLikeFindUniqueOrThrowArgs>(args: SelectSubset<T, MovieLikeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MovieLikeClient<$Result.GetResult<Prisma.$MovieLikePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MovieLike that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MovieLikeFindFirstArgs} args - Arguments to find a MovieLike
+     * @example
+     * // Get one MovieLike
+     * const movieLike = await prisma.movieLike.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MovieLikeFindFirstArgs>(args?: SelectSubset<T, MovieLikeFindFirstArgs<ExtArgs>>): Prisma__MovieLikeClient<$Result.GetResult<Prisma.$MovieLikePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MovieLike that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MovieLikeFindFirstOrThrowArgs} args - Arguments to find a MovieLike
+     * @example
+     * // Get one MovieLike
+     * const movieLike = await prisma.movieLike.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MovieLikeFindFirstOrThrowArgs>(args?: SelectSubset<T, MovieLikeFindFirstOrThrowArgs<ExtArgs>>): Prisma__MovieLikeClient<$Result.GetResult<Prisma.$MovieLikePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more MovieLikes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MovieLikeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all MovieLikes
+     * const movieLikes = await prisma.movieLike.findMany()
+     * 
+     * // Get first 10 MovieLikes
+     * const movieLikes = await prisma.movieLike.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const movieLikeWithIdOnly = await prisma.movieLike.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MovieLikeFindManyArgs>(args?: SelectSubset<T, MovieLikeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MovieLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a MovieLike.
+     * @param {MovieLikeCreateArgs} args - Arguments to create a MovieLike.
+     * @example
+     * // Create one MovieLike
+     * const MovieLike = await prisma.movieLike.create({
+     *   data: {
+     *     // ... data to create a MovieLike
+     *   }
+     * })
+     * 
+     */
+    create<T extends MovieLikeCreateArgs>(args: SelectSubset<T, MovieLikeCreateArgs<ExtArgs>>): Prisma__MovieLikeClient<$Result.GetResult<Prisma.$MovieLikePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many MovieLikes.
+     * @param {MovieLikeCreateManyArgs} args - Arguments to create many MovieLikes.
+     * @example
+     * // Create many MovieLikes
+     * const movieLike = await prisma.movieLike.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MovieLikeCreateManyArgs>(args?: SelectSubset<T, MovieLikeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many MovieLikes and returns the data saved in the database.
+     * @param {MovieLikeCreateManyAndReturnArgs} args - Arguments to create many MovieLikes.
+     * @example
+     * // Create many MovieLikes
+     * const movieLike = await prisma.movieLike.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many MovieLikes and only return the `id`
+     * const movieLikeWithIdOnly = await prisma.movieLike.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MovieLikeCreateManyAndReturnArgs>(args?: SelectSubset<T, MovieLikeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MovieLikePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a MovieLike.
+     * @param {MovieLikeDeleteArgs} args - Arguments to delete one MovieLike.
+     * @example
+     * // Delete one MovieLike
+     * const MovieLike = await prisma.movieLike.delete({
+     *   where: {
+     *     // ... filter to delete one MovieLike
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MovieLikeDeleteArgs>(args: SelectSubset<T, MovieLikeDeleteArgs<ExtArgs>>): Prisma__MovieLikeClient<$Result.GetResult<Prisma.$MovieLikePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one MovieLike.
+     * @param {MovieLikeUpdateArgs} args - Arguments to update one MovieLike.
+     * @example
+     * // Update one MovieLike
+     * const movieLike = await prisma.movieLike.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MovieLikeUpdateArgs>(args: SelectSubset<T, MovieLikeUpdateArgs<ExtArgs>>): Prisma__MovieLikeClient<$Result.GetResult<Prisma.$MovieLikePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more MovieLikes.
+     * @param {MovieLikeDeleteManyArgs} args - Arguments to filter MovieLikes to delete.
+     * @example
+     * // Delete a few MovieLikes
+     * const { count } = await prisma.movieLike.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MovieLikeDeleteManyArgs>(args?: SelectSubset<T, MovieLikeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MovieLikes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MovieLikeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many MovieLikes
+     * const movieLike = await prisma.movieLike.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MovieLikeUpdateManyArgs>(args: SelectSubset<T, MovieLikeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MovieLikes and returns the data updated in the database.
+     * @param {MovieLikeUpdateManyAndReturnArgs} args - Arguments to update many MovieLikes.
+     * @example
+     * // Update many MovieLikes
+     * const movieLike = await prisma.movieLike.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more MovieLikes and only return the `id`
+     * const movieLikeWithIdOnly = await prisma.movieLike.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MovieLikeUpdateManyAndReturnArgs>(args: SelectSubset<T, MovieLikeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MovieLikePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one MovieLike.
+     * @param {MovieLikeUpsertArgs} args - Arguments to update or create a MovieLike.
+     * @example
+     * // Update or create a MovieLike
+     * const movieLike = await prisma.movieLike.upsert({
+     *   create: {
+     *     // ... data to create a MovieLike
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the MovieLike we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MovieLikeUpsertArgs>(args: SelectSubset<T, MovieLikeUpsertArgs<ExtArgs>>): Prisma__MovieLikeClient<$Result.GetResult<Prisma.$MovieLikePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of MovieLikes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MovieLikeCountArgs} args - Arguments to filter MovieLikes to count.
+     * @example
+     * // Count the number of MovieLikes
+     * const count = await prisma.movieLike.count({
+     *   where: {
+     *     // ... the filter for the MovieLikes we want to count
+     *   }
+     * })
+    **/
+    count<T extends MovieLikeCountArgs>(
+      args?: Subset<T, MovieLikeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MovieLikeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a MovieLike.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MovieLikeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MovieLikeAggregateArgs>(args: Subset<T, MovieLikeAggregateArgs>): Prisma.PrismaPromise<GetMovieLikeAggregateType<T>>
+
+    /**
+     * Group by MovieLike.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MovieLikeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MovieLikeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MovieLikeGroupByArgs['orderBy'] }
+        : { orderBy?: MovieLikeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MovieLikeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMovieLikeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the MovieLike model
+   */
+  readonly fields: MovieLikeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for MovieLike.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MovieLikeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    movieSeries<T extends MovieSeriesDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MovieSeriesDefaultArgs<ExtArgs>>): Prisma__MovieSeriesClient<$Result.GetResult<Prisma.$MovieSeriesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the MovieLike model
+   */
+  interface MovieLikeFieldRefs {
+    readonly id: FieldRef<"MovieLike", 'String'>
+    readonly movieSeriesId: FieldRef<"MovieLike", 'String'>
+    readonly userId: FieldRef<"MovieLike", 'String'>
+    readonly createdAt: FieldRef<"MovieLike", 'DateTime'>
+    readonly updatedAt: FieldRef<"MovieLike", 'DateTime'>
+    readonly isLike: FieldRef<"MovieLike", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * MovieLike findUnique
+   */
+  export type MovieLikeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MovieLike
+     */
+    select?: MovieLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MovieLike
+     */
+    omit?: MovieLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MovieLikeInclude<ExtArgs> | null
+    /**
+     * Filter, which MovieLike to fetch.
+     */
+    where: MovieLikeWhereUniqueInput
+  }
+
+  /**
+   * MovieLike findUniqueOrThrow
+   */
+  export type MovieLikeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MovieLike
+     */
+    select?: MovieLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MovieLike
+     */
+    omit?: MovieLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MovieLikeInclude<ExtArgs> | null
+    /**
+     * Filter, which MovieLike to fetch.
+     */
+    where: MovieLikeWhereUniqueInput
+  }
+
+  /**
+   * MovieLike findFirst
+   */
+  export type MovieLikeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MovieLike
+     */
+    select?: MovieLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MovieLike
+     */
+    omit?: MovieLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MovieLikeInclude<ExtArgs> | null
+    /**
+     * Filter, which MovieLike to fetch.
+     */
+    where?: MovieLikeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MovieLikes to fetch.
+     */
+    orderBy?: MovieLikeOrderByWithRelationInput | MovieLikeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MovieLikes.
+     */
+    cursor?: MovieLikeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MovieLikes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MovieLikes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MovieLikes.
+     */
+    distinct?: MovieLikeScalarFieldEnum | MovieLikeScalarFieldEnum[]
+  }
+
+  /**
+   * MovieLike findFirstOrThrow
+   */
+  export type MovieLikeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MovieLike
+     */
+    select?: MovieLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MovieLike
+     */
+    omit?: MovieLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MovieLikeInclude<ExtArgs> | null
+    /**
+     * Filter, which MovieLike to fetch.
+     */
+    where?: MovieLikeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MovieLikes to fetch.
+     */
+    orderBy?: MovieLikeOrderByWithRelationInput | MovieLikeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MovieLikes.
+     */
+    cursor?: MovieLikeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MovieLikes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MovieLikes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MovieLikes.
+     */
+    distinct?: MovieLikeScalarFieldEnum | MovieLikeScalarFieldEnum[]
+  }
+
+  /**
+   * MovieLike findMany
+   */
+  export type MovieLikeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MovieLike
+     */
+    select?: MovieLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MovieLike
+     */
+    omit?: MovieLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MovieLikeInclude<ExtArgs> | null
+    /**
+     * Filter, which MovieLikes to fetch.
+     */
+    where?: MovieLikeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MovieLikes to fetch.
+     */
+    orderBy?: MovieLikeOrderByWithRelationInput | MovieLikeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing MovieLikes.
+     */
+    cursor?: MovieLikeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MovieLikes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MovieLikes.
+     */
+    skip?: number
+    distinct?: MovieLikeScalarFieldEnum | MovieLikeScalarFieldEnum[]
+  }
+
+  /**
+   * MovieLike create
+   */
+  export type MovieLikeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MovieLike
+     */
+    select?: MovieLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MovieLike
+     */
+    omit?: MovieLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MovieLikeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a MovieLike.
+     */
+    data: XOR<MovieLikeCreateInput, MovieLikeUncheckedCreateInput>
+  }
+
+  /**
+   * MovieLike createMany
+   */
+  export type MovieLikeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many MovieLikes.
+     */
+    data: MovieLikeCreateManyInput | MovieLikeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * MovieLike createManyAndReturn
+   */
+  export type MovieLikeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MovieLike
+     */
+    select?: MovieLikeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MovieLike
+     */
+    omit?: MovieLikeOmit<ExtArgs> | null
+    /**
+     * The data used to create many MovieLikes.
+     */
+    data: MovieLikeCreateManyInput | MovieLikeCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MovieLikeIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MovieLike update
+   */
+  export type MovieLikeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MovieLike
+     */
+    select?: MovieLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MovieLike
+     */
+    omit?: MovieLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MovieLikeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a MovieLike.
+     */
+    data: XOR<MovieLikeUpdateInput, MovieLikeUncheckedUpdateInput>
+    /**
+     * Choose, which MovieLike to update.
+     */
+    where: MovieLikeWhereUniqueInput
+  }
+
+  /**
+   * MovieLike updateMany
+   */
+  export type MovieLikeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update MovieLikes.
+     */
+    data: XOR<MovieLikeUpdateManyMutationInput, MovieLikeUncheckedUpdateManyInput>
+    /**
+     * Filter which MovieLikes to update
+     */
+    where?: MovieLikeWhereInput
+    /**
+     * Limit how many MovieLikes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * MovieLike updateManyAndReturn
+   */
+  export type MovieLikeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MovieLike
+     */
+    select?: MovieLikeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MovieLike
+     */
+    omit?: MovieLikeOmit<ExtArgs> | null
+    /**
+     * The data used to update MovieLikes.
+     */
+    data: XOR<MovieLikeUpdateManyMutationInput, MovieLikeUncheckedUpdateManyInput>
+    /**
+     * Filter which MovieLikes to update
+     */
+    where?: MovieLikeWhereInput
+    /**
+     * Limit how many MovieLikes to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MovieLikeIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MovieLike upsert
+   */
+  export type MovieLikeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MovieLike
+     */
+    select?: MovieLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MovieLike
+     */
+    omit?: MovieLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MovieLikeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the MovieLike to update in case it exists.
+     */
+    where: MovieLikeWhereUniqueInput
+    /**
+     * In case the MovieLike found by the `where` argument doesn't exist, create a new MovieLike with this data.
+     */
+    create: XOR<MovieLikeCreateInput, MovieLikeUncheckedCreateInput>
+    /**
+     * In case the MovieLike was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MovieLikeUpdateInput, MovieLikeUncheckedUpdateInput>
+  }
+
+  /**
+   * MovieLike delete
+   */
+  export type MovieLikeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MovieLike
+     */
+    select?: MovieLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MovieLike
+     */
+    omit?: MovieLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MovieLikeInclude<ExtArgs> | null
+    /**
+     * Filter which MovieLike to delete.
+     */
+    where: MovieLikeWhereUniqueInput
+  }
+
+  /**
+   * MovieLike deleteMany
+   */
+  export type MovieLikeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MovieLikes to delete
+     */
+    where?: MovieLikeWhereInput
+    /**
+     * Limit how many MovieLikes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * MovieLike without action
+   */
+  export type MovieLikeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MovieLike
+     */
+    select?: MovieLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MovieLike
+     */
+    omit?: MovieLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MovieLikeInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model CommentLike
+   */
+
+  export type AggregateCommentLike = {
+    _count: CommentLikeCountAggregateOutputType | null
+    _min: CommentLikeMinAggregateOutputType | null
+    _max: CommentLikeMaxAggregateOutputType | null
+  }
+
+  export type CommentLikeMinAggregateOutputType = {
+    id: string | null
+    commentId: string | null
+    userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    isLike: boolean | null
+  }
+
+  export type CommentLikeMaxAggregateOutputType = {
+    id: string | null
+    commentId: string | null
+    userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    isLike: boolean | null
+  }
+
+  export type CommentLikeCountAggregateOutputType = {
+    id: number
+    commentId: number
+    userId: number
+    createdAt: number
+    updatedAt: number
+    isLike: number
+    _all: number
+  }
+
+
+  export type CommentLikeMinAggregateInputType = {
+    id?: true
+    commentId?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+    isLike?: true
+  }
+
+  export type CommentLikeMaxAggregateInputType = {
+    id?: true
+    commentId?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+    isLike?: true
+  }
+
+  export type CommentLikeCountAggregateInputType = {
+    id?: true
+    commentId?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+    isLike?: true
+    _all?: true
+  }
+
+  export type CommentLikeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CommentLike to aggregate.
+     */
+    where?: CommentLikeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CommentLikes to fetch.
+     */
+    orderBy?: CommentLikeOrderByWithRelationInput | CommentLikeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CommentLikeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CommentLikes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CommentLikes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned CommentLikes
+    **/
+    _count?: true | CommentLikeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CommentLikeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CommentLikeMaxAggregateInputType
+  }
+
+  export type GetCommentLikeAggregateType<T extends CommentLikeAggregateArgs> = {
+        [P in keyof T & keyof AggregateCommentLike]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCommentLike[P]>
+      : GetScalarType<T[P], AggregateCommentLike[P]>
+  }
+
+
+
+
+  export type CommentLikeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CommentLikeWhereInput
+    orderBy?: CommentLikeOrderByWithAggregationInput | CommentLikeOrderByWithAggregationInput[]
+    by: CommentLikeScalarFieldEnum[] | CommentLikeScalarFieldEnum
+    having?: CommentLikeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CommentLikeCountAggregateInputType | true
+    _min?: CommentLikeMinAggregateInputType
+    _max?: CommentLikeMaxAggregateInputType
+  }
+
+  export type CommentLikeGroupByOutputType = {
+    id: string
+    commentId: string
+    userId: string
+    createdAt: Date
+    updatedAt: Date
+    isLike: boolean
+    _count: CommentLikeCountAggregateOutputType | null
+    _min: CommentLikeMinAggregateOutputType | null
+    _max: CommentLikeMaxAggregateOutputType | null
+  }
+
+  type GetCommentLikeGroupByPayload<T extends CommentLikeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CommentLikeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CommentLikeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CommentLikeGroupByOutputType[P]>
+            : GetScalarType<T[P], CommentLikeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CommentLikeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    commentId?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    isLike?: boolean
+    comment?: boolean | CommentDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["commentLike"]>
+
+  export type CommentLikeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    commentId?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    isLike?: boolean
+    comment?: boolean | CommentDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["commentLike"]>
+
+  export type CommentLikeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    commentId?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    isLike?: boolean
+    comment?: boolean | CommentDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["commentLike"]>
+
+  export type CommentLikeSelectScalar = {
+    id?: boolean
+    commentId?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    isLike?: boolean
+  }
+
+  export type CommentLikeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "commentId" | "userId" | "createdAt" | "updatedAt" | "isLike", ExtArgs["result"]["commentLike"]>
+  export type CommentLikeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    comment?: boolean | CommentDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type CommentLikeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    comment?: boolean | CommentDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type CommentLikeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    comment?: boolean | CommentDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $CommentLikePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "CommentLike"
+    objects: {
+      comment: Prisma.$CommentPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      commentId: string
+      userId: string
+      createdAt: Date
+      updatedAt: Date
+      isLike: boolean
+    }, ExtArgs["result"]["commentLike"]>
+    composites: {}
+  }
+
+  type CommentLikeGetPayload<S extends boolean | null | undefined | CommentLikeDefaultArgs> = $Result.GetResult<Prisma.$CommentLikePayload, S>
+
+  type CommentLikeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CommentLikeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CommentLikeCountAggregateInputType | true
+    }
+
+  export interface CommentLikeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CommentLike'], meta: { name: 'CommentLike' } }
+    /**
+     * Find zero or one CommentLike that matches the filter.
+     * @param {CommentLikeFindUniqueArgs} args - Arguments to find a CommentLike
+     * @example
+     * // Get one CommentLike
+     * const commentLike = await prisma.commentLike.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CommentLikeFindUniqueArgs>(args: SelectSubset<T, CommentLikeFindUniqueArgs<ExtArgs>>): Prisma__CommentLikeClient<$Result.GetResult<Prisma.$CommentLikePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one CommentLike that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CommentLikeFindUniqueOrThrowArgs} args - Arguments to find a CommentLike
+     * @example
+     * // Get one CommentLike
+     * const commentLike = await prisma.commentLike.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CommentLikeFindUniqueOrThrowArgs>(args: SelectSubset<T, CommentLikeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CommentLikeClient<$Result.GetResult<Prisma.$CommentLikePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CommentLike that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommentLikeFindFirstArgs} args - Arguments to find a CommentLike
+     * @example
+     * // Get one CommentLike
+     * const commentLike = await prisma.commentLike.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CommentLikeFindFirstArgs>(args?: SelectSubset<T, CommentLikeFindFirstArgs<ExtArgs>>): Prisma__CommentLikeClient<$Result.GetResult<Prisma.$CommentLikePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CommentLike that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommentLikeFindFirstOrThrowArgs} args - Arguments to find a CommentLike
+     * @example
+     * // Get one CommentLike
+     * const commentLike = await prisma.commentLike.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CommentLikeFindFirstOrThrowArgs>(args?: SelectSubset<T, CommentLikeFindFirstOrThrowArgs<ExtArgs>>): Prisma__CommentLikeClient<$Result.GetResult<Prisma.$CommentLikePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more CommentLikes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommentLikeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all CommentLikes
+     * const commentLikes = await prisma.commentLike.findMany()
+     * 
+     * // Get first 10 CommentLikes
+     * const commentLikes = await prisma.commentLike.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const commentLikeWithIdOnly = await prisma.commentLike.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CommentLikeFindManyArgs>(args?: SelectSubset<T, CommentLikeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a CommentLike.
+     * @param {CommentLikeCreateArgs} args - Arguments to create a CommentLike.
+     * @example
+     * // Create one CommentLike
+     * const CommentLike = await prisma.commentLike.create({
+     *   data: {
+     *     // ... data to create a CommentLike
+     *   }
+     * })
+     * 
+     */
+    create<T extends CommentLikeCreateArgs>(args: SelectSubset<T, CommentLikeCreateArgs<ExtArgs>>): Prisma__CommentLikeClient<$Result.GetResult<Prisma.$CommentLikePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many CommentLikes.
+     * @param {CommentLikeCreateManyArgs} args - Arguments to create many CommentLikes.
+     * @example
+     * // Create many CommentLikes
+     * const commentLike = await prisma.commentLike.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CommentLikeCreateManyArgs>(args?: SelectSubset<T, CommentLikeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many CommentLikes and returns the data saved in the database.
+     * @param {CommentLikeCreateManyAndReturnArgs} args - Arguments to create many CommentLikes.
+     * @example
+     * // Create many CommentLikes
+     * const commentLike = await prisma.commentLike.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many CommentLikes and only return the `id`
+     * const commentLikeWithIdOnly = await prisma.commentLike.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CommentLikeCreateManyAndReturnArgs>(args?: SelectSubset<T, CommentLikeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentLikePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a CommentLike.
+     * @param {CommentLikeDeleteArgs} args - Arguments to delete one CommentLike.
+     * @example
+     * // Delete one CommentLike
+     * const CommentLike = await prisma.commentLike.delete({
+     *   where: {
+     *     // ... filter to delete one CommentLike
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CommentLikeDeleteArgs>(args: SelectSubset<T, CommentLikeDeleteArgs<ExtArgs>>): Prisma__CommentLikeClient<$Result.GetResult<Prisma.$CommentLikePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one CommentLike.
+     * @param {CommentLikeUpdateArgs} args - Arguments to update one CommentLike.
+     * @example
+     * // Update one CommentLike
+     * const commentLike = await prisma.commentLike.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CommentLikeUpdateArgs>(args: SelectSubset<T, CommentLikeUpdateArgs<ExtArgs>>): Prisma__CommentLikeClient<$Result.GetResult<Prisma.$CommentLikePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more CommentLikes.
+     * @param {CommentLikeDeleteManyArgs} args - Arguments to filter CommentLikes to delete.
+     * @example
+     * // Delete a few CommentLikes
+     * const { count } = await prisma.commentLike.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CommentLikeDeleteManyArgs>(args?: SelectSubset<T, CommentLikeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CommentLikes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommentLikeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many CommentLikes
+     * const commentLike = await prisma.commentLike.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CommentLikeUpdateManyArgs>(args: SelectSubset<T, CommentLikeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CommentLikes and returns the data updated in the database.
+     * @param {CommentLikeUpdateManyAndReturnArgs} args - Arguments to update many CommentLikes.
+     * @example
+     * // Update many CommentLikes
+     * const commentLike = await prisma.commentLike.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more CommentLikes and only return the `id`
+     * const commentLikeWithIdOnly = await prisma.commentLike.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends CommentLikeUpdateManyAndReturnArgs>(args: SelectSubset<T, CommentLikeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentLikePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one CommentLike.
+     * @param {CommentLikeUpsertArgs} args - Arguments to update or create a CommentLike.
+     * @example
+     * // Update or create a CommentLike
+     * const commentLike = await prisma.commentLike.upsert({
+     *   create: {
+     *     // ... data to create a CommentLike
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the CommentLike we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CommentLikeUpsertArgs>(args: SelectSubset<T, CommentLikeUpsertArgs<ExtArgs>>): Prisma__CommentLikeClient<$Result.GetResult<Prisma.$CommentLikePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of CommentLikes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommentLikeCountArgs} args - Arguments to filter CommentLikes to count.
+     * @example
+     * // Count the number of CommentLikes
+     * const count = await prisma.commentLike.count({
+     *   where: {
+     *     // ... the filter for the CommentLikes we want to count
+     *   }
+     * })
+    **/
+    count<T extends CommentLikeCountArgs>(
+      args?: Subset<T, CommentLikeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CommentLikeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a CommentLike.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommentLikeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CommentLikeAggregateArgs>(args: Subset<T, CommentLikeAggregateArgs>): Prisma.PrismaPromise<GetCommentLikeAggregateType<T>>
+
+    /**
+     * Group by CommentLike.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommentLikeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CommentLikeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CommentLikeGroupByArgs['orderBy'] }
+        : { orderBy?: CommentLikeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CommentLikeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCommentLikeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the CommentLike model
+   */
+  readonly fields: CommentLikeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for CommentLike.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CommentLikeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    comment<T extends CommentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CommentDefaultArgs<ExtArgs>>): Prisma__CommentClient<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the CommentLike model
+   */
+  interface CommentLikeFieldRefs {
+    readonly id: FieldRef<"CommentLike", 'String'>
+    readonly commentId: FieldRef<"CommentLike", 'String'>
+    readonly userId: FieldRef<"CommentLike", 'String'>
+    readonly createdAt: FieldRef<"CommentLike", 'DateTime'>
+    readonly updatedAt: FieldRef<"CommentLike", 'DateTime'>
+    readonly isLike: FieldRef<"CommentLike", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * CommentLike findUnique
+   */
+  export type CommentLikeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CommentLike
+     */
+    select?: CommentLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CommentLike
+     */
+    omit?: CommentLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentLikeInclude<ExtArgs> | null
+    /**
+     * Filter, which CommentLike to fetch.
+     */
+    where: CommentLikeWhereUniqueInput
+  }
+
+  /**
+   * CommentLike findUniqueOrThrow
+   */
+  export type CommentLikeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CommentLike
+     */
+    select?: CommentLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CommentLike
+     */
+    omit?: CommentLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentLikeInclude<ExtArgs> | null
+    /**
+     * Filter, which CommentLike to fetch.
+     */
+    where: CommentLikeWhereUniqueInput
+  }
+
+  /**
+   * CommentLike findFirst
+   */
+  export type CommentLikeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CommentLike
+     */
+    select?: CommentLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CommentLike
+     */
+    omit?: CommentLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentLikeInclude<ExtArgs> | null
+    /**
+     * Filter, which CommentLike to fetch.
+     */
+    where?: CommentLikeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CommentLikes to fetch.
+     */
+    orderBy?: CommentLikeOrderByWithRelationInput | CommentLikeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CommentLikes.
+     */
+    cursor?: CommentLikeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CommentLikes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CommentLikes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CommentLikes.
+     */
+    distinct?: CommentLikeScalarFieldEnum | CommentLikeScalarFieldEnum[]
+  }
+
+  /**
+   * CommentLike findFirstOrThrow
+   */
+  export type CommentLikeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CommentLike
+     */
+    select?: CommentLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CommentLike
+     */
+    omit?: CommentLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentLikeInclude<ExtArgs> | null
+    /**
+     * Filter, which CommentLike to fetch.
+     */
+    where?: CommentLikeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CommentLikes to fetch.
+     */
+    orderBy?: CommentLikeOrderByWithRelationInput | CommentLikeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CommentLikes.
+     */
+    cursor?: CommentLikeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CommentLikes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CommentLikes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CommentLikes.
+     */
+    distinct?: CommentLikeScalarFieldEnum | CommentLikeScalarFieldEnum[]
+  }
+
+  /**
+   * CommentLike findMany
+   */
+  export type CommentLikeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CommentLike
+     */
+    select?: CommentLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CommentLike
+     */
+    omit?: CommentLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentLikeInclude<ExtArgs> | null
+    /**
+     * Filter, which CommentLikes to fetch.
+     */
+    where?: CommentLikeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CommentLikes to fetch.
+     */
+    orderBy?: CommentLikeOrderByWithRelationInput | CommentLikeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing CommentLikes.
+     */
+    cursor?: CommentLikeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CommentLikes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CommentLikes.
+     */
+    skip?: number
+    distinct?: CommentLikeScalarFieldEnum | CommentLikeScalarFieldEnum[]
+  }
+
+  /**
+   * CommentLike create
+   */
+  export type CommentLikeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CommentLike
+     */
+    select?: CommentLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CommentLike
+     */
+    omit?: CommentLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentLikeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a CommentLike.
+     */
+    data: XOR<CommentLikeCreateInput, CommentLikeUncheckedCreateInput>
+  }
+
+  /**
+   * CommentLike createMany
+   */
+  export type CommentLikeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many CommentLikes.
+     */
+    data: CommentLikeCreateManyInput | CommentLikeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * CommentLike createManyAndReturn
+   */
+  export type CommentLikeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CommentLike
+     */
+    select?: CommentLikeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CommentLike
+     */
+    omit?: CommentLikeOmit<ExtArgs> | null
+    /**
+     * The data used to create many CommentLikes.
+     */
+    data: CommentLikeCreateManyInput | CommentLikeCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentLikeIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CommentLike update
+   */
+  export type CommentLikeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CommentLike
+     */
+    select?: CommentLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CommentLike
+     */
+    omit?: CommentLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentLikeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a CommentLike.
+     */
+    data: XOR<CommentLikeUpdateInput, CommentLikeUncheckedUpdateInput>
+    /**
+     * Choose, which CommentLike to update.
+     */
+    where: CommentLikeWhereUniqueInput
+  }
+
+  /**
+   * CommentLike updateMany
+   */
+  export type CommentLikeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update CommentLikes.
+     */
+    data: XOR<CommentLikeUpdateManyMutationInput, CommentLikeUncheckedUpdateManyInput>
+    /**
+     * Filter which CommentLikes to update
+     */
+    where?: CommentLikeWhereInput
+    /**
+     * Limit how many CommentLikes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * CommentLike updateManyAndReturn
+   */
+  export type CommentLikeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CommentLike
+     */
+    select?: CommentLikeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CommentLike
+     */
+    omit?: CommentLikeOmit<ExtArgs> | null
+    /**
+     * The data used to update CommentLikes.
+     */
+    data: XOR<CommentLikeUpdateManyMutationInput, CommentLikeUncheckedUpdateManyInput>
+    /**
+     * Filter which CommentLikes to update
+     */
+    where?: CommentLikeWhereInput
+    /**
+     * Limit how many CommentLikes to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentLikeIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CommentLike upsert
+   */
+  export type CommentLikeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CommentLike
+     */
+    select?: CommentLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CommentLike
+     */
+    omit?: CommentLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentLikeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the CommentLike to update in case it exists.
+     */
+    where: CommentLikeWhereUniqueInput
+    /**
+     * In case the CommentLike found by the `where` argument doesn't exist, create a new CommentLike with this data.
+     */
+    create: XOR<CommentLikeCreateInput, CommentLikeUncheckedCreateInput>
+    /**
+     * In case the CommentLike was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CommentLikeUpdateInput, CommentLikeUncheckedUpdateInput>
+  }
+
+  /**
+   * CommentLike delete
+   */
+  export type CommentLikeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CommentLike
+     */
+    select?: CommentLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CommentLike
+     */
+    omit?: CommentLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentLikeInclude<ExtArgs> | null
+    /**
+     * Filter which CommentLike to delete.
+     */
+    where: CommentLikeWhereUniqueInput
+  }
+
+  /**
+   * CommentLike deleteMany
+   */
+  export type CommentLikeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CommentLikes to delete
+     */
+    where?: CommentLikeWhereInput
+    /**
+     * Limit how many CommentLikes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * CommentLike without action
+   */
+  export type CommentLikeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CommentLike
+     */
+    select?: CommentLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CommentLike
+     */
+    omit?: CommentLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentLikeInclude<ExtArgs> | null
   }
 
 
@@ -15110,6 +17622,30 @@ export namespace Prisma {
   export type CommentScalarFieldEnum = (typeof CommentScalarFieldEnum)[keyof typeof CommentScalarFieldEnum]
 
 
+  export const MovieLikeScalarFieldEnum: {
+    id: 'id',
+    movieSeriesId: 'movieSeriesId',
+    userId: 'userId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    isLike: 'isLike'
+  };
+
+  export type MovieLikeScalarFieldEnum = (typeof MovieLikeScalarFieldEnum)[keyof typeof MovieLikeScalarFieldEnum]
+
+
+  export const CommentLikeScalarFieldEnum: {
+    id: 'id',
+    commentId: 'commentId',
+    userId: 'userId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    isLike: 'isLike'
+  };
+
+  export type CommentLikeScalarFieldEnum = (typeof CommentLikeScalarFieldEnum)[keyof typeof CommentLikeScalarFieldEnum]
+
+
   export const WatchlistScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
@@ -15414,6 +17950,8 @@ export namespace Prisma {
     purchaseRentHistory?: PurchaseRentHistoryListRelationFilter
     paymentTransaction?: PaymentTransactionListRelationFilter
     notification?: NotificationListRelationFilter
+    movieLike?: MovieLikeListRelationFilter
+    CommentLike?: CommentLikeListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -15433,6 +17971,8 @@ export namespace Prisma {
     purchaseRentHistory?: PurchaseRentHistoryOrderByRelationAggregateInput
     paymentTransaction?: PaymentTransactionOrderByRelationAggregateInput
     notification?: NotificationOrderByRelationAggregateInput
+    movieLike?: MovieLikeOrderByRelationAggregateInput
+    CommentLike?: CommentLikeOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -15455,6 +17995,8 @@ export namespace Prisma {
     purchaseRentHistory?: PurchaseRentHistoryListRelationFilter
     paymentTransaction?: PaymentTransactionListRelationFilter
     notification?: NotificationListRelationFilter
+    movieLike?: MovieLikeListRelationFilter
+    CommentLike?: CommentLikeListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -15721,6 +18263,7 @@ export namespace Prisma {
     reviews?: ReviewListRelationFilter
     watchlist?: WatchlistListRelationFilter
     purchaseRentHistory?: PurchaseRentHistoryListRelationFilter
+    movieLike?: MovieLikeListRelationFilter
   }
 
   export type MovieSeriesOrderByWithRelationInput = {
@@ -15749,6 +18292,7 @@ export namespace Prisma {
     reviews?: ReviewOrderByRelationAggregateInput
     watchlist?: WatchlistOrderByRelationAggregateInput
     purchaseRentHistory?: PurchaseRentHistoryOrderByRelationAggregateInput
+    movieLike?: MovieLikeOrderByRelationAggregateInput
   }
 
   export type MovieSeriesWhereUniqueInput = Prisma.AtLeast<{
@@ -15780,6 +18324,7 @@ export namespace Prisma {
     reviews?: ReviewListRelationFilter
     watchlist?: WatchlistListRelationFilter
     purchaseRentHistory?: PurchaseRentHistoryListRelationFilter
+    movieLike?: MovieLikeListRelationFilter
   }, "id" | "title">
 
   export type MovieSeriesOrderByWithAggregationInput = {
@@ -15951,6 +18496,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Comment"> | Date | string
     review?: XOR<ReviewScalarRelationFilter, ReviewWhereInput>
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    CommentLike?: CommentLikeListRelationFilter
   }
 
   export type CommentOrderByWithRelationInput = {
@@ -15963,6 +18509,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     review?: ReviewOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
+    CommentLike?: CommentLikeOrderByRelationAggregateInput
   }
 
   export type CommentWhereUniqueInput = Prisma.AtLeast<{
@@ -15978,6 +18525,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Comment"> | Date | string
     review?: XOR<ReviewScalarRelationFilter, ReviewWhereInput>
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    CommentLike?: CommentLikeListRelationFilter
   }, "id">
 
   export type CommentOrderByWithAggregationInput = {
@@ -16004,6 +18552,132 @@ export namespace Prisma {
     replyTo?: StringNullableWithAggregatesFilter<"Comment"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Comment"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Comment"> | Date | string
+  }
+
+  export type MovieLikeWhereInput = {
+    AND?: MovieLikeWhereInput | MovieLikeWhereInput[]
+    OR?: MovieLikeWhereInput[]
+    NOT?: MovieLikeWhereInput | MovieLikeWhereInput[]
+    id?: StringFilter<"MovieLike"> | string
+    movieSeriesId?: StringFilter<"MovieLike"> | string
+    userId?: StringFilter<"MovieLike"> | string
+    createdAt?: DateTimeFilter<"MovieLike"> | Date | string
+    updatedAt?: DateTimeFilter<"MovieLike"> | Date | string
+    isLike?: BoolFilter<"MovieLike"> | boolean
+    movieSeries?: XOR<MovieSeriesScalarRelationFilter, MovieSeriesWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type MovieLikeOrderByWithRelationInput = {
+    id?: SortOrder
+    movieSeriesId?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    isLike?: SortOrder
+    movieSeries?: MovieSeriesOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type MovieLikeWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: MovieLikeWhereInput | MovieLikeWhereInput[]
+    OR?: MovieLikeWhereInput[]
+    NOT?: MovieLikeWhereInput | MovieLikeWhereInput[]
+    movieSeriesId?: StringFilter<"MovieLike"> | string
+    userId?: StringFilter<"MovieLike"> | string
+    createdAt?: DateTimeFilter<"MovieLike"> | Date | string
+    updatedAt?: DateTimeFilter<"MovieLike"> | Date | string
+    isLike?: BoolFilter<"MovieLike"> | boolean
+    movieSeries?: XOR<MovieSeriesScalarRelationFilter, MovieSeriesWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type MovieLikeOrderByWithAggregationInput = {
+    id?: SortOrder
+    movieSeriesId?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    isLike?: SortOrder
+    _count?: MovieLikeCountOrderByAggregateInput
+    _max?: MovieLikeMaxOrderByAggregateInput
+    _min?: MovieLikeMinOrderByAggregateInput
+  }
+
+  export type MovieLikeScalarWhereWithAggregatesInput = {
+    AND?: MovieLikeScalarWhereWithAggregatesInput | MovieLikeScalarWhereWithAggregatesInput[]
+    OR?: MovieLikeScalarWhereWithAggregatesInput[]
+    NOT?: MovieLikeScalarWhereWithAggregatesInput | MovieLikeScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"MovieLike"> | string
+    movieSeriesId?: StringWithAggregatesFilter<"MovieLike"> | string
+    userId?: StringWithAggregatesFilter<"MovieLike"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"MovieLike"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"MovieLike"> | Date | string
+    isLike?: BoolWithAggregatesFilter<"MovieLike"> | boolean
+  }
+
+  export type CommentLikeWhereInput = {
+    AND?: CommentLikeWhereInput | CommentLikeWhereInput[]
+    OR?: CommentLikeWhereInput[]
+    NOT?: CommentLikeWhereInput | CommentLikeWhereInput[]
+    id?: StringFilter<"CommentLike"> | string
+    commentId?: StringFilter<"CommentLike"> | string
+    userId?: StringFilter<"CommentLike"> | string
+    createdAt?: DateTimeFilter<"CommentLike"> | Date | string
+    updatedAt?: DateTimeFilter<"CommentLike"> | Date | string
+    isLike?: BoolFilter<"CommentLike"> | boolean
+    comment?: XOR<CommentScalarRelationFilter, CommentWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type CommentLikeOrderByWithRelationInput = {
+    id?: SortOrder
+    commentId?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    isLike?: SortOrder
+    comment?: CommentOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type CommentLikeWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: CommentLikeWhereInput | CommentLikeWhereInput[]
+    OR?: CommentLikeWhereInput[]
+    NOT?: CommentLikeWhereInput | CommentLikeWhereInput[]
+    commentId?: StringFilter<"CommentLike"> | string
+    userId?: StringFilter<"CommentLike"> | string
+    createdAt?: DateTimeFilter<"CommentLike"> | Date | string
+    updatedAt?: DateTimeFilter<"CommentLike"> | Date | string
+    isLike?: BoolFilter<"CommentLike"> | boolean
+    comment?: XOR<CommentScalarRelationFilter, CommentWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type CommentLikeOrderByWithAggregationInput = {
+    id?: SortOrder
+    commentId?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    isLike?: SortOrder
+    _count?: CommentLikeCountOrderByAggregateInput
+    _max?: CommentLikeMaxOrderByAggregateInput
+    _min?: CommentLikeMinOrderByAggregateInput
+  }
+
+  export type CommentLikeScalarWhereWithAggregatesInput = {
+    AND?: CommentLikeScalarWhereWithAggregatesInput | CommentLikeScalarWhereWithAggregatesInput[]
+    OR?: CommentLikeScalarWhereWithAggregatesInput[]
+    NOT?: CommentLikeScalarWhereWithAggregatesInput | CommentLikeScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"CommentLike"> | string
+    commentId?: StringWithAggregatesFilter<"CommentLike"> | string
+    userId?: StringWithAggregatesFilter<"CommentLike"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"CommentLike"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"CommentLike"> | Date | string
+    isLike?: BoolWithAggregatesFilter<"CommentLike"> | boolean
   }
 
   export type WatchlistWhereInput = {
@@ -16347,6 +19021,8 @@ export namespace Prisma {
     purchaseRentHistory?: PurchaseRentHistoryCreateNestedManyWithoutUserInput
     paymentTransaction?: PaymentTransactionCreateNestedManyWithoutUserInput
     notification?: NotificationCreateNestedManyWithoutUserInput
+    movieLike?: MovieLikeCreateNestedManyWithoutUserInput
+    CommentLike?: CommentLikeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -16366,6 +19042,8 @@ export namespace Prisma {
     purchaseRentHistory?: PurchaseRentHistoryUncheckedCreateNestedManyWithoutUserInput
     paymentTransaction?: PaymentTransactionUncheckedCreateNestedManyWithoutUserInput
     notification?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    movieLike?: MovieLikeUncheckedCreateNestedManyWithoutUserInput
+    CommentLike?: CommentLikeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -16385,6 +19063,8 @@ export namespace Prisma {
     purchaseRentHistory?: PurchaseRentHistoryUpdateManyWithoutUserNestedInput
     paymentTransaction?: PaymentTransactionUpdateManyWithoutUserNestedInput
     notification?: NotificationUpdateManyWithoutUserNestedInput
+    movieLike?: MovieLikeUpdateManyWithoutUserNestedInput
+    CommentLike?: CommentLikeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -16404,6 +19084,8 @@ export namespace Prisma {
     purchaseRentHistory?: PurchaseRentHistoryUncheckedUpdateManyWithoutUserNestedInput
     paymentTransaction?: PaymentTransactionUncheckedUpdateManyWithoutUserNestedInput
     notification?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    movieLike?: MovieLikeUncheckedUpdateManyWithoutUserNestedInput
+    CommentLike?: CommentLikeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -16708,6 +19390,7 @@ export namespace Prisma {
     reviews?: ReviewCreateNestedManyWithoutMovieSeriesInput
     watchlist?: WatchlistCreateNestedManyWithoutMovieSeriesInput
     purchaseRentHistory?: PurchaseRentHistoryCreateNestedManyWithoutMovieSeriesInput
+    movieLike?: MovieLikeCreateNestedManyWithoutMovieSeriesInput
   }
 
   export type MovieSeriesUncheckedCreateInput = {
@@ -16736,6 +19419,7 @@ export namespace Prisma {
     reviews?: ReviewUncheckedCreateNestedManyWithoutMovieSeriesInput
     watchlist?: WatchlistUncheckedCreateNestedManyWithoutMovieSeriesInput
     purchaseRentHistory?: PurchaseRentHistoryUncheckedCreateNestedManyWithoutMovieSeriesInput
+    movieLike?: MovieLikeUncheckedCreateNestedManyWithoutMovieSeriesInput
   }
 
   export type MovieSeriesUpdateInput = {
@@ -16764,6 +19448,7 @@ export namespace Prisma {
     reviews?: ReviewUpdateManyWithoutMovieSeriesNestedInput
     watchlist?: WatchlistUpdateManyWithoutMovieSeriesNestedInput
     purchaseRentHistory?: PurchaseRentHistoryUpdateManyWithoutMovieSeriesNestedInput
+    movieLike?: MovieLikeUpdateManyWithoutMovieSeriesNestedInput
   }
 
   export type MovieSeriesUncheckedUpdateInput = {
@@ -16792,6 +19477,7 @@ export namespace Prisma {
     reviews?: ReviewUncheckedUpdateManyWithoutMovieSeriesNestedInput
     watchlist?: WatchlistUncheckedUpdateManyWithoutMovieSeriesNestedInput
     purchaseRentHistory?: PurchaseRentHistoryUncheckedUpdateManyWithoutMovieSeriesNestedInput
+    movieLike?: MovieLikeUncheckedUpdateManyWithoutMovieSeriesNestedInput
   }
 
   export type MovieSeriesCreateManyInput = {
@@ -16984,6 +19670,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     review: ReviewCreateNestedOneWithoutCommentInput
     user: UserCreateNestedOneWithoutCommentInput
+    CommentLike?: CommentLikeCreateNestedManyWithoutCommentInput
   }
 
   export type CommentUncheckedCreateInput = {
@@ -16994,6 +19681,7 @@ export namespace Prisma {
     replyTo?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    CommentLike?: CommentLikeUncheckedCreateNestedManyWithoutCommentInput
   }
 
   export type CommentUpdateInput = {
@@ -17004,6 +19692,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     review?: ReviewUpdateOneRequiredWithoutCommentNestedInput
     user?: UserUpdateOneRequiredWithoutCommentNestedInput
+    CommentLike?: CommentLikeUpdateManyWithoutCommentNestedInput
   }
 
   export type CommentUncheckedUpdateInput = {
@@ -17014,6 +19703,7 @@ export namespace Prisma {
     replyTo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    CommentLike?: CommentLikeUncheckedUpdateManyWithoutCommentNestedInput
   }
 
   export type CommentCreateManyInput = {
@@ -17042,6 +19732,128 @@ export namespace Prisma {
     replyTo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MovieLikeCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isLike?: boolean
+    movieSeries: MovieSeriesCreateNestedOneWithoutMovieLikeInput
+    user: UserCreateNestedOneWithoutMovieLikeInput
+  }
+
+  export type MovieLikeUncheckedCreateInput = {
+    id?: string
+    movieSeriesId: string
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isLike?: boolean
+  }
+
+  export type MovieLikeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isLike?: BoolFieldUpdateOperationsInput | boolean
+    movieSeries?: MovieSeriesUpdateOneRequiredWithoutMovieLikeNestedInput
+    user?: UserUpdateOneRequiredWithoutMovieLikeNestedInput
+  }
+
+  export type MovieLikeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    movieSeriesId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isLike?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type MovieLikeCreateManyInput = {
+    id?: string
+    movieSeriesId: string
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isLike?: boolean
+  }
+
+  export type MovieLikeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isLike?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type MovieLikeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    movieSeriesId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isLike?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type CommentLikeCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isLike?: boolean
+    comment: CommentCreateNestedOneWithoutCommentLikeInput
+    user: UserCreateNestedOneWithoutCommentLikeInput
+  }
+
+  export type CommentLikeUncheckedCreateInput = {
+    id?: string
+    commentId: string
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isLike?: boolean
+  }
+
+  export type CommentLikeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isLike?: BoolFieldUpdateOperationsInput | boolean
+    comment?: CommentUpdateOneRequiredWithoutCommentLikeNestedInput
+    user?: UserUpdateOneRequiredWithoutCommentLikeNestedInput
+  }
+
+  export type CommentLikeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    commentId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isLike?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type CommentLikeCreateManyInput = {
+    id?: string
+    commentId: string
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isLike?: boolean
+  }
+
+  export type CommentLikeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isLike?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type CommentLikeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    commentId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isLike?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type WatchlistCreateInput = {
@@ -17470,6 +20282,18 @@ export namespace Prisma {
     none?: NotificationWhereInput
   }
 
+  export type MovieLikeListRelationFilter = {
+    every?: MovieLikeWhereInput
+    some?: MovieLikeWhereInput
+    none?: MovieLikeWhereInput
+  }
+
+  export type CommentLikeListRelationFilter = {
+    every?: CommentLikeWhereInput
+    some?: CommentLikeWhereInput
+    none?: CommentLikeWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -17496,6 +20320,14 @@ export namespace Prisma {
   }
 
   export type NotificationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MovieLikeOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type CommentLikeOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -18128,6 +20960,65 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type MovieLikeCountOrderByAggregateInput = {
+    id?: SortOrder
+    movieSeriesId?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    isLike?: SortOrder
+  }
+
+  export type MovieLikeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    movieSeriesId?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    isLike?: SortOrder
+  }
+
+  export type MovieLikeMinOrderByAggregateInput = {
+    id?: SortOrder
+    movieSeriesId?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    isLike?: SortOrder
+  }
+
+  export type CommentScalarRelationFilter = {
+    is?: CommentWhereInput
+    isNot?: CommentWhereInput
+  }
+
+  export type CommentLikeCountOrderByAggregateInput = {
+    id?: SortOrder
+    commentId?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    isLike?: SortOrder
+  }
+
+  export type CommentLikeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    commentId?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    isLike?: SortOrder
+  }
+
+  export type CommentLikeMinOrderByAggregateInput = {
+    id?: SortOrder
+    commentId?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    isLike?: SortOrder
+  }
+
   export type WatchlistCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
@@ -18369,6 +21260,20 @@ export namespace Prisma {
     connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
   }
 
+  export type MovieLikeCreateNestedManyWithoutUserInput = {
+    create?: XOR<MovieLikeCreateWithoutUserInput, MovieLikeUncheckedCreateWithoutUserInput> | MovieLikeCreateWithoutUserInput[] | MovieLikeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MovieLikeCreateOrConnectWithoutUserInput | MovieLikeCreateOrConnectWithoutUserInput[]
+    createMany?: MovieLikeCreateManyUserInputEnvelope
+    connect?: MovieLikeWhereUniqueInput | MovieLikeWhereUniqueInput[]
+  }
+
+  export type CommentLikeCreateNestedManyWithoutUserInput = {
+    create?: XOR<CommentLikeCreateWithoutUserInput, CommentLikeUncheckedCreateWithoutUserInput> | CommentLikeCreateWithoutUserInput[] | CommentLikeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CommentLikeCreateOrConnectWithoutUserInput | CommentLikeCreateOrConnectWithoutUserInput[]
+    createMany?: CommentLikeCreateManyUserInputEnvelope
+    connect?: CommentLikeWhereUniqueInput | CommentLikeWhereUniqueInput[]
+  }
+
   export type SecurityDetailsUncheckedCreateNestedOneWithoutUserInput = {
     create?: XOR<SecurityDetailsCreateWithoutUserInput, SecurityDetailsUncheckedCreateWithoutUserInput>
     connectOrCreate?: SecurityDetailsCreateOrConnectWithoutUserInput
@@ -18415,6 +21320,20 @@ export namespace Prisma {
     connectOrCreate?: NotificationCreateOrConnectWithoutUserInput | NotificationCreateOrConnectWithoutUserInput[]
     createMany?: NotificationCreateManyUserInputEnvelope
     connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+  }
+
+  export type MovieLikeUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<MovieLikeCreateWithoutUserInput, MovieLikeUncheckedCreateWithoutUserInput> | MovieLikeCreateWithoutUserInput[] | MovieLikeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MovieLikeCreateOrConnectWithoutUserInput | MovieLikeCreateOrConnectWithoutUserInput[]
+    createMany?: MovieLikeCreateManyUserInputEnvelope
+    connect?: MovieLikeWhereUniqueInput | MovieLikeWhereUniqueInput[]
+  }
+
+  export type CommentLikeUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<CommentLikeCreateWithoutUserInput, CommentLikeUncheckedCreateWithoutUserInput> | CommentLikeCreateWithoutUserInput[] | CommentLikeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CommentLikeCreateOrConnectWithoutUserInput | CommentLikeCreateOrConnectWithoutUserInput[]
+    createMany?: CommentLikeCreateManyUserInputEnvelope
+    connect?: CommentLikeWhereUniqueInput | CommentLikeWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -18531,6 +21450,34 @@ export namespace Prisma {
     deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
   }
 
+  export type MovieLikeUpdateManyWithoutUserNestedInput = {
+    create?: XOR<MovieLikeCreateWithoutUserInput, MovieLikeUncheckedCreateWithoutUserInput> | MovieLikeCreateWithoutUserInput[] | MovieLikeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MovieLikeCreateOrConnectWithoutUserInput | MovieLikeCreateOrConnectWithoutUserInput[]
+    upsert?: MovieLikeUpsertWithWhereUniqueWithoutUserInput | MovieLikeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: MovieLikeCreateManyUserInputEnvelope
+    set?: MovieLikeWhereUniqueInput | MovieLikeWhereUniqueInput[]
+    disconnect?: MovieLikeWhereUniqueInput | MovieLikeWhereUniqueInput[]
+    delete?: MovieLikeWhereUniqueInput | MovieLikeWhereUniqueInput[]
+    connect?: MovieLikeWhereUniqueInput | MovieLikeWhereUniqueInput[]
+    update?: MovieLikeUpdateWithWhereUniqueWithoutUserInput | MovieLikeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: MovieLikeUpdateManyWithWhereWithoutUserInput | MovieLikeUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: MovieLikeScalarWhereInput | MovieLikeScalarWhereInput[]
+  }
+
+  export type CommentLikeUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CommentLikeCreateWithoutUserInput, CommentLikeUncheckedCreateWithoutUserInput> | CommentLikeCreateWithoutUserInput[] | CommentLikeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CommentLikeCreateOrConnectWithoutUserInput | CommentLikeCreateOrConnectWithoutUserInput[]
+    upsert?: CommentLikeUpsertWithWhereUniqueWithoutUserInput | CommentLikeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CommentLikeCreateManyUserInputEnvelope
+    set?: CommentLikeWhereUniqueInput | CommentLikeWhereUniqueInput[]
+    disconnect?: CommentLikeWhereUniqueInput | CommentLikeWhereUniqueInput[]
+    delete?: CommentLikeWhereUniqueInput | CommentLikeWhereUniqueInput[]
+    connect?: CommentLikeWhereUniqueInput | CommentLikeWhereUniqueInput[]
+    update?: CommentLikeUpdateWithWhereUniqueWithoutUserInput | CommentLikeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CommentLikeUpdateManyWithWhereWithoutUserInput | CommentLikeUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CommentLikeScalarWhereInput | CommentLikeScalarWhereInput[]
+  }
+
   export type SecurityDetailsUncheckedUpdateOneWithoutUserNestedInput = {
     create?: XOR<SecurityDetailsCreateWithoutUserInput, SecurityDetailsUncheckedCreateWithoutUserInput>
     connectOrCreate?: SecurityDetailsCreateOrConnectWithoutUserInput
@@ -18623,6 +21570,34 @@ export namespace Prisma {
     update?: NotificationUpdateWithWhereUniqueWithoutUserInput | NotificationUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: NotificationUpdateManyWithWhereWithoutUserInput | NotificationUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+  }
+
+  export type MovieLikeUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<MovieLikeCreateWithoutUserInput, MovieLikeUncheckedCreateWithoutUserInput> | MovieLikeCreateWithoutUserInput[] | MovieLikeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MovieLikeCreateOrConnectWithoutUserInput | MovieLikeCreateOrConnectWithoutUserInput[]
+    upsert?: MovieLikeUpsertWithWhereUniqueWithoutUserInput | MovieLikeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: MovieLikeCreateManyUserInputEnvelope
+    set?: MovieLikeWhereUniqueInput | MovieLikeWhereUniqueInput[]
+    disconnect?: MovieLikeWhereUniqueInput | MovieLikeWhereUniqueInput[]
+    delete?: MovieLikeWhereUniqueInput | MovieLikeWhereUniqueInput[]
+    connect?: MovieLikeWhereUniqueInput | MovieLikeWhereUniqueInput[]
+    update?: MovieLikeUpdateWithWhereUniqueWithoutUserInput | MovieLikeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: MovieLikeUpdateManyWithWhereWithoutUserInput | MovieLikeUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: MovieLikeScalarWhereInput | MovieLikeScalarWhereInput[]
+  }
+
+  export type CommentLikeUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CommentLikeCreateWithoutUserInput, CommentLikeUncheckedCreateWithoutUserInput> | CommentLikeCreateWithoutUserInput[] | CommentLikeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CommentLikeCreateOrConnectWithoutUserInput | CommentLikeCreateOrConnectWithoutUserInput[]
+    upsert?: CommentLikeUpsertWithWhereUniqueWithoutUserInput | CommentLikeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CommentLikeCreateManyUserInputEnvelope
+    set?: CommentLikeWhereUniqueInput | CommentLikeWhereUniqueInput[]
+    disconnect?: CommentLikeWhereUniqueInput | CommentLikeWhereUniqueInput[]
+    delete?: CommentLikeWhereUniqueInput | CommentLikeWhereUniqueInput[]
+    connect?: CommentLikeWhereUniqueInput | CommentLikeWhereUniqueInput[]
+    update?: CommentLikeUpdateWithWhereUniqueWithoutUserInput | CommentLikeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CommentLikeUpdateManyWithWhereWithoutUserInput | CommentLikeUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CommentLikeScalarWhereInput | CommentLikeScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutSecurityDetailsInput = {
@@ -18756,6 +21731,13 @@ export namespace Prisma {
     connect?: PurchaseRentHistoryWhereUniqueInput | PurchaseRentHistoryWhereUniqueInput[]
   }
 
+  export type MovieLikeCreateNestedManyWithoutMovieSeriesInput = {
+    create?: XOR<MovieLikeCreateWithoutMovieSeriesInput, MovieLikeUncheckedCreateWithoutMovieSeriesInput> | MovieLikeCreateWithoutMovieSeriesInput[] | MovieLikeUncheckedCreateWithoutMovieSeriesInput[]
+    connectOrCreate?: MovieLikeCreateOrConnectWithoutMovieSeriesInput | MovieLikeCreateOrConnectWithoutMovieSeriesInput[]
+    createMany?: MovieLikeCreateManyMovieSeriesInputEnvelope
+    connect?: MovieLikeWhereUniqueInput | MovieLikeWhereUniqueInput[]
+  }
+
   export type ReviewUncheckedCreateNestedManyWithoutMovieSeriesInput = {
     create?: XOR<ReviewCreateWithoutMovieSeriesInput, ReviewUncheckedCreateWithoutMovieSeriesInput> | ReviewCreateWithoutMovieSeriesInput[] | ReviewUncheckedCreateWithoutMovieSeriesInput[]
     connectOrCreate?: ReviewCreateOrConnectWithoutMovieSeriesInput | ReviewCreateOrConnectWithoutMovieSeriesInput[]
@@ -18775,6 +21757,13 @@ export namespace Prisma {
     connectOrCreate?: PurchaseRentHistoryCreateOrConnectWithoutMovieSeriesInput | PurchaseRentHistoryCreateOrConnectWithoutMovieSeriesInput[]
     createMany?: PurchaseRentHistoryCreateManyMovieSeriesInputEnvelope
     connect?: PurchaseRentHistoryWhereUniqueInput | PurchaseRentHistoryWhereUniqueInput[]
+  }
+
+  export type MovieLikeUncheckedCreateNestedManyWithoutMovieSeriesInput = {
+    create?: XOR<MovieLikeCreateWithoutMovieSeriesInput, MovieLikeUncheckedCreateWithoutMovieSeriesInput> | MovieLikeCreateWithoutMovieSeriesInput[] | MovieLikeUncheckedCreateWithoutMovieSeriesInput[]
+    connectOrCreate?: MovieLikeCreateOrConnectWithoutMovieSeriesInput | MovieLikeCreateOrConnectWithoutMovieSeriesInput[]
+    createMany?: MovieLikeCreateManyMovieSeriesInputEnvelope
+    connect?: MovieLikeWhereUniqueInput | MovieLikeWhereUniqueInput[]
   }
 
   export type MovieSeriesUpdategenreInput = {
@@ -18868,6 +21857,20 @@ export namespace Prisma {
     deleteMany?: PurchaseRentHistoryScalarWhereInput | PurchaseRentHistoryScalarWhereInput[]
   }
 
+  export type MovieLikeUpdateManyWithoutMovieSeriesNestedInput = {
+    create?: XOR<MovieLikeCreateWithoutMovieSeriesInput, MovieLikeUncheckedCreateWithoutMovieSeriesInput> | MovieLikeCreateWithoutMovieSeriesInput[] | MovieLikeUncheckedCreateWithoutMovieSeriesInput[]
+    connectOrCreate?: MovieLikeCreateOrConnectWithoutMovieSeriesInput | MovieLikeCreateOrConnectWithoutMovieSeriesInput[]
+    upsert?: MovieLikeUpsertWithWhereUniqueWithoutMovieSeriesInput | MovieLikeUpsertWithWhereUniqueWithoutMovieSeriesInput[]
+    createMany?: MovieLikeCreateManyMovieSeriesInputEnvelope
+    set?: MovieLikeWhereUniqueInput | MovieLikeWhereUniqueInput[]
+    disconnect?: MovieLikeWhereUniqueInput | MovieLikeWhereUniqueInput[]
+    delete?: MovieLikeWhereUniqueInput | MovieLikeWhereUniqueInput[]
+    connect?: MovieLikeWhereUniqueInput | MovieLikeWhereUniqueInput[]
+    update?: MovieLikeUpdateWithWhereUniqueWithoutMovieSeriesInput | MovieLikeUpdateWithWhereUniqueWithoutMovieSeriesInput[]
+    updateMany?: MovieLikeUpdateManyWithWhereWithoutMovieSeriesInput | MovieLikeUpdateManyWithWhereWithoutMovieSeriesInput[]
+    deleteMany?: MovieLikeScalarWhereInput | MovieLikeScalarWhereInput[]
+  }
+
   export type ReviewUncheckedUpdateManyWithoutMovieSeriesNestedInput = {
     create?: XOR<ReviewCreateWithoutMovieSeriesInput, ReviewUncheckedCreateWithoutMovieSeriesInput> | ReviewCreateWithoutMovieSeriesInput[] | ReviewUncheckedCreateWithoutMovieSeriesInput[]
     connectOrCreate?: ReviewCreateOrConnectWithoutMovieSeriesInput | ReviewCreateOrConnectWithoutMovieSeriesInput[]
@@ -18908,6 +21911,20 @@ export namespace Prisma {
     update?: PurchaseRentHistoryUpdateWithWhereUniqueWithoutMovieSeriesInput | PurchaseRentHistoryUpdateWithWhereUniqueWithoutMovieSeriesInput[]
     updateMany?: PurchaseRentHistoryUpdateManyWithWhereWithoutMovieSeriesInput | PurchaseRentHistoryUpdateManyWithWhereWithoutMovieSeriesInput[]
     deleteMany?: PurchaseRentHistoryScalarWhereInput | PurchaseRentHistoryScalarWhereInput[]
+  }
+
+  export type MovieLikeUncheckedUpdateManyWithoutMovieSeriesNestedInput = {
+    create?: XOR<MovieLikeCreateWithoutMovieSeriesInput, MovieLikeUncheckedCreateWithoutMovieSeriesInput> | MovieLikeCreateWithoutMovieSeriesInput[] | MovieLikeUncheckedCreateWithoutMovieSeriesInput[]
+    connectOrCreate?: MovieLikeCreateOrConnectWithoutMovieSeriesInput | MovieLikeCreateOrConnectWithoutMovieSeriesInput[]
+    upsert?: MovieLikeUpsertWithWhereUniqueWithoutMovieSeriesInput | MovieLikeUpsertWithWhereUniqueWithoutMovieSeriesInput[]
+    createMany?: MovieLikeCreateManyMovieSeriesInputEnvelope
+    set?: MovieLikeWhereUniqueInput | MovieLikeWhereUniqueInput[]
+    disconnect?: MovieLikeWhereUniqueInput | MovieLikeWhereUniqueInput[]
+    delete?: MovieLikeWhereUniqueInput | MovieLikeWhereUniqueInput[]
+    connect?: MovieLikeWhereUniqueInput | MovieLikeWhereUniqueInput[]
+    update?: MovieLikeUpdateWithWhereUniqueWithoutMovieSeriesInput | MovieLikeUpdateWithWhereUniqueWithoutMovieSeriesInput[]
+    updateMany?: MovieLikeUpdateManyWithWhereWithoutMovieSeriesInput | MovieLikeUpdateManyWithWhereWithoutMovieSeriesInput[]
+    deleteMany?: MovieLikeScalarWhereInput | MovieLikeScalarWhereInput[]
   }
 
   export type ReviewCreatetagsInput = {
@@ -19005,6 +22022,20 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type CommentLikeCreateNestedManyWithoutCommentInput = {
+    create?: XOR<CommentLikeCreateWithoutCommentInput, CommentLikeUncheckedCreateWithoutCommentInput> | CommentLikeCreateWithoutCommentInput[] | CommentLikeUncheckedCreateWithoutCommentInput[]
+    connectOrCreate?: CommentLikeCreateOrConnectWithoutCommentInput | CommentLikeCreateOrConnectWithoutCommentInput[]
+    createMany?: CommentLikeCreateManyCommentInputEnvelope
+    connect?: CommentLikeWhereUniqueInput | CommentLikeWhereUniqueInput[]
+  }
+
+  export type CommentLikeUncheckedCreateNestedManyWithoutCommentInput = {
+    create?: XOR<CommentLikeCreateWithoutCommentInput, CommentLikeUncheckedCreateWithoutCommentInput> | CommentLikeCreateWithoutCommentInput[] | CommentLikeUncheckedCreateWithoutCommentInput[]
+    connectOrCreate?: CommentLikeCreateOrConnectWithoutCommentInput | CommentLikeCreateOrConnectWithoutCommentInput[]
+    createMany?: CommentLikeCreateManyCommentInputEnvelope
+    connect?: CommentLikeWhereUniqueInput | CommentLikeWhereUniqueInput[]
+  }
+
   export type ReviewUpdateOneRequiredWithoutCommentNestedInput = {
     create?: XOR<ReviewCreateWithoutCommentInput, ReviewUncheckedCreateWithoutCommentInput>
     connectOrCreate?: ReviewCreateOrConnectWithoutCommentInput
@@ -19019,6 +22050,90 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutCommentInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCommentInput, UserUpdateWithoutCommentInput>, UserUncheckedUpdateWithoutCommentInput>
+  }
+
+  export type CommentLikeUpdateManyWithoutCommentNestedInput = {
+    create?: XOR<CommentLikeCreateWithoutCommentInput, CommentLikeUncheckedCreateWithoutCommentInput> | CommentLikeCreateWithoutCommentInput[] | CommentLikeUncheckedCreateWithoutCommentInput[]
+    connectOrCreate?: CommentLikeCreateOrConnectWithoutCommentInput | CommentLikeCreateOrConnectWithoutCommentInput[]
+    upsert?: CommentLikeUpsertWithWhereUniqueWithoutCommentInput | CommentLikeUpsertWithWhereUniqueWithoutCommentInput[]
+    createMany?: CommentLikeCreateManyCommentInputEnvelope
+    set?: CommentLikeWhereUniqueInput | CommentLikeWhereUniqueInput[]
+    disconnect?: CommentLikeWhereUniqueInput | CommentLikeWhereUniqueInput[]
+    delete?: CommentLikeWhereUniqueInput | CommentLikeWhereUniqueInput[]
+    connect?: CommentLikeWhereUniqueInput | CommentLikeWhereUniqueInput[]
+    update?: CommentLikeUpdateWithWhereUniqueWithoutCommentInput | CommentLikeUpdateWithWhereUniqueWithoutCommentInput[]
+    updateMany?: CommentLikeUpdateManyWithWhereWithoutCommentInput | CommentLikeUpdateManyWithWhereWithoutCommentInput[]
+    deleteMany?: CommentLikeScalarWhereInput | CommentLikeScalarWhereInput[]
+  }
+
+  export type CommentLikeUncheckedUpdateManyWithoutCommentNestedInput = {
+    create?: XOR<CommentLikeCreateWithoutCommentInput, CommentLikeUncheckedCreateWithoutCommentInput> | CommentLikeCreateWithoutCommentInput[] | CommentLikeUncheckedCreateWithoutCommentInput[]
+    connectOrCreate?: CommentLikeCreateOrConnectWithoutCommentInput | CommentLikeCreateOrConnectWithoutCommentInput[]
+    upsert?: CommentLikeUpsertWithWhereUniqueWithoutCommentInput | CommentLikeUpsertWithWhereUniqueWithoutCommentInput[]
+    createMany?: CommentLikeCreateManyCommentInputEnvelope
+    set?: CommentLikeWhereUniqueInput | CommentLikeWhereUniqueInput[]
+    disconnect?: CommentLikeWhereUniqueInput | CommentLikeWhereUniqueInput[]
+    delete?: CommentLikeWhereUniqueInput | CommentLikeWhereUniqueInput[]
+    connect?: CommentLikeWhereUniqueInput | CommentLikeWhereUniqueInput[]
+    update?: CommentLikeUpdateWithWhereUniqueWithoutCommentInput | CommentLikeUpdateWithWhereUniqueWithoutCommentInput[]
+    updateMany?: CommentLikeUpdateManyWithWhereWithoutCommentInput | CommentLikeUpdateManyWithWhereWithoutCommentInput[]
+    deleteMany?: CommentLikeScalarWhereInput | CommentLikeScalarWhereInput[]
+  }
+
+  export type MovieSeriesCreateNestedOneWithoutMovieLikeInput = {
+    create?: XOR<MovieSeriesCreateWithoutMovieLikeInput, MovieSeriesUncheckedCreateWithoutMovieLikeInput>
+    connectOrCreate?: MovieSeriesCreateOrConnectWithoutMovieLikeInput
+    connect?: MovieSeriesWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutMovieLikeInput = {
+    create?: XOR<UserCreateWithoutMovieLikeInput, UserUncheckedCreateWithoutMovieLikeInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMovieLikeInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type MovieSeriesUpdateOneRequiredWithoutMovieLikeNestedInput = {
+    create?: XOR<MovieSeriesCreateWithoutMovieLikeInput, MovieSeriesUncheckedCreateWithoutMovieLikeInput>
+    connectOrCreate?: MovieSeriesCreateOrConnectWithoutMovieLikeInput
+    upsert?: MovieSeriesUpsertWithoutMovieLikeInput
+    connect?: MovieSeriesWhereUniqueInput
+    update?: XOR<XOR<MovieSeriesUpdateToOneWithWhereWithoutMovieLikeInput, MovieSeriesUpdateWithoutMovieLikeInput>, MovieSeriesUncheckedUpdateWithoutMovieLikeInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutMovieLikeNestedInput = {
+    create?: XOR<UserCreateWithoutMovieLikeInput, UserUncheckedCreateWithoutMovieLikeInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMovieLikeInput
+    upsert?: UserUpsertWithoutMovieLikeInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMovieLikeInput, UserUpdateWithoutMovieLikeInput>, UserUncheckedUpdateWithoutMovieLikeInput>
+  }
+
+  export type CommentCreateNestedOneWithoutCommentLikeInput = {
+    create?: XOR<CommentCreateWithoutCommentLikeInput, CommentUncheckedCreateWithoutCommentLikeInput>
+    connectOrCreate?: CommentCreateOrConnectWithoutCommentLikeInput
+    connect?: CommentWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutCommentLikeInput = {
+    create?: XOR<UserCreateWithoutCommentLikeInput, UserUncheckedCreateWithoutCommentLikeInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCommentLikeInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type CommentUpdateOneRequiredWithoutCommentLikeNestedInput = {
+    create?: XOR<CommentCreateWithoutCommentLikeInput, CommentUncheckedCreateWithoutCommentLikeInput>
+    connectOrCreate?: CommentCreateOrConnectWithoutCommentLikeInput
+    upsert?: CommentUpsertWithoutCommentLikeInput
+    connect?: CommentWhereUniqueInput
+    update?: XOR<XOR<CommentUpdateToOneWithWhereWithoutCommentLikeInput, CommentUpdateWithoutCommentLikeInput>, CommentUncheckedUpdateWithoutCommentLikeInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutCommentLikeNestedInput = {
+    create?: XOR<UserCreateWithoutCommentLikeInput, UserUncheckedCreateWithoutCommentLikeInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCommentLikeInput
+    upsert?: UserUpsertWithoutCommentLikeInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCommentLikeInput, UserUpdateWithoutCommentLikeInput>, UserUncheckedUpdateWithoutCommentLikeInput>
   }
 
   export type UserCreateNestedOneWithoutWatchlistInput = {
@@ -19529,6 +22644,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     review: ReviewCreateNestedOneWithoutCommentInput
+    CommentLike?: CommentLikeCreateNestedManyWithoutCommentInput
   }
 
   export type CommentUncheckedCreateWithoutUserInput = {
@@ -19538,6 +22654,7 @@ export namespace Prisma {
     replyTo?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    CommentLike?: CommentLikeUncheckedCreateNestedManyWithoutCommentInput
   }
 
   export type CommentCreateOrConnectWithoutUserInput = {
@@ -19655,6 +22772,58 @@ export namespace Prisma {
 
   export type NotificationCreateManyUserInputEnvelope = {
     data: NotificationCreateManyUserInput | NotificationCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MovieLikeCreateWithoutUserInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isLike?: boolean
+    movieSeries: MovieSeriesCreateNestedOneWithoutMovieLikeInput
+  }
+
+  export type MovieLikeUncheckedCreateWithoutUserInput = {
+    id?: string
+    movieSeriesId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isLike?: boolean
+  }
+
+  export type MovieLikeCreateOrConnectWithoutUserInput = {
+    where: MovieLikeWhereUniqueInput
+    create: XOR<MovieLikeCreateWithoutUserInput, MovieLikeUncheckedCreateWithoutUserInput>
+  }
+
+  export type MovieLikeCreateManyUserInputEnvelope = {
+    data: MovieLikeCreateManyUserInput | MovieLikeCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CommentLikeCreateWithoutUserInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isLike?: boolean
+    comment: CommentCreateNestedOneWithoutCommentLikeInput
+  }
+
+  export type CommentLikeUncheckedCreateWithoutUserInput = {
+    id?: string
+    commentId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isLike?: boolean
+  }
+
+  export type CommentLikeCreateOrConnectWithoutUserInput = {
+    where: CommentLikeWhereUniqueInput
+    create: XOR<CommentLikeCreateWithoutUserInput, CommentLikeUncheckedCreateWithoutUserInput>
+  }
+
+  export type CommentLikeCreateManyUserInputEnvelope = {
+    data: CommentLikeCreateManyUserInput | CommentLikeCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -19878,6 +23047,62 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Notification"> | Date | string
   }
 
+  export type MovieLikeUpsertWithWhereUniqueWithoutUserInput = {
+    where: MovieLikeWhereUniqueInput
+    update: XOR<MovieLikeUpdateWithoutUserInput, MovieLikeUncheckedUpdateWithoutUserInput>
+    create: XOR<MovieLikeCreateWithoutUserInput, MovieLikeUncheckedCreateWithoutUserInput>
+  }
+
+  export type MovieLikeUpdateWithWhereUniqueWithoutUserInput = {
+    where: MovieLikeWhereUniqueInput
+    data: XOR<MovieLikeUpdateWithoutUserInput, MovieLikeUncheckedUpdateWithoutUserInput>
+  }
+
+  export type MovieLikeUpdateManyWithWhereWithoutUserInput = {
+    where: MovieLikeScalarWhereInput
+    data: XOR<MovieLikeUpdateManyMutationInput, MovieLikeUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type MovieLikeScalarWhereInput = {
+    AND?: MovieLikeScalarWhereInput | MovieLikeScalarWhereInput[]
+    OR?: MovieLikeScalarWhereInput[]
+    NOT?: MovieLikeScalarWhereInput | MovieLikeScalarWhereInput[]
+    id?: StringFilter<"MovieLike"> | string
+    movieSeriesId?: StringFilter<"MovieLike"> | string
+    userId?: StringFilter<"MovieLike"> | string
+    createdAt?: DateTimeFilter<"MovieLike"> | Date | string
+    updatedAt?: DateTimeFilter<"MovieLike"> | Date | string
+    isLike?: BoolFilter<"MovieLike"> | boolean
+  }
+
+  export type CommentLikeUpsertWithWhereUniqueWithoutUserInput = {
+    where: CommentLikeWhereUniqueInput
+    update: XOR<CommentLikeUpdateWithoutUserInput, CommentLikeUncheckedUpdateWithoutUserInput>
+    create: XOR<CommentLikeCreateWithoutUserInput, CommentLikeUncheckedCreateWithoutUserInput>
+  }
+
+  export type CommentLikeUpdateWithWhereUniqueWithoutUserInput = {
+    where: CommentLikeWhereUniqueInput
+    data: XOR<CommentLikeUpdateWithoutUserInput, CommentLikeUncheckedUpdateWithoutUserInput>
+  }
+
+  export type CommentLikeUpdateManyWithWhereWithoutUserInput = {
+    where: CommentLikeScalarWhereInput
+    data: XOR<CommentLikeUpdateManyMutationInput, CommentLikeUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type CommentLikeScalarWhereInput = {
+    AND?: CommentLikeScalarWhereInput | CommentLikeScalarWhereInput[]
+    OR?: CommentLikeScalarWhereInput[]
+    NOT?: CommentLikeScalarWhereInput | CommentLikeScalarWhereInput[]
+    id?: StringFilter<"CommentLike"> | string
+    commentId?: StringFilter<"CommentLike"> | string
+    userId?: StringFilter<"CommentLike"> | string
+    createdAt?: DateTimeFilter<"CommentLike"> | Date | string
+    updatedAt?: DateTimeFilter<"CommentLike"> | Date | string
+    isLike?: BoolFilter<"CommentLike"> | boolean
+  }
+
   export type UserCreateWithoutSecurityDetailsInput = {
     id?: string
     email: string
@@ -19894,6 +23119,8 @@ export namespace Prisma {
     purchaseRentHistory?: PurchaseRentHistoryCreateNestedManyWithoutUserInput
     paymentTransaction?: PaymentTransactionCreateNestedManyWithoutUserInput
     notification?: NotificationCreateNestedManyWithoutUserInput
+    movieLike?: MovieLikeCreateNestedManyWithoutUserInput
+    CommentLike?: CommentLikeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSecurityDetailsInput = {
@@ -19912,6 +23139,8 @@ export namespace Prisma {
     purchaseRentHistory?: PurchaseRentHistoryUncheckedCreateNestedManyWithoutUserInput
     paymentTransaction?: PaymentTransactionUncheckedCreateNestedManyWithoutUserInput
     notification?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    movieLike?: MovieLikeUncheckedCreateNestedManyWithoutUserInput
+    CommentLike?: CommentLikeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSecurityDetailsInput = {
@@ -19990,6 +23219,8 @@ export namespace Prisma {
     purchaseRentHistory?: PurchaseRentHistoryUpdateManyWithoutUserNestedInput
     paymentTransaction?: PaymentTransactionUpdateManyWithoutUserNestedInput
     notification?: NotificationUpdateManyWithoutUserNestedInput
+    movieLike?: MovieLikeUpdateManyWithoutUserNestedInput
+    CommentLike?: CommentLikeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSecurityDetailsInput = {
@@ -20008,6 +23239,8 @@ export namespace Prisma {
     purchaseRentHistory?: PurchaseRentHistoryUncheckedUpdateManyWithoutUserNestedInput
     paymentTransaction?: PaymentTransactionUncheckedUpdateManyWithoutUserNestedInput
     notification?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    movieLike?: MovieLikeUncheckedUpdateManyWithoutUserNestedInput
+    CommentLike?: CommentLikeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type DeviceUpsertWithWhereUniqueWithoutSecurityDetailsInput = {
@@ -20223,6 +23456,32 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type MovieLikeCreateWithoutMovieSeriesInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isLike?: boolean
+    user: UserCreateNestedOneWithoutMovieLikeInput
+  }
+
+  export type MovieLikeUncheckedCreateWithoutMovieSeriesInput = {
+    id?: string
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isLike?: boolean
+  }
+
+  export type MovieLikeCreateOrConnectWithoutMovieSeriesInput = {
+    where: MovieLikeWhereUniqueInput
+    create: XOR<MovieLikeCreateWithoutMovieSeriesInput, MovieLikeUncheckedCreateWithoutMovieSeriesInput>
+  }
+
+  export type MovieLikeCreateManyMovieSeriesInputEnvelope = {
+    data: MovieLikeCreateManyMovieSeriesInput | MovieLikeCreateManyMovieSeriesInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ReviewUpsertWithWhereUniqueWithoutMovieSeriesInput = {
     where: ReviewWhereUniqueInput
     update: XOR<ReviewUpdateWithoutMovieSeriesInput, ReviewUncheckedUpdateWithoutMovieSeriesInput>
@@ -20271,6 +23530,22 @@ export namespace Prisma {
     data: XOR<PurchaseRentHistoryUpdateManyMutationInput, PurchaseRentHistoryUncheckedUpdateManyWithoutMovieSeriesInput>
   }
 
+  export type MovieLikeUpsertWithWhereUniqueWithoutMovieSeriesInput = {
+    where: MovieLikeWhereUniqueInput
+    update: XOR<MovieLikeUpdateWithoutMovieSeriesInput, MovieLikeUncheckedUpdateWithoutMovieSeriesInput>
+    create: XOR<MovieLikeCreateWithoutMovieSeriesInput, MovieLikeUncheckedCreateWithoutMovieSeriesInput>
+  }
+
+  export type MovieLikeUpdateWithWhereUniqueWithoutMovieSeriesInput = {
+    where: MovieLikeWhereUniqueInput
+    data: XOR<MovieLikeUpdateWithoutMovieSeriesInput, MovieLikeUncheckedUpdateWithoutMovieSeriesInput>
+  }
+
+  export type MovieLikeUpdateManyWithWhereWithoutMovieSeriesInput = {
+    where: MovieLikeScalarWhereInput
+    data: XOR<MovieLikeUpdateManyMutationInput, MovieLikeUncheckedUpdateManyWithoutMovieSeriesInput>
+  }
+
   export type MovieSeriesCreateWithoutReviewsInput = {
     id?: string
     title: string
@@ -20296,6 +23571,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     watchlist?: WatchlistCreateNestedManyWithoutMovieSeriesInput
     purchaseRentHistory?: PurchaseRentHistoryCreateNestedManyWithoutMovieSeriesInput
+    movieLike?: MovieLikeCreateNestedManyWithoutMovieSeriesInput
   }
 
   export type MovieSeriesUncheckedCreateWithoutReviewsInput = {
@@ -20323,6 +23599,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     watchlist?: WatchlistUncheckedCreateNestedManyWithoutMovieSeriesInput
     purchaseRentHistory?: PurchaseRentHistoryUncheckedCreateNestedManyWithoutMovieSeriesInput
+    movieLike?: MovieLikeUncheckedCreateNestedManyWithoutMovieSeriesInput
   }
 
   export type MovieSeriesCreateOrConnectWithoutReviewsInput = {
@@ -20346,6 +23623,8 @@ export namespace Prisma {
     purchaseRentHistory?: PurchaseRentHistoryCreateNestedManyWithoutUserInput
     paymentTransaction?: PaymentTransactionCreateNestedManyWithoutUserInput
     notification?: NotificationCreateNestedManyWithoutUserInput
+    movieLike?: MovieLikeCreateNestedManyWithoutUserInput
+    CommentLike?: CommentLikeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutReviewInput = {
@@ -20364,6 +23643,8 @@ export namespace Prisma {
     purchaseRentHistory?: PurchaseRentHistoryUncheckedCreateNestedManyWithoutUserInput
     paymentTransaction?: PaymentTransactionUncheckedCreateNestedManyWithoutUserInput
     notification?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    movieLike?: MovieLikeUncheckedCreateNestedManyWithoutUserInput
+    CommentLike?: CommentLikeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutReviewInput = {
@@ -20378,6 +23659,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutCommentInput
+    CommentLike?: CommentLikeCreateNestedManyWithoutCommentInput
   }
 
   export type CommentUncheckedCreateWithoutReviewInput = {
@@ -20387,6 +23669,7 @@ export namespace Prisma {
     replyTo?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    CommentLike?: CommentLikeUncheckedCreateNestedManyWithoutCommentInput
   }
 
   export type CommentCreateOrConnectWithoutReviewInput = {
@@ -20435,6 +23718,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     watchlist?: WatchlistUpdateManyWithoutMovieSeriesNestedInput
     purchaseRentHistory?: PurchaseRentHistoryUpdateManyWithoutMovieSeriesNestedInput
+    movieLike?: MovieLikeUpdateManyWithoutMovieSeriesNestedInput
   }
 
   export type MovieSeriesUncheckedUpdateWithoutReviewsInput = {
@@ -20462,6 +23746,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     watchlist?: WatchlistUncheckedUpdateManyWithoutMovieSeriesNestedInput
     purchaseRentHistory?: PurchaseRentHistoryUncheckedUpdateManyWithoutMovieSeriesNestedInput
+    movieLike?: MovieLikeUncheckedUpdateManyWithoutMovieSeriesNestedInput
   }
 
   export type UserUpsertWithoutReviewInput = {
@@ -20491,6 +23776,8 @@ export namespace Prisma {
     purchaseRentHistory?: PurchaseRentHistoryUpdateManyWithoutUserNestedInput
     paymentTransaction?: PaymentTransactionUpdateManyWithoutUserNestedInput
     notification?: NotificationUpdateManyWithoutUserNestedInput
+    movieLike?: MovieLikeUpdateManyWithoutUserNestedInput
+    CommentLike?: CommentLikeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReviewInput = {
@@ -20509,6 +23796,8 @@ export namespace Prisma {
     purchaseRentHistory?: PurchaseRentHistoryUncheckedUpdateManyWithoutUserNestedInput
     paymentTransaction?: PaymentTransactionUncheckedUpdateManyWithoutUserNestedInput
     notification?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    movieLike?: MovieLikeUncheckedUpdateManyWithoutUserNestedInput
+    CommentLike?: CommentLikeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CommentUpsertWithWhereUniqueWithoutReviewInput = {
@@ -20578,6 +23867,8 @@ export namespace Prisma {
     purchaseRentHistory?: PurchaseRentHistoryCreateNestedManyWithoutUserInput
     paymentTransaction?: PaymentTransactionCreateNestedManyWithoutUserInput
     notification?: NotificationCreateNestedManyWithoutUserInput
+    movieLike?: MovieLikeCreateNestedManyWithoutUserInput
+    CommentLike?: CommentLikeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCommentInput = {
@@ -20596,11 +23887,39 @@ export namespace Prisma {
     purchaseRentHistory?: PurchaseRentHistoryUncheckedCreateNestedManyWithoutUserInput
     paymentTransaction?: PaymentTransactionUncheckedCreateNestedManyWithoutUserInput
     notification?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    movieLike?: MovieLikeUncheckedCreateNestedManyWithoutUserInput
+    CommentLike?: CommentLikeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCommentInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutCommentInput, UserUncheckedCreateWithoutCommentInput>
+  }
+
+  export type CommentLikeCreateWithoutCommentInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isLike?: boolean
+    user: UserCreateNestedOneWithoutCommentLikeInput
+  }
+
+  export type CommentLikeUncheckedCreateWithoutCommentInput = {
+    id?: string
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isLike?: boolean
+  }
+
+  export type CommentLikeCreateOrConnectWithoutCommentInput = {
+    where: CommentLikeWhereUniqueInput
+    create: XOR<CommentLikeCreateWithoutCommentInput, CommentLikeUncheckedCreateWithoutCommentInput>
+  }
+
+  export type CommentLikeCreateManyCommentInputEnvelope = {
+    data: CommentLikeCreateManyCommentInput | CommentLikeCreateManyCommentInput[]
+    skipDuplicates?: boolean
   }
 
   export type ReviewUpsertWithoutCommentInput = {
@@ -20671,6 +23990,8 @@ export namespace Prisma {
     purchaseRentHistory?: PurchaseRentHistoryUpdateManyWithoutUserNestedInput
     paymentTransaction?: PaymentTransactionUpdateManyWithoutUserNestedInput
     notification?: NotificationUpdateManyWithoutUserNestedInput
+    movieLike?: MovieLikeUpdateManyWithoutUserNestedInput
+    CommentLike?: CommentLikeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCommentInput = {
@@ -20689,6 +24010,400 @@ export namespace Prisma {
     purchaseRentHistory?: PurchaseRentHistoryUncheckedUpdateManyWithoutUserNestedInput
     paymentTransaction?: PaymentTransactionUncheckedUpdateManyWithoutUserNestedInput
     notification?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    movieLike?: MovieLikeUncheckedUpdateManyWithoutUserNestedInput
+    CommentLike?: CommentLikeUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type CommentLikeUpsertWithWhereUniqueWithoutCommentInput = {
+    where: CommentLikeWhereUniqueInput
+    update: XOR<CommentLikeUpdateWithoutCommentInput, CommentLikeUncheckedUpdateWithoutCommentInput>
+    create: XOR<CommentLikeCreateWithoutCommentInput, CommentLikeUncheckedCreateWithoutCommentInput>
+  }
+
+  export type CommentLikeUpdateWithWhereUniqueWithoutCommentInput = {
+    where: CommentLikeWhereUniqueInput
+    data: XOR<CommentLikeUpdateWithoutCommentInput, CommentLikeUncheckedUpdateWithoutCommentInput>
+  }
+
+  export type CommentLikeUpdateManyWithWhereWithoutCommentInput = {
+    where: CommentLikeScalarWhereInput
+    data: XOR<CommentLikeUpdateManyMutationInput, CommentLikeUncheckedUpdateManyWithoutCommentInput>
+  }
+
+  export type MovieSeriesCreateWithoutMovieLikeInput = {
+    id?: string
+    title: string
+    posterUrl: string
+    description: string
+    releaseYear: number
+    genre?: MovieSeriesCreategenreInput | $Enums.Genre[]
+    director?: MovieSeriesCreatedirectorInput | string[]
+    cast?: MovieSeriesCreatecastInput | string[]
+    streamingPlatform?: MovieSeriesCreatestreamingPlatformInput | $Enums.StreamingPlatform[]
+    accessLink?: MovieSeriesCreateaccessLinkInput | string[]
+    rating?: number
+    viewCount?: number
+    markByAdmin?: boolean
+    price: number
+    priceType: $Enums.PriceType
+    discount?: number | null
+    discountType?: $Enums.DiscountType | null
+    discountExpiry?: Date | string | null
+    isActive?: boolean
+    isDeleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    reviews?: ReviewCreateNestedManyWithoutMovieSeriesInput
+    watchlist?: WatchlistCreateNestedManyWithoutMovieSeriesInput
+    purchaseRentHistory?: PurchaseRentHistoryCreateNestedManyWithoutMovieSeriesInput
+  }
+
+  export type MovieSeriesUncheckedCreateWithoutMovieLikeInput = {
+    id?: string
+    title: string
+    posterUrl: string
+    description: string
+    releaseYear: number
+    genre?: MovieSeriesCreategenreInput | $Enums.Genre[]
+    director?: MovieSeriesCreatedirectorInput | string[]
+    cast?: MovieSeriesCreatecastInput | string[]
+    streamingPlatform?: MovieSeriesCreatestreamingPlatformInput | $Enums.StreamingPlatform[]
+    accessLink?: MovieSeriesCreateaccessLinkInput | string[]
+    rating?: number
+    viewCount?: number
+    markByAdmin?: boolean
+    price: number
+    priceType: $Enums.PriceType
+    discount?: number | null
+    discountType?: $Enums.DiscountType | null
+    discountExpiry?: Date | string | null
+    isActive?: boolean
+    isDeleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    reviews?: ReviewUncheckedCreateNestedManyWithoutMovieSeriesInput
+    watchlist?: WatchlistUncheckedCreateNestedManyWithoutMovieSeriesInput
+    purchaseRentHistory?: PurchaseRentHistoryUncheckedCreateNestedManyWithoutMovieSeriesInput
+  }
+
+  export type MovieSeriesCreateOrConnectWithoutMovieLikeInput = {
+    where: MovieSeriesWhereUniqueInput
+    create: XOR<MovieSeriesCreateWithoutMovieLikeInput, MovieSeriesUncheckedCreateWithoutMovieLikeInput>
+  }
+
+  export type UserCreateWithoutMovieLikeInput = {
+    id?: string
+    email: string
+    name: string
+    profilePhoto?: string | null
+    password: string
+    role?: $Enums.UserRole
+    status?: $Enums.UserStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    securityDetails?: SecurityDetailsCreateNestedOneWithoutUserInput
+    review?: ReviewCreateNestedManyWithoutUserInput
+    comment?: CommentCreateNestedManyWithoutUserInput
+    watchlist?: WatchlistCreateNestedManyWithoutUserInput
+    purchaseRentHistory?: PurchaseRentHistoryCreateNestedManyWithoutUserInput
+    paymentTransaction?: PaymentTransactionCreateNestedManyWithoutUserInput
+    notification?: NotificationCreateNestedManyWithoutUserInput
+    CommentLike?: CommentLikeCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutMovieLikeInput = {
+    id?: string
+    email: string
+    name: string
+    profilePhoto?: string | null
+    password: string
+    role?: $Enums.UserRole
+    status?: $Enums.UserStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    securityDetails?: SecurityDetailsUncheckedCreateNestedOneWithoutUserInput
+    review?: ReviewUncheckedCreateNestedManyWithoutUserInput
+    comment?: CommentUncheckedCreateNestedManyWithoutUserInput
+    watchlist?: WatchlistUncheckedCreateNestedManyWithoutUserInput
+    purchaseRentHistory?: PurchaseRentHistoryUncheckedCreateNestedManyWithoutUserInput
+    paymentTransaction?: PaymentTransactionUncheckedCreateNestedManyWithoutUserInput
+    notification?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    CommentLike?: CommentLikeUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutMovieLikeInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutMovieLikeInput, UserUncheckedCreateWithoutMovieLikeInput>
+  }
+
+  export type MovieSeriesUpsertWithoutMovieLikeInput = {
+    update: XOR<MovieSeriesUpdateWithoutMovieLikeInput, MovieSeriesUncheckedUpdateWithoutMovieLikeInput>
+    create: XOR<MovieSeriesCreateWithoutMovieLikeInput, MovieSeriesUncheckedCreateWithoutMovieLikeInput>
+    where?: MovieSeriesWhereInput
+  }
+
+  export type MovieSeriesUpdateToOneWithWhereWithoutMovieLikeInput = {
+    where?: MovieSeriesWhereInput
+    data: XOR<MovieSeriesUpdateWithoutMovieLikeInput, MovieSeriesUncheckedUpdateWithoutMovieLikeInput>
+  }
+
+  export type MovieSeriesUpdateWithoutMovieLikeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    posterUrl?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    releaseYear?: IntFieldUpdateOperationsInput | number
+    genre?: MovieSeriesUpdategenreInput | $Enums.Genre[]
+    director?: MovieSeriesUpdatedirectorInput | string[]
+    cast?: MovieSeriesUpdatecastInput | string[]
+    streamingPlatform?: MovieSeriesUpdatestreamingPlatformInput | $Enums.StreamingPlatform[]
+    accessLink?: MovieSeriesUpdateaccessLinkInput | string[]
+    rating?: FloatFieldUpdateOperationsInput | number
+    viewCount?: IntFieldUpdateOperationsInput | number
+    markByAdmin?: BoolFieldUpdateOperationsInput | boolean
+    price?: FloatFieldUpdateOperationsInput | number
+    priceType?: EnumPriceTypeFieldUpdateOperationsInput | $Enums.PriceType
+    discount?: NullableFloatFieldUpdateOperationsInput | number | null
+    discountType?: NullableEnumDiscountTypeFieldUpdateOperationsInput | $Enums.DiscountType | null
+    discountExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reviews?: ReviewUpdateManyWithoutMovieSeriesNestedInput
+    watchlist?: WatchlistUpdateManyWithoutMovieSeriesNestedInput
+    purchaseRentHistory?: PurchaseRentHistoryUpdateManyWithoutMovieSeriesNestedInput
+  }
+
+  export type MovieSeriesUncheckedUpdateWithoutMovieLikeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    posterUrl?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    releaseYear?: IntFieldUpdateOperationsInput | number
+    genre?: MovieSeriesUpdategenreInput | $Enums.Genre[]
+    director?: MovieSeriesUpdatedirectorInput | string[]
+    cast?: MovieSeriesUpdatecastInput | string[]
+    streamingPlatform?: MovieSeriesUpdatestreamingPlatformInput | $Enums.StreamingPlatform[]
+    accessLink?: MovieSeriesUpdateaccessLinkInput | string[]
+    rating?: FloatFieldUpdateOperationsInput | number
+    viewCount?: IntFieldUpdateOperationsInput | number
+    markByAdmin?: BoolFieldUpdateOperationsInput | boolean
+    price?: FloatFieldUpdateOperationsInput | number
+    priceType?: EnumPriceTypeFieldUpdateOperationsInput | $Enums.PriceType
+    discount?: NullableFloatFieldUpdateOperationsInput | number | null
+    discountType?: NullableEnumDiscountTypeFieldUpdateOperationsInput | $Enums.DiscountType | null
+    discountExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reviews?: ReviewUncheckedUpdateManyWithoutMovieSeriesNestedInput
+    watchlist?: WatchlistUncheckedUpdateManyWithoutMovieSeriesNestedInput
+    purchaseRentHistory?: PurchaseRentHistoryUncheckedUpdateManyWithoutMovieSeriesNestedInput
+  }
+
+  export type UserUpsertWithoutMovieLikeInput = {
+    update: XOR<UserUpdateWithoutMovieLikeInput, UserUncheckedUpdateWithoutMovieLikeInput>
+    create: XOR<UserCreateWithoutMovieLikeInput, UserUncheckedCreateWithoutMovieLikeInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutMovieLikeInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutMovieLikeInput, UserUncheckedUpdateWithoutMovieLikeInput>
+  }
+
+  export type UserUpdateWithoutMovieLikeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    profilePhoto?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    securityDetails?: SecurityDetailsUpdateOneWithoutUserNestedInput
+    review?: ReviewUpdateManyWithoutUserNestedInput
+    comment?: CommentUpdateManyWithoutUserNestedInput
+    watchlist?: WatchlistUpdateManyWithoutUserNestedInput
+    purchaseRentHistory?: PurchaseRentHistoryUpdateManyWithoutUserNestedInput
+    paymentTransaction?: PaymentTransactionUpdateManyWithoutUserNestedInput
+    notification?: NotificationUpdateManyWithoutUserNestedInput
+    CommentLike?: CommentLikeUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutMovieLikeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    profilePhoto?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    securityDetails?: SecurityDetailsUncheckedUpdateOneWithoutUserNestedInput
+    review?: ReviewUncheckedUpdateManyWithoutUserNestedInput
+    comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    watchlist?: WatchlistUncheckedUpdateManyWithoutUserNestedInput
+    purchaseRentHistory?: PurchaseRentHistoryUncheckedUpdateManyWithoutUserNestedInput
+    paymentTransaction?: PaymentTransactionUncheckedUpdateManyWithoutUserNestedInput
+    notification?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    CommentLike?: CommentLikeUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type CommentCreateWithoutCommentLikeInput = {
+    id?: string
+    content: string
+    replyTo?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    review: ReviewCreateNestedOneWithoutCommentInput
+    user: UserCreateNestedOneWithoutCommentInput
+  }
+
+  export type CommentUncheckedCreateWithoutCommentLikeInput = {
+    id?: string
+    reviewId: string
+    userId: string
+    content: string
+    replyTo?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CommentCreateOrConnectWithoutCommentLikeInput = {
+    where: CommentWhereUniqueInput
+    create: XOR<CommentCreateWithoutCommentLikeInput, CommentUncheckedCreateWithoutCommentLikeInput>
+  }
+
+  export type UserCreateWithoutCommentLikeInput = {
+    id?: string
+    email: string
+    name: string
+    profilePhoto?: string | null
+    password: string
+    role?: $Enums.UserRole
+    status?: $Enums.UserStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    securityDetails?: SecurityDetailsCreateNestedOneWithoutUserInput
+    review?: ReviewCreateNestedManyWithoutUserInput
+    comment?: CommentCreateNestedManyWithoutUserInput
+    watchlist?: WatchlistCreateNestedManyWithoutUserInput
+    purchaseRentHistory?: PurchaseRentHistoryCreateNestedManyWithoutUserInput
+    paymentTransaction?: PaymentTransactionCreateNestedManyWithoutUserInput
+    notification?: NotificationCreateNestedManyWithoutUserInput
+    movieLike?: MovieLikeCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutCommentLikeInput = {
+    id?: string
+    email: string
+    name: string
+    profilePhoto?: string | null
+    password: string
+    role?: $Enums.UserRole
+    status?: $Enums.UserStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    securityDetails?: SecurityDetailsUncheckedCreateNestedOneWithoutUserInput
+    review?: ReviewUncheckedCreateNestedManyWithoutUserInput
+    comment?: CommentUncheckedCreateNestedManyWithoutUserInput
+    watchlist?: WatchlistUncheckedCreateNestedManyWithoutUserInput
+    purchaseRentHistory?: PurchaseRentHistoryUncheckedCreateNestedManyWithoutUserInput
+    paymentTransaction?: PaymentTransactionUncheckedCreateNestedManyWithoutUserInput
+    notification?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    movieLike?: MovieLikeUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutCommentLikeInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCommentLikeInput, UserUncheckedCreateWithoutCommentLikeInput>
+  }
+
+  export type CommentUpsertWithoutCommentLikeInput = {
+    update: XOR<CommentUpdateWithoutCommentLikeInput, CommentUncheckedUpdateWithoutCommentLikeInput>
+    create: XOR<CommentCreateWithoutCommentLikeInput, CommentUncheckedCreateWithoutCommentLikeInput>
+    where?: CommentWhereInput
+  }
+
+  export type CommentUpdateToOneWithWhereWithoutCommentLikeInput = {
+    where?: CommentWhereInput
+    data: XOR<CommentUpdateWithoutCommentLikeInput, CommentUncheckedUpdateWithoutCommentLikeInput>
+  }
+
+  export type CommentUpdateWithoutCommentLikeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    replyTo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    review?: ReviewUpdateOneRequiredWithoutCommentNestedInput
+    user?: UserUpdateOneRequiredWithoutCommentNestedInput
+  }
+
+  export type CommentUncheckedUpdateWithoutCommentLikeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reviewId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    replyTo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserUpsertWithoutCommentLikeInput = {
+    update: XOR<UserUpdateWithoutCommentLikeInput, UserUncheckedUpdateWithoutCommentLikeInput>
+    create: XOR<UserCreateWithoutCommentLikeInput, UserUncheckedCreateWithoutCommentLikeInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCommentLikeInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCommentLikeInput, UserUncheckedUpdateWithoutCommentLikeInput>
+  }
+
+  export type UserUpdateWithoutCommentLikeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    profilePhoto?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    securityDetails?: SecurityDetailsUpdateOneWithoutUserNestedInput
+    review?: ReviewUpdateManyWithoutUserNestedInput
+    comment?: CommentUpdateManyWithoutUserNestedInput
+    watchlist?: WatchlistUpdateManyWithoutUserNestedInput
+    purchaseRentHistory?: PurchaseRentHistoryUpdateManyWithoutUserNestedInput
+    paymentTransaction?: PaymentTransactionUpdateManyWithoutUserNestedInput
+    notification?: NotificationUpdateManyWithoutUserNestedInput
+    movieLike?: MovieLikeUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCommentLikeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    profilePhoto?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    securityDetails?: SecurityDetailsUncheckedUpdateOneWithoutUserNestedInput
+    review?: ReviewUncheckedUpdateManyWithoutUserNestedInput
+    comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    watchlist?: WatchlistUncheckedUpdateManyWithoutUserNestedInput
+    purchaseRentHistory?: PurchaseRentHistoryUncheckedUpdateManyWithoutUserNestedInput
+    paymentTransaction?: PaymentTransactionUncheckedUpdateManyWithoutUserNestedInput
+    notification?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    movieLike?: MovieLikeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutWatchlistInput = {
@@ -20707,6 +24422,8 @@ export namespace Prisma {
     purchaseRentHistory?: PurchaseRentHistoryCreateNestedManyWithoutUserInput
     paymentTransaction?: PaymentTransactionCreateNestedManyWithoutUserInput
     notification?: NotificationCreateNestedManyWithoutUserInput
+    movieLike?: MovieLikeCreateNestedManyWithoutUserInput
+    CommentLike?: CommentLikeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutWatchlistInput = {
@@ -20725,6 +24442,8 @@ export namespace Prisma {
     purchaseRentHistory?: PurchaseRentHistoryUncheckedCreateNestedManyWithoutUserInput
     paymentTransaction?: PaymentTransactionUncheckedCreateNestedManyWithoutUserInput
     notification?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    movieLike?: MovieLikeUncheckedCreateNestedManyWithoutUserInput
+    CommentLike?: CommentLikeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutWatchlistInput = {
@@ -20757,6 +24476,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     reviews?: ReviewCreateNestedManyWithoutMovieSeriesInput
     purchaseRentHistory?: PurchaseRentHistoryCreateNestedManyWithoutMovieSeriesInput
+    movieLike?: MovieLikeCreateNestedManyWithoutMovieSeriesInput
   }
 
   export type MovieSeriesUncheckedCreateWithoutWatchlistInput = {
@@ -20784,6 +24504,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     reviews?: ReviewUncheckedCreateNestedManyWithoutMovieSeriesInput
     purchaseRentHistory?: PurchaseRentHistoryUncheckedCreateNestedManyWithoutMovieSeriesInput
+    movieLike?: MovieLikeUncheckedCreateNestedManyWithoutMovieSeriesInput
   }
 
   export type MovieSeriesCreateOrConnectWithoutWatchlistInput = {
@@ -20818,6 +24539,8 @@ export namespace Prisma {
     purchaseRentHistory?: PurchaseRentHistoryUpdateManyWithoutUserNestedInput
     paymentTransaction?: PaymentTransactionUpdateManyWithoutUserNestedInput
     notification?: NotificationUpdateManyWithoutUserNestedInput
+    movieLike?: MovieLikeUpdateManyWithoutUserNestedInput
+    CommentLike?: CommentLikeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutWatchlistInput = {
@@ -20836,6 +24559,8 @@ export namespace Prisma {
     purchaseRentHistory?: PurchaseRentHistoryUncheckedUpdateManyWithoutUserNestedInput
     paymentTransaction?: PaymentTransactionUncheckedUpdateManyWithoutUserNestedInput
     notification?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    movieLike?: MovieLikeUncheckedUpdateManyWithoutUserNestedInput
+    CommentLike?: CommentLikeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type MovieSeriesUpsertWithoutWatchlistInput = {
@@ -20874,6 +24599,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reviews?: ReviewUpdateManyWithoutMovieSeriesNestedInput
     purchaseRentHistory?: PurchaseRentHistoryUpdateManyWithoutMovieSeriesNestedInput
+    movieLike?: MovieLikeUpdateManyWithoutMovieSeriesNestedInput
   }
 
   export type MovieSeriesUncheckedUpdateWithoutWatchlistInput = {
@@ -20901,6 +24627,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reviews?: ReviewUncheckedUpdateManyWithoutMovieSeriesNestedInput
     purchaseRentHistory?: PurchaseRentHistoryUncheckedUpdateManyWithoutMovieSeriesNestedInput
+    movieLike?: MovieLikeUncheckedUpdateManyWithoutMovieSeriesNestedInput
   }
 
   export type UserCreateWithoutPurchaseRentHistoryInput = {
@@ -20919,6 +24646,8 @@ export namespace Prisma {
     watchlist?: WatchlistCreateNestedManyWithoutUserInput
     paymentTransaction?: PaymentTransactionCreateNestedManyWithoutUserInput
     notification?: NotificationCreateNestedManyWithoutUserInput
+    movieLike?: MovieLikeCreateNestedManyWithoutUserInput
+    CommentLike?: CommentLikeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPurchaseRentHistoryInput = {
@@ -20937,6 +24666,8 @@ export namespace Prisma {
     watchlist?: WatchlistUncheckedCreateNestedManyWithoutUserInput
     paymentTransaction?: PaymentTransactionUncheckedCreateNestedManyWithoutUserInput
     notification?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    movieLike?: MovieLikeUncheckedCreateNestedManyWithoutUserInput
+    CommentLike?: CommentLikeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPurchaseRentHistoryInput = {
@@ -20969,6 +24700,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     reviews?: ReviewCreateNestedManyWithoutMovieSeriesInput
     watchlist?: WatchlistCreateNestedManyWithoutMovieSeriesInput
+    movieLike?: MovieLikeCreateNestedManyWithoutMovieSeriesInput
   }
 
   export type MovieSeriesUncheckedCreateWithoutPurchaseRentHistoryInput = {
@@ -20996,6 +24728,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     reviews?: ReviewUncheckedCreateNestedManyWithoutMovieSeriesInput
     watchlist?: WatchlistUncheckedCreateNestedManyWithoutMovieSeriesInput
+    movieLike?: MovieLikeUncheckedCreateNestedManyWithoutMovieSeriesInput
   }
 
   export type MovieSeriesCreateOrConnectWithoutPurchaseRentHistoryInput = {
@@ -21030,6 +24763,8 @@ export namespace Prisma {
     watchlist?: WatchlistUpdateManyWithoutUserNestedInput
     paymentTransaction?: PaymentTransactionUpdateManyWithoutUserNestedInput
     notification?: NotificationUpdateManyWithoutUserNestedInput
+    movieLike?: MovieLikeUpdateManyWithoutUserNestedInput
+    CommentLike?: CommentLikeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPurchaseRentHistoryInput = {
@@ -21048,6 +24783,8 @@ export namespace Prisma {
     watchlist?: WatchlistUncheckedUpdateManyWithoutUserNestedInput
     paymentTransaction?: PaymentTransactionUncheckedUpdateManyWithoutUserNestedInput
     notification?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    movieLike?: MovieLikeUncheckedUpdateManyWithoutUserNestedInput
+    CommentLike?: CommentLikeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type MovieSeriesUpsertWithoutPurchaseRentHistoryInput = {
@@ -21086,6 +24823,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reviews?: ReviewUpdateManyWithoutMovieSeriesNestedInput
     watchlist?: WatchlistUpdateManyWithoutMovieSeriesNestedInput
+    movieLike?: MovieLikeUpdateManyWithoutMovieSeriesNestedInput
   }
 
   export type MovieSeriesUncheckedUpdateWithoutPurchaseRentHistoryInput = {
@@ -21113,6 +24851,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reviews?: ReviewUncheckedUpdateManyWithoutMovieSeriesNestedInput
     watchlist?: WatchlistUncheckedUpdateManyWithoutMovieSeriesNestedInput
+    movieLike?: MovieLikeUncheckedUpdateManyWithoutMovieSeriesNestedInput
   }
 
   export type UserCreateWithoutPaymentTransactionInput = {
@@ -21131,6 +24870,8 @@ export namespace Prisma {
     watchlist?: WatchlistCreateNestedManyWithoutUserInput
     purchaseRentHistory?: PurchaseRentHistoryCreateNestedManyWithoutUserInput
     notification?: NotificationCreateNestedManyWithoutUserInput
+    movieLike?: MovieLikeCreateNestedManyWithoutUserInput
+    CommentLike?: CommentLikeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPaymentTransactionInput = {
@@ -21149,6 +24890,8 @@ export namespace Prisma {
     watchlist?: WatchlistUncheckedCreateNestedManyWithoutUserInput
     purchaseRentHistory?: PurchaseRentHistoryUncheckedCreateNestedManyWithoutUserInput
     notification?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    movieLike?: MovieLikeUncheckedCreateNestedManyWithoutUserInput
+    CommentLike?: CommentLikeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPaymentTransactionInput = {
@@ -21183,6 +24926,8 @@ export namespace Prisma {
     watchlist?: WatchlistUpdateManyWithoutUserNestedInput
     purchaseRentHistory?: PurchaseRentHistoryUpdateManyWithoutUserNestedInput
     notification?: NotificationUpdateManyWithoutUserNestedInput
+    movieLike?: MovieLikeUpdateManyWithoutUserNestedInput
+    CommentLike?: CommentLikeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPaymentTransactionInput = {
@@ -21201,6 +24946,8 @@ export namespace Prisma {
     watchlist?: WatchlistUncheckedUpdateManyWithoutUserNestedInput
     purchaseRentHistory?: PurchaseRentHistoryUncheckedUpdateManyWithoutUserNestedInput
     notification?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    movieLike?: MovieLikeUncheckedUpdateManyWithoutUserNestedInput
+    CommentLike?: CommentLikeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutNotificationInput = {
@@ -21219,6 +24966,8 @@ export namespace Prisma {
     watchlist?: WatchlistCreateNestedManyWithoutUserInput
     purchaseRentHistory?: PurchaseRentHistoryCreateNestedManyWithoutUserInput
     paymentTransaction?: PaymentTransactionCreateNestedManyWithoutUserInput
+    movieLike?: MovieLikeCreateNestedManyWithoutUserInput
+    CommentLike?: CommentLikeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutNotificationInput = {
@@ -21237,6 +24986,8 @@ export namespace Prisma {
     watchlist?: WatchlistUncheckedCreateNestedManyWithoutUserInput
     purchaseRentHistory?: PurchaseRentHistoryUncheckedCreateNestedManyWithoutUserInput
     paymentTransaction?: PaymentTransactionUncheckedCreateNestedManyWithoutUserInput
+    movieLike?: MovieLikeUncheckedCreateNestedManyWithoutUserInput
+    CommentLike?: CommentLikeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNotificationInput = {
@@ -21271,6 +25022,8 @@ export namespace Prisma {
     watchlist?: WatchlistUpdateManyWithoutUserNestedInput
     purchaseRentHistory?: PurchaseRentHistoryUpdateManyWithoutUserNestedInput
     paymentTransaction?: PaymentTransactionUpdateManyWithoutUserNestedInput
+    movieLike?: MovieLikeUpdateManyWithoutUserNestedInput
+    CommentLike?: CommentLikeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNotificationInput = {
@@ -21289,6 +25042,8 @@ export namespace Prisma {
     watchlist?: WatchlistUncheckedUpdateManyWithoutUserNestedInput
     purchaseRentHistory?: PurchaseRentHistoryUncheckedUpdateManyWithoutUserNestedInput
     paymentTransaction?: PaymentTransactionUncheckedUpdateManyWithoutUserNestedInput
+    movieLike?: MovieLikeUncheckedUpdateManyWithoutUserNestedInput
+    CommentLike?: CommentLikeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ReviewCreateManyUserInput = {
@@ -21348,6 +25103,22 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type MovieLikeCreateManyUserInput = {
+    id?: string
+    movieSeriesId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isLike?: boolean
+  }
+
+  export type CommentLikeCreateManyUserInput = {
+    id?: string
+    commentId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isLike?: boolean
+  }
+
   export type ReviewUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     rating?: IntFieldUpdateOperationsInput | number
@@ -21399,6 +25170,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     review?: ReviewUpdateOneRequiredWithoutCommentNestedInput
+    CommentLike?: CommentLikeUpdateManyWithoutCommentNestedInput
   }
 
   export type CommentUncheckedUpdateWithoutUserInput = {
@@ -21408,6 +25180,7 @@ export namespace Prisma {
     replyTo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    CommentLike?: CommentLikeUncheckedUpdateManyWithoutCommentNestedInput
   }
 
   export type CommentUncheckedUpdateManyWithoutUserInput = {
@@ -21521,6 +25294,54 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type MovieLikeUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isLike?: BoolFieldUpdateOperationsInput | boolean
+    movieSeries?: MovieSeriesUpdateOneRequiredWithoutMovieLikeNestedInput
+  }
+
+  export type MovieLikeUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    movieSeriesId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isLike?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type MovieLikeUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    movieSeriesId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isLike?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type CommentLikeUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isLike?: BoolFieldUpdateOperationsInput | boolean
+    comment?: CommentUpdateOneRequiredWithoutCommentLikeNestedInput
+  }
+
+  export type CommentLikeUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    commentId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isLike?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type CommentLikeUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    commentId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isLike?: BoolFieldUpdateOperationsInput | boolean
+  }
+
   export type DeviceCreateManySecurityDetailsInput = {
     id?: string
     machineId?: string
@@ -21621,6 +25442,14 @@ export namespace Prisma {
     isEmailSent?: boolean
   }
 
+  export type MovieLikeCreateManyMovieSeriesInput = {
+    id?: string
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isLike?: boolean
+  }
+
   export type ReviewUpdateWithoutMovieSeriesInput = {
     id?: StringFieldUpdateOperationsInput | string
     rating?: IntFieldUpdateOperationsInput | number
@@ -21719,6 +25548,30 @@ export namespace Prisma {
     isEmailSent?: BoolFieldUpdateOperationsInput | boolean
   }
 
+  export type MovieLikeUpdateWithoutMovieSeriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isLike?: BoolFieldUpdateOperationsInput | boolean
+    user?: UserUpdateOneRequiredWithoutMovieLikeNestedInput
+  }
+
+  export type MovieLikeUncheckedUpdateWithoutMovieSeriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isLike?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type MovieLikeUncheckedUpdateManyWithoutMovieSeriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isLike?: BoolFieldUpdateOperationsInput | boolean
+  }
+
   export type CommentCreateManyReviewInput = {
     id?: string
     userId: string
@@ -21735,6 +25588,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutCommentNestedInput
+    CommentLike?: CommentLikeUpdateManyWithoutCommentNestedInput
   }
 
   export type CommentUncheckedUpdateWithoutReviewInput = {
@@ -21744,6 +25598,7 @@ export namespace Prisma {
     replyTo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    CommentLike?: CommentLikeUncheckedUpdateManyWithoutCommentNestedInput
   }
 
   export type CommentUncheckedUpdateManyWithoutReviewInput = {
@@ -21753,6 +25608,38 @@ export namespace Prisma {
     replyTo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CommentLikeCreateManyCommentInput = {
+    id?: string
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isLike?: boolean
+  }
+
+  export type CommentLikeUpdateWithoutCommentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isLike?: BoolFieldUpdateOperationsInput | boolean
+    user?: UserUpdateOneRequiredWithoutCommentLikeNestedInput
+  }
+
+  export type CommentLikeUncheckedUpdateWithoutCommentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isLike?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type CommentLikeUncheckedUpdateManyWithoutCommentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isLike?: BoolFieldUpdateOperationsInput | boolean
   }
 
 

@@ -74,6 +74,7 @@ const createSession = async (payload: ICreateSessionPayload) => {
       mediaId: productId,
       email: customerEmail,
       priceType: purchaseType,
+      productName,
     },
   });
 
