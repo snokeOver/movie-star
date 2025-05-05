@@ -46,4 +46,6 @@ export interface IMedia {
   isActive: boolean;
   isDeleted: boolean;
   createdAt: string;
+  totalLike: number;
+  isUserLiked: boolean;
 }

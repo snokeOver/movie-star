@@ -1,5 +1,4 @@
 import MediaDetailsSection from "@/components/modules/mediaDetails";
-import { getPublicData } from "@/services/core/getPublicData";
 import { IPageWithProps } from "@/types";
 
 const MediaDetailsPage = async ({ params }: IPageWithProps) => {
@@ -10,11 +9,9 @@ const MediaDetailsPage = async ({ params }: IPageWithProps) => {
     return <div>Media not found</div>;
   }
 
-  const media = await getPublicData(`media/single-public/${mediaId}`);
-
   return (
     <div className="p-6 space-y-4">
-      <MediaDetailsSection media={media} />
+      <MediaDetailsSection mediaId={mediaId} />
     </div>
   );
 };

@@ -1,6 +1,6 @@
 "use client";
 
-import { Genre, IMedia, StreamingPlatform } from "@/types";
+import { Genre, IMedia, PriceType, StreamingPlatform } from "@/types";
 import Image from "next/image";
 import {
   Heart,
@@ -10,6 +10,7 @@ import {
   ShoppingCart,
   PlusCircle,
   Pencil,
+  Loader,
 } from "lucide-react";
 import { getEnumValueByKey } from "@/lib/formatter";
 import { useUserStore } from "@/stores/auth";
@@ -18,11 +19,24 @@ import PrimaryButton from "../../shared/buttons/PrimaryButton";
 import { useCreateCheckoutMutation } from "@/hooks/mutations/useCreateCheckoutMutaion";
 import CreateReviewDialogue from "./CreateReviewDialogue";
 import { DivButton } from "@/components/ui/divbutton";
+import { useLikeMutation } from "@/hooks/mutations/useLikeMutation";
+import LoadingSection from "@/components/shared/core/loading-skeleton/LoadingSection";
+import { usePublicMediaQuery } from "@/hooks/queries/usePublicMediaQuery";
+import { Button } from "@/components/ui/button";
 
-const MediaDetailsSection = ({ media }: { media: IMedia }) => {
+const MediaDetailsSection = ({ mediaId }: { mediaId: string }) => {
+  const { data, isLoading: isSingleMediaLoading } = usePublicMediaQuery({
+    id: mediaId,
+  });
+
+  const media = data as IMedia;
+
   const pathname = usePathname();
   const { mutate: createCheckoutSession, isPending: isCheckoutPending } =
     useCreateCheckoutMutation();
+
+  const { mutate: updateMediaLike, isPending: isMediaLikePending } =
+    useLikeMutation();
 
   const { user } = useUserStore();
   const router = useRouter();
@@ -33,18 +47,36 @@ const MediaDetailsSection = ({ media }: { media: IMedia }) => {
       return router.push(`/login?redirect=${pathname}&cleanup=true`);
 
     const payload = {
-      price: media.price,
-      purchaseType: media.priceType,
+      price: media?.price as number,
+      purchaseType: media?.priceType as PriceType,
       customerEmail: user.email,
       customerId: user.userId,
-      productId: media.id,
-      productName: media.title,
+      productId: media?.id as string,
+      productName: media?.title as string,
       success_url: window.location.origin,
       cancel_url: window.location.origin,
     };
 
     createCheckoutSession(payload);
   };
+
+  //handle media like
+  const handleMediaLike = () => {
+    if (!user?.userId)
+      return router.push(`/login?redirect=${pathname}&cleanup=true`);
+
+    const payload = {
+      userId: user.userId,
+      movieSeriesId: media?.id as string,
+    };
+
+    updateMediaLike(payload);
+  };
+
+  if (isSingleMediaLoading) return <LoadingSection />;
+
+  if (!media) return;
+
   return (
     <div className="flex flex-col lg:flex-row gap-8 p-6 lg:p-12 text-white bg-gradient-to-b from-gray-900 to-black min-h-screen">
       {/* Poster */}
@@ -68,8 +100,12 @@ const MediaDetailsSection = ({ media }: { media: IMedia }) => {
               {media.viewCount?.toLocaleString()}
             </div>
             <div className="flex items-center gap-1">
-              <Heart className="size-4" />
-              3.2K
+              <Heart
+                className={`size-4 ${
+                  media.isUserLiked ? "fill-red-500 text-red-500" : ""
+                } `}
+              />
+              {media.totalLike || 0}
             </div>
             <div className="flex items-center gap-1">
               <MessageCircle className="size-4" />
@@ -209,15 +245,31 @@ const MediaDetailsSection = ({ media }: { media: IMedia }) => {
           </div>
 
           <div className="flex-1">
-            <PrimaryButton
-              isLoading={false}
-              onClick={() => ({})}
-              loadingText="Loading..."
-              btnText="Like"
-              Icon={Heart}
+            <Button
+              type="button"
+              onClick={handleMediaLike}
               variant="ghost"
-              className="text-white text-xs border"
-            />
+              className={`w-full uppercase text-white text-xs border`}
+              disabled={isMediaLikePending}
+            >
+              {isMediaLikePending ? (
+                <div className="flex items-center gap-2">
+                  <Loader className="h-4 w-4 animate-spin" />
+                  <span>Updating...</span>
+                </div>
+              ) : (
+                <div className="flex items-center gap-2">
+                  {
+                    <Heart
+                      className={`!h-4 !w-4 ${
+                        media.isUserLiked ? "fill-red-500 text-red-500" : ""
+                      }`}
+                    />
+                  }
+                  <span>Like</span>
+                </div>
+              )}
+            </Button>
           </div>
         </div>
       </div>

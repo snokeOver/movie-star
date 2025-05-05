@@ -55,7 +55,10 @@ const getSingle = tryCatchAsync(async (req, res) => {
 });
 //Get single movie series data by id for public
 const getSinglePublic = tryCatchAsync(async (req, res) => {
-  const result = await MovieSeriesService.getSinglePublic(req.params.id);
+  const result = await MovieSeriesService.getSinglePublic(
+    req.params.id,
+    req.headers.authorization
+  );
   sendResponse({
     res,
     sendData: {

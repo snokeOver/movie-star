@@ -34,3 +34,8 @@ export interface IMovieSeries
     | "rating"
     | "streamingPlatform"
   > {}
+
+export interface ISingleMovieSeriesResponse extends MovieSeries {
+  totalLike: number;
+  isUserLiked: boolean;
+}

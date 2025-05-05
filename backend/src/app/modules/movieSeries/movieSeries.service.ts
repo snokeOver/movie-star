@@ -10,9 +10,12 @@ import {
   IMovieSeriesFilteredQuery,
   IAllMovieSeries,
   IMovieSeries,
+  ISingleMovieSeriesResponse,
 } from "./movieSeries.interface";
 import { movieSeriesSearchTerms } from "./movieSeries.constant";
 import { fileUploader } from "../../utils/fileUploader";
+import { verifyToken } from "../../utils/jwtToken";
+import config from "../../config";
 
 //Update single movie series data by id
 const deleteSingle = async (id: string): Promise<any> => {
@@ -289,8 +292,9 @@ const getFiveAdminSelected = async (): Promise<
 
 //Get single Movie Series data by id for public
 const getSinglePublic = async (
-  id: string
-): Promise<Partial<MovieSeries> | null> => {
+  id: string,
+  token: string | undefined
+): Promise<Partial<ISingleMovieSeriesResponse> | null> => {
   const foundMovieSeries = await prisma.movieSeries.findUnique({
     where: {
       id,
@@ -327,7 +331,32 @@ const getSinglePublic = async (
     },
   });
 
-  return foundMovieSeries;
+  const totalLike = await prisma.movieLike.count({
+    where: {
+      movieSeriesId: id,
+      isLike: true,
+    },
+  });
+
+  let isUserLiked = false;
+
+  if (token) {
+    const decoded = verifyToken(token, config.jwt.jwt_access_secret as string);
+
+    const { userId } = decoded;
+    const foundMovieLike = await prisma.movieLike.findFirst({
+      where: {
+        movieSeriesId: id,
+        userId,
+      },
+    });
+
+    if (foundMovieLike) {
+      isUserLiked = foundMovieLike.isLike;
+    }
+  }
+
+  return { ...foundMovieSeries, totalLike, isUserLiked };
 };
 
 export const MovieSeriesService = {

@@ -24,7 +24,6 @@ const createMediaLike = z.object({
     .object({
       movieSeriesId: z.string().min(1, "Movie Series ID is required"),
       userId: z.string().min(1, "User ID is required"),
-      rating: z.boolean(),
     })
     .strict(),
 });

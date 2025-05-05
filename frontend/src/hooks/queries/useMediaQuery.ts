@@ -42,6 +42,8 @@ export const useMediaQuery = (
       if (!res.ok) throw new Error("Failed to fetch media");
 
       const data = await res.json();
+
+      if (!data.data) throw new Error("Failed to fetch media");
       return data.data;
     },
     enabled:
