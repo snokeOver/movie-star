@@ -62,8 +62,7 @@ export const useReviewMutation = () => {
       if (!res.success) toast.error(res?.message || "Operation unsuccessful");
 
       // Invalidate the queries related to media to update the UI after mutation
-      queryClient.invalidateQueries({ queryKey: ["reviews"] });
-      queryClient.invalidateQueries({ queryKey: ["review"] });
+      queryClient.invalidateQueries({ queryKey: ["single_media"] });
     },
 
     onError: (error) => {

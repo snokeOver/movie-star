@@ -35,7 +35,7 @@ const PrimaryButton = ({
       type={type}
       onClick={onClick}
       variant={variant}
-      className={`w-full uppercase text-black ${className}`}
+      className={`w-full uppercase text-white ${className}`}
       disabled={isLoading || isDisable}
     >
       {isLoading ? (

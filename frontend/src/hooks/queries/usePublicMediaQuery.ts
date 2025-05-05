@@ -10,7 +10,7 @@ interface IusePublicMediaQueryOptions {
 export const usePublicMediaQuery = ({ id }: IusePublicMediaQueryOptions) => {
   const { user } = useUserStore();
   const options = queryOptions({
-    queryKey: ["single_media", id],
+    queryKey: ["single_media", id, user?.userId],
     queryFn: async () => {
       if (!id) {
         throw new Error("mediaId is required to fetch single media.");

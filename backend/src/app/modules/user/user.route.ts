@@ -22,4 +22,11 @@ router.post(
   UserController.createMediaLike
 );
 
+router.post(
+  "/review-like",
+  auth(UserRole.user),
+  validateRequest(ValidateUser.createReviewLike),
+  UserController.createReviewLike
+);
+
 export const userRoutes = router;

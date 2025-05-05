@@ -34,7 +34,7 @@ model User {
   paymentTransaction  PaymentTransaction[]
   notification        Notification[]
   movieLike           MovieLike[]
-  CommentLike         CommentLike[]
+  reviewLike          ReviewLike[]
 
   @@map("users")
 }
@@ -130,9 +130,10 @@ model Review {
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
 
-  movieSeries MovieSeries @relation(fields: [movieSeriesId], references: [id])
-  user        User        @relation(fields: [userId], references: [id])
+  movieSeries MovieSeries  @relation(fields: [movieSeriesId], references: [id])
+  user        User         @relation(fields: [userId], references: [id])
   comment     Comment[]
+  reviewLike  ReviewLike[]
 
   @@map("reviews")
 }
@@ -146,9 +147,8 @@ model Comment {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  review      Review        @relation(fields: [reviewId], references: [id])
-  user        User          @relation(fields: [userId], references: [id])
-  CommentLike CommentLike[]
+  review Review @relation(fields: [reviewId], references: [id])
+  user   User   @relation(fields: [userId], references: [id])
 
   @@map("comments")
 }
@@ -162,17 +162,21 @@ model MovieLike {
   isLike        Boolean     @default(false)
   movieSeries   MovieSeries @relation(fields: [movieSeriesId], references: [id])
   user          User        @relation(fields: [userId], references: [id])
+
+  @@map("movie_like")
 }
 
-model CommentLike {
+model ReviewLike {
   id        String   @id @default(cuid())
-  commentId String
+  reviewId  String
   userId    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   isLike    Boolean  @default(false)
-  comment   Comment  @relation(fields: [commentId], references: [id])
+  review    Review   @relation(fields: [reviewId], references: [id])
   user      User     @relation(fields: [userId], references: [id])
+
+  @@map("review_like")
 }
 
 model Watchlist {

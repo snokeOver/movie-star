@@ -28,7 +28,17 @@ const createMediaLike = z.object({
     .strict(),
 });
 
+const createReviewLike = z.object({
+  body: z
+    .object({
+      reviewId: z.string().min(1, "Review id is required"),
+      userId: z.string().min(1, "User ID is required"),
+    })
+    .strict(),
+});
+
 export const ValidateUser = {
   createReview,
   createMediaLike,
+  createReviewLike,
 };

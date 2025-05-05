@@ -33,7 +33,23 @@ const createMediaLike = tryCatchAsync(async (req, res) => {
   });
 });
 
+//Create review like
+const createReviewLike = tryCatchAsync(async (req, res) => {
+  const result = await UserService.createReviewLike(req.body);
+
+  sendResponse({
+    res,
+    sendData: {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Reaction update successfully",
+      data: result,
+    },
+  });
+});
+
 export const UserController = {
   createReview,
   createMediaLike,
+  createReviewLike,
 };

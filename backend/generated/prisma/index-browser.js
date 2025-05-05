@@ -225,9 +225,9 @@ exports.Prisma.MovieLikeScalarFieldEnum = {
   isLike: 'isLike'
 };
 
-exports.Prisma.CommentLikeScalarFieldEnum = {
+exports.Prisma.ReviewLikeScalarFieldEnum = {
   id: 'id',
-  commentId: 'commentId',
+  reviewId: 'reviewId',
   userId: 'userId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
@@ -371,7 +371,7 @@ exports.Prisma.ModelName = {
   Review: 'Review',
   Comment: 'Comment',
   MovieLike: 'MovieLike',
-  CommentLike: 'CommentLike',
+  ReviewLike: 'ReviewLike',
   Watchlist: 'Watchlist',
   PurchaseRentHistory: 'PurchaseRentHistory',
   PaymentTransaction: 'PaymentTransaction',

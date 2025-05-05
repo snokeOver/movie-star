@@ -8,8 +8,9 @@ import { getValidToken } from "@/lib/verifyToken"; // Token utility
 
 // Define types for mutation parameters
 type ILikeMutationParams = {
-  userId: string; // User who is liking
-  movieSeriesId: string; // Movie or series being liked
+  userId: string;
+  movieSeriesId?: string;
+  reviewId?: string;
 };
 
 export const useLikeMutation = () => {
@@ -18,13 +19,19 @@ export const useLikeMutation = () => {
 
   return useMutation({
     mutationKey,
-    mutationFn: async ({ userId, movieSeriesId }: ILikeMutationParams) => {
+    mutationFn: async ({
+      userId,
+      movieSeriesId,
+      reviewId,
+    }: ILikeMutationParams) => {
       if (!userId) {
         return toast.error("Please provide userId");
       }
 
       const token = await getValidToken();
-      const url = process.env.NEXT_PUBLIC_BASE_API_URL + "/user/media-like";
+      const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/user/${
+        movieSeriesId ? "media-like" : "review-like"
+      }`;
 
       const options: RequestInit = {
         method: "POST",
@@ -34,7 +41,8 @@ export const useLikeMutation = () => {
         },
         body: JSON.stringify({
           userId,
-          movieSeriesId,
+          ...(movieSeriesId && { movieSeriesId }),
+          ...(reviewId && { reviewId }),
         }),
       };
 

@@ -331,6 +331,7 @@ const getSinglePublic = async (
     },
   });
 
+  //get total like of that media
   const totalLike = await prisma.movieLike.count({
     where: {
       movieSeriesId: id,
@@ -338,7 +339,57 @@ const getSinglePublic = async (
     },
   });
 
+  //get total review of that media
+  const totalReview = await prisma.review.count({
+    where: {
+      movieSeriesId: id,
+    },
+  });
+
+  //get latest review of that media
+  const latestReview = await prisma.review.findFirst({
+    where: {
+      movieSeriesId: id,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+    select: {
+      id: true,
+      rating: true,
+      writtenReview: true,
+      isSpoiler: true,
+      tags: true,
+      likesCount: true,
+      commentCount: true,
+      createdAt: true,
+      user: {
+        select: {
+          id: true,
+          name: true,
+          profilePhoto: true,
+        },
+      },
+      comment: {
+        select: {
+          id: true,
+          content: true,
+          createdAt: true,
+          user: {
+            select: {
+              id: true,
+              name: true,
+              profilePhoto: true,
+            },
+          },
+        },
+      },
+    },
+  });
+
+  //Get if the user liked the media
   let isUserLiked = false;
+  let isUserLikedReview = false;
 
   if (token) {
     const decoded = verifyToken(token, config.jwt.jwt_access_secret as string);
@@ -351,12 +402,29 @@ const getSinglePublic = async (
       },
     });
 
-    if (foundMovieLike) {
-      isUserLiked = foundMovieLike.isLike;
-    }
+    if (foundMovieLike) isUserLiked = foundMovieLike.isLike;
+
+    if (!latestReview)
+      return { ...foundMovieSeries, reviews: [], totalReview, totalLike };
+
+    const foundReviewLike = await prisma.reviewLike.findFirst({
+      where: {
+        reviewId: latestReview?.id,
+        userId,
+      },
+    });
+
+    if (foundReviewLike) isUserLikedReview = foundReviewLike.isLike;
   }
 
-  return { ...foundMovieSeries, totalLike, isUserLiked };
+  return {
+    ...foundMovieSeries,
+    totalReview,
+    isUserLikedReview,
+    reviews: latestReview ? [latestReview] : [],
+    totalLike,
+    isUserLiked,
+  };
 };
 
 export const MovieSeriesService = {

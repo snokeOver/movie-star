@@ -35,7 +35,34 @@ export interface IMovieSeries
     | "streamingPlatform"
   > {}
 
+export interface IMinUser {
+  id: string;
+  name: string;
+  profilePhoto: string | null;
+}
+
+export interface ILatestReview {
+  id: string;
+  rating: number;
+  writtenReview: string;
+  isSpoiler: boolean;
+  tags: string[];
+  likesCount: number;
+  commentCount: number;
+  createdAt: Date;
+  user: IMinUser;
+  comment: {
+    id: string;
+    content: string;
+    createdAt: Date;
+    user: IMinUser;
+  }[];
+}
+
 export interface ISingleMovieSeriesResponse extends MovieSeries {
   totalLike: number;
   isUserLiked: boolean;
+  totalReview: number;
+  isUserLikedReview: boolean;
+  reviews: ILatestReview[] | null;
 }
