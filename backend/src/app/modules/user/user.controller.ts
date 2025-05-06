@@ -48,8 +48,24 @@ const createReviewLike = tryCatchAsync(async (req, res) => {
   });
 });
 
+//Create comment like
+const createComment = tryCatchAsync(async (req, res) => {
+  const result = await UserService.createComment(req.body);
+
+  sendResponse({
+    res,
+    sendData: {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Comment saved successfully",
+      data: result,
+    },
+  });
+});
+
 export const UserController = {
   createReview,
   createMediaLike,
   createReviewLike,
+  createComment,
 };

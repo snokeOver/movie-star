@@ -46,8 +46,6 @@ const ReviewCard = ({
     updateMediaLike(payload);
   };
 
-  console.log(review);
-
   return (
     <div className="bg-muted/50 p-5 rounded-lg shadow-lg mb-6">
       <div className="flex items-center gap-4 mb-4">
@@ -60,7 +58,7 @@ const ReviewCard = ({
           className="rounded-full"
         />
         <div>
-          <p className="font-bold">{review.user.name}</p>
+          <p className="font-bold uppercase">{review.user.name}</p>
           <p className="text-xs text-gray-400">
             {formatDistanceToNow(new Date(review.createdAt), {
               addSuffix: true,
@@ -108,7 +106,7 @@ const ReviewCard = ({
             </span>
           </div>
         </div>
-        <div className="flex w-full gap-5 sm:items-end sm:justify-end">
+        <div className="flex w-full gap-5 sm:items-end text-sm sm:justify-end">
           <h4 className="text-white/30">
             {reactsConverter(review.likesCount)}
             <span> {review.likesCount > 1 ? "Reacts" : "React"}</span>
@@ -121,7 +119,13 @@ const ReviewCard = ({
       </div>
 
       {/* Comments Section */}
-      {isCommenting && <CommentForm reviewId={review.id} />}
+      {isCommenting && (
+        <CommentForm
+          reviewId={review.id}
+          user={user}
+          setIsCommenting={setIsCommenting}
+        />
+      )}
       <div className="mt-4">
         {review.comment.length > 0 && (
           <div>

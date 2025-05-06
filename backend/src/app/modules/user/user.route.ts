@@ -29,4 +29,11 @@ router.post(
   UserController.createReviewLike
 );
 
+router.post(
+  "/comment",
+  auth(UserRole.user),
+  validateRequest(ValidateUser.createComment),
+  UserController.createComment
+);
+
 export const userRoutes = router;

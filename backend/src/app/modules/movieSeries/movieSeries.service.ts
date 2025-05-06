@@ -371,6 +371,9 @@ const getSinglePublic = async (
         },
       },
       comment: {
+        orderBy: {
+          createdAt: "desc",
+        },
         select: {
           id: true,
           content: true,

@@ -9,16 +9,17 @@ import {
 } from "@/components/ui/form";
 
 import { FieldValues, useForm } from "react-hook-form";
-
-import { useRouter } from "next/navigation";
-import { registerUser } from "@/services/auth/register";
-import { toast } from "sonner";
 import { Textarea } from "@/components/ui/textarea";
 import { z } from "zod";
-import { useState } from "react";
+
 import PrimaryButton from "@/components/shared/buttons/PrimaryButton";
+import { IUser } from "@/types";
+import { useCommentMutation } from "@/hooks/mutations/useCommentMutation";
+import { useEffect } from "react";
 interface CommentFormProps {
   reviewId: string;
+  user: IUser | null;
+  setIsCommenting: (value: boolean) => void;
 }
 
 export const commentSchema = z.object({
@@ -28,9 +29,8 @@ export const commentSchema = z.object({
     .max(500, "Comment is too long"),
 });
 
-const CommentForm = ({ reviewId }: CommentFormProps) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
+const CommentForm = ({ reviewId, user, setIsCommenting }: CommentFormProps) => {
+  const { mutate: createComment, isPending } = useCommentMutation();
 
   const form = useForm({
     resolver: zodResolver(commentSchema),
@@ -41,28 +41,15 @@ const CommentForm = ({ reviewId }: CommentFormProps) => {
   });
 
   const onSubmit = async (data: FieldValues) => {
-    setIsLoading(true);
+    if (!user || !user?.userId) return;
+    const payload = {
+      reviewId,
+      userId: user.userId,
+      content: data.content,
+    };
 
-    const { confirmPassword, ...rest } = data;
-    void confirmPassword;
-    // Convert data to FormData
-    const formData = new FormData();
-
-    formData.append("data", JSON.stringify(rest));
-
-    try {
-      const res = await registerUser(formData);
-
-      if (res?.success) {
-        toast.success(res?.message);
-        router.push("/verify-email");
-      } else toast.error(res?.message);
-    } catch (error) {
-      console.log(error);
-      toast.error(`User registration Failed`);
-    } finally {
-      setIsLoading(false);
-    }
+    createComment({ payload });
+    form.reset();
   };
 
   return (
@@ -87,7 +74,7 @@ const CommentForm = ({ reviewId }: CommentFormProps) => {
         <PrimaryButton
           btnText="Post Comment"
           type="submit"
-          isLoading={false}
+          isLoading={isPending}
           loadingText="Posting..."
           className="w-fit text-xs"
         />

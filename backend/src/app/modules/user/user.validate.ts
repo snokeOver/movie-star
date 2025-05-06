@@ -37,8 +37,19 @@ const createReviewLike = z.object({
     .strict(),
 });
 
+const createComment = z.object({
+  body: z
+    .object({
+      reviewId: z.string().min(1, "Review id is required"),
+      userId: z.string().min(1, "User ID is required"),
+      content: z.string().min(1, "Comment is required"),
+    })
+    .strict(),
+});
+
 export const ValidateUser = {
   createReview,
   createMediaLike,
   createReviewLike,
+  createComment,
 };

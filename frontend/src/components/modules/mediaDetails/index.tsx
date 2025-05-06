@@ -11,6 +11,7 @@ import {
   PlusCircle,
   Pencil,
   Loader,
+  ArrowBigRightDash,
 } from "lucide-react";
 import { getEnumValueByKey } from "@/lib/formatter";
 import { useUserStore } from "@/stores/auth";
@@ -25,6 +26,7 @@ import { usePublicMediaQuery } from "@/hooks/queries/usePublicMediaQuery";
 import { Button } from "@/components/ui/button";
 import ReviewCard from "./review/ReviewCard";
 import { useEffect } from "react";
+import Link from "next/link";
 
 const MediaDetailsSection = ({ mediaId }: { mediaId: string }) => {
   const { user } = useUserStore();
@@ -81,8 +83,7 @@ const MediaDetailsSection = ({ mediaId }: { mediaId: string }) => {
 
   useEffect(() => {
     if (user?.userId) {
-      console.log("Refetching media data...");
-      refetch(); // Explicitly trigger refetch when user is available
+      refetch();
     }
   }, [refetch, user?.userId]);
 
@@ -91,7 +92,7 @@ const MediaDetailsSection = ({ mediaId }: { mediaId: string }) => {
   if (!media) return;
 
   return (
-    <div className="bg-gradient-to-b from-gray-900 to-black min-h-screen p-6 lg:p-12">
+    <div className="bg-gradient-to-b from-gray-900 to-black min-h-screen p-3 md:p-6 lg:p-12">
       <div className="flex flex-col lg:flex-row gap-8 text-white ">
         {/* Poster */}
         <div className=" flex-shrink-0 w-full lg:w-1/3">
@@ -101,7 +102,7 @@ const MediaDetailsSection = ({ mediaId }: { mediaId: string }) => {
               alt={media.title}
               width={600}
               height={900}
-              className="w-full h-[600px] rounded-lg shadow-lg object-cover relative z-0"
+              className="w-full h-[400px] sm:h-[550px] md:h-[600px] rounded-lg shadow-lg object-cover relative z-0"
             />
 
             {/* Gradient Overlay */}
@@ -123,7 +124,7 @@ const MediaDetailsSection = ({ mediaId }: { mediaId: string }) => {
               </div>
               <div className="flex items-center gap-1">
                 <MessageCircle className="size-4" />
-                123
+                {media.totalReview || 0}
               </div>
             </div>
           </div>
@@ -273,6 +274,10 @@ const MediaDetailsSection = ({ mediaId }: { mediaId: string }) => {
                   </div>
                 ) : (
                   <div className="flex items-center gap-2">
+                    <span className="mr-2">
+                      {" "}
+                      {media.totalLike > 0 && media.totalLike}
+                    </span>
                     {
                       <Heart
                         className={`!h-4 !w-4 ${
@@ -291,9 +296,21 @@ const MediaDetailsSection = ({ mediaId }: { mediaId: string }) => {
 
       {/* Reviews */}
       <div className="pt-10">
-        <h2 className="text-lg md:text-xl lg:text-2xl font-bold mb-4">
-          User Reviews
-        </h2>
+        <Link
+          href={`/media/${media.id}/reviews`}
+          className="text-lg md:text-xl flex cursor-pointer items-center gap-6 lg:text-2xl font-bold mb-4"
+        >
+          <span className="border-l-4 border-l-primary pl-2">User Review</span>
+          {media.totalReview > 0 && (
+            <p className="hover:text-primary flex items-center gap-1">
+              <span className="text-primary font-normal">
+                {media.totalReview}
+              </span>
+
+              <ArrowBigRightDash className="h-7 w-7" />
+            </p>
+          )}
+        </Link>
         <div className="grid gap-4  w-full">
           {media && media.reviews && media.reviews.length ? (
             media.reviews.map((review: IReview) => (

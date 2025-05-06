@@ -1,4 +1,9 @@
-import { MovieLike, Review, ReviewLike } from "../../../../generated/prisma";
+import {
+  Comment,
+  MovieLike,
+  Review,
+  ReviewLike,
+} from "../../../../generated/prisma";
 import AppError from "../../middleWares/errorHandler/appError";
 import { prisma } from "../../utils/prisma";
 import httpStatus from "http-status";
@@ -125,8 +130,41 @@ const createReviewLike = async (payload: ReviewLike): Promise<any> => {
   return updatedReview;
 };
 
+//Create comment for review  by user
+const createComment = async (payload: Comment): Promise<any> => {
+  if (!payload) throw new AppError(httpStatus.BAD_REQUEST, "Payload not found");
+
+  const result = await prisma.$transaction(async (tx) => {
+    const createdComment = await tx.comment.create({
+      data: payload,
+    });
+
+    const foundUserReview = await tx.review.findUnique({
+      where: {
+        id: payload.reviewId,
+      },
+    });
+
+    if (foundUserReview) {
+      await tx.review.update({
+        where: {
+          id: foundUserReview.id,
+        },
+        data: {
+          commentCount: foundUserReview.commentCount + 1,
+        },
+      });
+    }
+
+    return createdComment;
+  });
+
+  return result;
+};
+
 export const UserService = {
   createReview,
   createMediaLike,
   createReviewLike,
+  createComment,
 };

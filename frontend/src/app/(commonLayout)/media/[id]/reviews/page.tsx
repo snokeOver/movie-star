@@ -1,7 +1,7 @@
-import MediaDetailsSection from "@/components/modules/mediaDetails";
+import AllReviewSection from "@/components/modules/mediaDetails/reviews";
 import { IPageWithProps } from "@/types";
 
-const MediaDetailsPage = async ({ params }: IPageWithProps) => {
+const ReviewsPage = async ({ params }: IPageWithProps) => {
   const idParams = await params;
   const mediaId = idParams?.id;
 
@@ -11,9 +11,9 @@ const MediaDetailsPage = async ({ params }: IPageWithProps) => {
 
   return (
     <div className="p-3 lg:p-6 space-y-4">
-      <MediaDetailsSection mediaId={mediaId} />
+      <AllReviewSection mediaId={mediaId} />
     </div>
   );
 };
 
-export default MediaDetailsPage;
+export default ReviewsPage;
