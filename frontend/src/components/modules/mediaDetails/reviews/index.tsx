@@ -1,28 +1,32 @@
 "use client";
 
-import { IMedia } from "@/types";
+import { IPageReview } from "@/types";
 import Image from "next/image";
 
 import { useUserStore } from "@/stores/auth";
 
 import LoadingSection from "@/components/shared/core/loading-skeleton/LoadingSection";
-import { usePublicMediaQuery } from "@/hooks/queries/usePublicMediaQuery";
 
 import ReviewCard from "../review/ReviewCard";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { usePublicReviewQuery } from "@/hooks/queries/usePublicReviewQuery";
+import { ReviewPagination } from "./ReviePagination";
 
 const AllReviewSection = ({ mediaId }: { mediaId: string }) => {
   const { user } = useUserStore();
+  const [page, setPage] = useState(1);
 
   const {
     data,
     isLoading: isSingleMediaLoading,
     refetch,
-  } = usePublicMediaQuery({
-    id: mediaId,
+  } = usePublicReviewQuery({
+    movieSeriesId: mediaId,
+    page,
+    limit: 1,
   });
 
-  const media = data as IMedia;
+  const pageReview = data as IPageReview;
 
   useEffect(() => {
     if (user?.userId) {
@@ -32,25 +36,24 @@ const AllReviewSection = ({ mediaId }: { mediaId: string }) => {
 
   if (isSingleMediaLoading) return <LoadingSection />;
 
-  if (!media) return;
-
+  if (!pageReview.success) return;
+  const { posterUrl, title } = pageReview.data.foundMedia;
+  const media = pageReview.data;
   return (
     <div className="bg-gradient-to-b from-gray-900 to-black min-h-screen p-3 md:p-6 lg:p-12">
       <div className="flex flex-col lg:flex-row gap-8 text-white ">
         {/* Poster */}
         <div className="flex items-center gap-6">
           <Image
-            src={media.posterUrl}
-            alt={media.title}
+            src={posterUrl}
+            alt={title}
             width={120}
             height={180}
             className="rounded-lg shadow-lg"
           />
           <div className="flex flex-col h-full  justify-end">
-            <h1 className="text-md text-white/40 font-semibold">
-              {media.title}
-            </h1>
-            <p className="text-2xl font-bold mt-1">User reviews</p>
+            <h1 className="text-md text-white/40 font-semibold">{title}</h1>
+            <p className="text-2xl font-bold mt-1">User Reviews</p>
           </div>
         </div>
       </div>
@@ -58,13 +61,19 @@ const AllReviewSection = ({ mediaId }: { mediaId: string }) => {
       {/* Reviews */}
       <div className="pt-10">
         <div className="grid gap-4  w-full">
-          {media && media.reviews && media.reviews.length ? (
-            media.reviews.map((review) => (
+          {media && media.result && media.result.length ? (
+            media.result.map((review) => (
               <ReviewCard
                 key={review.id}
                 review={review}
-                isReviewLiked={media.isUserLikedReview}
+                isReviewLiked={
+                  (review &&
+                    review?.reviewLike &&
+                    (review?.reviewLike[0]?.isLike as boolean)) ||
+                  false
+                }
                 user={user}
+                meta={pageReview.meta}
               />
             ))
           ) : (
@@ -73,6 +82,11 @@ const AllReviewSection = ({ mediaId }: { mediaId: string }) => {
             </div>
           )}
         </div>
+      </div>
+
+      {/* Pagination */}
+      <div>
+        <ReviewPagination meta={pageReview.meta} setPage={setPage} />
       </div>
     </div>
   );

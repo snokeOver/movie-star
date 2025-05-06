@@ -52,6 +52,7 @@ export const useCommentMutation = () => {
 
       // Invalidate the queries related to media to update the UI after mutation
       queryClient.invalidateQueries({ queryKey: ["single_media"] });
+      queryClient.invalidateQueries({ queryKey: ["reviews_by_query"] });
     },
 
     onError: (error) => {

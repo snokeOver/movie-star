@@ -5,12 +5,14 @@ import { queryOptions, useQuery } from "@tanstack/react-query";
 interface IusePublicReviewQueryOptions {
   page: number;
   limit: number;
+  movieSeriesId: string;
 }
 
 // Single media fetch hook
 export const usePublicReviewQuery = ({
   page = 1,
   limit = 1,
+  movieSeriesId,
 }: IusePublicReviewQueryOptions) => {
   const { user } = useUserStore();
   const options = queryOptions({
@@ -19,7 +21,7 @@ export const usePublicReviewQuery = ({
       let token = "";
       if (user?.userId) token = await getValidToken();
 
-      const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/media/single-public/?page=${page}&limit=${limit}`;
+      const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/user/review/${movieSeriesId}?page=${page}&limit=${limit}`;
 
       const res = await fetch(url, {
         method: "GET",
@@ -33,7 +35,7 @@ export const usePublicReviewQuery = ({
       const data = await res.json();
 
       if (!data.data) throw new Error("Failed to fetch media");
-      return data.data;
+      return data;
     },
     enabled: true, // Only enable if id is provided
   });

@@ -1,7 +1,7 @@
 "use client";
-import { ILatestReview, IUser } from "@/types";
+import { ILatestReview, IMeta, IUser } from "@/types";
 import Image from "next/image";
-import { Heart, MessageSquareText, Star } from "lucide-react";
+import { Heart, MessageSquareText, NotebookText, Star } from "lucide-react";
 import { useState } from "react";
 import CommentForm from "./CommentForm"; // For adding new comments
 import CommentCard from "./CommentCard"; // To display each comment
@@ -16,12 +16,14 @@ interface IReviewCardProps {
   review: ILatestReview;
   isReviewLiked: boolean;
   user: IUser | null;
+  meta?: IMeta;
 }
 
 const ReviewCard = ({
   review,
   isReviewLiked: isReacted,
   user,
+  meta,
 }: IReviewCardProps) => {
   const [isCommenting, setIsCommenting] = useState(false);
   const router = useRouter();
@@ -48,28 +50,38 @@ const ReviewCard = ({
 
   return (
     <div className="bg-muted/50 p-5 rounded-lg shadow-lg mb-6">
-      <div className="flex items-center gap-4 mb-4">
-        {/* User Info */}
-        <Image
-          src={review.user.profilePhoto || "https://github.com/shadcn.png"}
-          alt={review.user.name}
-          width={40}
-          height={40}
-          className="rounded-full"
-        />
-        <div>
-          <p className="font-bold uppercase">{review.user.name}</p>
-          <p className="text-xs text-gray-400">
-            {formatDistanceToNow(new Date(review.createdAt), {
-              addSuffix: true,
-            })}
-          </p>
-        </div>
+      <div className="flex justify-between">
+        <div className="flex items-center gap-4 mb-4">
+          {/* User Info */}
+          <Image
+            src={review.user.profilePhoto || "https://github.com/shadcn.png"}
+            alt={review.user.name}
+            width={40}
+            height={40}
+            className="rounded-full"
+          />
+          <div>
+            <p className="font-bold uppercase">{review.user.name}</p>
+            <p className="text-xs text-gray-400">
+              {formatDistanceToNow(new Date(review.createdAt), {
+                addSuffix: true,
+              })}
+            </p>
+          </div>
 
-        {/* Rating   */}
-        <div className="flex items-center gap-1 border-l border-gray-200 pl-3">
-          <Star className="w-4 h-4 fill-yellow-400" />{" "}
-          <span>{review.rating}/10</span>
+          {/* Rating   */}
+          <div className="flex items-center gap-1 border-l border-gray-200 pl-3">
+            <Star className="w-4 h-4 fill-yellow-400" />{" "}
+            <span>{review.rating}/10</span>
+          </div>
+        </div>
+        <div className="text-white/70 font-bold text-lg flex items-center gap-1">
+          <span>
+            <NotebookText className="size-5" />
+          </span>
+          <span className="text-primary">{meta?.page}</span>
+          <span>of</span>
+          {meta?.total}
         </div>
       </div>
 

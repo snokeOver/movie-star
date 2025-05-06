@@ -48,6 +48,9 @@ export interface ILatestReview {
   commentCount: number;
   createdAt: Date;
   user: IMinUser;
+  reviewLike: {
+    isLike: boolean;
+  }[];
   comment: {
     id: string;
     content: string;
@@ -82,4 +85,25 @@ export interface IMedia {
   totalReview: number;
   isUserLikedReview: boolean;
   reviews: ILatestReview[] | null;
+}
+
+export interface IReviewData {
+  foundMedia: {
+    posterUrl: string;
+    title: string;
+  };
+  result: ILatestReview[];
+}
+
+export interface IMeta {
+  page: number;
+  limit: number;
+  total: number;
+}
+
+export interface IPageReview {
+  success: boolean;
+  message: string;
+  data: IReviewData;
+  meta: IMeta;
 }

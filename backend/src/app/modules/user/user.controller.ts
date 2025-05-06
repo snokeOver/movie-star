@@ -2,6 +2,8 @@ import httpStatus from "http-status";
 import { sendResponse } from "../../utils/sendResponse";
 import { tryCatchAsync } from "../../utils/tryCatchAsync";
 import { UserService } from "./user.service";
+import { pick } from "../../utils/pick";
+import { paginationProperties } from "../../constant/pagination";
 
 //Create single review
 const createReview = tryCatchAsync(async (req, res) => {
@@ -63,9 +65,31 @@ const createComment = tryCatchAsync(async (req, res) => {
   });
 });
 
+const getAll = tryCatchAsync(async (req, res) => {
+  const pagination = pick(req.query, paginationProperties);
+
+  const result = await UserService.getAll(
+    pagination,
+    req.params.id,
+    req.headers.authorization
+  );
+
+  sendResponse({
+    res,
+    sendData: {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "All Reviews fetched successfully",
+      data: result.data,
+      meta: result.meta,
+    },
+  });
+});
+
 export const UserController = {
   createReview,
   createMediaLike,
   createReviewLike,
   createComment,
+  getAll,
 };

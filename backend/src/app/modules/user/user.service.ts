@@ -1,12 +1,19 @@
 import {
   Comment,
   MovieLike,
+  Prisma,
   Review,
   ReviewLike,
+  ReviewStatus,
 } from "../../../../generated/prisma";
 import AppError from "../../middleWares/errorHandler/appError";
+import { IPagination } from "../../types";
 import { prisma } from "../../utils/prisma";
 import httpStatus from "http-status";
+import { IAllReviews } from "./user.interface";
+import { paginationHelper } from "../../utils/paginationHealper";
+import { verifyToken } from "../../utils/jwtToken";
+import config from "../../config";
 
 //Create review for movie series by user
 const createReview = async (payload: Review): Promise<any> => {
@@ -162,9 +169,113 @@ const createComment = async (payload: Comment): Promise<any> => {
   return result;
 };
 
+//Get all Reviews
+const getAll = async (
+  pagination: IPagination,
+  movieSeriesId: string,
+  token: string | undefined
+): Promise<IAllReviews> => {
+  if (!movieSeriesId)
+    throw new AppError(httpStatus.BAD_REQUEST, "Movie series id not found");
+
+  const { page, take, skip, orderBy } = paginationHelper(pagination);
+
+  const searchCondition: Prisma.ReviewWhereInput[] = [];
+
+  //show only approved reviews and specific movie series
+  searchCondition.push({
+    status: ReviewStatus.pending, //change this to approved later
+    movieSeriesId,
+  });
+
+  const whereConditions: Prisma.ReviewWhereInput = {
+    AND: searchCondition,
+  };
+
+  //Get the user id if the user is logged in
+  let userId = null;
+  if (token) {
+    const decoded = verifyToken(token, config.jwt.jwt_access_secret as string);
+    userId = decoded.userId;
+  }
+
+  const foundMedia = await prisma.movieSeries.findUnique({
+    where: {
+      id: movieSeriesId,
+    },
+    select: {
+      posterUrl: true,
+      title: true,
+    },
+  });
+
+  if (!foundMedia) throw new AppError(httpStatus.NOT_FOUND, "Media not found");
+
+  const result = await prisma.review.findMany({
+    where: whereConditions,
+    skip,
+    take,
+    orderBy,
+    select: {
+      id: true,
+      rating: true,
+      writtenReview: true,
+      isSpoiler: true,
+      tags: true,
+      likesCount: true,
+      commentCount: true,
+      createdAt: true,
+      user: {
+        select: {
+          id: true,
+          name: true,
+          profilePhoto: true,
+        },
+      },
+      reviewLike: userId
+        ? {
+            where: { userId },
+            select: { isLike: true },
+          }
+        : undefined,
+      comment: {
+        orderBy: {
+          createdAt: "desc",
+        },
+        select: {
+          id: true,
+          content: true,
+          createdAt: true,
+          user: {
+            select: {
+              id: true,
+              name: true,
+              profilePhoto: true,
+            },
+          },
+        },
+      },
+    },
+  });
+
+  const total = await prisma.review.count({
+    where: whereConditions,
+  });
+
+  return {
+    meta: {
+      page,
+      limit: take,
+      total,
+    },
+    data: { result, foundMedia },
+  };
+};
+
 export const UserService = {
   createReview,
   createMediaLike,
   createReviewLike,
   createComment,
+  getAll,
 };

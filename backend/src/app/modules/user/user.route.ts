@@ -36,4 +36,6 @@ router.post(
   UserController.createComment
 );
 
+router.get("/review/:id", UserController.getAll);
+
 export const userRoutes = router;
