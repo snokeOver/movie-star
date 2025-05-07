@@ -11,6 +11,7 @@ import { reactsConverter } from "@/lib/formatter";
 
 import { usePathname, useRouter } from "next/navigation";
 import { useLikeMutation } from "@/hooks/mutations/useLikeMutation";
+import PrimaryButton from "@/components/shared/buttons/PrimaryButton";
 
 interface IReviewCardProps {
   review: ILatestReview;
@@ -26,6 +27,7 @@ const ReviewCard = ({
   meta,
 }: IReviewCardProps) => {
   const [isCommenting, setIsCommenting] = useState(false);
+  const [showReview, isShowReview] = useState(review.isSpoiler);
   const router = useRouter();
   const pathname = usePathname();
 
@@ -75,20 +77,35 @@ const ReviewCard = ({
             <span>{review.rating}/10</span>
           </div>
         </div>
-        <div className="text-white/70 font-bold text-lg flex items-center gap-1">
-          <span>
-            <NotebookText className="size-5" />
-          </span>
-          <span className="text-primary">{meta?.page}</span>
-          <span>of</span>
-          {meta?.total}
-        </div>
+        {meta && (
+          <div className="text-white/70 font-bold text-lg flex items-center gap-1">
+            <span>
+              <NotebookText className="size-5" />
+            </span>
+            <span className="text-primary">{meta?.page}</span>
+            <span>of</span>
+            {meta?.total}
+          </div>
+        )}
       </div>
 
       {/* Review Content */}
-      <div className="mb-3">
-        <p className="text-white/70">{review.writtenReview}</p>
-      </div>
+      {showReview ? (
+        <div className="mb-3">
+          <p className="text-white/70">{review.writtenReview}</p>
+        </div>
+      ) : (
+        <div className="w-full flex justify-center">
+          <PrimaryButton
+            btnText="Spoiler Alert"
+            isLoading={false}
+            variant="outline"
+            className="w-fit text-primary"
+            loadingText="Loading"
+            onClick={() => isShowReview(!showReview)}
+          />
+        </div>
+      )}
 
       {/* Likes and Comments */}
       <div className="flex w-full flex-col-reverse justify-between pt-3 text-xxs sm:flex-row md:text-sm">
