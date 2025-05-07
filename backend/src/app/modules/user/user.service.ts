@@ -7,7 +7,7 @@ import {
   ReviewStatus,
 } from "../../../../generated/prisma";
 import AppError from "../../middleWares/errorHandler/appError";
-import { IPagination } from "../../types";
+import { IJwtPayload, IPagination } from "../../types";
 import { prisma } from "../../utils/prisma";
 import httpStatus from "http-status";
 import { IAllReviews } from "./user.interface";
@@ -272,10 +272,91 @@ const getAll = async (
   };
 };
 
+//Add to watchlist
+const addWatchList = async (
+  user: IJwtPayload | undefined,
+  id: string
+): Promise<any> => {
+  if (!user) throw new AppError(httpStatus.UNAUTHORIZED, "Unauthorized");
+  if (!id) throw new AppError(httpStatus.BAD_REQUEST, "Media id not found");
+
+  const foundMedia = await prisma.movieSeries.findUnique({
+    where: {
+      id,
+    },
+  });
+
+  if (!foundMedia) throw new AppError(httpStatus.CONFLICT, "Media not found");
+
+  const foundWatchList = await prisma.watchlist.findFirst({
+    where: {
+      userId: user.userId,
+      movieSeriesId: id,
+    },
+  });
+
+  if (foundWatchList)
+    throw new AppError(httpStatus.CONFLICT, "Media already in watchlist");
+
+  const result = await prisma.watchlist.create({
+    data: {
+      userId: user.userId,
+      movieSeriesId: id,
+    },
+  });
+
+  return result;
+};
+
+//Remove one from watchlist
+const removeOneWatchList = async (
+  user: IJwtPayload | undefined,
+
+  id: string
+): Promise<any> => {
+  if (!user) throw new AppError(httpStatus.UNAUTHORIZED, "Unauthorized");
+  if (!id) throw new AppError(httpStatus.BAD_REQUEST, "Watchlist id not found");
+
+  const foundMedia = await prisma.movieSeries.findUnique({
+    where: {
+      id,
+    },
+  });
+
+  if (!foundMedia)
+    throw new AppError(httpStatus.CONFLICT, "Watchlist not found");
+
+  await prisma.watchlist.delete({
+    where: {
+      id,
+    },
+  });
+
+  return null;
+};
+
+//Remove one from watchlist
+const removeAllWatchList = async (
+  user: IJwtPayload | undefined
+): Promise<any> => {
+  if (!user) throw new AppError(httpStatus.UNAUTHORIZED, "Unauthorized");
+
+  await prisma.watchlist.deleteMany({
+    where: {
+      userId: user.userId,
+    },
+  });
+
+  return null;
+};
+
 export const UserService = {
   createReview,
   createMediaLike,
   createReviewLike,
   createComment,
   getAll,
+  addWatchList,
+  removeOneWatchList,
+  removeAllWatchList,
 };

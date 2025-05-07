@@ -4,6 +4,8 @@ import { tryCatchAsync } from "../../utils/tryCatchAsync";
 import { UserService } from "./user.service";
 import { pick } from "../../utils/pick";
 import { paginationProperties } from "../../constant/pagination";
+import { Request } from "express";
+import { IJwtPayload } from "../../types";
 
 //Create single review
 const createReview = tryCatchAsync(async (req, res) => {
@@ -86,10 +88,70 @@ const getAll = tryCatchAsync(async (req, res) => {
   });
 });
 
+const addWatchList = tryCatchAsync(
+  async (req: Request & { user?: IJwtPayload }, res) => {
+    const result = await UserService.addWatchList(
+      req.user,
+      req.body.movieSeriesId
+    );
+
+    sendResponse({
+      res,
+      sendData: {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "Watchlist added successfully",
+        data: result.data,
+        meta: result.meta,
+      },
+    });
+  }
+);
+
+const removeSingleWatchList = tryCatchAsync(
+  async (req: Request & { user?: IJwtPayload }, res) => {
+    const result = await UserService.removeOneWatchList(
+      req.user,
+      req.params.id
+    );
+
+    sendResponse({
+      res,
+      sendData: {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "Watchlist updated successfully",
+        data: result.data,
+        meta: result.meta,
+      },
+    });
+  }
+);
+
+const removeAllWatchList = tryCatchAsync(
+  async (req: Request & { user?: IJwtPayload }, res) => {
+    const result = await UserService.removeAllWatchList(req.user);
+
+    sendResponse({
+      res,
+      sendData: {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "Watchlist removed successfully",
+        data: result.data,
+        meta: result.meta,
+      },
+    });
+  }
+);
+
 export const UserController = {
   createReview,
   createMediaLike,
   createReviewLike,
   createComment,
   getAll,
+  addWatchList,
+  removeSingleWatchList,
+  removeAllWatchList,
 };

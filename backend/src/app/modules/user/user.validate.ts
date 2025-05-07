@@ -47,9 +47,18 @@ const createComment = z.object({
     .strict(),
 });
 
+const watchList = z.object({
+  body: z
+    .object({
+      movieSeriesId: z.string().min(1, "Movie series id is required"),
+    })
+    .strict(),
+});
+
 export const ValidateUser = {
   createReview,
   createMediaLike,
   createReviewLike,
   createComment,
+  watchList,
 };

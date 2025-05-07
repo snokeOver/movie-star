@@ -36,6 +36,26 @@ router.post(
   UserController.createComment
 );
 
+router.post(
+  "/watchlist",
+  auth(UserRole.user),
+  validateRequest(ValidateUser.watchList),
+  UserController.addWatchList
+);
+
+router.delete(
+  "/watchlist/:id",
+  auth(UserRole.user),
+  validateRequest(ValidateUser.watchList),
+  UserController.removeSingleWatchList
+);
+
+router.delete(
+  "/watchlist",
+  auth(UserRole.user),
+  UserController.removeAllWatchList
+);
+
 router.get("/review/:id", UserController.getAll);
 
 export const userRoutes = router;

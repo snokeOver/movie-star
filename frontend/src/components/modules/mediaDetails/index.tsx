@@ -27,10 +27,13 @@ import { Button } from "@/components/ui/button";
 import ReviewCard from "./review/ReviewCard";
 import { useEffect } from "react";
 import Link from "next/link";
+import { useWatchListMutation } from "@/hooks/mutations/useWatchListMutation";
 
 const MediaDetailsSection = ({ mediaId }: { mediaId: string }) => {
   const { user } = useUserStore();
   const router = useRouter();
+  const { mutate: addToWatchlist, isPending: isWatchlistPending } =
+    useWatchListMutation();
 
   const {
     data,
@@ -66,6 +69,18 @@ const MediaDetailsSection = ({ mediaId }: { mediaId: string }) => {
     };
 
     createCheckoutSession(payload);
+  };
+
+  //handle add to withlist
+  const handleAddToWatchList = () => {
+    if (!user?.userId)
+      return router.push(`/login?redirect=${pathname}&cleanup=true`);
+
+    const payload = {
+      movieSeriesId: media?.id as string,
+    };
+
+    addToWatchlist(payload);
   };
 
   //handle media like
@@ -227,11 +242,11 @@ const MediaDetailsSection = ({ mediaId }: { mediaId: string }) => {
           <div className="pt-6 flex flex-wrap gap-4">
             <div className="flex-1">
               <PrimaryButton
-                isLoading={false}
-                onClick={() => ({})}
+                isLoading={isWatchlistPending}
+                onClick={handleAddToWatchList}
                 loadingText="Adding..."
                 variant="secondary"
-                btnText="Add to Wishlist"
+                btnText="Add to Watchlist"
                 Icon={PlusCircle}
                 className="text-white text-xs"
               />
