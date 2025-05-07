@@ -297,8 +297,10 @@ const MediaDetailsSection = ({ mediaId }: { mediaId: string }) => {
       {/* Reviews */}
       <div className="pt-10">
         <Link
-          href={`/media/${media.id}/reviews`}
-          className="text-lg md:text-xl flex cursor-pointer items-center gap-6 lg:text-2xl font-bold mb-4"
+          href={media.totalReview > 0 ? `/media/${media.id}/reviews` : ""}
+          className={`text-lg md:text-xl flex items-center gap-6 lg:text-2xl font-bold mb-4 ${
+            media.totalReview === 0 ? "cursor-not-allowed" : "cursor-pointer"
+          }`}
         >
           <span className="border-l-4 border-l-primary pl-2">User Review</span>
           {media.totalReview > 0 && (

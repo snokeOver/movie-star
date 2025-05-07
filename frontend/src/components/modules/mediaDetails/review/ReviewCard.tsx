@@ -77,6 +77,17 @@ const ReviewCard = ({
             <span>{review.rating}/10</span>
           </div>
         </div>
+
+        <div>
+          {review.tags.map((tag) => (
+            <span
+              key={tag}
+              className="px-3 py-1 mr-2 text-sm rounded-full bg-blue-800 text-white"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
         {meta && (
           <div className="text-white/70 font-bold text-lg flex items-center gap-1">
             <span>

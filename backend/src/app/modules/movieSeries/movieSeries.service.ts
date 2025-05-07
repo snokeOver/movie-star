@@ -1,4 +1,8 @@
-import { MovieSeries, Prisma } from "../../../../generated/prisma";
+import {
+  MovieSeries,
+  Prisma,
+  ReviewStatus,
+} from "../../../../generated/prisma";
 import AppError from "../../middleWares/errorHandler/appError";
 import { IFile, IPagination } from "../../types";
 import { paginationHelper } from "../../utils/paginationHealper";
@@ -343,6 +347,7 @@ const getSinglePublic = async (
   const totalReview = await prisma.review.count({
     where: {
       movieSeriesId: id,
+      status: ReviewStatus.approved,
     },
   });
 
@@ -350,6 +355,7 @@ const getSinglePublic = async (
   const latestReview = await prisma.review.findFirst({
     where: {
       movieSeriesId: id,
+      status: ReviewStatus.approved,
     },
     orderBy: {
       createdAt: "desc",

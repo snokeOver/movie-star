@@ -174,7 +174,7 @@ const getAll = async (
   pagination: IPagination,
   movieSeriesId: string,
   token: string | undefined
-): Promise<IAllReviews> => {
+): Promise<any> => {
   if (!movieSeriesId)
     throw new AppError(httpStatus.BAD_REQUEST, "Movie series id not found");
 
@@ -184,7 +184,7 @@ const getAll = async (
 
   //show only approved reviews and specific movie series
   searchCondition.push({
-    status: ReviewStatus.pending, //change this to approved later
+    status: ReviewStatus.approved,
     movieSeriesId,
   });
 
