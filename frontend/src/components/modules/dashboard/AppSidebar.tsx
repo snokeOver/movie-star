@@ -7,6 +7,7 @@ import {
   Frame,
   GalleryVerticalEnd,
   Map,
+  MessageCircleDashedIcon,
   PieChart,
   Settings2,
   Video,
@@ -42,7 +43,7 @@ const data = {
   navMain: [
     {
       title: "Media Library",
-      url: "#",
+      url: "/dashboard/admin/media/manage",
       icon: Video,
       isActive: true,
       items: [
@@ -54,9 +55,17 @@ const data = {
           title: "Manage",
           url: "/dashboard/admin/media/manage",
         },
+      ],
+    },
+    {
+      title: "Reviews",
+      url: "/dashboard/admin/reviews/manage",
+      icon: MessageCircleDashedIcon,
+      isActive: true,
+      items: [
         {
-          title: "Settings",
-          url: "#",
+          title: "Manage",
+          url: "/dashboard/admin/reviews/manage",
         },
       ],
     },
