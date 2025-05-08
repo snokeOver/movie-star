@@ -33,8 +33,36 @@ const approveOne = tryCatchAsync(async (req, res) => {
     },
   });
 });
+const unpublishOne = tryCatchAsync(async (req, res) => {
+  const result = await ReviewService.unpublishOne(req.params.id);
+
+  sendResponse({
+    res,
+    sendData: {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Review unpublished successfully",
+      data: result,
+    },
+  });
+});
+const removeOne = tryCatchAsync(async (req, res) => {
+  const result = await ReviewService.removeOne(req.params.id);
+
+  sendResponse({
+    res,
+    sendData: {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Review removed successfully",
+      data: result,
+    },
+  });
+});
 
 export const ReviewController = {
   getAllPending,
   approveOne,
+  unpublishOne,
+  removeOne,
 };

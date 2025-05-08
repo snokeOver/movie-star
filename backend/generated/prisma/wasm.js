@@ -202,6 +202,7 @@ exports.Prisma.ReviewScalarFieldEnum = {
   likesCount: 'likesCount',
   commentCount: 'commentCount',
   status: 'status',
+  isDeleted: 'isDeleted',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

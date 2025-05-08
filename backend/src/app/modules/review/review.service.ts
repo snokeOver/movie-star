@@ -11,7 +11,7 @@ const getAllPending = async (pagination: IPagination): Promise<any> => {
 
   const result = await prisma.review.findMany({
     where: {
-      status: ReviewStatus.pending,
+      isDeleted: false,
     },
     skip,
     take,
@@ -19,6 +19,7 @@ const getAllPending = async (pagination: IPagination): Promise<any> => {
     select: {
       id: true,
       writtenReview: true,
+      status: true,
       isSpoiler: true,
       user: {
         select: {
@@ -70,7 +71,59 @@ const approveOne = async (id: string): Promise<any> => {
 
   return null;
 };
+
+//unpublish one by id
+const unpublishOne = async (id: string): Promise<any> => {
+  if (!id) throw new AppError(httpStatus.BAD_REQUEST, "Id not found");
+
+  const foundReview = await prisma.review.findUnique({
+    where: {
+      id,
+    },
+  });
+
+  if (!foundReview)
+    throw new AppError(httpStatus.NOT_FOUND, "Review not found");
+
+  const result = await prisma.review.update({
+    where: {
+      id,
+    },
+    data: {
+      status: ReviewStatus.unpublished,
+    },
+  });
+
+  return null;
+};
+
+//remove one by id
+const removeOne = async (id: string): Promise<any> => {
+  if (!id) throw new AppError(httpStatus.BAD_REQUEST, "Id not found");
+
+  const foundReview = await prisma.review.findUnique({
+    where: {
+      id,
+    },
+  });
+
+  if (!foundReview)
+    throw new AppError(httpStatus.NOT_FOUND, "Review not found");
+
+  const result = await prisma.review.update({
+    where: {
+      id,
+    },
+    data: {
+      isDeleted: true,
+    },
+  });
+
+  return null;
+};
 export const ReviewService = {
   getAllPending,
   approveOne,
+  unpublishOne,
+  removeOne,
 };

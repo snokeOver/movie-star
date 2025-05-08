@@ -26,6 +26,7 @@ const createReview = async (payload: Review): Promise<any> => {
     where: {
       userId,
       movieSeriesId,
+      isDeleted: false,
     },
   });
 
@@ -185,6 +186,7 @@ const getAll = async (
   //show only approved reviews and specific movie series
   searchCondition.push({
     status: ReviewStatus.approved,
+    isDeleted: false,
     movieSeriesId,
   });
 

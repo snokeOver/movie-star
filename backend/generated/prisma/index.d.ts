@@ -7536,6 +7536,7 @@ export namespace Prisma {
     likesCount: number | null
     commentCount: number | null
     status: $Enums.ReviewStatus | null
+    isDeleted: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -7550,6 +7551,7 @@ export namespace Prisma {
     likesCount: number | null
     commentCount: number | null
     status: $Enums.ReviewStatus | null
+    isDeleted: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -7565,6 +7567,7 @@ export namespace Prisma {
     likesCount: number
     commentCount: number
     status: number
+    isDeleted: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -7593,6 +7596,7 @@ export namespace Prisma {
     likesCount?: true
     commentCount?: true
     status?: true
+    isDeleted?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -7607,6 +7611,7 @@ export namespace Prisma {
     likesCount?: true
     commentCount?: true
     status?: true
+    isDeleted?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -7622,6 +7627,7 @@ export namespace Prisma {
     likesCount?: true
     commentCount?: true
     status?: true
+    isDeleted?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -7724,6 +7730,7 @@ export namespace Prisma {
     likesCount: number
     commentCount: number
     status: $Enums.ReviewStatus
+    isDeleted: boolean
     createdAt: Date
     updatedAt: Date
     _count: ReviewCountAggregateOutputType | null
@@ -7758,6 +7765,7 @@ export namespace Prisma {
     likesCount?: boolean
     commentCount?: boolean
     status?: boolean
+    isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     movieSeries?: boolean | MovieSeriesDefaultArgs<ExtArgs>
@@ -7778,6 +7786,7 @@ export namespace Prisma {
     likesCount?: boolean
     commentCount?: boolean
     status?: boolean
+    isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     movieSeries?: boolean | MovieSeriesDefaultArgs<ExtArgs>
@@ -7795,6 +7804,7 @@ export namespace Prisma {
     likesCount?: boolean
     commentCount?: boolean
     status?: boolean
+    isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     movieSeries?: boolean | MovieSeriesDefaultArgs<ExtArgs>
@@ -7812,11 +7822,12 @@ export namespace Prisma {
     likesCount?: boolean
     commentCount?: boolean
     status?: boolean
+    isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ReviewOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "movieSeriesId" | "userId" | "rating" | "writtenReview" | "isSpoiler" | "tags" | "likesCount" | "commentCount" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["review"]>
+  export type ReviewOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "movieSeriesId" | "userId" | "rating" | "writtenReview" | "isSpoiler" | "tags" | "likesCount" | "commentCount" | "status" | "isDeleted" | "createdAt" | "updatedAt", ExtArgs["result"]["review"]>
   export type ReviewInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     movieSeries?: boolean | MovieSeriesDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -7852,6 +7863,7 @@ export namespace Prisma {
       likesCount: number
       commentCount: number
       status: $Enums.ReviewStatus
+      isDeleted: boolean
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["review"]>
@@ -8291,6 +8303,7 @@ export namespace Prisma {
     readonly likesCount: FieldRef<"Review", 'Int'>
     readonly commentCount: FieldRef<"Review", 'Int'>
     readonly status: FieldRef<"Review", 'ReviewStatus'>
+    readonly isDeleted: FieldRef<"Review", 'Boolean'>
     readonly createdAt: FieldRef<"Review", 'DateTime'>
     readonly updatedAt: FieldRef<"Review", 'DateTime'>
   }
@@ -17578,6 +17591,7 @@ export namespace Prisma {
     likesCount: 'likesCount',
     commentCount: 'commentCount',
     status: 'status',
+    isDeleted: 'isDeleted',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -18375,6 +18389,7 @@ export namespace Prisma {
     likesCount?: IntFilter<"Review"> | number
     commentCount?: IntFilter<"Review"> | number
     status?: EnumReviewStatusFilter<"Review"> | $Enums.ReviewStatus
+    isDeleted?: BoolFilter<"Review"> | boolean
     createdAt?: DateTimeFilter<"Review"> | Date | string
     updatedAt?: DateTimeFilter<"Review"> | Date | string
     movieSeries?: XOR<MovieSeriesScalarRelationFilter, MovieSeriesWhereInput>
@@ -18394,6 +18409,7 @@ export namespace Prisma {
     likesCount?: SortOrder
     commentCount?: SortOrder
     status?: SortOrder
+    isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     movieSeries?: MovieSeriesOrderByWithRelationInput
@@ -18416,6 +18432,7 @@ export namespace Prisma {
     likesCount?: IntFilter<"Review"> | number
     commentCount?: IntFilter<"Review"> | number
     status?: EnumReviewStatusFilter<"Review"> | $Enums.ReviewStatus
+    isDeleted?: BoolFilter<"Review"> | boolean
     createdAt?: DateTimeFilter<"Review"> | Date | string
     updatedAt?: DateTimeFilter<"Review"> | Date | string
     movieSeries?: XOR<MovieSeriesScalarRelationFilter, MovieSeriesWhereInput>
@@ -18435,6 +18452,7 @@ export namespace Prisma {
     likesCount?: SortOrder
     commentCount?: SortOrder
     status?: SortOrder
+    isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: ReviewCountOrderByAggregateInput
@@ -18458,6 +18476,7 @@ export namespace Prisma {
     likesCount?: IntWithAggregatesFilter<"Review"> | number
     commentCount?: IntWithAggregatesFilter<"Review"> | number
     status?: EnumReviewStatusWithAggregatesFilter<"Review"> | $Enums.ReviewStatus
+    isDeleted?: BoolWithAggregatesFilter<"Review"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Review"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Review"> | Date | string
   }
@@ -19540,6 +19559,7 @@ export namespace Prisma {
     likesCount?: number
     commentCount?: number
     status?: $Enums.ReviewStatus
+    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     movieSeries: MovieSeriesCreateNestedOneWithoutReviewsInput
@@ -19559,6 +19579,7 @@ export namespace Prisma {
     likesCount?: number
     commentCount?: number
     status?: $Enums.ReviewStatus
+    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     comment?: CommentUncheckedCreateNestedManyWithoutReviewInput
@@ -19574,6 +19595,7 @@ export namespace Prisma {
     likesCount?: IntFieldUpdateOperationsInput | number
     commentCount?: IntFieldUpdateOperationsInput | number
     status?: EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     movieSeries?: MovieSeriesUpdateOneRequiredWithoutReviewsNestedInput
@@ -19593,6 +19615,7 @@ export namespace Prisma {
     likesCount?: IntFieldUpdateOperationsInput | number
     commentCount?: IntFieldUpdateOperationsInput | number
     status?: EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     comment?: CommentUncheckedUpdateManyWithoutReviewNestedInput
@@ -19610,6 +19633,7 @@ export namespace Prisma {
     likesCount?: number
     commentCount?: number
     status?: $Enums.ReviewStatus
+    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -19623,6 +19647,7 @@ export namespace Prisma {
     likesCount?: IntFieldUpdateOperationsInput | number
     commentCount?: IntFieldUpdateOperationsInput | number
     status?: EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -19638,6 +19663,7 @@ export namespace Prisma {
     likesCount?: IntFieldUpdateOperationsInput | number
     commentCount?: IntFieldUpdateOperationsInput | number
     status?: EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -20847,6 +20873,7 @@ export namespace Prisma {
     likesCount?: SortOrder
     commentCount?: SortOrder
     status?: SortOrder
+    isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -20867,6 +20894,7 @@ export namespace Prisma {
     likesCount?: SortOrder
     commentCount?: SortOrder
     status?: SortOrder
+    isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -20881,6 +20909,7 @@ export namespace Prisma {
     likesCount?: SortOrder
     commentCount?: SortOrder
     status?: SortOrder
+    isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -22577,6 +22606,7 @@ export namespace Prisma {
     likesCount?: number
     commentCount?: number
     status?: $Enums.ReviewStatus
+    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     movieSeries: MovieSeriesCreateNestedOneWithoutReviewsInput
@@ -22594,6 +22624,7 @@ export namespace Prisma {
     likesCount?: number
     commentCount?: number
     status?: $Enums.ReviewStatus
+    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     comment?: CommentUncheckedCreateNestedManyWithoutReviewInput
@@ -22871,6 +22902,7 @@ export namespace Prisma {
     likesCount?: IntFilter<"Review"> | number
     commentCount?: IntFilter<"Review"> | number
     status?: EnumReviewStatusFilter<"Review"> | $Enums.ReviewStatus
+    isDeleted?: BoolFilter<"Review"> | boolean
     createdAt?: DateTimeFilter<"Review"> | Date | string
     updatedAt?: DateTimeFilter<"Review"> | Date | string
   }
@@ -23340,6 +23372,7 @@ export namespace Prisma {
     likesCount?: number
     commentCount?: number
     status?: $Enums.ReviewStatus
+    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutReviewInput
@@ -23357,6 +23390,7 @@ export namespace Prisma {
     likesCount?: number
     commentCount?: number
     status?: $Enums.ReviewStatus
+    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     comment?: CommentUncheckedCreateNestedManyWithoutReviewInput
@@ -23838,6 +23872,7 @@ export namespace Prisma {
     likesCount?: number
     commentCount?: number
     status?: $Enums.ReviewStatus
+    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     movieSeries: MovieSeriesCreateNestedOneWithoutReviewsInput
@@ -23856,6 +23891,7 @@ export namespace Prisma {
     likesCount?: number
     commentCount?: number
     status?: $Enums.ReviewStatus
+    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     reviewLike?: ReviewLikeUncheckedCreateNestedManyWithoutReviewInput
@@ -23931,6 +23967,7 @@ export namespace Prisma {
     likesCount?: IntFieldUpdateOperationsInput | number
     commentCount?: IntFieldUpdateOperationsInput | number
     status?: EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     movieSeries?: MovieSeriesUpdateOneRequiredWithoutReviewsNestedInput
@@ -23949,6 +23986,7 @@ export namespace Prisma {
     likesCount?: IntFieldUpdateOperationsInput | number
     commentCount?: IntFieldUpdateOperationsInput | number
     status?: EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reviewLike?: ReviewLikeUncheckedUpdateManyWithoutReviewNestedInput
@@ -24238,6 +24276,7 @@ export namespace Prisma {
     likesCount?: number
     commentCount?: number
     status?: $Enums.ReviewStatus
+    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     movieSeries: MovieSeriesCreateNestedOneWithoutReviewsInput
@@ -24256,6 +24295,7 @@ export namespace Prisma {
     likesCount?: number
     commentCount?: number
     status?: $Enums.ReviewStatus
+    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     comment?: CommentUncheckedCreateNestedManyWithoutReviewInput
@@ -24331,6 +24371,7 @@ export namespace Prisma {
     likesCount?: IntFieldUpdateOperationsInput | number
     commentCount?: IntFieldUpdateOperationsInput | number
     status?: EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     movieSeries?: MovieSeriesUpdateOneRequiredWithoutReviewsNestedInput
@@ -24349,6 +24390,7 @@ export namespace Prisma {
     likesCount?: IntFieldUpdateOperationsInput | number
     commentCount?: IntFieldUpdateOperationsInput | number
     status?: EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     comment?: CommentUncheckedUpdateManyWithoutReviewNestedInput
@@ -25055,6 +25097,7 @@ export namespace Prisma {
     likesCount?: number
     commentCount?: number
     status?: $Enums.ReviewStatus
+    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -25127,6 +25170,7 @@ export namespace Prisma {
     likesCount?: IntFieldUpdateOperationsInput | number
     commentCount?: IntFieldUpdateOperationsInput | number
     status?: EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     movieSeries?: MovieSeriesUpdateOneRequiredWithoutReviewsNestedInput
@@ -25144,6 +25188,7 @@ export namespace Prisma {
     likesCount?: IntFieldUpdateOperationsInput | number
     commentCount?: IntFieldUpdateOperationsInput | number
     status?: EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     comment?: CommentUncheckedUpdateManyWithoutReviewNestedInput
@@ -25160,6 +25205,7 @@ export namespace Prisma {
     likesCount?: IntFieldUpdateOperationsInput | number
     commentCount?: IntFieldUpdateOperationsInput | number
     status?: EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -25419,6 +25465,7 @@ export namespace Prisma {
     likesCount?: number
     commentCount?: number
     status?: $Enums.ReviewStatus
+    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -25458,6 +25505,7 @@ export namespace Prisma {
     likesCount?: IntFieldUpdateOperationsInput | number
     commentCount?: IntFieldUpdateOperationsInput | number
     status?: EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutReviewNestedInput
@@ -25475,6 +25523,7 @@ export namespace Prisma {
     likesCount?: IntFieldUpdateOperationsInput | number
     commentCount?: IntFieldUpdateOperationsInput | number
     status?: EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     comment?: CommentUncheckedUpdateManyWithoutReviewNestedInput
@@ -25491,6 +25540,7 @@ export namespace Prisma {
     likesCount?: IntFieldUpdateOperationsInput | number
     commentCount?: IntFieldUpdateOperationsInput | number
     status?: EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

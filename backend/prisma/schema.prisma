@@ -127,6 +127,7 @@ model Review {
   likesCount    Int          @default(0)
   commentCount  Int          @default(0)
   status        ReviewStatus @default(pending)
+  isDeleted     Boolean      @default(false)
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
 

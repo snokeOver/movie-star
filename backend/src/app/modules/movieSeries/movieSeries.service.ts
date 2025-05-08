@@ -348,6 +348,7 @@ const getSinglePublic = async (
     where: {
       movieSeriesId: id,
       status: ReviewStatus.approved,
+      isDeleted: false,
     },
   });
 
@@ -356,6 +357,7 @@ const getSinglePublic = async (
     where: {
       movieSeriesId: id,
       status: ReviewStatus.approved,
+      isDeleted: false,
     },
     orderBy: {
       createdAt: "desc",

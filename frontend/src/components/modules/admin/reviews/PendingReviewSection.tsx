@@ -7,6 +7,7 @@ export interface IReview {
   id: string;
   writtenReview: string;
   profilePhoto: string;
+  status: string;
   isSpoiler: boolean;
   name: string;
 }
@@ -14,7 +15,7 @@ export interface IReview {
 export interface UnformattedReview {
   id: string;
   writtenReview: string;
-
+  status: string;
   isSpoiler: boolean;
   user: {
     name: string;

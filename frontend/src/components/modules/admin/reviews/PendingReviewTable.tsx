@@ -36,7 +36,11 @@ import {
 
 import Image from "next/image";
 import { IReview } from "./PendingReviewSection";
-import { useReviewApproveMutation } from "@/hooks/mutations/useReviewApproveMutation";
+import {
+  TActionType,
+  useReviewApproveMutation,
+} from "@/hooks/mutations/useReviewApproveMutation";
+import PrimaryButton from "@/components/shared/buttons/PrimaryButton";
 
 export const columns: ColumnDef<IReview>[] = [
   {
@@ -119,6 +123,27 @@ export const columns: ColumnDef<IReview>[] = [
     },
   },
   {
+    accessorKey: "status",
+    header: () => <div className="text-right">Status</div>,
+    cell: ({ row }) => {
+      return (
+        <div className="w-full flex justify-end">
+          <Button
+            className={`text-right font-medium uppercase w-36 bg-transparent border ${
+              row.getValue("status") === "unpublished"
+                ? "text-red-500"
+                : row.getValue("status") === "approved"
+                ? "text-green-500"
+                : "text-orange-400"
+            }`}
+          >
+            {row.getValue("status")}
+          </Button>
+        </div>
+      );
+    },
+  },
+  {
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
@@ -133,7 +158,9 @@ export const columns: ColumnDef<IReview>[] = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <ApproveAction reviewId={reviewId} />
+            <ApproveAction reviewId={reviewId} action={"Approve"} />
+            <ApproveAction reviewId={reviewId} action="Unpublish" />
+            <ApproveAction reviewId={reviewId} action="Delete" />
           </DropdownMenuContent>
         </DropdownMenu>
       );
@@ -141,15 +168,26 @@ export const columns: ColumnDef<IReview>[] = [
   },
 ];
 
-const ApproveAction = ({ reviewId }: { reviewId: string }) => {
-  const { mutate: approveReview } = useReviewApproveMutation();
+const ApproveAction = ({
+  reviewId,
+  action,
+}: {
+  reviewId: string;
+  action: TActionType;
+}) => {
+  const { mutate: approveReview, isPending } = useReviewApproveMutation();
 
   return (
     <DropdownMenuLabel
-      className="cursor-pointer"
-      onClick={() => approveReview(reviewId)}
+      className="cursor-pointer hover:text-primary"
+      onClick={() => approveReview({ reviewId, action })}
     >
-      Approve
+      <PrimaryButton
+        btnText={action}
+        isLoading={isPending}
+        loadingText="Loading..."
+        className="w-full"
+      />
     </DropdownMenuLabel>
   );
 };

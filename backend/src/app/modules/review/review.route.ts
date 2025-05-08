@@ -12,10 +12,21 @@ router.get(
   ReviewController.getAllPending
 );
 
-router.patch(
+router.post(
   "/pending/:id",
   auth(UserRole.s_admin, UserRole.admin),
   ReviewController.approveOne
+);
+
+router.patch(
+  "/pending/:id",
+  auth(UserRole.s_admin, UserRole.admin),
+  ReviewController.unpublishOne
+);
+router.delete(
+  "/pending/:id",
+  auth(UserRole.s_admin, UserRole.admin),
+  ReviewController.removeOne
 );
 
 export const reviewRoutes = router;

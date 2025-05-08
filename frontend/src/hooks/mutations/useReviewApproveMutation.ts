@@ -5,6 +5,12 @@ import {
 } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { getValidToken } from "@/lib/verifyToken"; // Token utility
+export type TActionType = "Approve" | "Unpublish" | "Delete";
+
+interface IPayload {
+  reviewId: string;
+  action: TActionType;
+}
 
 export const useReviewApproveMutation = () => {
   const queryClient = useQueryClient(); // For cache invalidation
@@ -12,7 +18,8 @@ export const useReviewApproveMutation = () => {
 
   return useMutation({
     mutationKey,
-    mutationFn: async (reviewId: string) => {
+    mutationFn: async (payload: IPayload) => {
+      const { reviewId, action } = payload;
       const token = await getValidToken();
       if (!reviewId || !token) {
         return toast.error("Please provide reviewId or token is invalid");
@@ -21,7 +28,12 @@ export const useReviewApproveMutation = () => {
       const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/review/pending/${reviewId}`;
 
       const options: RequestInit = {
-        method: "PATCH",
+        method:
+          action === "Delete"
+            ? "DELETE"
+            : action === "Approve"
+            ? "POST"
+            : "PATCH",
         headers: {
           Authorization: token,
           "Content-Type": "application/json",

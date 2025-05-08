@@ -101,7 +101,7 @@ const ReviewCard = ({
       </div>
 
       {/* Review Content */}
-      {showReview ? (
+      {!showReview ? (
         <div className="mb-3">
           <p className="text-white/70">{review.writtenReview}</p>
         </div>
