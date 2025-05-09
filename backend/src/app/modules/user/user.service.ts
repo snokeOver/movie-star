@@ -110,33 +110,34 @@ const createMediaLike = async (payload: MovieLike): Promise<any> => {
 
   const { userId, movieSeriesId } = payload;
 
-  const foundReview = await prisma.movieLike.findFirst({
+  const foundMovieLike = await prisma.movieLike.findFirst({
     where: {
       userId,
       movieSeriesId,
     },
   });
 
-  if (!foundReview) {
-    const createdReview = await prisma.movieLike.create({
+  if (!foundMovieLike) {
+    const createdMovieLike = await prisma.movieLike.create({
       data: {
         userId,
         movieSeriesId,
+        isLike: true,
       },
     });
-    return createdReview;
+    return createdMovieLike;
   }
 
-  const updatedReview = await prisma.movieLike.update({
+  const updatedMovieLike = await prisma.movieLike.update({
     where: {
-      id: foundReview.id,
+      id: foundMovieLike.id,
     },
     data: {
-      isLike: !foundReview.isLike,
+      isLike: !foundMovieLike.isLike,
     },
   });
 
-  return updatedReview;
+  return updatedMovieLike;
 };
 
 //Create like for review  by user

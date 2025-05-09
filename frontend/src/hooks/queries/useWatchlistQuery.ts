@@ -1,9 +1,11 @@
 import { getValidToken } from "@/lib/verifyToken";
 import { useUserStore } from "@/stores/auth";
+import { useWatchListStore } from "@/stores/watchlist";
 import { queryOptions, useQuery } from "@tanstack/react-query";
 
 export const useWatchlistQuery = (page: number, limit: number) => {
   const { user } = useUserStore();
+  const { setListNo } = useWatchListStore();
 
   const options = queryOptions({
     queryKey: ["user_watchlist", page, limit],
@@ -23,6 +25,8 @@ export const useWatchlistQuery = (page: number, limit: number) => {
       if (!res.ok) throw new Error("Failed to fetch user watchlist");
 
       const data = await res.json();
+
+      if (data.data) setListNo(data.data.length);
       return data.data;
     },
     enabled: !!user && user.role === "user",
