@@ -69,6 +69,18 @@ const watchList = z.object({
     .strict(),
 });
 
+const updateProfile = z
+  .object({
+    name: z
+      .string()
+      .min(1, "Name is required")
+      .max(110, "Name cannot exceed 110 characters")
+      .optional(),
+
+    profilePhoto: z.string().optional(),
+  })
+  .strict();
+
 export const ValidateUser = {
   createReview,
   createMediaLike,
@@ -76,4 +88,5 @@ export const ValidateUser = {
   createComment,
   watchList,
   updateReview,
+  updateProfile,
 };

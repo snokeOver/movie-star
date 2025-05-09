@@ -5,15 +5,18 @@ import {
   Review,
   ReviewLike,
   ReviewStatus,
+  User,
+  UserStatus,
 } from "../../../../generated/prisma";
 import AppError from "../../middleWares/errorHandler/appError";
-import { IJwtPayload, IPagination } from "../../types";
+import { IFile, IJwtPayload, IPagination } from "../../types";
 import { prisma } from "../../utils/prisma";
 import httpStatus from "http-status";
 import { IAllReviews } from "./user.interface";
 import { paginationHelper } from "../../utils/paginationHealper";
 import { verifyToken } from "../../utils/jwtToken";
 import config from "../../config";
+import { fileUploader } from "../../utils/fileUploader";
 
 //Create review for movie series by user
 const createReview = async (payload: Review): Promise<any> => {
@@ -540,6 +543,75 @@ const getALlReviewList = async (
   };
 };
 
+//get user profile details
+const getProfile = async (user: IJwtPayload) => {
+  if (!user) throw new AppError(httpStatus.UNAUTHORIZED, "Unauthorized");
+
+  const foundUser = await prisma.user.findUnique({
+    where: {
+      id: user.userId,
+      status: UserStatus.active,
+    },
+    select: {
+      id: true,
+      name: true,
+      profilePhoto: true,
+      createdAt: true,
+      updatedAt: true,
+    },
+  });
+
+  if (!foundUser) throw new AppError(httpStatus.NOT_FOUND, "User not found");
+
+  return foundUser;
+};
+
+//Update user profile details
+const updateProfile = async (
+  user: IJwtPayload,
+  payload: Partial<User>,
+  file: IFile | undefined
+) => {
+  if (!user) throw new AppError(httpStatus.UNAUTHORIZED, "Unauthorized");
+
+  const foundUser = await prisma.user.findUnique({
+    where: {
+      id: user.userId,
+      status: UserStatus.active,
+    },
+    select: {
+      id: true,
+    },
+  });
+
+  if (!foundUser) throw new AppError(httpStatus.NOT_FOUND, "User not found");
+
+  //Upload image to cloudinary
+  if (file) {
+    const uploadedResult = await fileUploader.cloudinaryUpload(
+      file.path,
+      file.filename.split(".")[0]
+    );
+    payload.profilePhoto = uploadedResult.secure_url;
+  }
+
+  const updatedUser = await prisma.user.update({
+    where: {
+      id: user.userId,
+    },
+    data: payload,
+    select: {
+      id: true,
+      name: true,
+      profilePhoto: true,
+      createdAt: true,
+      updatedAt: true,
+    },
+  });
+
+  return updatedUser;
+};
+
 export const UserService = {
   createReview,
   createMediaLike,
@@ -553,4 +625,6 @@ export const UserService = {
   getALlPurchaseList,
   getALlReviewList,
   updateReview,
+  getProfile,
+  updateProfile,
 };

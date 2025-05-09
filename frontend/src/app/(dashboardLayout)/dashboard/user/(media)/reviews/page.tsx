@@ -1,19 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
-import {
-  AlertCircle,
-  ChevronLeft,
-  Edit,
-  Eye,
-  Film,
-  Pencil,
-  Star,
-} from "lucide-react";
+import { AlertCircle, Film, Pencil, Star } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,

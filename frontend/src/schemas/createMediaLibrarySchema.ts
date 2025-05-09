@@ -90,3 +90,12 @@ export const createMediaLibrarySchema = z.object({
 
   isActive: z.boolean(), // Status must be a boolean (true/false)
 });
+
+export const updateProfileSchema = z.object({
+  name: z
+    .string()
+    .min(1, "Name is required")
+    .max(100, "Name cannot exceed 100 characters"), // Added max length for title
+
+  profilePhoto: z.string().optional(),
+});

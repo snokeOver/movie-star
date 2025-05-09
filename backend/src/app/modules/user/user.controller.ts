@@ -214,6 +214,44 @@ const removeAllWatchList = tryCatchAsync(
   }
 );
 
+//update user profile
+const updateProfile = tryCatchAsync(
+  async (req: Request & { user?: IJwtPayload }, res) => {
+    const result = await UserService.updateProfile(
+      req.user as IJwtPayload,
+      req.body.data,
+      req.file
+    );
+
+    sendResponse({
+      res,
+      sendData: {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "Profile updated successfully",
+        data: result,
+      },
+    });
+  }
+);
+
+//get user profile
+const getProfile = tryCatchAsync(
+  async (req: Request & { user?: IJwtPayload }, res) => {
+    const result = await UserService.getProfile(req.user as IJwtPayload);
+
+    sendResponse({
+      res,
+      sendData: {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "Profile retrieved successfully",
+        data: result,
+      },
+    });
+  }
+);
+
 export const UserController = {
   createReview,
   createMediaLike,
@@ -227,4 +265,6 @@ export const UserController = {
   getAllPurchaseList,
   getMyALlReviews,
   updateReview,
+  getProfile,
+  updateProfile,
 };

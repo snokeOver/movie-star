@@ -5,6 +5,7 @@ import { UserRole } from "../../../../generated/prisma";
 import { validateRequest } from "../../middleWares/validateRequest";
 import { ValidateUser } from "./user.validate";
 import { UserController } from "./user.controller";
+import { fileUploader } from "../../utils/fileUploader";
 
 const router = express.Router();
 
@@ -46,6 +47,24 @@ router.post(
 router.get("/watchlist", auth(UserRole.user), UserController.getAllWatchList);
 router.get("/purchase", auth(UserRole.user), UserController.getAllPurchaseList);
 router.get("/review", auth(UserRole.user), UserController.getMyALlReviews);
+
+router.get(
+  "/profile",
+  auth(UserRole.user, UserRole.admin, UserRole.s_admin),
+  UserController.getProfile
+);
+
+router.patch(
+  "/profile",
+  auth(UserRole.user, UserRole.admin, UserRole.s_admin),
+  fileUploader.multerUpload.single("file"),
+
+  (req: Request, res: Response, next: NextFunction) => {
+    req.body.data = ValidateUser.updateProfile.parse(JSON.parse(req.body.data));
+
+    return UserController.updateProfile(req, res, next);
+  }
+);
 
 router.post(
   "/watchlist",
