@@ -13,7 +13,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react";
+import { ArrowUpDown, ChevronDown } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -21,7 +21,6 @@ import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
-  DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
@@ -36,11 +35,8 @@ import {
 
 import Image from "next/image";
 import { IReview } from "./PendingReviewSection";
-import {
-  TActionType,
-  useReviewApproveMutation,
-} from "@/hooks/mutations/useReviewApproveMutation";
-import PrimaryButton from "@/components/shared/buttons/PrimaryButton";
+import TableRowActions from "./TableRowActions";
+import { format } from "date-fns";
 
 export const columns: ColumnDef<IReview>[] = [
   {
@@ -66,16 +62,10 @@ export const columns: ColumnDef<IReview>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "profilePhoto",
-    header: "Profile",
+    accessorKey: "createdAt",
+    header: "Submitted",
     cell: ({ row }) => (
-      <Image
-        src={row.getValue("profilePhoto") || "https://github.com/shadcn.png"}
-        alt={row.getValue("name")}
-        width={30}
-        height={30}
-        className="rounded-full"
-      />
+      <div>{format(new Date(row.getValue("createdAt")), "dd-MM-yyyy")}</div>
     ),
   },
   {
@@ -95,10 +85,10 @@ export const columns: ColumnDef<IReview>[] = [
   },
   {
     accessorKey: "writtenReview",
-    header: () => <div className="text-right">Review</div>,
+    header: () => <div className="text-left">Review</div>,
     cell: ({ row }) => {
       return (
-        <div className="text-right font-medium">
+        <div className="text-left font-medium">
           {row.getValue("writtenReview")}
         </div>
       );
@@ -106,10 +96,10 @@ export const columns: ColumnDef<IReview>[] = [
   },
   {
     accessorKey: "isSpoiler",
-    header: () => <div className="text-right">Spoiler Alert</div>,
+    header: () => <div className="text-center">Spoiler Alert</div>,
     cell: ({ row }) => {
       return (
-        <div className="w-full flex justify-end">
+        <div className="w-full flex justify-center">
           <Button
             variant={"outline"}
             className={`text-right font-medium ${
@@ -124,17 +114,17 @@ export const columns: ColumnDef<IReview>[] = [
   },
   {
     accessorKey: "status",
-    header: () => <div className="text-right">Status</div>,
+    header: () => <div className="text-center">Status</div>,
     cell: ({ row }) => {
       return (
-        <div className="w-full flex justify-end">
+        <div className="w-full flex justify-center">
           <Button
-            className={`text-right font-medium uppercase w-36 bg-transparent border ${
+            className={`inline-flex items-center uppercase rounded-full border px-2.5 py-0.5 text-white text-xs font-semibold ${
               row.getValue("status") === "unpublished"
-                ? "text-red-500"
+                ? "bg-red-500"
                 : row.getValue("status") === "approved"
-                ? "text-green-500"
-                : "text-orange-400"
+                ? "bg-green-500"
+                : "bg-orange-400"
             }`}
           >
             {row.getValue("status")}
@@ -149,48 +139,10 @@ export const columns: ColumnDef<IReview>[] = [
     cell: ({ row }) => {
       const reviewId = row.original.id;
 
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <ApproveAction reviewId={reviewId} action={"Approve"} />
-            <ApproveAction reviewId={reviewId} action="Unpublish" />
-            <ApproveAction reviewId={reviewId} action="Delete" />
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
+      return <TableRowActions reviewId={reviewId} />;
     },
   },
 ];
-
-const ApproveAction = ({
-  reviewId,
-  action,
-}: {
-  reviewId: string;
-  action: TActionType;
-}) => {
-  const { mutate: approveReview, isPending } = useReviewApproveMutation();
-
-  return (
-    <DropdownMenuLabel
-      className="cursor-pointer hover:text-primary"
-      onClick={() => approveReview({ reviewId, action })}
-    >
-      <PrimaryButton
-        btnText={action}
-        isLoading={isPending}
-        loadingText="Loading..."
-        className="w-full"
-      />
-    </DropdownMenuLabel>
-  );
-};
 
 export function PendingReviewTable({ data }: { data: IReview[] }) {
   const [sorting, setSorting] = React.useState<SortingState>([]);

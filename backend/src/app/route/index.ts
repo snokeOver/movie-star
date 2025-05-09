@@ -5,6 +5,7 @@ import { movieSeriesRoutes } from "../modules/movieSeries/movieSeries.route";
 import { paymentRoutes } from "../modules/payment/payment.route";
 import { userRoutes } from "../modules/user/user.route";
 import { reviewRoutes } from "../modules/review/review.route";
+import { adminRoutes } from "../modules/admin/admin.route";
 
 const router = express.Router();
 
@@ -28,6 +29,10 @@ const routes = [
   {
     path: "/review",
     route: reviewRoutes,
+  },
+  {
+    path: "/admin",
+    route: adminRoutes,
   },
 ];
 

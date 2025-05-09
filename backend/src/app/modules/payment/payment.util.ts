@@ -102,7 +102,7 @@ const handleCheckoutSessionSuccess = async (
         attachment
       );
 
-      console.log("email sent");
+      // console.log("email sent");
     },
     { timeout: 10000 }
   ); // Set the timeout to 10000 ms (10 seconds)

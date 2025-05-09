@@ -9,6 +9,7 @@ export interface IReview {
   profilePhoto: string;
   status: string;
   isSpoiler: boolean;
+  createdAt: Date;
   name: string;
 }
 
@@ -17,6 +18,7 @@ export interface UnformattedReview {
   writtenReview: string;
   status: string;
   isSpoiler: boolean;
+  createdAt: Date;
   user: {
     name: string;
     profilePhoto: string;

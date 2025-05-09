@@ -21,6 +21,7 @@ const getAllPending = async (pagination: IPagination): Promise<any> => {
       writtenReview: true,
       status: true,
       isSpoiler: true,
+      createdAt: true,
       user: {
         select: {
           id: true,
@@ -67,6 +68,48 @@ const approveOne = async (id: string): Promise<any> => {
     data: {
       status: ReviewStatus.approved,
     },
+  });
+
+  //get all the approved isDeleted:false reviews of this movie series and take their average rating to update the movie series rating
+
+  const foundMedia = await prisma.movieSeries.findUnique({
+    where: {
+      id: foundReview.movieSeriesId,
+    },
+    select: {
+      rating: true,
+    },
+  });
+
+  if (!foundMedia) throw new AppError(httpStatus.NOT_FOUND, "Media not found");
+
+  const { _avg, _count } = await prisma.review.aggregate({
+    where: {
+      movieSeriesId: foundReview.movieSeriesId,
+      status: ReviewStatus.approved,
+      isDeleted: false,
+    },
+    _avg: {
+      rating: true, // Calculate the average of the `rating` field
+    },
+    _count: {
+      rating: true, // Count the number of reviews to check if any exist
+    },
+  });
+
+  let averageRating = _avg.rating || foundMedia.rating;
+  const foundAvgRating = _avg.rating || 0;
+  // If no approved reviews are found, do not update the movie series rating
+  if (_count.rating === 0) return null;
+
+  if (_count.rating === 1)
+    averageRating = (foundAvgRating + foundMedia.rating) / 2;
+  if (_count.rating > 1) averageRating = averageRating;
+
+  // Update the movie series rating
+  const updateRating = await prisma.movieSeries.update({
+    where: { id: foundReview.movieSeriesId },
+    data: { rating: averageRating },
   });
 
   return null;

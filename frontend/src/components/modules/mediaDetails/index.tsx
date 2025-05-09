@@ -1,6 +1,6 @@
 "use client";
 
-import { Genre, IMedia, IReview, PriceType, StreamingPlatform } from "@/types";
+import { Genre, IMedia, PriceType, StreamingPlatform } from "@/types";
 import Image from "next/image";
 import {
   Heart,
@@ -330,7 +330,7 @@ const MediaDetailsSection = ({ mediaId }: { mediaId: string }) => {
         </Link>
         <div className="grid gap-4  w-full">
           {media && media.reviews && media.reviews.length ? (
-            media.reviews.map((review: IReview) => (
+            media.reviews.map((review) => (
               <ReviewCard
                 key={review.id}
                 review={review}
