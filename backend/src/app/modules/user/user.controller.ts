@@ -88,6 +88,25 @@ const getAll = tryCatchAsync(async (req, res) => {
   });
 });
 
+const getAllWatchList = tryCatchAsync(
+  async (req: Request & { user?: IJwtPayload }, res) => {
+    const pagination = pick(req.query, paginationProperties);
+
+    const result = await UserService.getALlWatchList(pagination, req.user);
+
+    sendResponse({
+      res,
+      sendData: {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "All watchlist fetched successfully",
+        data: result.data,
+        meta: result.meta,
+      },
+    });
+  }
+);
+
 const addWatchList = tryCatchAsync(
   async (req: Request & { user?: IJwtPayload }, res) => {
     const result = await UserService.addWatchList(
@@ -110,10 +129,7 @@ const addWatchList = tryCatchAsync(
 
 const removeSingleWatchList = tryCatchAsync(
   async (req: Request & { user?: IJwtPayload }, res) => {
-    const result = await UserService.removeOneWatchList(
-      req.user,
-      req.params.id
-    );
+    const result = await UserService.removeOneWatchList(req.params.id);
 
     sendResponse({
       res,
@@ -154,4 +170,5 @@ export const UserController = {
   addWatchList,
   removeSingleWatchList,
   removeAllWatchList,
+  getAllWatchList,
 };

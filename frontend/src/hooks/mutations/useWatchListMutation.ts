@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import { getValidToken } from "@/lib/verifyToken"; // Token utility
 
 interface IPayload {
-  movieSeriesId: string;
+  movieSeriesId?: string;
   watchlistId?: string;
 }
 export const useWatchListMutation = () => {
@@ -27,7 +27,7 @@ export const useWatchListMutation = () => {
         : `${process.env.NEXT_PUBLIC_BASE_API_URL}/user/watchlist`;
 
       const options: RequestInit = {
-        method: watchlistId ? "DELETE" : "POST",
+        method: watchlistId ? "PATCH" : movieSeriesId ? "POST" : "DELETE",
         headers: {
           Authorization: token,
           "Content-Type": "application/json",
@@ -50,6 +50,7 @@ export const useWatchListMutation = () => {
 
       // Invalidate the queries related to media to update the UI after mutation
       queryClient.invalidateQueries({ queryKey: ["single_media"] });
+      queryClient.invalidateQueries({ queryKey: ["user_watchlist"] });
     },
 
     onError: (error) => {

@@ -1,18 +1,18 @@
 "use client";
 import Image from "next/image";
-import { IMedia } from "@/types";
+import { IWatchListMedia } from "@/types";
 import { Card, CardContent } from "@/components/ui/card";
-import { Plus, Star, Video } from "lucide-react";
+import { Minus, Star, Video } from "lucide-react";
 import PrimaryButton from "../../buttons/PrimaryButton";
 import { usePathname, useRouter } from "next/navigation";
 import { useWatchListMutation } from "@/hooks/mutations/useWatchListMutation";
 import { useUserStore } from "@/stores/auth";
 
-interface IPopularCardProps {
-  media: IMedia;
+interface IWatchlistCardProps {
+  media: IWatchListMedia;
 }
 
-export function PopularCard({ media }: IPopularCardProps) {
+export function WatchlistCard({ media }: IWatchlistCardProps) {
   const router = useRouter();
   const { user } = useUserStore();
   const pathname = usePathname();
@@ -22,15 +22,15 @@ export function PopularCard({ media }: IPopularCardProps) {
   const hadleWatchlist = () => {
     if (!user?.userId)
       return router.push(`/login?redirect=${pathname}&cleanup=true`);
-
-    addToWatchlist({ movieSeriesId: media.id });
+    addToWatchlist({ movieSeriesId: media.id, watchlistId: media.id });
   };
+
   return (
     <Card>
       <div className="relative">
         <Image
-          src={media.posterUrl}
-          alt={media.title}
+          src={media.movieSeries.posterUrl}
+          alt={media.movieSeries.title}
           width={500}
           height={500}
           className="h-56 w-full object-cover rounded-t-xl z-0"
@@ -46,30 +46,33 @@ export function PopularCard({ media }: IPopularCardProps) {
               <span>
                 <Star className="text-yellow-400 fill-amber-400 size-4" />
               </span>
-              <span className="text-white/50">{media.rating}/10</span>
+              <span className="text-white/50">
+                {media.movieSeries.rating}/10
+              </span>
             </div>
             <span>
               <Star className="text-primary ml-2 size-4" />
             </span>
           </div>
           <h3 className="text-md line-clamp-1 text-white/70 font-medium">
-            {media.title.slice(0, 1).toUpperCase() + media.title.slice(1)}
+            {media.movieSeries.title.slice(0, 1).toUpperCase() +
+              media.movieSeries.title.slice(1)}
           </h3>
 
           <div className="flex flex-col gap-2">
             <PrimaryButton
               btnText="Watchlist"
               isLoading={isWatchlistPending}
-              loadingText=""
+              loadingText={"Updating..."}
               onClick={hadleWatchlist}
-              Icon={Plus}
+              Icon={Minus}
               className="rounded-sm text-white/80 bg-blue-100/10 hover:bg-blue-400/20 mt-2"
             />
             <PrimaryButton
               btnText="Details"
               isLoading={false}
               loadingText=""
-              onClick={() => router.push(`/media/${media.id}`)}
+              onClick={() => router.push(`/media/${media.movieSeries.id}`)}
               Icon={Video}
               className="rounded-full text-white/70 hover:text-blue-500/40 mt-2 bg-trasparent flex-1 hover:bg-transparent"
             />

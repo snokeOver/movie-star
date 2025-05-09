@@ -36,6 +36,8 @@ router.post(
   UserController.createComment
 );
 
+router.get("/watchlist", auth(UserRole.user), UserController.getAllWatchList);
+
 router.post(
   "/watchlist",
   auth(UserRole.user),
@@ -43,10 +45,9 @@ router.post(
   UserController.addWatchList
 );
 
-router.delete(
+router.patch(
   "/watchlist/:id",
   auth(UserRole.user),
-  validateRequest(ValidateUser.watchList),
   UserController.removeSingleWatchList
 );
 

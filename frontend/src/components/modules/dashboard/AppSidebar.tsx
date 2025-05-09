@@ -2,14 +2,11 @@
 
 import * as React from "react";
 import {
-  BookOpen,
-  Bot,
-  Frame,
+  ChartArea,
   GalleryVerticalEnd,
-  Map,
   MessageCircleDashedIcon,
   PieChart,
-  Settings2,
+  User,
   Video,
 } from "lucide-react";
 
@@ -27,7 +24,7 @@ import { NavUser } from "./NavUser";
 import { useUserStore } from "@/stores/auth";
 
 // This is sample data.
-const data = {
+const adminData = {
   user: {
     name: "shadcn",
     email: "m@example.com",
@@ -72,6 +69,11 @@ const data = {
   ],
   projects: [
     {
+      name: "Analytics",
+      url: "/dashboard/admin",
+      icon: ChartArea,
+    },
+    {
       name: "Sales",
       url: "/dashboard/admin/sales",
       icon: PieChart,
@@ -79,9 +81,61 @@ const data = {
   ],
 };
 
+//user data
+const userData = {
+  user: {
+    name: "shadcn",
+    email: "m@example.com",
+    avatar: "/avatars/shadcn.jpg",
+  },
+  teams: [
+    {
+      name: "Movie Star",
+      logo: GalleryVerticalEnd,
+      plan: "Snoke Industry",
+    },
+  ],
+  navMain: [
+    {
+      title: "Media",
+      url: "/dashboard/user/media",
+      icon: Video,
+      isActive: true,
+      items: [
+        {
+          title: "Purchase",
+          url: "/dashboard/user/media",
+        },
+        {
+          title: "Reviews",
+          url: "/dashboard/user/reviews",
+        },
+        {
+          title: "Watchlist",
+          url: "/dashboard/user/watchlist",
+        },
+      ],
+    },
+    {
+      title: "Profile",
+      url: "/dashboard/user",
+      icon: User,
+      isActive: true,
+      items: [
+        {
+          title: "Edit Profile",
+          url: "/dashboard/user",
+        },
+      ],
+    },
+  ],
+};
+
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { user } = useUserStore();
   if (!user) return null;
+
+  const data = user.role === "admin" ? adminData : userData;
 
   data.user.email = user.email;
   data.user.avatar = user.profilePhoto;
@@ -94,7 +148,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} />
+        {data?.projects && <NavProjects projects={data.projects} />}
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={data.user} />

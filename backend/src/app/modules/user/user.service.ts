@@ -274,6 +274,48 @@ const getAll = async (
   };
 };
 
+//Get all Watchlist
+const getALlWatchList = async (
+  pagination: IPagination,
+  user: IJwtPayload | undefined
+): Promise<any> => {
+  if (!user) throw new AppError(httpStatus.UNAUTHORIZED, "Unauthorized");
+
+  const { page, take, skip, orderBy } = paginationHelper(pagination);
+
+  const result = await prisma.watchlist.findMany({
+    where: {
+      userId: user.userId,
+    },
+    select: {
+      id: true,
+      movieSeries: {
+        select: {
+          id: true,
+          title: true,
+          posterUrl: true,
+          rating: true,
+        },
+      },
+    },
+  });
+
+  const total = await prisma.review.count({
+    where: {
+      userId: user.userId,
+    },
+  });
+
+  return {
+    meta: {
+      page,
+      limit: take,
+      total,
+    },
+    data: result,
+  };
+};
+
 //Add to watchlist
 const addWatchList = async (
   user: IJwtPayload | undefined,
@@ -311,15 +353,10 @@ const addWatchList = async (
 };
 
 //Remove one from watchlist
-const removeOneWatchList = async (
-  user: IJwtPayload | undefined,
-
-  id: string
-): Promise<any> => {
-  if (!user) throw new AppError(httpStatus.UNAUTHORIZED, "Unauthorized");
+const removeOneWatchList = async (id: string): Promise<any> => {
   if (!id) throw new AppError(httpStatus.BAD_REQUEST, "Watchlist id not found");
 
-  const foundMedia = await prisma.movieSeries.findUnique({
+  const foundMedia = await prisma.watchlist.findUnique({
     where: {
       id,
     },
@@ -334,7 +371,7 @@ const removeOneWatchList = async (
     },
   });
 
-  return null;
+  return { message: "Watchlist updated successfully" };
 };
 
 //Remove one from watchlist
@@ -349,7 +386,7 @@ const removeAllWatchList = async (
     },
   });
 
-  return null;
+  return { message: "Watchlist cleared successfully" };
 };
 
 export const UserService = {
@@ -361,4 +398,5 @@ export const UserService = {
   addWatchList,
   removeOneWatchList,
   removeAllWatchList,
+  getALlWatchList,
 };

@@ -107,3 +107,13 @@ export interface IPageReview {
   data: IReviewData;
   meta: IMeta;
 }
+
+export interface IWatchListMedia {
+  id: string;
+  movieSeries: {
+    id: string;
+    title: string;
+    posterUrl: string;
+    rating: number;
+  };
+}
