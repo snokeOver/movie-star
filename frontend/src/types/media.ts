@@ -117,3 +117,14 @@ export interface IWatchListMedia {
     rating: number;
   };
 }
+export interface IPurchaseListMedia {
+  id: string;
+  accessExpiry?: Date;
+  movieSeries: {
+    id: string;
+    title: string;
+    posterUrl: string;
+    rating: number;
+    accessLink: string[];
+  };
+}

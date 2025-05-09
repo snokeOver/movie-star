@@ -37,6 +37,7 @@ router.post(
 );
 
 router.get("/watchlist", auth(UserRole.user), UserController.getAllWatchList);
+router.get("/purchase", auth(UserRole.user), UserController.getAllPurchaseList);
 
 router.post(
   "/watchlist",

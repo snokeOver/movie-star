@@ -98,13 +98,13 @@ const userData = {
   navMain: [
     {
       title: "Media",
-      url: "/dashboard/user/media",
+      url: "/dashboard/user/purchase",
       icon: Video,
       isActive: true,
       items: [
         {
           title: "Purchase",
-          url: "/dashboard/user/media",
+          url: "/dashboard/user/purchase",
         },
         {
           title: "Reviews",

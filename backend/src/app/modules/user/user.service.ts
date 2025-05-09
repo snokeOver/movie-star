@@ -389,6 +389,55 @@ const removeAllWatchList = async (
   return { message: "Watchlist cleared successfully" };
 };
 
+//Get all your purchase
+const getALlPurchaseList = async (
+  pagination: IPagination,
+  user: IJwtPayload | undefined
+): Promise<any> => {
+  if (!user) throw new AppError(httpStatus.UNAUTHORIZED, "Unauthorized");
+
+  const { page, take, skip, orderBy } = paginationHelper(
+    pagination,
+    "purchaseDate"
+  );
+
+  const result = await prisma.purchaseRentHistory.findMany({
+    where: {
+      userId: user.userId,
+    },
+    skip,
+    orderBy,
+    select: {
+      id: true,
+      accessExpiry: true,
+      movieSeries: {
+        select: {
+          id: true,
+          title: true,
+          posterUrl: true,
+          rating: true,
+          accessLink: true,
+        },
+      },
+    },
+  });
+
+  const total = await prisma.review.count({
+    where: {
+      userId: user.userId,
+    },
+  });
+
+  return {
+    meta: {
+      page,
+      limit: take,
+      total,
+    },
+    data: result,
+  };
+};
+
 export const UserService = {
   createReview,
   createMediaLike,
@@ -399,4 +448,5 @@ export const UserService = {
   removeOneWatchList,
   removeAllWatchList,
   getALlWatchList,
+  getALlPurchaseList,
 };

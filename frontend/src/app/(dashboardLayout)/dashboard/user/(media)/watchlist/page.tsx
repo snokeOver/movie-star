@@ -9,7 +9,7 @@ import { IWatchListMedia } from "@/types";
 import React from "react";
 
 const WatchListPage = () => {
-  const { data, isLoading } = useWatchlistQuery(1, 10);
+  const { data, isLoading } = useWatchlistQuery(1, 100);
   const { mutate: clearWatchList, isPending } = useWatchListMutation();
 
   console.log(data);
