@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { IPurchaseListMedia } from "@/types";
 import { Card, CardContent } from "@/components/ui/card";
-import { Play, Star, Video } from "lucide-react";
+import { Play, Video } from "lucide-react";
 import PrimaryButton from "../../buttons/PrimaryButton";
 import { useRouter } from "next/navigation";
 import { format } from "date-fns";
@@ -55,7 +55,7 @@ export function PurchaselistCard({ media }: IWatchlistCardProps) {
               isLoading={false}
               loadingText={"Updating..."}
               onClick={() =>
-                window.open(`${media.movieSeries.accessLink}`, "_blank")
+                window.open(`${media.movieSeries.accessLink[0]}`, "_blank")
               }
               Icon={Play}
               className="rounded-sm text-white/80 bg-blue-100/10 hover:bg-blue-400/20 mt-2"

@@ -41,6 +41,10 @@ const handleCheckoutSessionSuccess = async (
           price: amountTotal,
           transactionId,
           isEmailSent: true,
+          accessExpiry:
+            purchaseType === "rent"
+              ? new Date(new Date().setMonth(new Date().getMonth() + 1))
+              : null,
         },
       });
 

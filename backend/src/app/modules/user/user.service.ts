@@ -30,10 +30,20 @@ const createReview = async (payload: Review): Promise<any> => {
     },
   });
 
-  if (foundReview)
+  if (foundReview?.status === ReviewStatus.approved)
     throw new AppError(
       httpStatus.CONFLICT,
       "You have already given a review for this movie series"
+    );
+  if (foundReview?.status === ReviewStatus.pending)
+    throw new AppError(
+      httpStatus.CONFLICT,
+      "You review is pending for approval"
+    );
+  if (foundReview?.status === ReviewStatus.unpublished)
+    throw new AppError(
+      httpStatus.CONFLICT,
+      "Your review is not approved. You can update your review from dashboard for approval"
     );
 
   const createdReview = await prisma.review.create({
@@ -48,6 +58,47 @@ const createReview = async (payload: Review): Promise<any> => {
   });
 
   return createdReview;
+};
+
+//Update review for movie series by user
+const updateReview = async (payload: Review, id: string): Promise<any> => {
+  if (!payload) throw new AppError(httpStatus.BAD_REQUEST, "Review not found");
+
+  const { userId, movieSeriesId, rating, writtenReview, isSpoiler, tags } =
+    payload;
+
+  const foundReview = await prisma.review.findFirst({
+    where: {
+      userId,
+      movieSeriesId,
+      isDeleted: false,
+    },
+  });
+
+  if (foundReview?.status === ReviewStatus.approved)
+    throw new AppError(httpStatus.CONFLICT, "You review already approved");
+  if (foundReview?.status === ReviewStatus.pending)
+    throw new AppError(
+      httpStatus.CONFLICT,
+      "You review is pending for approval"
+    );
+
+  const updatedReview = await prisma.review.update({
+    where: {
+      id,
+    },
+    data: {
+      userId,
+      movieSeriesId,
+      rating,
+      writtenReview,
+      isSpoiler,
+      status: ReviewStatus.pending,
+      tags,
+    },
+  });
+
+  return updatedReview;
 };
 
 //Create like for movie series by user
@@ -417,6 +468,57 @@ const getALlPurchaseList = async (
           posterUrl: true,
           rating: true,
           accessLink: true,
+          priceType: true,
+        },
+      },
+    },
+  });
+
+  const total = await prisma.review.count({
+    where: {
+      userId: user.userId,
+    },
+  });
+
+  return {
+    meta: {
+      page,
+      limit: take,
+      total,
+    },
+    data: result,
+  };
+};
+
+//Get all your reviews
+const getALlReviewList = async (
+  pagination: IPagination,
+  user: IJwtPayload | undefined
+): Promise<any> => {
+  if (!user) throw new AppError(httpStatus.UNAUTHORIZED, "Unauthorized");
+
+  const { page, take, skip, orderBy } = paginationHelper(pagination);
+
+  const result = await prisma.review.findMany({
+    where: {
+      userId: user.userId,
+      status: ReviewStatus.unpublished,
+    },
+    skip,
+    orderBy,
+    select: {
+      id: true,
+      rating: true,
+      writtenReview: true,
+      isSpoiler: true,
+      tags: true,
+      createdAt: true,
+      movieSeries: {
+        select: {
+          id: true,
+          title: true,
+          posterUrl: true,
+          releaseYear: true,
         },
       },
     },
@@ -449,4 +551,6 @@ export const UserService = {
   removeAllWatchList,
   getALlWatchList,
   getALlPurchaseList,
+  getALlReviewList,
+  updateReview,
 };

@@ -126,5 +126,21 @@ export interface IPurchaseListMedia {
     posterUrl: string;
     rating: number;
     accessLink: string[];
+    priceType: string;
+  };
+}
+
+export interface IDisapprovedReview {
+  id: string;
+  rating: number;
+  writtenReview: string;
+  isSpoiler: boolean;
+  tags: string[];
+  createdAt: Date;
+  movieSeries: {
+    id: string;
+    title: string;
+    posterUrl: string;
+    releaseYear: true;
   };
 }

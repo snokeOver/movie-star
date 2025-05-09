@@ -63,6 +63,7 @@ export const useReviewMutation = () => {
 
       // Invalidate the queries related to media to update the UI after mutation
       queryClient.invalidateQueries({ queryKey: ["single_media"] });
+      queryClient.invalidateQueries({ queryKey: ["diapproved_user_reviews"] });
     },
 
     onError: (error) => {

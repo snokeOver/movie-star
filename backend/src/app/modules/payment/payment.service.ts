@@ -4,6 +4,7 @@ import Stripe from "stripe";
 import config from "../../config";
 import { ICreateSessionPayload } from "./payment.interface";
 import { PaymentUtil } from "./payment.util";
+import { prisma } from "../../utils/prisma";
 
 const stripe = new Stripe(config.stripe_secret_key);
 
@@ -47,6 +48,17 @@ const createSession = async (payload: ICreateSessionPayload) => {
     cancel_url,
     purchaseType,
   } = payload;
+
+  //check if already purchased
+  const isPurchased = await prisma.purchaseRentHistory.findFirst({
+    where: {
+      userId: customerId,
+      movieSeriesId: productId,
+    },
+  });
+  if (isPurchased) {
+    throw new AppError(httpStatus.CONFLICT, "Already Purchased");
+  }
 
   const session = await stripe.checkout.sessions.create({
     mode: "payment",

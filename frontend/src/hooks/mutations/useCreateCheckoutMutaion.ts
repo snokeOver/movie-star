@@ -42,24 +42,16 @@ export const useCreateCheckoutMutation = () => {
 
       const response = await fetch(url, options);
 
-      if (!response.ok) {
-        throw new Error("Failed to create checkout session");
-      }
-
       const result = await response.json();
-
-      // Ensure the response has the expected structure
-      if (!result || !result.data?.url) {
-        throw new Error("Missing URL in response");
-      }
 
       return result;
     },
 
     onSuccess: async (res) => {
-      if (!res?.data?.url) {
-        toast.error("Something went wrong with the checkout session");
-      }
+      if (!res.success) return toast.error(res.message);
+      if (!res?.data?.url)
+        return toast.error("Something went wrong with the checkout session");
+
       const { id } = res.data;
 
       const stripe = await stripePromise;

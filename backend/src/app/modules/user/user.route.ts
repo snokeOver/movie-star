@@ -15,6 +15,13 @@ router.post(
   UserController.createReview
 );
 
+router.patch(
+  "/review/:id",
+  auth(UserRole.user),
+  validateRequest(ValidateUser.updateReview),
+  UserController.updateReview
+);
+
 router.post(
   "/media-like",
   auth(UserRole.user),
@@ -38,6 +45,7 @@ router.post(
 
 router.get("/watchlist", auth(UserRole.user), UserController.getAllWatchList);
 router.get("/purchase", auth(UserRole.user), UserController.getAllPurchaseList);
+router.get("/review", auth(UserRole.user), UserController.getMyALlReviews);
 
 router.post(
   "/watchlist",

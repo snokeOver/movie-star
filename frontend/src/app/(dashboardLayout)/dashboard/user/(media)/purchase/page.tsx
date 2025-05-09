@@ -1,6 +1,5 @@
 "use client";
 import { PurchaselistCard } from "@/components/shared/core/card/PurchaseCard";
-import { WatchlistCard } from "@/components/shared/core/card/WatchlistCard";
 import LoadingSection from "@/components/shared/core/loading-skeleton/LoadingSection";
 import { usePurchaseQuery } from "@/hooks/queries/usePurchaseQuery";
 import { IPurchaseListMedia } from "@/types";
@@ -10,7 +9,6 @@ import React from "react";
 const UserPurchasePage = () => {
   const { data, isLoading } = usePurchaseQuery(1, 100);
 
-  console.log(data);
   if (isLoading) return <LoadingSection />;
   if (!data) return null;
   return (

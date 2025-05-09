@@ -56,7 +56,7 @@ export const globalErrorHandler: ErrorRequestHandler = (
     ];
   }
 
-  console.log(err);
+  // console.log(err);
 
   // Handle the error response
   res.status(statusCode).json({

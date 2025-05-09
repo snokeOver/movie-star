@@ -43,7 +43,7 @@ import { Textarea } from "@/components/ui/textarea";
 
 import { z } from "zod";
 import { useUserStore } from "@/stores/auth";
-import { IChildren, IReviewForm } from "@/types";
+import { IChildren, IDisapprovedReview } from "@/types";
 import { useReviewMutation } from "@/hooks/mutations/useReviewMutation";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -82,7 +82,7 @@ const suggestedTags = [
 ];
 
 interface ICreateReviewDialogueProps extends IChildren {
-  currReview?: IReviewForm;
+  currReview?: IDisapprovedReview;
   mediaId: string;
 }
 
@@ -149,7 +149,7 @@ const CreateReviewDialogue = ({
         <div className="flex flex-col items-center gap-10">
           <DialogTitle>
             <p className="text-lg font-bold uppercase lg:text-2xl">
-              Create Review
+              {currReview ? "Update" : "Create"} Review
             </p>
           </DialogTitle>
 

@@ -16,7 +16,22 @@ const createReview = tryCatchAsync(async (req, res) => {
     sendData: {
       statusCode: httpStatus.OK,
       success: true,
-      message: "Review saved successfully",
+      message: "Review submitted for admin approval",
+      data: result,
+    },
+  });
+});
+
+//Update single review
+const updateReview = tryCatchAsync(async (req, res) => {
+  const result = await UserService.updateReview(req.body, req.params.id);
+
+  sendResponse({
+    res,
+    sendData: {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Review re-submitted for admin approval",
       data: result,
     },
   });
@@ -100,6 +115,25 @@ const getAllWatchList = tryCatchAsync(
         statusCode: httpStatus.OK,
         success: true,
         message: "All watchlist fetched successfully",
+        data: result.data,
+        meta: result.meta,
+      },
+    });
+  }
+);
+
+const getMyALlReviews = tryCatchAsync(
+  async (req: Request & { user?: IJwtPayload }, res) => {
+    const pagination = pick(req.query, paginationProperties);
+
+    const result = await UserService.getALlReviewList(pagination, req.user);
+
+    sendResponse({
+      res,
+      sendData: {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "All reviews fetched successfully",
         data: result.data,
         meta: result.meta,
       },
@@ -191,4 +225,6 @@ export const UserController = {
   removeAllWatchList,
   getAllWatchList,
   getAllPurchaseList,
+  getMyALlReviews,
+  updateReview,
 };

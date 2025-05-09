@@ -19,6 +19,20 @@ const createReview = z.object({
     .strict(),
 });
 
+const updateReview = z.object({
+  body: z
+    .object({
+      movieSeriesId: z.string().optional(),
+      userId: z.string().optional(),
+      rating: z.number().optional(),
+
+      writtenReview: z.string().optional(),
+      isSpoiler: z.boolean().optional(),
+      tags: z.array(z.string().optional()).optional(),
+    })
+    .strict(),
+});
+
 const createMediaLike = z.object({
   body: z
     .object({
@@ -61,4 +75,5 @@ export const ValidateUser = {
   createReviewLike,
   createComment,
   watchList,
+  updateReview,
 };
