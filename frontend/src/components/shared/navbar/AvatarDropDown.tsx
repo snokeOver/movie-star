@@ -47,10 +47,15 @@ export function AvatarDropDown() {
           <span className="text-xs text-muted-foreground">{user?.email}</span>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="cursor-pointer">
-          <User className="text-white" />
-          <span>Profile</span>
-        </DropdownMenuItem>
+        {user?.role === "user" && (
+          <DropdownMenuItem
+            onClick={() => router.push(`/dashboard/${user?.role}`)}
+            className="cursor-pointer"
+          >
+            <User className="text-white" />
+            <span>Profile</span>
+          </DropdownMenuItem>
+        )}
         <DropdownMenuItem
           className="cursor-pointer"
           onClick={() => router.push(`/dashboard/${user?.role}`)}
@@ -58,14 +63,16 @@ export function AvatarDropDown() {
           <Plus className="text-white" />
           <span>Dashboard</span>
         </DropdownMenuItem>
-        <DropdownMenuItem className="cursor-pointer">
-          <CreditCard className="text-white" />
-          <span>Billing</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem className="cursor-pointer">
-          <Plus className="text-white" />
-          <span>New Post</span>
-        </DropdownMenuItem>
+        {user?.role === "user" && (
+          <DropdownMenuItem
+            onClick={() => router.push(`/dashboard/${user?.role}/purchase`)}
+            className="cursor-pointer"
+          >
+            <CreditCard className="text-white" />
+            <span>Purchase</span>
+          </DropdownMenuItem>
+        )}
+
         <DropdownMenuSeparator />
         <DropdownMenuItem
           className="text-red-600 cursor-pointer"

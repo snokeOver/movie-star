@@ -1,3 +1,4 @@
+import ExtraSection from "@/components/modules/home/ExtraSection";
 import RecommendedSection from "@/components/modules/home/RecommendedSection";
 import TopRatedSection from "@/components/modules/home/TopRatedSection";
 import TrendingSection from "@/components/modules/home/TrendingSection";
@@ -20,6 +21,9 @@ const HomePage = async () => {
           <TrendingSection medias={trendingMedia} />
           <TopRatedSection medias={popularMedia} />
           <RecommendedSection medias={recommendedMedia} />
+        </div>
+        <div>
+          <ExtraSection />
         </div>
       </div>
     </div>

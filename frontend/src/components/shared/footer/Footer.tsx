@@ -6,7 +6,7 @@ const Footer = () => {
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/about", label: "About Us" },
-    { href: "/testimonial", label: "Testimonial" },
+    { href: "#", label: "Testimonial" },
     { href: "/blogs", label: "Blogs" },
     { href: "/contact", label: "Contact Us" },
   ];
