@@ -159,9 +159,31 @@ const getFiveAdminSelected = tryCatchAsync(async (req, res) => {
   });
 });
 
+const getAllPublic = tryCatchAsync(async (req, res) => {
+  const filteredQuery = pick(req.query, validSearchableFields);
+  const pagination = pick(req.query, paginationProperties);
+
+  const result = await MovieSeriesService.getAllPublic(
+    filteredQuery,
+    pagination
+  );
+
+  sendResponse({
+    res,
+    sendData: {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "All public Media fetched successfully",
+      data: result.data,
+      meta: result.meta,
+    },
+  });
+});
+
 export const MovieSeriesController = {
   getSingle,
   getAll,
+  getAllPublic,
   updateSingle,
   deleteSingle,
   createSingle,

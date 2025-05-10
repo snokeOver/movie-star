@@ -1,8 +1,17 @@
 export const validSearchableFields = [
   "searchTerm",
   "title",
-  "description",
-  "releaseYear",
+  "genre",
+  "rating",
+  "streamingPlatform",
 ];
 
-export const movieSeriesSearchTerms = ["title", "description"];
+export const movieSeriesSearchTerms = [
+  "title",
+  "description",
+  "releaseYear",
+  "streamingPlatform",
+  "genre",
+  "director",
+  "cast",
+];

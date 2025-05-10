@@ -438,9 +438,113 @@ const getSinglePublic = async (
   };
 };
 
+//Get all public Movie Series data
+const getAllPublic = async (
+  query: IMovieSeriesFilteredQuery,
+  pagination: IPagination
+): Promise<any> => {
+  const { page, take, skip, orderBy } = paginationHelper(pagination);
+
+  // console.log("Pagination data:", query);
+  const { searchTerm, ...filterData } = query;
+
+  const searchCondition: Prisma.MovieSeriesWhereInput[] = [];
+
+  if (query.searchTerm) {
+    searchCondition.push({
+      OR: movieSeriesSearchTerms.map((field) => ({
+        [field]: { contains: query.searchTerm, mode: "insensitive" },
+      })),
+    });
+  }
+
+  if (Object.keys(filterData).length) {
+    const { genre, streamingPlatform, rating } = filterData as any;
+
+    // Genre filter (array)
+    if (genre) {
+      searchCondition.push({
+        AND: [
+          {
+            genre: {
+              has: genre,
+            },
+          },
+        ],
+      });
+    }
+
+    // Streaming Platform filter (array)
+    if (streamingPlatform) {
+      searchCondition.push({
+        AND: [
+          {
+            streamingPlatform: {
+              has: streamingPlatform,
+            },
+          },
+        ],
+      });
+    }
+
+    // Rating filter (number)
+    if (rating) {
+      searchCondition.push({
+        AND: [
+          {
+            rating: {
+              gte: parseFloat(rating),
+            },
+          },
+        ],
+      });
+    }
+  }
+
+  //Do not show data where isDeleted is true
+  searchCondition.push({
+    isDeleted: false,
+  });
+
+  const whereConditions: Prisma.MovieSeriesWhereInput = {
+    AND: searchCondition,
+  };
+
+  const result = await prisma.movieSeries.findMany({
+    where: whereConditions,
+    skip,
+    take,
+    orderBy,
+    select: {
+      id: true,
+      title: true,
+      posterUrl: true,
+      releaseYear: true,
+      genre: true,
+      rating: true,
+      viewCount: true,
+      streamingPlatform: true,
+    },
+  });
+
+  const total = await prisma.movieSeries.count({
+    where: whereConditions,
+  });
+
+  return {
+    meta: {
+      page,
+      limit: take,
+      total,
+    },
+    data: result,
+  };
+};
+
 export const MovieSeriesService = {
   getSingle,
   getAll,
+  getAllPublic,
   updateSingle,
   deleteSingle,
   createSingle,
