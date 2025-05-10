@@ -1,7 +1,13 @@
-import { ICategory } from "@/types";
 import Image from "next/image";
 
-const CategoryCard = ({ category }: { category: ICategory }) => {
+interface ICategoryCardProps {
+  category: {
+    name: string;
+    icon: string;
+  };
+}
+
+const CategoryCard = ({ category }: ICategoryCardProps) => {
   return (
     <div className="bg-white bg-opacity-50 border-2 border-white rounded-2xl text-center p-6 h-44">
       <Image

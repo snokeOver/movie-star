@@ -15,11 +15,10 @@ import { z } from "zod";
 import PrimaryButton from "@/components/shared/buttons/PrimaryButton";
 import { IUser } from "@/types";
 import { useCommentMutation } from "@/hooks/mutations/useCommentMutation";
-import { useEffect } from "react";
 interface CommentFormProps {
   reviewId: string;
   user: IUser | null;
-  setIsCommenting: (value: boolean) => void;
+  setIsCommenting?: (value: boolean) => void;
 }
 
 export const commentSchema = z.object({
@@ -29,7 +28,7 @@ export const commentSchema = z.object({
     .max(500, "Comment is too long"),
 });
 
-const CommentForm = ({ reviewId, user, setIsCommenting }: CommentFormProps) => {
+const CommentForm = ({ reviewId, user }: CommentFormProps) => {
   const { mutate: createComment, isPending } = useCommentMutation();
 
   const form = useForm({

@@ -46,7 +46,7 @@ export function TransactionsTable({
     }
 
     return filtered;
-  }, [dateRange, limit]);
+  }, [dateRange, limit, data]);
 
   return (
     <div className="rounded-md border">

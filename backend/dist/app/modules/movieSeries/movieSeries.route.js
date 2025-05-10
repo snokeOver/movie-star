@@ -14,10 +14,12 @@ const router = express_1.default.Router();
 router.delete("/:id", (0, auth_1.default)(prisma_1.UserRole.admin, prisma_1.UserRole.s_admin), movieSeries_controller_1.MovieSeriesController.deleteSingle);
 router.get("/single/:id", (0, auth_1.default)(prisma_1.UserRole.admin, prisma_1.UserRole.s_admin), movieSeries_controller_1.MovieSeriesController.getSingle);
 router.get("/single-public/:id", movieSeries_controller_1.MovieSeriesController.getSinglePublic);
-router.get("/", (0, auth_1.default)(prisma_1.UserRole.admin, prisma_1.UserRole.s_admin), movieSeries_controller_1.MovieSeriesController.getAll);
+router.get("/", movieSeries_controller_1.MovieSeriesController.getAll);
+router.get("/public", movieSeries_controller_1.MovieSeriesController.getAllPublic);
 router.get("/home-banner", movieSeries_controller_1.MovieSeriesController.getFiveHomeBanner);
 router.get("/admin-selected", movieSeries_controller_1.MovieSeriesController.getFiveAdminSelected);
 router.get("/hightest-rated", movieSeries_controller_1.MovieSeriesController.getFiveHighestRated);
+router.get("/trending", movieSeries_controller_1.MovieSeriesController.getFiveHighlyViewed);
 router.get("/trending", movieSeries_controller_1.MovieSeriesController.getFiveHighlyViewed);
 router.post("/", (0, auth_1.default)(prisma_1.UserRole.admin, prisma_1.UserRole.s_admin), fileUploader_1.fileUploader.multerUpload.single("file"), (req, res, next) => {
     req.body.data = movieSeries_validate_1.ValidateMovieSeries.create.parse(JSON.parse(req.body.data));

@@ -38,7 +38,7 @@ export function UserTransactionsTable({
     }
 
     return filtered;
-  }, [dateRange]);
+  }, [dateRange, data]);
 
   return (
     <div className="rounded-md border">

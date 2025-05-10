@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { ChevronsUpDown } from "lucide-react";
 
 import {
   DropdownMenu,
@@ -28,7 +27,7 @@ export function TeamSwitcher({
   if (!activeTeam) {
     return null;
   }
-
+  void setActiveTeam;
   return (
     <SidebarMenu>
       <SidebarMenuItem>

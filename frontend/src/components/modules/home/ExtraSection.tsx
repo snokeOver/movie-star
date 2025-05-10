@@ -123,7 +123,7 @@ const ExtraSection = () => {
           </AccordionItem>
           <AccordionItem value="item-5">
             <AccordionTrigger>
-              How do I request a movie that's not in your library?
+              How do I request a movie that is not in your library?
             </AccordionTrigger>
             <AccordionContent>
               We welcome suggestions! You can submit movie requests through your
@@ -143,8 +143,8 @@ const ExtraSection = () => {
                 Get In Touch
               </h2>
               <p className="mb-6 text-muted-foreground">
-                Have questions or feedback? We'd love to hear from you. Our team
-                is always ready to help enhance your movie experience.
+                Have questions or feedback? We would love to hear from you. Our
+                team is always ready to help enhance your movie experience.
               </p>
               <div className="space-y-4">
                 <div className="flex items-center gap-3">

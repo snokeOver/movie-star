@@ -99,7 +99,7 @@ export default function ContactPage() {
             Frequently Asked Questions
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto mb-6">
-            Can't find what you're looking for? Check our{" "}
+            Caa not find what you are looking for? Check our{" "}
             <a href="/faq" className="text-primary hover:underline">
               FAQ page
             </a>{" "}

@@ -53,6 +53,7 @@ const globalErrorHandler = (err, req, res, next) => {
             },
         ];
     }
+    // console.log(err);
     // Handle the error response
     res.status(statusCode).json({
         success: false,

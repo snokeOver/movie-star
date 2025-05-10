@@ -2,10 +2,16 @@ export interface IChildren {
   children: React.ReactNode;
 }
 
-export type Params = { id: string };
-export type SearchParams = { [key: string]: string | string[] | undefined };
+type TParams = Promise<{ [key: string]: string }>;
+type TSearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 
 export interface IPageWithProps {
-  params?: Params;
-  searchParams?: SearchParams;
+  params: TParams;
+}
+export interface IPageWithParams {
+  searchParams: TSearchParams;
+}
+export interface IPageWithPropsParams {
+  params: TParams;
+  searchParams: TSearchParams;
 }

@@ -17,6 +17,18 @@ const payment_service_1 = require("./payment.service");
 const http_status_1 = __importDefault(require("http-status"));
 const sendResponse_1 = require("../../utils/sendResponse");
 const tryCatchAsync_1 = require("../../utils/tryCatchAsync");
+const handleStripeWebhook = (0, tryCatchAsync_1.tryCatchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    yield payment_service_1.PaymentService.handleStripeWebhook(req.body);
+    (0, sendResponse_1.sendResponse)({
+        res,
+        sendData: {
+            statusCode: http_status_1.default.OK,
+            success: true,
+            message: "Webhook received successfully",
+            data: null,
+        },
+    });
+}));
 const createSession = (0, tryCatchAsync_1.tryCatchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield payment_service_1.PaymentService.createSession(req.body);
     (0, sendResponse_1.sendResponse)({
@@ -31,4 +43,5 @@ const createSession = (0, tryCatchAsync_1.tryCatchAsync)((req, res) => __awaiter
 }));
 exports.PaymentController = {
     createSession,
+    handleStripeWebhook,
 };

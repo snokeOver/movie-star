@@ -4,17 +4,7 @@ import { MoviesGrid } from "@/components/modules/movies/movies-grid";
 import { MoviesSidebar } from "@/components/modules/movies/movies-sidebar";
 import { MoviesHeader } from "@/components/modules/movies/movies-header";
 
-export default function MoviesPage({
-  searchParams,
-}: {
-  searchParams: {
-    page?: string;
-    sort?: string;
-    genre?: string;
-    rating?: string;
-    platform?: string;
-  };
-}) {
+export default function MoviesPage({ searchParams }: any) {
   // Get the current page from the search params or default to 1
   const page = searchParams.page ? Number.parseInt(searchParams.page) : 1;
   const sort = searchParams.sort || "createdAt";

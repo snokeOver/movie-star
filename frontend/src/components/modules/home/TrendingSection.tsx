@@ -1,6 +1,5 @@
 "use client";
 import PrimaryButton from "@/components/shared/buttons/PrimaryButton";
-import SecondaryButton from "@/components/shared/buttons/SecondaryButton";
 import { PopularCard } from "@/components/shared/core/card/PopularCard";
 import { IMedia } from "@/types";
 import Link from "next/link";

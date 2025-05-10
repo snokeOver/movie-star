@@ -53,14 +53,12 @@ import ImageUploader from "@/components/shared/core/image/ImageUploader";
 
 import { useMediaMutation } from "@/hooks/mutations/useMediaMutation";
 import { Genre, StreamingPlatform } from "@/types";
-import { useSearchParams } from "next/navigation";
 import { useMediaQuery } from "@/hooks/queries/useMediaQuery";
 import LoadingSection from "@/components/shared/core/loading-skeleton/LoadingSection";
 import { getEnumValueByKey, transformEnumArray } from "@/lib/formatter";
 
-const CreateMediaForm = () => {
+const CreateMediaForm = ({ mediaId }: { mediaId?: string }) => {
   const { mutate: createMedia, isPending: isLoading } = useMediaMutation();
-  const mediaId = useSearchParams().get("id");
 
   const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
   const [imageFiles, setImageFiles] = useState<File[] | []>([]);
@@ -170,7 +168,7 @@ const CreateMediaForm = () => {
     if (media?.title) {
       setImagePreview([media?.posterUrl || null]);
     }
-  }, [mediaId, media]);
+  }, [mediaId, media, form]);
 
   if (isSingleMediaLoading) return <LoadingSection />;
   if (isError) return <div>Error: {error?.message}</div>; // Error state

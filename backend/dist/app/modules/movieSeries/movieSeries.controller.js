@@ -61,7 +61,7 @@ const getSingle = (0, tryCatchAsync_1.tryCatchAsync)((req, res) => __awaiter(voi
 }));
 //Get single movie series data by id for public
 const getSinglePublic = (0, tryCatchAsync_1.tryCatchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield movieSeries_service_1.MovieSeriesService.getSinglePublic(req.params.id);
+    const result = yield movieSeries_service_1.MovieSeriesService.getSinglePublic(req.params.id, req.headers.authorization);
     (0, sendResponse_1.sendResponse)({
         res,
         sendData: {
@@ -148,9 +148,25 @@ const getFiveAdminSelected = (0, tryCatchAsync_1.tryCatchAsync)((req, res) => __
         },
     });
 }));
+const getAllPublic = (0, tryCatchAsync_1.tryCatchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const filteredQuery = (0, pick_1.pick)(req.query, movieSeries_constant_1.validSearchableFields);
+    const pagination = (0, pick_1.pick)(req.query, pagination_1.paginationProperties);
+    const result = yield movieSeries_service_1.MovieSeriesService.getAllPublic(filteredQuery, pagination);
+    (0, sendResponse_1.sendResponse)({
+        res,
+        sendData: {
+            statusCode: http_status_1.default.OK,
+            success: true,
+            message: "All public Media fetched successfully",
+            data: result.data,
+            meta: result.meta,
+        },
+    });
+}));
 exports.MovieSeriesController = {
     getSingle,
     getAll,
+    getAllPublic,
     updateSingle,
     deleteSingle,
     createSingle,

@@ -1,7 +1,8 @@
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { Button } from "../../button";
+
 import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
 
 const TablePagination = ({ totalPage }: { totalPage: number }) => {
   const [currentPage, setCurrentPage] = useState(1);

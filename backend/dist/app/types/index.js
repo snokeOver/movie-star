@@ -20,3 +20,4 @@ __exportStar(require("./error.type"), exports);
 __exportStar(require("./jwt.type"), exports);
 __exportStar(require("./clientInfo.type"), exports);
 __exportStar(require("./file.type"), exports);
+__exportStar(require("./order.type"), exports);

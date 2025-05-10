@@ -42,7 +42,7 @@ export function HomeBannerCarousel({ bannerMedias }: IHomeBannerCarouselProps) {
       onMouseLeave={plugin.current.reset}
     >
       <CarouselContent className="h-full">
-        {bannerMedias.map((media, index) => (
+        {bannerMedias?.map((media, index) => (
           <CarouselItem key={index}>
             <Card className="bg-transparent border-none shadow-none">
               <CardContent className="flex gap-10 items-center justify-between p-10 mx-10">

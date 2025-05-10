@@ -60,8 +60,6 @@ export const ChartGrid = ({
 export const ChartLine = ({
   dataKey,
   className,
-  dot,
-  activeDot,
 }: {
   dataKey: string;
   className: string;
@@ -73,12 +71,7 @@ export const ChartLine = ({
 
 export const ChartContainer = ({
   children,
-  xAxisKey,
-  yAxisKey,
   padding,
-  minY,
-  maxY,
-  data,
 }: {
   children: React.ReactNode;
   xAxisKey: string;
@@ -103,9 +96,7 @@ export const ChartContainer = ({
   );
 };
 
-export const ChartTooltip = ({
-  content,
-}: {
+export const ChartTooltip = ({}: {
   content: (props: any) => React.ReactNode;
 }) => {
   // This is a mock implementation since we can't actually render the tooltip without the real Recharts

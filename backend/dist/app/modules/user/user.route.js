@@ -1,0 +1,32 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.userRoutes = void 0;
+const express_1 = __importDefault(require("express"));
+const auth_1 = __importDefault(require("../../middleWares/auth"));
+const prisma_1 = require("../../../../generated/prisma");
+const validateRequest_1 = require("../../middleWares/validateRequest");
+const user_validate_1 = require("./user.validate");
+const user_controller_1 = require("./user.controller");
+const fileUploader_1 = require("../../utils/fileUploader");
+const router = express_1.default.Router();
+router.post("/review", (0, auth_1.default)(prisma_1.UserRole.user), (0, validateRequest_1.validateRequest)(user_validate_1.ValidateUser.createReview), user_controller_1.UserController.createReview);
+router.patch("/review/:id", (0, auth_1.default)(prisma_1.UserRole.user), (0, validateRequest_1.validateRequest)(user_validate_1.ValidateUser.updateReview), user_controller_1.UserController.updateReview);
+router.post("/media-like", (0, auth_1.default)(prisma_1.UserRole.user), (0, validateRequest_1.validateRequest)(user_validate_1.ValidateUser.createMediaLike), user_controller_1.UserController.createMediaLike);
+router.post("/review-like", (0, auth_1.default)(prisma_1.UserRole.user), (0, validateRequest_1.validateRequest)(user_validate_1.ValidateUser.createReviewLike), user_controller_1.UserController.createReviewLike);
+router.post("/comment", (0, auth_1.default)(prisma_1.UserRole.user), (0, validateRequest_1.validateRequest)(user_validate_1.ValidateUser.createComment), user_controller_1.UserController.createComment);
+router.get("/watchlist", (0, auth_1.default)(prisma_1.UserRole.user), user_controller_1.UserController.getAllWatchList);
+router.get("/purchase", (0, auth_1.default)(prisma_1.UserRole.user), user_controller_1.UserController.getAllPurchaseList);
+router.get("/review", (0, auth_1.default)(prisma_1.UserRole.user), user_controller_1.UserController.getMyALlReviews);
+router.get("/profile", (0, auth_1.default)(prisma_1.UserRole.user, prisma_1.UserRole.admin, prisma_1.UserRole.s_admin), user_controller_1.UserController.getProfile);
+router.patch("/profile", (0, auth_1.default)(prisma_1.UserRole.user, prisma_1.UserRole.admin, prisma_1.UserRole.s_admin), fileUploader_1.fileUploader.multerUpload.single("file"), (req, res, next) => {
+    req.body.data = user_validate_1.ValidateUser.updateProfile.parse(JSON.parse(req.body.data));
+    return user_controller_1.UserController.updateProfile(req, res, next);
+});
+router.post("/watchlist", (0, auth_1.default)(prisma_1.UserRole.user), (0, validateRequest_1.validateRequest)(user_validate_1.ValidateUser.watchList), user_controller_1.UserController.addWatchList);
+router.patch("/watchlist/:id", (0, auth_1.default)(prisma_1.UserRole.user), user_controller_1.UserController.removeSingleWatchList);
+router.delete("/watchlist", (0, auth_1.default)(prisma_1.UserRole.user), user_controller_1.UserController.removeAllWatchList);
+router.get("/review/:id", user_controller_1.UserController.getAll);
+exports.userRoutes = router;

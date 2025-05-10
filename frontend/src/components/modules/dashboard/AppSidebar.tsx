@@ -129,6 +129,13 @@ const userData = {
       ],
     },
   ],
+  projects: [
+    {
+      name: "Analytics",
+      url: "#",
+      icon: PieChart,
+    },
+  ],
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {

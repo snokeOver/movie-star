@@ -191,7 +191,7 @@ export default function AboutPage() {
                   <div>
                     <h4 className="font-medium">Premium Titles</h4>
                     <p className="text-sm text-muted-foreground">
-                      Access to the newest releases before they're available on
+                      Access to the newest releases before they are available on
                       subscription services
                     </p>
                   </div>

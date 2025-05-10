@@ -66,7 +66,7 @@ const UpdateProfile = () => {
     if (data && data.profilePhoto) {
       setImagePreview([data.profilePhoto]);
     }
-  }, [data]);
+  }, [data, form]);
 
   if (isProfileLoading) return <LoadingSection />;
   if (!data) return null;

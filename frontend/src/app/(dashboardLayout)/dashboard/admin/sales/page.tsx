@@ -13,10 +13,7 @@ import { format, subDays } from "date-fns";
 import type { DateRange } from "react-day-picker";
 import { DateRangePicker } from "@/components/modules/admin/sales/DateRangePicker";
 import { TransactionsTable } from "@/components/modules/admin/sales/TransactionTable";
-import {
-  PurchaseTypeChart,
-  SalesPieChart,
-} from "@/components/modules/admin/sales/PurchaseTypeChart";
+import { SalesPieChart } from "@/components/modules/admin/sales/PurchaseTypeChart";
 import { UserTransactionsTable } from "@/components/modules/admin/sales/UserTransactionTable";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useSalesQuery } from "@/hooks/queries/useSalesQuery";
@@ -57,7 +54,7 @@ export default function DashboardPage() {
               Analytics Overview
             </h1>
             <p className="text-muted-foreground mt-1">
-              Monitor your platform's performance and revenue
+              Monitor your platforms performance and revenue
             </p>
           </div>
           <DateRangePicker date={date} setDate={setDate} />

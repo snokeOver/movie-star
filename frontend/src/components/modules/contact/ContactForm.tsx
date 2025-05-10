@@ -47,7 +47,7 @@ export default function ContactForm() {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit() {
     setIsSubmitting(true);
 
     // Simulate API call

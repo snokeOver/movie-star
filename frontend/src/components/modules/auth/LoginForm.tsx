@@ -24,7 +24,13 @@ import { useVerifyEmail } from "@/stores/verifyEmail";
 import { jwtDecode } from "jwt-decode";
 import { IUser } from "@/types";
 
-const LoginForm = () => {
+const LoginForm = ({
+  redirect,
+  cleanup,
+}: {
+  redirect?: string | undefined;
+  cleanup?: string | undefined;
+}) => {
   const { setUser } = useUserStore();
   const { handleLogout } = useSilentLogout();
 
@@ -33,7 +39,6 @@ const LoginForm = () => {
   const [showPass, setShowPass] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-  const searchParams = useSearchParams();
 
   const form = useForm({
     resolver: zodResolver(loginUserSchema),
@@ -55,7 +60,7 @@ const LoginForm = () => {
           currUser.role === "admin" ? "/dashboard/admin" : "/";
 
         setUser(currUser);
-        const redirecUrl = searchParams.get("redirect") || roleBasedPath;
+        const redirecUrl = redirect || roleBasedPath;
 
         router.push(redirecUrl);
         toast.success(res.message);
@@ -76,17 +81,16 @@ const LoginForm = () => {
 
   //check for clear user from local storage
   useEffect(() => {
-    const shouldClearUser = searchParams.get("cleanup") === "true";
+    const shouldClearUser = cleanup === "true";
     if (shouldClearUser) {
       const redirectedUrl =
-        `${process.env.NEXT_PUBLIC_BASE_URL}/login?redirect=${searchParams.get(
-          "redirect"
-        )}` || "/login";
+        `${process.env.NEXT_PUBLIC_BASE_URL}/login?redirect=${redirect}` ||
+        "/login";
 
       router.push(redirectedUrl);
       handleLogout(false);
     }
-  }, [searchParams]);
+  }, [redirect]);
 
   return (
     <>

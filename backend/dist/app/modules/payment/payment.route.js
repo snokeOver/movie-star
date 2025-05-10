@@ -12,4 +12,5 @@ const validateRequest_1 = require("../../middleWares/validateRequest");
 const payment_validate_1 = require("./payment.validate");
 const router = express_1.default.Router();
 router.post("/create-session", (0, auth_1.default)(prisma_1.UserRole.user, prisma_1.UserRole.admin), (0, validateRequest_1.validateRequest)(payment_validate_1.ValidatePayment.createSession), payment_controller_1.PaymentController.createSession);
+router.post("/webhook", payment_controller_1.PaymentController.handleStripeWebhook);
 exports.paymentRoutes = router;

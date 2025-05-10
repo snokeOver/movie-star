@@ -33,7 +33,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-import Image from "next/image";
 import { IReview } from "./PendingReviewSection";
 import TableRowActions from "./TableRowActions";
 import { format } from "date-fns";
