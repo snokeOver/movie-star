@@ -8,7 +8,7 @@ export const useWatchlistQuery = (page: number, limit: number) => {
   const { setListNo } = useWatchListStore();
 
   const options = queryOptions({
-    queryKey: ["user_watchlist", page, limit],
+    queryKey: ["userWatchlist"],
     queryFn: async () => {
       const token = await getValidToken();
       if (!token) return null;
@@ -25,8 +25,10 @@ export const useWatchlistQuery = (page: number, limit: number) => {
       if (!res.ok) throw new Error("Failed to fetch user watchlist");
 
       const data = await res.json();
+      // console.log("total watchlist:", data);
 
       if (data.data) setListNo(data.data.length);
+
       return data.data;
     },
     enabled: !!user && user.role === "user",

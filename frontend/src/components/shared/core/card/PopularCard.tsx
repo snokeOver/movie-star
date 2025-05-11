@@ -16,6 +16,7 @@ export function PopularCard({ media }: IPopularCardProps) {
   const router = useRouter();
   const { user } = useUserStore();
   const pathname = usePathname();
+
   const { mutate: addToWatchlist, isPending: isWatchlistPending } =
     useWatchListMutation();
 

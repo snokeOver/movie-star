@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Slider } from "@/components/ui/slider";
 import { Badge } from "@/components/ui/badge";
+import { useSearchTerm } from "@/stores/searchTerm";
 
 export function MoviesFilters({
   currentSort = "recent",
@@ -20,6 +21,7 @@ export function MoviesFilters({
 }) {
   const router = useRouter();
   const pathname = usePathname();
+  const { setSearchTerm } = useSearchTerm();
 
   // State for filters
   const [localFilters, setLocalFilters] = useState({
@@ -81,6 +83,9 @@ export function MoviesFilters({
     if (filters.platform) {
       params.set("platform", filters.platform);
     }
+    if (filters.searchTerm) {
+      params.set("searchTerm", filters.searchTerm);
+    }
 
     // Reset to page 1 when filters change
     params.set("page", "1");
@@ -126,6 +131,7 @@ export function MoviesFilters({
 
   // Handle reset filters
   const handleResetFilters = () => {
+    setSearchTerm("");
     setLocalFilters({
       sort: "recent",
       genre: "",

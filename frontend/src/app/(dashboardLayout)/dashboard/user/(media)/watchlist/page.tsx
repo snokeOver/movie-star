@@ -12,7 +12,7 @@ const WatchListPage = () => {
   const { data, isLoading } = useWatchlistQuery(1, 100);
   const { mutate: clearWatchList, isPending } = useWatchListMutation();
 
-  console.log(data);
+  // console.log(data);
   if (isLoading) return <LoadingSection />;
   if (!data) return null;
   return (

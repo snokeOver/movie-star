@@ -173,8 +173,7 @@ const addWatchList = tryCatchAsync(
         statusCode: httpStatus.OK,
         success: true,
         message: "Watchlist added successfully",
-        data: result.data,
-        meta: result.meta,
+        data: result,
       },
     });
   }

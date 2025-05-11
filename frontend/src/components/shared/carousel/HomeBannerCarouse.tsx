@@ -1,7 +1,6 @@
 "use client";
 import * as React from "react";
 import Autoplay from "embla-carousel-autoplay";
-
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
@@ -45,61 +44,58 @@ export function HomeBannerCarousel({ bannerMedias }: IHomeBannerCarouselProps) {
         {bannerMedias?.map((media, index) => (
           <CarouselItem key={index}>
             <Card className="bg-transparent border-none shadow-none">
-              <CardContent className="flex gap-10 items-center justify-between p-10 mx-10">
+              <CardContent className="flex flex-col lg:flex-row gap-6 lg:gap-10 items-center justify-between p-4 sm:p-6 md:p-8 lg:p-10">
                 {/* Poster */}
-                <div className="flex-1 relative">
-                  {/* Poster Image */}
+                <div className="relative w-full lg:w-1/2">
                   <Image
                     src={media.posterUrl!}
                     alt={media.title ?? "banner"}
                     width={1000}
                     height={500}
-                    className="h-[400px] w-full object-cover rounded-lg shadow-md z-0"
+                    className="h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] w-full object-cover rounded-lg shadow-md"
                   />
                   {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent rounded-lg z-10" />
-
-                  {/* Top-left: Release Year */}
-                  <div className="absolute bottom-4 z-50 left-4 bg-black/70 text-2xl font-bold text-white px-3 py-1 rounded-full">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent rounded-lg" />
+                  {/* Title */}
+                  <div className="absolute bottom-4 left-4 bg-black/70 text-base sm:text-xl font-bold text-white px-3 py-1 rounded-full">
                     {media.title}
                   </div>
-
-                  {/* Top-right: Rating */}
-                  <div className="absolute top-4 right-4 z-50 backdrop-blur-sm bg-white/20 text-primary font-semibold text-sm px-3 py-1 rounded-full  shadow">
+                  {/* Rating */}
+                  <div className="absolute top-4 right-4 backdrop-blur-sm bg-white/20 text-primary font-semibold text-xs sm:text-sm px-3 py-1 rounded-full shadow">
                     ⭐ {media.rating}/10
                   </div>
                 </div>
 
                 {/* Info */}
-                <div className="flex-1 flex h-[400px] justify-end flex-col">
+                <div className="w-full lg:w-1/2 flex flex-col justify-end h-auto lg:h-[400px]">
                   <div className="space-y-4">
                     {/* Genre */}
-                    <div>
-                      <div className="flex flex-wrap gap-2">
-                        {media?.genre?.map((g, i) => (
-                          <span
-                            key={i}
-                            className="px-3 py-1 text-white/80 bg-blue-100/10 rounded-full text-sm"
-                          >
-                            {getEnumValueByKey(Genre, g)}
-                          </span>
-                        ))}
-                      </div>
+                    <div className="flex flex-wrap gap-2">
+                      {media?.genre?.map((g, i) => (
+                        <span
+                          key={i}
+                          className="px-3 py-1 text-white/80 bg-blue-100/10 rounded-full text-sm"
+                        >
+                          {getEnumValueByKey(Genre, g)}
+                        </span>
+                      ))}
                     </div>
 
-                    <p className="text-lg text-muted-foreground">
+                    {/* Description */}
+                    <p className="text-sm md:text-base text-muted-foreground">
                       {media.description}
                     </p>
+
                     {/* Cast */}
                     <div>
-                      <p className="text-md font-medium mb-1">
+                      <p className="text-sm font-medium mb-1">
                         Major Characters
                       </p>
                       <div className="flex flex-wrap gap-2">
                         {media.cast?.map((member, i) => (
                           <span
                             key={i}
-                            className="px-3 py-1 bg-blue-800 rounded-sm text-sm"
+                            className="px-3 py-1 bg-blue-800 text-white rounded-sm text-sm"
                           >
                             {member}
                           </span>

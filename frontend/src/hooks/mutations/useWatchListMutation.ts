@@ -44,13 +44,11 @@ export const useWatchListMutation = () => {
       return result;
     },
 
-    onSuccess: (res) => {
+    onSuccess: async (res) => {
       if (res.success) toast.success(res?.message || "Comment successfully");
       if (!res.success) toast.error(res?.message || "Comment successfully");
 
-      // Invalidate the queries related to media to update the UI after mutation
-      queryClient.invalidateQueries({ queryKey: ["single_media"] });
-      queryClient.invalidateQueries({ queryKey: ["user_watchlist"] });
+      queryClient.invalidateQueries({ queryKey: ["userWatchlist"] });
     },
 
     onError: (error) => {

@@ -6,6 +6,17 @@ import { MoviesPagination } from "./movies-pagination";
 import { useEffect, useState } from "react";
 import { IMovies } from "@/types";
 import LoadingSection from "@/components/shared/core/loading-skeleton/LoadingSection";
+import { useSearchTerm } from "@/stores/searchTerm";
+
+export interface IMoviesGrid {
+  page?: number;
+  sort?: string;
+  genre?: string;
+  rating?: string;
+  platform?: string;
+  limit?: number;
+  searchTerm?: string;
+}
 
 export function MoviesGrid({
   page = 1,
@@ -14,16 +25,11 @@ export function MoviesGrid({
   rating = "",
   platform = "",
   limit = 100,
-}: {
-  page: number;
-  sort: string;
-  genre: string;
-  rating: string;
-  platform: string;
-  limit?: number;
-}) {
+}: IMoviesGrid) {
   // Fetch movies with pagination, sorting and filtering
   const [totalPages, setTotalPages] = useState(0);
+
+  const { searchTerm } = useSearchTerm();
 
   const { data, isLoading, refetch } = useAllMediaQuery({
     page,
@@ -32,9 +38,8 @@ export function MoviesGrid({
     rating,
     limit,
     platform,
+    searchTerm,
   });
-
-  // console.log(data);
 
   useEffect(() => {
     if (data) {
@@ -44,7 +49,7 @@ export function MoviesGrid({
 
   useEffect(() => {
     refetch();
-  }, [page, sort, genre, rating, platform, refetch]);
+  }, [page, sort, genre, rating, platform, searchTerm, refetch]);
 
   if (isLoading) return <LoadingSection />;
   const movies: IMovies[] = data?.data;

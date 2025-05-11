@@ -21,6 +21,7 @@ import { Slider } from "@/components/ui/slider";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useSidebarStore } from "@/stores/sidebar";
+import { useSearchTerm } from "@/stores/searchTerm";
 
 export function MoviesSidebar({
   currentSort = "createdAt",
@@ -31,6 +32,7 @@ export function MoviesSidebar({
   const router = useRouter();
   const pathname = usePathname();
   const { expanded } = useSidebarStore();
+  const { setSearchTerm } = useSearchTerm();
 
   // State for filters
   const [localFilters, setLocalFilters] = useState({
@@ -132,6 +134,7 @@ export function MoviesSidebar({
     });
     setRatingValue(0);
 
+    setSearchTerm("");
     // Apply immediately
     applyFilters({
       sort: "createdAt",

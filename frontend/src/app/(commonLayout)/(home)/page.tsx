@@ -17,12 +17,12 @@ const HomePage = async () => {
     <div>
       <div className="container mx-auto my-20">
         <HomeBannerCarousel bannerMedias={bannerMedia} />
-        <div className="space-y-10">
+        <div className="space-y-10 px-2">
           <TrendingSection medias={trendingMedia} />
           <TopRatedSection medias={popularMedia} />
           <RecommendedSection medias={recommendedMedia} />
         </div>
-        <div>
+        <div className="mt-5 px-2">
           <ExtraSection />
         </div>
       </div>
