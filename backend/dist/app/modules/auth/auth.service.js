@@ -702,7 +702,7 @@ const register = (data, clientInfo, file) => __awaiter(void 0, void 0, void 0, f
             select: { id: true, email: true, name: true, role: true },
         });
         const createdSecurityDetails = yield tx.securityDetails.create({
-            data: Object.assign({ userId: createdUser.id }, clientInfo.securityDetails),
+            data: Object.assign(Object.assign({ userId: createdUser.id }, clientInfo.securityDetails), { lastAttemptTime: new Date(Date.now() - 60000) }),
         });
         const createdDevice = yield tx.device.create({
             data: Object.assign({ securityDetailsId: createdSecurityDetails.id }, clientInfo.device),

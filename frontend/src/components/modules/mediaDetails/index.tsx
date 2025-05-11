@@ -64,7 +64,7 @@ const MediaDetailsSection = ({ mediaId }: { mediaId: string }) => {
       customerId: user.userId,
       productId: media?.id as string,
       productName: media?.title as string,
-      success_url: window.location.origin,
+      success_url: `${window.location.origin}/success`,
       cancel_url: window.location.origin,
     };
 

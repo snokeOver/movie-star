@@ -26,7 +26,7 @@ const generateOrderInvoicePDF = (order) => __awaiter(void 0, void 0, void 0, fun
         try {
             if (!order || !order.totalAmount)
                 return Promise.reject(new Error("Order price is required"));
-            const logoUrl = "https://res.cloudinary.com/dbgrq28js/image/upload/v1736763971/logoipsum-282_ilqjfb_paw4if.png";
+            const logoUrl = "https://res.cloudinary.com/dn6vutilh/image/upload/v1746993113/logo_copy_ny3blj.png";
             // Download the logo image as a buffer
             const response = yield axios_1.default.get(logoUrl, {
                 responseType: "arraybuffer",
