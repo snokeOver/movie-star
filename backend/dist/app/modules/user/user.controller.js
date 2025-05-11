@@ -148,8 +148,7 @@ const addWatchList = (0, tryCatchAsync_1.tryCatchAsync)((req, res) => __awaiter(
             statusCode: http_status_1.default.OK,
             success: true,
             message: "Watchlist added successfully",
-            data: result.data,
-            meta: result.meta,
+            data: result,
         },
     });
 }));

@@ -130,12 +130,55 @@ const getAll = async (
   const { searchTerm, ...filterData } = query;
   const searchCondition: Prisma.MovieSeriesWhereInput[] = [];
 
-  if (query.searchTerm) {
-    searchCondition.push({
-      OR: movieSeriesSearchTerms.map((field) => ({
-        [field]: { contains: query.searchTerm, mode: "insensitive" },
-      })),
-    });
+  if (searchTerm) {
+    const orConditions: Prisma.MovieSeriesWhereInput[] = [];
+
+    // Numeric search (releaseYear)
+    if (!isNaN(Number(searchTerm))) {
+      orConditions.push({
+        releaseYear: Number(searchTerm),
+      });
+    }
+
+    if (isNaN(Number(searchTerm))) {
+      // String search fields
+      movieStringSearchFields.forEach((field) => {
+        orConditions.push({
+          [field]: {
+            contains: searchTerm,
+            mode: "insensitive",
+          },
+        });
+      });
+
+      // Array search fields (string[])
+      movieArraySearchFields.forEach((field) => {
+        orConditions.push({
+          [field]: {
+            has: searchTerm,
+          },
+        });
+      });
+
+      // Enum search (streamingPlatform)
+      const platformMatches = Object.values(StreamingPlatform).filter(
+        (platform) => platform.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+
+      // ✅ Only add exact, valid enum matches to Prisma query
+      platformMatches.forEach((validEnumValue) => {
+        orConditions.push({
+          streamingPlatform: {
+            has: validEnumValue,
+          },
+        });
+      });
+    }
+
+    // Combine all search conditions with OR
+    if (orConditions.length > 0) {
+      searchCondition.push({ OR: orConditions });
+    }
   }
 
   if (Object.keys(filterData).length) {

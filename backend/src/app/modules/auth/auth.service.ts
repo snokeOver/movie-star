@@ -977,7 +977,9 @@ const register = async (
     const createdSecurityDetails = await tx.securityDetails.create({
       data: {
         userId: createdUser.id,
+
         ...clientInfo.securityDetails,
+        lastAttemptTime: new Date(Date.now() - 60000),
       },
     });
 

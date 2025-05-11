@@ -113,12 +113,47 @@ const getAll = (query, pagination) => __awaiter(void 0, void 0, void 0, function
     // console.log("Pagination data:", query);
     const { searchTerm } = query, filterData = __rest(query, ["searchTerm"]);
     const searchCondition = [];
-    if (query.searchTerm) {
-        searchCondition.push({
-            OR: movieSeries_constant_1.movieSeriesSearchTerms.map((field) => ({
-                [field]: { contains: query.searchTerm, mode: "insensitive" },
-            })),
-        });
+    if (searchTerm) {
+        const orConditions = [];
+        // Numeric search (releaseYear)
+        if (!isNaN(Number(searchTerm))) {
+            orConditions.push({
+                releaseYear: Number(searchTerm),
+            });
+        }
+        if (isNaN(Number(searchTerm))) {
+            // String search fields
+            movieSeries_constant_1.movieStringSearchFields.forEach((field) => {
+                orConditions.push({
+                    [field]: {
+                        contains: searchTerm,
+                        mode: "insensitive",
+                    },
+                });
+            });
+            // Array search fields (string[])
+            movieSeries_constant_1.movieArraySearchFields.forEach((field) => {
+                orConditions.push({
+                    [field]: {
+                        has: searchTerm,
+                    },
+                });
+            });
+            // Enum search (streamingPlatform)
+            const platformMatches = Object.values(prisma_1.StreamingPlatform).filter((platform) => platform.toLowerCase().includes(searchTerm.toLowerCase()));
+            // ✅ Only add exact, valid enum matches to Prisma query
+            platformMatches.forEach((validEnumValue) => {
+                orConditions.push({
+                    streamingPlatform: {
+                        has: validEnumValue,
+                    },
+                });
+            });
+        }
+        // Combine all search conditions with OR
+        if (orConditions.length > 0) {
+            searchCondition.push({ OR: orConditions });
+        }
     }
     if (Object.keys(filterData).length) {
         searchCondition.push({
@@ -384,12 +419,48 @@ const getAllPublic = (query, pagination) => __awaiter(void 0, void 0, void 0, fu
     // console.log("Pagination data:", query);
     const { searchTerm } = query, filterData = __rest(query, ["searchTerm"]);
     const searchCondition = [];
-    if (query.searchTerm) {
-        searchCondition.push({
-            OR: movieSeries_constant_1.movieSeriesSearchTerms.map((field) => ({
-                [field]: { contains: query.searchTerm, mode: "insensitive" },
-            })),
-        });
+    //modified search for string, number and array fields
+    if (searchTerm) {
+        const orConditions = [];
+        // Numeric search (releaseYear)
+        if (!isNaN(Number(searchTerm))) {
+            orConditions.push({
+                releaseYear: Number(searchTerm),
+            });
+        }
+        if (isNaN(Number(searchTerm))) {
+            // String search fields
+            movieSeries_constant_1.movieStringSearchFields.forEach((field) => {
+                orConditions.push({
+                    [field]: {
+                        contains: searchTerm,
+                        mode: "insensitive",
+                    },
+                });
+            });
+            // Array search fields (string[])
+            movieSeries_constant_1.movieArraySearchFields.forEach((field) => {
+                orConditions.push({
+                    [field]: {
+                        has: searchTerm,
+                    },
+                });
+            });
+            // Enum search (streamingPlatform)
+            const platformMatches = Object.values(prisma_1.StreamingPlatform).filter((platform) => platform.toLowerCase().includes(searchTerm.toLowerCase()));
+            // ✅ Only add exact, valid enum matches to Prisma query
+            platformMatches.forEach((validEnumValue) => {
+                orConditions.push({
+                    streamingPlatform: {
+                        has: validEnumValue,
+                    },
+                });
+            });
+        }
+        // Combine all search conditions with OR
+        if (orConditions.length > 0) {
+            searchCondition.push({ OR: orConditions });
+        }
     }
     if (Object.keys(filterData).length) {
         const { genre, streamingPlatform, rating } = filterData;
