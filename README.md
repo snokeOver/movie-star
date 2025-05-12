@@ -165,7 +165,7 @@
 
 ## 🎥 Video Walkthrough
 
-Watch the frontend walkthrough: [Video Explanation](https://drive.google.com/file/d/1bPaPIERabhza6jswb9MH-cmbQB2Nj2sW/view?usp=drive_link)
+Watch the frontend walkthrough: [Video Explanation](https://drive.google.com/file/d/1dG14a7-4k8pRw9vOt9HG22iwaUKCfRz9/view)
 
 ---
 
